@@ -1,206 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<title>Ganesh R Takwale — Intelligence Architect</title>
 
-  <title>Ganesh R Takwale — Intelligence Architecture</title>
+<!-- GOOGLE VERIFICATION -->
+<meta name="google-site-verification" content="google2216e0058875e421" />
 
-  <!-- GOOGLE SEARCH CONSOLE -->
-  <meta name="google-site-verification" content="google2216e0058875e421" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ganesh R Takwale — AI Engineering, Prompt Systems, Intelligence Architecture">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ganesh R Takwale — AI Engineering, Prompt Systems, Intelligence Architecture">
-  <meta name="keywords" content="Ganesh Takwale, AI Engineering, Prompt Engineering, Intelligence Systems">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- MODERN TECH FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070c;
+  --fg:#e6e9f0;
+  --muted:#9aa3b2;
+  --accent:#7dd3fc;
+}
 
-  <style>
-    :root {
-      --bg: #05070c;
-      --fg: #e6e9f0;
-      --muted: #9aa3b2;
-      --accent: #6cf2ff;
-      --accent2: #7c7cff;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+}
 
-    * { box-sizing: border-box; }
+/* CRYSTAL TAKWALE BACKGROUND */
+.bg-mark{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18vw;
+  font-weight:600;
+  letter-spacing:1vw;
+  color:rgba(255,255,255,0.035);
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
 
-    body {
-      margin: 0;
-      background: radial-gradient(circle at 20% 10%, #0c1430, transparent 60%), var(--bg);
-      color: var(--fg);
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      overflow-x: hidden;
-    }
+/* NOISE */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.04;
+  pointer-events:none;
+  z-index:1;
+}
 
-    /* subtle grain */
-    body::after {
-      content:"";
-      position:fixed;
-      inset:0;
-      background:url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity:0.035;
-      pointer-events:none;
-      z-index:1;
-    }
+main{
+  position:relative;
+  z-index:2;
+  max-width:1200px;
+  margin:auto;
+  padding:80px 24px;
+}
 
-    /* layout */
-    .wrap {
-      position:relative;
-      z-index:2;
-      max-width:1200px;
-      margin:auto;
-      padding:80px 24px;
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.hero img{
+  width:220px;
+  filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
+}
+h1{
+  font-size:clamp(40px,6vw,68px);
+  margin:30px 0 10px;
+}
+.hero p{
+  max-width:720px;
+  color:var(--muted);
+  font-size:18px;
+}
 
-    /* HERO */
-    .hero {
-      min-height:90vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
+/* TERMINAL */
+.terminal{
+  margin-top:80px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  padding:24px;
+  font-family:monospace;
+}
+.terminal span{color:var(--accent)}
 
-    .signal {
-      width:260px;
-      margin-bottom:40px;
-      filter:drop-shadow(0 0 40px rgba(108,242,255,0.25));
-      transition:transform .6s ease;
-    }
+/* SECTIONS */
+section{margin-top:160px}
+section h2{font-size:28px}
+section p{max-width:760px;color:var(--muted)}
 
-    .signal:hover { transform:scale(1.03); }
+/* TIMELINE */
+.timeline div{
+  border-left:2px solid rgba(255,255,255,.15);
+  padding-left:20px;
+  margin:40px 0;
+}
 
-    h1 {
-      font-size:clamp(36px,5vw,64px);
-      line-height:1.1;
-      letter-spacing:2px;
-      margin:0;
-    }
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);
+  padding:28px;
+}
 
-    .sub {
-      margin-top:18px;
-      max-width:720px;
-      font-size:18px;
-      color:var(--muted);
-    }
-
-    .quote {
-      margin-top:26px;
-      font-style:italic;
-      color:#b8c0ff;
-      max-width:760px;
-    }
-
-    /* SECTIONS */
-    section {
-      margin-top:140px;
-    }
-
-    section h2 {
-      font-size:28px;
-      letter-spacing:2px;
-    }
-
-    .grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:32px;
-      margin-top:40px;
-    }
-
-    .card {
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.08);
-      padding:28px;
-      backdrop-filter:blur(12px);
-    }
-
-    .card h3 {
-      margin:0 0 12px;
-      font-size:18px;
-    }
-
-    .card p {
-      margin:0;
-      font-size:15px;
-      color:var(--muted);
-    }
-
-    /* FOOTER */
-    footer {
-      margin-top:160px;
-      padding-top:40px;
-      border-top:1px solid rgba(255,255,255,0.1);
-      font-size:14px;
-      color:var(--muted);
-    }
-
-    footer a {
-      color:var(--accent);
-      text-decoration:none;
-    }
-  </style>
+/* FOOTER */
+footer{
+  margin-top:160px;
+  border-top:1px solid rgba(255,255,255,.15);
+  padding-top:40px;
+  font-size:14px;
+}
+a{color:var(--accent);text-decoration:none}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <!-- HERO -->
-    <div class="hero">
-      <img src="GRT%20LOGO_05.png" class="signal" alt="GRT Signal">
+<div class="bg-mark">TAKWALE</div>
 
-      <h1>
-        Intelligence<br>
-        is not automated.<br>
-        It is architected.
-      </h1>
+<main>
 
-      <p class="sub">
-        I design AI systems where prompts, context, memory, and reasoning
-        behave as a coherent intelligence — not a workflow.
-      </p>
+<!-- HERO -->
+<section class="hero">
+  <img src="GRT%20LOGO_05.png" alt="GRT Logo">
 
-      <p class="quote">
-        “The next decade belongs to those who understand how intelligence
-        *moves*, not those who chain tools together.”
-      </p>
-    </div>
+  <h1>Intelligence is not automated.<br>It is architected.</h1>
 
-    <!-- WHAT I BUILD -->
-    <section>
-      <h2>What I Build</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Prompt Architecture</h3>
-          <p>Structured prompt systems that adapt, persist, and evolve across time.</p>
-        </div>
-        <div class="card">
-          <h3>Intelligence Workflows</h3>
-          <p>Reasoning flows designed around cognition, not automation steps.</p>
-        </div>
-        <div class="card">
-          <h3>AI System Design</h3>
-          <p>End-to-end architectures where tools serve intelligence — not the other way around.</p>
-        </div>
-      </div>
-    </section>
+  <p>
+    I design AI systems where prompts, memory, context, and reasoning
+    behave as a coherent intelligence — not a workflow.
+  </p>
 
-    <!-- GRT LABS -->
-    <section>
-      <h2>GRT Labs</h2>
-      <p class="sub">
-        GRT Labs is an applied research space focused on how intelligence
-        behaves under constraints — scale, ambiguity, memory, and intent.
-      </p>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      Collaborate · Research · Architect Intelligence<br>
-      <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
-    </footer>
-
+  <!-- TERMINAL -->
+  <div class="terminal">
+    <div><span>&gt;</span> load cognition.system</div>
+    <div><span>&gt;</span> initialize prompt-architecture</div>
+    <div><span>&gt;</span> observe intelligence behavior</div>
+    <div><span>&gt;</span> status: <span>ACTIVE</span></div>
   </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+<h2>Cognition Timeline</h2>
+<div class="timeline">
+  <div>
+    <strong>Past:</strong>
+    Rule-based automation, scripts, static prompts.
+  </div>
+  <div>
+    <strong>Present:</strong>
+    Adaptive prompting, memory-aware systems, reasoning flows.
+  </div>
+  <div>
+    <strong>Future:</strong>
+    Self-evolving intelligence architectures with intent alignment.
+  </div>
+</div>
+</section>
+
+<!-- RESEARCH -->
+<section>
+<h2>Research & Thought Essays</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Prompt Architecture as Cognitive Design</h3>
+    <p>Why prompts should be treated as system-level intelligence components.</p>
+  </div>
+  <div class="card">
+    <h3>Memory is the Real Model</h3>
+    <p>How long-term context reshapes AI behavior more than model size.</p>
+  </div>
+  <div class="card">
+    <h3>AI Beyond Tools</h3>
+    <p>Why future intelligence will feel less like software and more like presence.</p>
+  </div>
+</div>
+</section>
+
+<!-- MANIFESTO -->
+<section>
+<h2>Personal Manifesto</h2>
+<p>
+I believe intelligence is not about answers — it is about alignment,
+intent, and the ability to reason under uncertainty.
+<br><br>
+The future belongs to those who design systems that think *with* humans,
+not systems that replace them.
+</p>
+</section>
+
+<!-- LIVE DEMO -->
+<section>
+<h2>Live Intelligence Demos</h2>
+<p>
+This space will host live AI reasoning systems, prompt experiments,
+and intelligence workflows.
+<br><br>
+Not demos — instruments.
+</p>
+</section>
+
+<footer>
+Collaborate · Research · Architect Intelligence<br>
+<a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
+</footer>
+
+</main>
 </body>
 </html>
