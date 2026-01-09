@@ -4,17 +4,15 @@
 <meta charset="UTF-8">
 <title>Ganesh R Takwale — Intelligence Architect</title>
 
-<!-- GOOGLE VERIFICATION -->
 <meta name="google-site-verification" content="google2216e0058875e421" />
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Ganesh R Takwale — AI Engineering, Prompt Systems, Intelligence Architecture">
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#05070c;
+  --bg:#06080f;
   --fg:#e6e9f0;
   --muted:#9aa3b2;
   --accent:#7dd3fc;
@@ -23,61 +21,46 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:'Space Grotesk',system-ui,sans-serif;
+  font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
   color:var(--fg);
   overflow-x:hidden;
 }
 
-/* CRYSTAL TAKWALE BACKGROUND */
-.bg-mark{
+/* CRYSTAL TAKWALE */
+.bg-name{
   position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   font-size:18vw;
   font-weight:600;
   letter-spacing:1vw;
   color:rgba(255,255,255,0.035);
+  filter:blur(1px);
   pointer-events:none;
-  user-select:none;
   z-index:0;
+  transition:transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* NOISE */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("https://grainy-gradients.vercel.app/noise.svg");
-  opacity:.04;
-  pointer-events:none;
-  z-index:1;
-}
-
-main{
+/* SECTIONS */
+section{
+  min-height:100vh;
+  padding:120px 24px;
+  max-width:1100px;
+  margin:auto;
   position:relative;
   z-index:2;
-  max-width:1200px;
-  margin:auto;
-  padding:80px 24px;
 }
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
 .hero img{
   width:220px;
   filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
 }
-h1{
-  font-size:clamp(40px,6vw,68px);
-  margin:30px 0 10px;
+.hero h1{
+  font-size:clamp(38px,6vw,64px);
+  margin:30px 0 16px;
 }
 .hero p{
   max-width:720px;
@@ -87,25 +70,24 @@ h1{
 
 /* TERMINAL */
 .terminal{
-  margin-top:80px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.12);
+  margin-top:50px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.15);
   padding:24px;
   font-family:monospace;
 }
+.terminal div{opacity:0}
 .terminal span{color:var(--accent)}
-
-/* SECTIONS */
-section{margin-top:160px}
-section h2{font-size:28px}
-section p{max-width:760px;color:var(--muted)}
 
 /* TIMELINE */
 .timeline div{
   border-left:2px solid rgba(255,255,255,.15);
   padding-left:20px;
-  margin:40px 0;
+  margin:50px 0;
+  opacity:0.4;
+  transition:opacity .4s ease;
 }
+.timeline div.active{opacity:1}
 
 /* CARDS */
 .grid{
@@ -114,17 +96,27 @@ section p{max-width:760px;color:var(--muted)}
   gap:32px;
 }
 .card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.15);
   padding:28px;
 }
 
-/* FOOTER */
+/* FADE-IN */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s ease;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+}
+
 footer{
-  margin-top:160px;
   border-top:1px solid rgba(255,255,255,.15);
-  padding-top:40px;
-  font-size:14px;
+  padding:60px 0;
+  text-align:center;
+  color:var(--muted);
 }
 a{color:var(--accent);text-decoration:none}
 </style>
@@ -132,96 +124,96 @@ a{color:var(--accent);text-decoration:none}
 
 <body>
 
-<div class="bg-mark">TAKWALE</div>
+<div class="bg-name" id="bgName">TAKWALE</div>
 
-<main>
-
-<!-- HERO -->
-<section class="hero">
+<section class="hero fade">
   <img src="GRT%20LOGO_05.png" alt="GRT Logo">
-
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-
   <p>
     I design AI systems where prompts, memory, context, and reasoning
-    behave as a coherent intelligence — not a workflow.
+    behave as a coherent intelligence.
   </p>
 
-  <!-- TERMINAL -->
-  <div class="terminal">
-    <div><span>&gt;</span> load cognition.system</div>
-    <div><span>&gt;</span> initialize prompt-architecture</div>
-    <div><span>&gt;</span> observe intelligence behavior</div>
-    <div><span>&gt;</span> status: <span>ACTIVE</span></div>
+  <div class="terminal" id="terminal">
+    <div><span>&gt;</span> boot intelligence.system</div>
+    <div><span>&gt;</span> load prompt-architecture</div>
+    <div><span>&gt;</span> attach memory.core</div>
+    <div><span>&gt;</span> status: <span>ONLINE</span></div>
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section>
-<h2>Cognition Timeline</h2>
-<div class="timeline">
-  <div>
-    <strong>Past:</strong>
-    Rule-based automation, scripts, static prompts.
+<section class="fade">
+  <h2>Cognition Timeline</h2>
+  <div class="timeline" id="timeline">
+    <div>Past — static rules & scripts</div>
+    <div>Present — adaptive prompting & memory</div>
+    <div>Future — self-evolving intelligence</div>
   </div>
-  <div>
-    <strong>Present:</strong>
-    Adaptive prompting, memory-aware systems, reasoning flows.
-  </div>
-  <div>
-    <strong>Future:</strong>
-    Self-evolving intelligence architectures with intent alignment.
-  </div>
-</div>
 </section>
 
-<!-- RESEARCH -->
-<section>
-<h2>Research & Thought Essays</h2>
-<div class="grid">
-  <div class="card">
-    <h3>Prompt Architecture as Cognitive Design</h3>
-    <p>Why prompts should be treated as system-level intelligence components.</p>
+<section class="fade">
+  <h2>Research & Thought Essays</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Prompt Architecture</h3>
+      <p>Designing prompts as living system components.</p>
+    </div>
+    <div class="card">
+      <h3>Memory as Intelligence</h3>
+      <p>Why context persistence shapes reasoning.</p>
+    </div>
+    <div class="card">
+      <h3>AI Beyond Tools</h3>
+      <p>Intelligence as presence, not software.</p>
+    </div>
   </div>
-  <div class="card">
-    <h3>Memory is the Real Model</h3>
-    <p>How long-term context reshapes AI behavior more than model size.</p>
-  </div>
-  <div class="card">
-    <h3>AI Beyond Tools</h3>
-    <p>Why future intelligence will feel less like software and more like presence.</p>
-  </div>
-</div>
 </section>
 
-<!-- MANIFESTO -->
-<section>
-<h2>Personal Manifesto</h2>
-<p>
-I believe intelligence is not about answers — it is about alignment,
-intent, and the ability to reason under uncertainty.
-<br><br>
-The future belongs to those who design systems that think *with* humans,
-not systems that replace them.
-</p>
-</section>
-
-<!-- LIVE DEMO -->
-<section>
-<h2>Live Intelligence Demos</h2>
-<p>
-This space will host live AI reasoning systems, prompt experiments,
-and intelligence workflows.
-<br><br>
-Not demos — instruments.
-</p>
+<section class="fade">
+  <h2>Manifesto</h2>
+  <p>
+    Intelligence is not output.<br><br>
+    It is intent, alignment, and the ability
+    to reason under uncertainty.
+  </p>
 </section>
 
 <footer>
-Collaborate · Research · Architect Intelligence<br>
-<a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
+  Collaborate · Research · Architect Intelligence<br>
+  <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
 </footer>
 
-</main>
+<script>
+/* FADE ON SCROLL */
+const fades=document.querySelectorAll('.fade');
+const timeline=document.querySelectorAll('#timeline div');
+
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  document.getElementById('bgName').style.transform=
+    `translate(-50%,-50%) translateY(${y*0.05}px)`;
+  fades.forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight*0.8)
+      el.classList.add('show');
+  });
+  timeline.forEach((el,i)=>{
+    if(el.getBoundingClientRect().top<window.innerHeight*0.6)
+      el.classList.add('active');
+  });
+});
+
+/* TERMINAL TYPE EFFECT */
+const lines=document.querySelectorAll('#terminal div');
+let i=0;
+const type=()=>{
+  if(i<lines.length){
+    lines[i].style.opacity=1;
+    i++;
+    setTimeout(type,600);
+  }
+};
+setTimeout(type,800);
+</script>
+
 </body>
 </html>
