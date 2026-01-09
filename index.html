@@ -1,208 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98" />
+  <meta charset="UTF-8">
 
-  <title>Ganesh R Takwale | AI Engineering</title>
+  <title>Ganesh R Takwale — Intelligence Architecture</title>
 
-  <!-- GOOGLE SEARCH CONSOLE VERIFICATION -->
-  <!-- KEEP THIS EXACT VALUE AS GIVEN BY GOOGLE -->
-  <meta name="google-site-verification" content="google2216e0058875e421.html" />
+  <!-- GOOGLE SEARCH CONSOLE -->
+  <meta name="google-site-verification" content="google2216e0058875e421" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ganesh R Takwale – AI Engineering, Prompt Systems & Future Intelligence">
-  <meta name="keywords" content="Ganesh Takwale, AI Engineering, Prompt Engineering, GRT Labs">
+  <meta name="description" content="Ganesh R Takwale — AI Engineering, Prompt Systems, Intelligence Architecture">
+  <meta name="keywords" content="Ganesh Takwale, AI Engineering, Prompt Engineering, Intelligence Systems">
 
-  <!-- FUTURISTIC FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- MODERN TECH FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --bg: #05070c;
+      --fg: #e6e9f0;
+      --muted: #9aa3b2;
+      --accent: #6cf2ff;
+      --accent2: #7c7cff;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #0b1220 0%, #000 70%);
-      color: #e5e7eb;
-      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 10%, #0c1430, transparent 60%), var(--bg);
+      color: var(--fg);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       overflow-x: hidden;
+    }
+
+    /* subtle grain */
+    body::after {
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity:0.035;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    /* layout */
+    .wrap {
+      position:relative;
+      z-index:2;
+      max-width:1200px;
+      margin:auto;
+      padding:80px 24px;
     }
 
     /* HERO */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 40px 20px;
+      min-height:90vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
 
-    /* GLOW RING */
-    .glow-ring {
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 180deg,
-        #00f5ff,
-        #7c7cff,
-        #ff00cc,
-        #00f5ff
-      );
-      filter: blur(45px);
-      opacity: 0.35;
-      position: absolute;
-      z-index: 1;
-      animation: spin 22s linear infinite;
+    .signal {
+      width:260px;
+      margin-bottom:40px;
+      filter:drop-shadow(0 0 40px rgba(108,242,255,0.25));
+      transition:transform .6s ease;
     }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    .signal:hover { transform:scale(1.03); }
 
-    /* LOGO */
-    .logo {
-      width: 260px;
-      max-width: 85%;
-      z-index: 2;
-      transition: transform 0.4s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.03);
-    }
-
-    /* NAME */
     h1 {
-      margin-top: 40px;
-      font-size: clamp(28px, 4vw, 44px);
-      letter-spacing: 6px;
-      font-weight: 600;
-      z-index: 2;
+      font-size:clamp(36px,5vw,64px);
+      line-height:1.1;
+      letter-spacing:2px;
+      margin:0;
     }
 
-    /* TAGLINE */
-    .tagline {
-      margin-top: 14px;
-      max-width: 640px;
-      opacity: 0.75;
-      font-weight: 300;
-      z-index: 2;
+    .sub {
+      margin-top:18px;
+      max-width:720px;
+      font-size:18px;
+      color:var(--muted);
     }
 
-    /* SWITCH BUTTONS */
-    .switch {
-      margin-top: 34px;
-      z-index: 2;
+    .quote {
+      margin-top:26px;
+      font-style:italic;
+      color:#b8c0ff;
+      max-width:760px;
     }
 
-    .switch button {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #ffffff;
-      padding: 10px 16px;
-      margin: 0 6px;
-      cursor: pointer;
-      font-size: 14px;
-      letter-spacing: 1px;
-      backdrop-filter: blur(12px);
-      transition: background 0.3s, transform 0.3s;
+    /* SECTIONS */
+    section {
+      margin-top:140px;
     }
 
-    .switch button:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: translateY(-1px);
+    section h2 {
+      font-size:28px;
+      letter-spacing:2px;
     }
 
-    /* LABS SECTION */
-    .labs {
-      padding: 80px 20px;
-      text-align: center;
-      opacity: 0.9;
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:32px;
+      margin-top:40px;
     }
 
-    .labs h2 {
-      letter-spacing: 4px;
-      font-weight: 600;
+    .card {
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:28px;
+      backdrop-filter:blur(12px);
     }
 
-    .labs p {
-      max-width: 720px;
-      margin: 20px auto 0;
-      font-weight: 300;
-      opacity: 0.8;
+    .card h3 {
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    .card p {
+      margin:0;
+      font-size:15px;
+      color:var(--muted);
     }
 
     /* FOOTER */
     footer {
-      padding: 50px 20px;
-      text-align: center;
-      font-size: 14px;
-      opacity: 0.65;
+      margin-top:160px;
+      padding-top:40px;
+      border-top:1px solid rgba(255,255,255,0.1);
+      font-size:14px;
+      color:var(--muted);
     }
 
     footer a {
-      color: #7dd3fc;
-      text-decoration: none;
+      color:var(--accent);
+      text-decoration:none;
     }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="glow-ring"></div>
+    <!-- HERO -->
+    <div class="hero">
+      <img src="GRT%20LOGO_05.png" class="signal" alt="GRT Signal">
 
-    <!-- LOGO IMAGE -->
-    <img
-      id="logo"
-      src="GRT%20LOGO_05.png"
-      alt="GRT AI Logo by Ganesh R Takwale"
-      class="logo"
-    >
+      <h1>
+        Intelligence<br>
+        is not automated.<br>
+        It is architected.
+      </h1>
 
-    <h1>GANESH R TAKWALE</h1>
+      <p class="sub">
+        I design AI systems where prompts, context, memory, and reasoning
+        behave as a coherent intelligence — not a workflow.
+      </p>
 
-    <p class="tagline">
-      This is not a brand. It’s a signal from what comes next.
-    </p>
-
-    <!-- LOGO SWITCHER -->
-    <div class="switch">
-      <button onclick="setLogo('GRT%20LOGO_05.png')">Neon Core</button>
-      <button onclick="setLogo('GRT%20LOGO_11.png')">Energy Ring</button>
+      <p class="quote">
+        “The next decade belongs to those who understand how intelligence
+        *moves*, not those who chain tools together.”
+      </p>
     </div>
-  </section>
 
-  <!-- GRT LABS -->
-  <section class="labs">
-    <h2>GRT LABS</h2>
-    <p>
-      GRT LABS is an applied AI experimentation space — focused on
-      prompt engineering, intelligence workflows, and future-ready systems.
-    </p>
-  </section>
+    <!-- WHAT I BUILD -->
+    <section>
+      <h2>What I Build</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Prompt Architecture</h3>
+          <p>Structured prompt systems that adapt, persist, and evolve across time.</p>
+        </div>
+        <div class="card">
+          <h3>Intelligence Workflows</h3>
+          <p>Reasoning flows designed around cognition, not automation steps.</p>
+        </div>
+        <div class="card">
+          <h3>AI System Design</h3>
+          <p>End-to-end architectures where tools serve intelligence — not the other way around.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    Collaborate · Research · Build<br>
-    <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
-  </footer>
+    <!-- GRT LABS -->
+    <section>
+      <h2>GRT Labs</h2>
+      <p class="sub">
+        GRT Labs is an applied research space focused on how intelligence
+        behaves under constraints — scale, ambiguity, memory, and intent.
+      </p>
+    </section>
 
-  <!-- LOGO SWITCH SCRIPT -->
-  <script>
-    function setLogo(file) {
-      document.getElementById("logo").src = file;
-    }
-  </script>
+    <!-- FOOTER -->
+    <footer>
+      Collaborate · Research · Architect Intelligence<br>
+      <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
+    </footer>
 
+  </div>
 </body>
 </html>
