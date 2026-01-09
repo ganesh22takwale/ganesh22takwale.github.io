@@ -4,31 +4,55 @@
   <meta charset="UTF-8">
   <title>Ganesh R Takwale | AI Engineering</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ganesh R Takwale – AI Engineering & Custom AI Prompt Systems">
+  <meta name="description" content="Ganesh R Takwale – AI Engineering, Prompt Systems & Future Intelligence">
 </head>
 
-<body style="margin:0; background:#0b0f14; color:white; font-family:Arial, sans-serif;">
+<body style="
+  margin:0;
+  background:#0b0f14;
+  color:white;
+  font-family:Arial, sans-serif;
+  text-align:center;
+">
 
   <div style="
+    min-height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
-    text-align:center;
+    padding:20px;
   ">
-    <img src="GRT%20LOGO_05.png"
-         alt="GRT Futuristic AI Logo by Ganesh R Takwale"
-         style="width:320px; max-width:90%; height:auto;">
 
-    <h1 style="margin-top:30px; letter-spacing:3px;">
+    <img id="logo"
+         src="GRT%20LOGO_05.png"
+         alt="GRT AI Logo by Ganesh R Takwale"
+         style="width:320px; max-width:90%; height:auto; transition:0.4s;">
+
+    <h1 style="margin-top:30px; letter-spacing:4px;">
       GANESH R TAKWALE
     </h1>
 
-    <p style="opacity:0.8; max-width:600px;">
+    <p style="max-width:600px; opacity:0.85;">
       This is not a brand. It’s a signal from what comes next.
     </p>
+
+    <div style="margin-top:30px;">
+      <button onclick="setLogo('GRT%20LOGO_05.png')">
+        Neon Core
+      </button>
+      <button onclick="setLogo('GRT%20LOGO_11.png')">
+        Energy Ring
+      </button>
+    </div>
+
   </div>
+
+  <script>
+    function setLogo(file) {
+      document.getElementById("logo").src = file;
+    }
+  </script>
 
 </body>
 </html>
