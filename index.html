@@ -1,63 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+
   <title>Ganesh R Takwale | AI Engineering</title>
-  <!-- GOOGLE VERIFICATION -->
+
+  <!-- GOOGLE SEARCH CONSOLE VERIFICATION -->
+  <!-- KEEP THIS EXACT VALUE AS GIVEN BY GOOGLE -->
   <meta name="google-site-verification" content="google2216e0058875e421.html" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Ganesh R Takwale – AI Engineering, Prompt Systems & Future Intelligence">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ganesh R Takwale – AI Engineering, Prompt Systems & Future Intelligence">
+  <meta name="keywords" content="Ganesh Takwale, AI Engineering, Prompt Engineering, GRT Labs">
+
+  <!-- FUTURISTIC FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #0b1220 0%, #000 70%);
+      color: #e5e7eb;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    /* GLOW RING */
+    .glow-ring {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 180deg,
+        #00f5ff,
+        #7c7cff,
+        #ff00cc,
+        #00f5ff
+      );
+      filter: blur(45px);
+      opacity: 0.35;
+      position: absolute;
+      z-index: 1;
+      animation: spin 22s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* LOGO */
+    .logo {
+      width: 260px;
+      max-width: 85%;
+      z-index: 2;
+      transition: transform 0.4s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.03);
+    }
+
+    /* NAME */
+    h1 {
+      margin-top: 40px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 6px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    /* TAGLINE */
+    .tagline {
+      margin-top: 14px;
+      max-width: 640px;
+      opacity: 0.75;
+      font-weight: 300;
+      z-index: 2;
+    }
+
+    /* SWITCH BUTTONS */
+    .switch {
+      margin-top: 34px;
+      z-index: 2;
+    }
+
+    .switch button {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      padding: 10px 16px;
+      margin: 0 6px;
+      cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 1px;
+      backdrop-filter: blur(12px);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .switch button:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* LABS SECTION */
+    .labs {
+      padding: 80px 20px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .labs h2 {
+      letter-spacing: 4px;
+      font-weight: 600;
+    }
+
+    .labs p {
+      max-width: 720px;
+      margin: 20px auto 0;
+      font-weight: 300;
+      opacity: 0.8;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 50px 20px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0.65;
+    }
+
+    footer a {
+      color: #7dd3fc;
+      text-decoration: none;
+    }
+  </style>
 </head>
-<!-- LOTTIE PLAYER -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<body style="
-  margin:0;
-  background:#0b0f14;
-  color:white;
-  font-family:Arial, sans-serif;
-  text-align:center;
-">
-  <div style="
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-  ">
-    <lottie-player
-  src="https://assets9.lottiefiles.com/packages/lf20_tfb3estd.json"
-  background="transparent"
-  speed="1"
-  style="width:320px; max-width:90%;"
-  loop
-  autoplay>
-</lottie-player>
-<noscript>
-  <img src="GRT%20LOGO_05.png"
-       alt="GRT AI Logo by Ganesh R Takwale"
-       style="width:320px; max-width:90%; height:auto;">
-</noscript>
-    <h1 style="margin-top:30px; letter-spacing:4px;">
-      GANESH R TAKWALE
-    </h1>
-    <p style="max-width:600px; opacity:0.85;">
+
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="glow-ring"></div>
+
+    <!-- LOGO IMAGE -->
+    <img
+      id="logo"
+      src="GRT%20LOGO_05.png"
+      alt="GRT AI Logo by Ganesh R Takwale"
+      class="logo"
+    >
+
+    <h1>GANESH R TAKWALE</h1>
+
+    <p class="tagline">
       This is not a brand. It’s a signal from what comes next.
     </p>
-    <div style="margin-top:30px;">
-      <button onclick="setLogo('GRT%20LOGO_05.png')">
-        Neon Core
-      </button>
-      <button onclick="setLogo('GRT%20LOGO_11.png')">
-        Energy Ring
-      </button>
+
+    <!-- LOGO SWITCHER -->
+    <div class="switch">
+      <button onclick="setLogo('GRT%20LOGO_05.png')">Neon Core</button>
+      <button onclick="setLogo('GRT%20LOGO_11.png')">Energy Ring</button>
     </div>
-  </div>
+  </section>
+
+  <!-- GRT LABS -->
+  <section class="labs">
+    <h2>GRT LABS</h2>
+    <p>
+      GRT LABS is an applied AI experimentation space — focused on
+      prompt engineering, intelligence workflows, and future-ready systems.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    Collaborate · Research · Build<br>
+    <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
+  </footer>
+
+  <!-- LOGO SWITCH SCRIPT -->
   <script>
     function setLogo(file) {
       document.getElementById("logo").src = file;
     }
   </script>
+
 </body>
 </html>
