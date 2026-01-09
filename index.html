@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Ganesh R Takwale – AI Engineering, Prompt Systems & Future Intelligence">
 </head>
-
+<!-- LOTTIE PLAYER -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <body style="
   margin:0;
   background:#0b0f14;
@@ -14,7 +15,6 @@
   font-family:Arial, sans-serif;
   text-align:center;
 ">
-
   <div style="
     min-height:100vh;
     display:flex;
@@ -23,20 +23,25 @@
     align-items:center;
     padding:20px;
   ">
-
-    <img id="logo"
-         src="GRT%20LOGO_05.png"
-         alt="GRT AI Logo by Ganesh R Takwale"
-         style="width:320px; max-width:90%; height:auto; transition:0.4s;">
-
+    <lottie-player
+  src="https://assets9.lottiefiles.com/packages/lf20_tfb3estd.json"
+  background="transparent"
+  speed="1"
+  style="width:320px; max-width:90%;"
+  loop
+  autoplay>
+</lottie-player>
+<noscript>
+  <img src="GRT%20LOGO_05.png"
+       alt="GRT AI Logo by Ganesh R Takwale"
+       style="width:320px; max-width:90%; height:auto;">
+</noscript>
     <h1 style="margin-top:30px; letter-spacing:4px;">
       GANESH R TAKWALE
     </h1>
-
     <p style="max-width:600px; opacity:0.85;">
       This is not a brand. It’s a signal from what comes next.
     </p>
-
     <div style="margin-top:30px;">
       <button onclick="setLogo('GRT%20LOGO_05.png')">
         Neon Core
@@ -45,14 +50,11 @@
         Energy Ring
       </button>
     </div>
-
   </div>
-
   <script>
     function setLogo(file) {
       document.getElementById("logo").src = file;
     }
   </script>
-
 </body>
 </html>
