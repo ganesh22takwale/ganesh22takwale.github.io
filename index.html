@@ -3,216 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <title>Ganesh R Takwale — Intelligence Architect</title>
-
-<meta name="google-site-verification" content="google2216e0058875e421" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ganesh R Takwale — AI Engineering, Prompt Systems, Intelligence Architecture">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#06080f;
-  --fg:#e6e9f0;
-  --muted:#9aa3b2;
-  --accent:#7dd3fc;
+  --cyan:#6ee7ff;
+  --violet:#8b7cff;
+  --pink:#ff6ad5;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.2);
+  --text:#f4f6ff;
 }
-
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Inter,system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--fg);
+  background:#020314;
+  color:var(--text);
+  font-family:system-ui,Inter,sans-serif;
   overflow-x:hidden;
 }
+section{max-width:1200px;margin:auto;padding:120px 24px;position:relative}
+.panel{
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  border-radius:22px;
+  padding:40px;
+}
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  margin:4px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  color:#000;font-size:11px;font-weight:600;
+}
+h1{font-size:clamp(42px,6vw,72px)}
+canvas{position:fixed;inset:0;z-index:-5}
+.fade{opacity:0;transform:translateY(40px);transition:1s}
+.fade.show{opacity:1;transform:none}
 
-/* CRYSTAL TAKWALE */
-.bg-name{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:18vw;
-  font-weight:600;
-  letter-spacing:1vw;
-  color:rgba(255,255,255,0.035);
-  filter:blur(1px);
-  pointer-events:none;
-  z-index:0;
-  transition:transform 0.2s ease, opacity 0.2s ease;
-}
+/* TELEMETRY */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px}
+.metric{background:#0007;border:1px solid var(--border);padding:20px;border-radius:14px}
 
-/* SECTIONS */
-section{
-  min-height:100vh;
-  padding:120px 24px;
-  max-width:1100px;
-  margin:auto;
-  position:relative;
-  z-index:2;
+/* AGENT */
+.agent{
+  position:fixed;bottom:20px;right:20px;width:300px;
+  background:#000;border:1px solid var(--border);
+  border-radius:16px;padding:14px;z-index:9
 }
+.agent-log{height:120px;overflow:auto;font-size:13px}
+.agent input{width:100%;margin-top:8px;background:#111;color:#fff;border:none;padding:8px}
 
-/* HERO */
-.hero img{
-  width:220px;
-  filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
-}
-.hero h1{
-  font-size:clamp(38px,6vw,64px);
-  margin:30px 0 16px;
-}
-.hero p{
-  max-width:720px;
-  color:var(--muted);
-  font-size:18px;
-}
+/* GRAPH */
+svg{width:100%;max-width:700px}
+.node{fill:var(--cyan);cursor:pointer}
+.line{stroke:var(--violet);stroke-width:1.2}
+.essay{margin-top:20px;padding:20px;background:#0006;border-radius:14px}
 
 /* TERMINAL */
-.terminal{
-  margin-top:50px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.15);
-  padding:24px;
-  font-family:monospace;
-}
-.terminal div{opacity:0}
-.terminal span{color:var(--accent)}
-
-/* TIMELINE */
-.timeline div{
-  border-left:2px solid rgba(255,255,255,.15);
-  padding-left:20px;
-  margin:50px 0;
-  opacity:0.4;
-  transition:opacity .4s ease;
-}
-.timeline div.active{opacity:1}
-
-/* CARDS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.15);
-  padding:28px;
-}
-
-/* FADE-IN */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:all .8s ease;
-}
-.fade.show{
-  opacity:1;
-  transform:none;
-}
-
-footer{
-  border-top:1px solid rgba(255,255,255,.15);
-  padding:60px 0;
-  text-align:center;
-  color:var(--muted);
-}
-a{color:var(--accent);text-decoration:none}
+.terminal{background:#000;border-radius:16px;padding:16px;font-family:monospace}
+.terminal pre{height:180px;overflow:auto;color:var(--cyan)}
 </style>
 </head>
 
 <body>
 
-<div class="bg-name" id="bgName">TAKWALE</div>
+<canvas id="bg"></canvas>
 
-<section class="hero fade">
-  <img src="GRT%20LOGO_05.png" alt="GRT Logo">
-  <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>
-    I design AI systems where prompts, memory, context, and reasoning
-    behave as a coherent intelligence.
-  </p>
-
-  <div class="terminal" id="terminal">
-    <div><span>&gt;</span> boot intelligence.system</div>
-    <div><span>&gt;</span> load prompt-architecture</div>
-    <div><span>&gt;</span> attach memory.core</div>
-    <div><span>&gt;</span> status: <span>ONLINE</span></div>
+<section class="fade">
+  <div class="panel">
+    <span class="badge">INTELLIGENCE ARCHITECT</span>
+    <span class="badge">2050 SYSTEMS</span>
+    <h1>Intelligence is not automated.<br>It is architected.</h1>
+    <p>Unified cognition, memory, agents, and reasoning.</p>
   </div>
 </section>
 
 <section class="fade">
-  <h2>Cognition Timeline</h2>
-  <div class="timeline" id="timeline">
-    <div>Past — static rules & scripts</div>
-    <div>Present — adaptive prompting & memory</div>
-    <div>Future — self-evolving intelligence</div>
+  <div class="panel">
+    <span class="badge">LIVE TELEMETRY</span>
+    <div class="metrics">
+      <div class="metric">Coherence: <strong id="coh">0.00</strong></div>
+      <div class="metric">Alignment: <strong id="ali">0.00</strong></div>
+      <div class="metric">Memory: <strong id="mem">0%</strong></div>
+    </div>
+    <canvas id="chart" height="120"></canvas>
   </div>
 </section>
 
 <section class="fade">
-  <h2>Research & Thought Essays</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Prompt Architecture</h3>
-      <p>Designing prompts as living system components.</p>
-    </div>
-    <div class="card">
-      <h3>Memory as Intelligence</h3>
-      <p>Why context persistence shapes reasoning.</p>
-    </div>
-    <div class="card">
-      <h3>AI Beyond Tools</h3>
-      <p>Intelligence as presence, not software.</p>
-    </div>
+  <div class="panel">
+    <span class="badge">COGNITION GRAPH</span>
+    <svg viewBox="0 0 600 300">
+      <line class="line" x1="300" y1="150" x2="100" y2="80"/>
+      <line class="line" x1="300" y1="150" x2="500" y2="80"/>
+      <circle class="node" cx="300" cy="150" r="18"/>
+      <circle class="node" cx="100" cy="80" r="12"/>
+      <circle class="node" cx="500" cy="80" r="12"/>
+    </svg>
+    <div class="essay" id="essay">Click a cognition node.</div>
   </div>
 </section>
 
 <section class="fade">
-  <h2>Manifesto</h2>
-  <p>
-    Intelligence is not output.<br><br>
-    It is intent, alignment, and the ability
-    to reason under uncertainty.
-  </p>
+  <div class="panel">
+    <span class="badge">STREAMING LLM</span>
+    <div class="terminal">
+      <pre id="terminal"></pre>
+      <input id="prompt" placeholder="Ask the intelligence system…"/>
+    </div>
+  </div>
 </section>
 
-<footer>
-  Collaborate · Research · Architect Intelligence<br>
-  <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
-</footer>
+<div class="agent">
+  <div class="agent-log" id="agentLog">Swarm initialized.</div>
+  <input id="agentInput" placeholder="Command agent swarm"/>
+</div>
 
 <script>
-/* FADE ON SCROLL */
-const fades=document.querySelectorAll('.fade');
-const timeline=document.querySelectorAll('#timeline div');
+/* ===== BACKGROUND PARTICLES + NEURAL ===== */
+const c=document.getElementById('bg'),x=c.getContext('2d');
+let W,H;function R(){W=c.width=innerWidth;H=c.height=innerHeight}R();onresize=R;
+let pts=[...Array(120)].map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}));
+let mouse={x:0,y:0};onmousemove=e=>mouse=e;
+(function anim(){
+  x.clearRect(0,0,W,H);
+  pts.forEach(a=>{
+    pts.forEach(b=>{
+      let d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<120){
+        x.strokeStyle=`rgba(139,124,255,${1-d/120})`;
+        x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();
+      }
+    });
+    a.x+=a.vx;a.y+=a.vy;
+    if(a.x<0||a.x>W)a.vx*=-1;
+    if(a.y<0||a.y>H)a.vy*=-1;
+    x.fillStyle='#6ee7ff';x.fillRect(a.x,a.y,2,2);
+  });
+  requestAnimationFrame(anim);
+})();
 
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  document.getElementById('bgName').style.transform=
-    `translate(-50%,-50%) translateY(${y*0.05}px)`;
-  fades.forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight*0.8)
-      el.classList.add('show');
+/* ===== TELEMETRY ===== */
+let series=[...Array(40)].map(()=>.8);
+setInterval(()=>{
+  coh.textContent=(Math.random()*.15+.8).toFixed(2);
+  ali.textContent=(Math.random()*.18+.78).toFixed(2);
+  mem.textContent=Math.floor(Math.random()*30+60)+'%';
+  series.push(Math.random()*.15+.8);series.shift();
+  let g=chart.getContext('2d');
+  g.clearRect(0,0,chart.width,chart.height);
+  g.beginPath();
+  series.forEach((v,i)=>{
+    let X=i*(chart.width/series.length);
+    let Y=chart.height-(v*chart.height);
+    i?g.lineTo(X,Y):g.moveTo(X,Y);
   });
-  timeline.forEach((el,i)=>{
-    if(el.getBoundingClientRect().top<window.innerHeight*0.6)
-      el.classList.add('active');
-  });
+  g.strokeStyle='#6ee7ff';g.stroke();
+},1000);
+
+/* ===== COGNITION ESSAYS ===== */
+document.querySelectorAll('.node').forEach((n,i)=>{
+  n.onclick=()=>essay.innerHTML=`<h3>Node ${i+1}</h3><p>This represents a cognitive subsystem: memory, abstraction, alignment.</p>`;
 });
 
-/* TERMINAL TYPE EFFECT */
-const lines=document.querySelectorAll('#terminal div');
-let i=0;
-const type=()=>{
-  if(i<lines.length){
-    lines[i].style.opacity=1;
-    i++;
-    setTimeout(type,600);
-  }
+/* ===== REAL LLM STREAMING HOOK ===== */
+const API_KEY="YOUR_API_KEY_HERE";
+prompt.onkeydown=async e=>{
+  if(e.key!=="Enter")return;
+  terminal.textContent="Thinking...\n";
+  const res=await fetch("https://api.openai.com/v1/chat/completions",{
+    method:"POST",
+    headers:{
+      "Authorization":"Bearer "+API_KEY,
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      model:"gpt-4o-mini",
+      messages:[{role:"user",content:e.target.value}],
+      stream:false
+    })
+  });
+  const j=await res.json();
+  terminal.textContent=j.choices[0].message.content;
+  e.target.value="";
 };
-setTimeout(type,800);
+
+/* ===== AGENT SWARM ===== */
+agentInput.onkeydown=e=>{
+  if(e.key!=="Enter")return;
+  agentLog.innerHTML+=`<br>&gt; ${e.target.value}`;
+  setTimeout(()=>{
+    agentLog.innerHTML+=`<br>✔ Swarm response synthesized.`;
+  },600);
+  e.target.value="";
+};
+
+/* ===== FADE ===== */
+document.addEventListener('scroll',()=>{
+  document.querySelectorAll('.fade').forEach(el=>{
+    if(el.getBoundingClientRect().top<innerHeight*0.8)el.classList.add('show');
+  });
+});
 </script>
 
 </body>
