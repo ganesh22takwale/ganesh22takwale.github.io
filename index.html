@@ -28,20 +28,34 @@ body{
 }
 
 /* ================= BACKGROUND ================= */
+
+/* Neural canvas */
 canvas{
   position:fixed;
   inset:0;
   z-index:-3;
 }
 
+/* LOGO 11 — MAIN BACKGROUND */
 .bg-logo{
   position:fixed;
   inset:0;
-  background:url("GRT LOGO_11.png") repeat;
-  background-size:140px;
-  opacity:.045;
-  mix-blend-mode:overlay;
+  background:
+    url("GRT LOGO_11.png") center/520px no-repeat,
+    url("GRT LOGO_11.png") repeat;
+  background-size:520px,180px;
+  opacity:0.12;              /* 👈 clearly visible */
+  filter:blur(.2px);
+  mix-blend-mode:screen;     /* 👈 makes logo glow */
   z-index:-2;
+}
+
+/* Subtle dark overlay (keeps text readable) */
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, transparent, #020314 70%);
+  z-index:-1;
 }
 
 /* ================= LAYOUT ================= */
@@ -63,8 +77,6 @@ h1{
   font-size:clamp(42px,6vw,72px);
   margin:0 0 20px;
 }
-
-h2{margin-top:0}
 
 p{
   color:var(--muted);
@@ -89,7 +101,7 @@ p{
 .hero-logo{
   width:180px;
   margin-bottom:28px;
-  filter:drop-shadow(0 0 40px rgba(110,231,255,.45));
+  filter:drop-shadow(0 0 40px rgba(110,231,255,.5));
 }
 
 /* ================= TELEMETRY ================= */
@@ -98,7 +110,6 @@ p{
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
-
 .metric{
   background:#0007;
   border:1px solid var(--border);
@@ -126,14 +137,8 @@ svg{
   max-width:600px;
   margin-top:30px;
 }
-.node{
-  fill:var(--cyan);
-  cursor:pointer;
-}
-.line{
-  stroke:var(--violet);
-  stroke-width:1.2;
-}
+.node{fill:var(--cyan);cursor:pointer}
+.line{stroke:var(--violet);stroke-width:1.2}
 .essay{
   margin-top:20px;
   padding:20px;
@@ -158,6 +163,7 @@ svg{
 
 <canvas id="bg"></canvas>
 <div class="bg-logo"></div>
+<div class="bg-overlay"></div>
 
 <!-- ================= HERO ================= -->
 <section class="fade">
@@ -187,9 +193,9 @@ svg{
     </div>
 
     <div class="metrics">
-      <div class="metric">Coherence: <strong id="coh">0.92</strong></div>
-      <div class="metric">Alignment: <strong id="ali">0.89</strong></div>
-      <div class="metric">Memory Load: <strong id="mem">74%</strong></div>
+      <div class="metric">Coherence: <strong>0.92</strong></div>
+      <div class="metric">Alignment: <strong>0.89</strong></div>
+      <div class="metric">Memory Load: <strong>74%</strong></div>
     </div>
   </div>
 </section>
@@ -223,7 +229,7 @@ svg{
     </div>
 
     <div class="terminal">
-      <pre id="terminal">
+      <pre>
 > system.boot()
 > memory.attach()
 > reasoning.active()
@@ -234,7 +240,7 @@ svg{
 </section>
 
 <script>
-/* ========== BACKGROUND NEURAL FIELD ========== */
+/* ========== NEURAL BACKGROUND ========== */
 const c=document.getElementById("bg");
 const ctx=c.getContext("2d");
 let W,H;function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
