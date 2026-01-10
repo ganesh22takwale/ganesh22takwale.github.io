@@ -3,252 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <title>Ganesh R Takwale — Intelligence Architect</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Intelligence is not automated. It is architected. Architecting AI systems with memory, alignment, and intent.">
 
-<meta name="description" content="Intelligence is not automated. It is architected. Designing coherent, aligned, memory-aware AI systems." />
-
-<!-- Open Graph -->
-<meta property="og:title" content="Ganesh R Takwale — Intelligence Architect" />
-<meta property="og:description" content="Architecting intelligent systems that reason, remember, and stay aligned." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://ganesh22takwale.github.io/" />
-<meta property="og:image" content="preview.png" />
-
-<meta name="google-site-verification" content="google2216e0058875e421" />
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#020314;
-  --cyan:#6ee7ff;
-  --violet:#8b7cff;
-  --text:#eef2ff;
-  --muted:#b6c0ff;
-  --soft:#9aa4ff;
-  --glass:rgba(255,255,255,.08);
-  --border:rgba(255,255,255,.18);
+  --bg:#06080f;
+  --fg:#e6e9f0;
+  --muted:#9aa3b2;
+  --accent:#7dd3fc;
+  --border:rgba(255,255,255,.14);
 }
 
 *{box-sizing:border-box}
-
+html,body{margin:0;padding:0}
 body{
-  margin:0;
   font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
-  color:var(--text);
+  color:var(--fg);
   overflow-x:hidden;
 }
 
-/* ========== NAV (NEW, VERY LIGHT) ========== */
-nav{
+/* ===== BACKGROUND FIELD ===== */
+canvas#field{
   position:fixed;
-  top:0; left:0; right:0;
-  z-index:10;
-  backdrop-filter:blur(14px);
-  background:rgba(2,3,20,.45);
-  border-bottom:1px solid var(--border);
+  inset:0;
+  z-index:-5;
 }
-.nav-inner{
-  max-width:1150px;
-  margin:auto;
-  padding:14px 24px;
+
+/* ===== CRYSTAL NAME ===== */
+.bg-name{
+  position:fixed;
+  inset:0;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  font-size:13px;
-}
-nav a{
-  color:var(--muted);
-  text-decoration:none;
-  margin-left:18px;
-}
-nav a:hover{color:var(--cyan)}
-
-canvas#bg{position:fixed;inset:0;z-index:-4}
-
-.bg-logo{
-  position:fixed;
-  inset:0;
-  background:
-    url("GRT LOGO_11.png") center/520px no-repeat,
-    url("GRT LOGO_11.png") repeat;
-  background-size:520px,180px;
-  opacity:.14;
-  mix-blend-mode:screen;
-  z-index:-3;
-}
-
-.bg-overlay{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(to bottom, rgba(2,3,20,.25), #020314 70%);
-  z-index:-2;
-}
-
-section{
-  max-width:1150px;
-  margin:auto;
-  padding:140px 24px;
-}
-
-.panel{
-  background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
-  border:1px solid var(--border);
-  border-radius:28px;
-  backdrop-filter:blur(22px);
-  padding:64px;
-}
-
-h1{
-  font-size:clamp(48px,6vw,80px);
-  line-height:1.02;
-  margin:0 0 28px;
-}
-
-h2{
-  font-size:22px;
-  letter-spacing:.12em;
-  margin-bottom:28px;
-}
-
-p{
-  font-size:15.5px;
-  line-height:1.75;
-  color:var(--muted);
-  max-width:820px;
-}
-
-.badges{margin-bottom:32px}
-.badge{
-  display:inline-block;
-  padding:6px 16px;
-  margin:4px;
-  border-radius:999px;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  color:#000;
-  font-size:10.5px;
+  justify-content:center;
+  font-size:18vw;
   font-weight:600;
+  letter-spacing:1vw;
+  color:rgba(255,255,255,0.035);
+  pointer-events:none;
+  z-index:-4;
+  transition:transform .4s ease;
 }
 
-.hero-logo{
-  width:150px;
-  margin-bottom:36px;
-  filter:drop-shadow(0 0 36px rgba(110,231,255,.45));
-}
-
-.explain{
-  margin-top:24px;
-  padding:18px 22px;
-  background:#0008;
-  border-left:3px solid var(--cyan);
-  border-radius:12px;
-  font-size:14px;
-  color:var(--soft);
-}
-
-/* CTA (NEW) */
-.cta{
-  margin-top:36px;
-}
-.cta a{
-  display:inline-block;
-  padding:10px 22px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  color:var(--text);
-  text-decoration:none;
-}
-.cta a:hover{
-  background:rgba(255,255,255,.08);
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-
-.card{
-  background:#0007;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:26px;
-}
-
-/* FOOTER (NEW) */
-footer{
-  max-width:1150px;
+/* ===== SECTIONS ===== */
+section{
+  min-height:100vh;
+  padding:140px 24px;
+  max-width:1100px;
   margin:auto;
-  padding:80px 24px 60px;
-  font-size:13px;
-  color:var(--soft);
+  position:relative;
+  cursor:pointer;
+  transition:.45s;
 }
-footer a{color:var(--cyan);text-decoration:none;margin-right:18px}
+section.dim{
+  opacity:.25;
+  filter:blur(2px);
+}
+section.active{
+  opacity:1;
+  filter:none;
+}
 
-/* FADE */
-.fade{opacity:0;transform:translateY(30px);transition:.9s}
-.fade.show{opacity:1;transform:none}
+/* ===== HERO ===== */
+.hero img{
+  width:220px;
+  filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
+}
+.hero h1{
+  font-size:clamp(38px,6vw,64px);
+  margin:30px 0 16px;
+}
+.hero p{
+  max-width:720px;
+  color:var(--muted);
+  font-size:18px;
+}
+
+/* ===== TERMINAL ===== */
+.terminal{
+  margin-top:50px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  padding:24px;
+  font-family:monospace;
+}
+.terminal div{opacity:0}
+.terminal span{color:var(--accent)}
+
+/* ===== AI MODEL ===== */
+.model{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  margin-top:60px;
+}
+.node{
+  border:1px solid var(--border);
+  padding:28px;
+  background:rgba(255,255,255,.04);
+  transition:.35s;
+  position:relative;
+}
+.node::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:1px dashed rgba(125,211,252,.35);
+  opacity:0;
+}
+.node.active{
+  border-color:var(--accent);
+  background:rgba(125,211,252,.08);
+}
+.node.active::after{opacity:.4}
+
+/* ===== CONTACT ===== */
+.contact-wrap{
+  position:relative;
+  padding:70px;
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+.contact-wrap::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("GRT LOGO_11.png") center/420px no-repeat;
+  opacity:.08;
+  transform:translate(var(--mx,0),var(--my,0));
+  transition:.2s;
+  pointer-events:none;
+}
+
+input,textarea{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border);
+  padding:14px;
+  color:var(--fg);
+  margin-bottom:18px;
+  font-family:inherit;
+}
+button{
+  background:var(--accent);
+  border:none;
+  padding:12px 30px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* ===== FADE ===== */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.9s;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:60px 0;
+  text-align:center;
+  color:var(--muted);
+}
+a{color:var(--accent);text-decoration:none}
 </style>
 </head>
 
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <strong>Ganesh Takwale</strong>
-    <div>
-      <a href="#what">What I Do</a>
-      <a href="#health">System Health</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
+<canvas id="field"></canvas>
+<div class="bg-name" id="bgName">TAKWALE</div>
 
-<canvas id="bg"></canvas>
-<div class="bg-logo"></div>
-<div class="bg-overlay"></div>
+<!-- HERO -->
+<section class="hero fade">
+  <img src="GRT%20LOGO_05.png">
+  <h1>Intelligence is not automated.<br>It is architected.</h1>
+  <p>I architect AI systems where intent, memory, and reasoning operate as a single coherent intelligence.</p>
 
-<section class="fade">
-  <div class="panel">
-    <img src="GRT LOGO_05.png" id="logo" class="hero-logo" loading="lazy">
-
-    <div class="badges">
-      <span class="badge">INTELLIGENCE ARCHITECT</span>
-      <span class="badge">AI SYSTEMS</span>
-      <span class="badge">COGNITIVE DESIGN</span>
-    </div>
-
-    <h1>Intelligence is not automated.<br>It is architected.</h1>
-
-    <p>
-      I design intelligent systems that behave consistently over time —
-      systems that reason, remember, and remain aligned.
-    </p>
-
-    <div class="explain">
-      <strong>In simple words:</strong><br>
-      I help build AI that understands context and avoids unpredictable behavior.
-    </div>
-
-    <div class="cta">
-      <a href="#what">Explore My Work</a>
-    </div>
+  <div class="terminal" id="terminal">
+    <div><span>&gt;</span> boot intelligence.system</div>
+    <div><span>&gt;</span> load architecture.core</div>
+    <div><span>&gt;</span> attach memory.layer</div>
+    <div><span>&gt;</span> status: <span>ONLINE</span></div>
   </div>
 </section>
 
-<footer id="contact">
-  © <span id="year"></span> Ganesh R Takwale<br><br>
-  <a href="mailto:ganeshtakwale017@gmail.com">Email</a>
-  <a href="https://github.com/ganesh22takwale" target="_blank">GitHub</a>
-  <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+<!-- MODEL -->
+<section class="fade">
+  <h2>AI Architect Model</h2>
+  <div class="model">
+    <div class="node">Intent<br><small>Why the system exists</small></div>
+    <div class="node">Prompt Architecture<br><small>Behavior structure</small></div>
+    <div class="node">Memory<br><small>Continuity across time</small></div>
+    <div class="node">Alignment<br><small>Human constraints</small></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="fade">
+  <h2>Initiate Contact</h2>
+  <div class="contact-wrap" id="contact">
+    <input placeholder="Your name">
+    <input placeholder="Your email">
+    <textarea rows="4" placeholder="Your intent"></textarea>
+    <button>Initiate</button>
+  </div>
+</section>
+
+<footer>
+  Architect Intelligence · Ganesh R Takwale<br>
+  <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
 </footer>
 
 <script>
-document.getElementById("year").textContent=new Date().getFullYear();
+/* ===== INTELLIGENCE FIELD ===== */
+const c=document.getElementById("field"),ctx=c.getContext("2d");
+let W,H,pts=[];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
+
+pts=[...Array(120)].map(()=>({
+  x:Math.random()*W,y:Math.random()*H,
+  vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
+}));
+
+(function anim(){
+ctx.clearRect(0,0,W,H);
+pts.forEach(p=>{
+pts.forEach(q=>{
+let d=Math.hypot(p.x-q.x,p.y-q.y);
+if(d<120){
+ctx.strokeStyle="rgba(125,211,252,.08)";
+ctx.beginPath();
+ctx.moveTo(p.x,p.y);
+ctx.lineTo(q.x,q.y);
+ctx.stroke();
+}
+});
+p.x+=p.vx;p.y+=p.vy;
+if(p.x<0||p.x>W)p.vx*=-1;
+if(p.y<0||p.y>H)p.vy*=-1;
+ctx.fillStyle="rgba(125,211,252,.6)";
+ctx.fillRect(p.x,p.y,1.4,1.4);
+});
+requestAnimationFrame(anim);
+})();
+
+/* TERMINAL */
+const lines=document.querySelectorAll('#terminal div');
+let ti=0;
+setTimeout(function type(){
+if(ti<lines.length){
+lines[ti++].style.opacity=1;
+setTimeout(type,600);
+}},800);
+
+/* FADE */
+const fades=document.querySelectorAll('.fade');
+addEventListener('scroll',()=>{
+const y=scrollY;
+document.getElementById('bgName').style.transform=
+`translateY(${y*0.05}px)`;
+fades.forEach(el=>{
+if(el.getBoundingClientRect().top<innerHeight*0.8)
+el.classList.add('show');
+});
+});
+
+/* SECTION FOCUS */
+const sections=[...document.querySelectorAll("section")];
+sections.forEach(s=>{
+s.onclick=e=>{
+e.stopPropagation();
+sections.forEach(o=>o.classList.toggle("dim",o!==s));
+s.classList.add("active");
+};
+});
+document.body.onclick=()=>{
+sections.forEach(s=>s.classList.remove("dim","active"));
+};
+
+/* MODEL NODES */
+document.querySelectorAll(".node").forEach(n=>{
+n.onclick=e=>{
+e.stopPropagation();
+document.querySelectorAll(".node").forEach(o=>o.classList.remove("active"));
+n.classList.add("active");
+};
+});
+
+/* CONTACT LOGO MOTION */
+const contact=document.getElementById("contact");
+contact.addEventListener("mousemove",e=>{
+const r=contact.getBoundingClientRect();
+contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/30+"px");
+contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/30+"px");
+});
 </script>
 
 </body>
