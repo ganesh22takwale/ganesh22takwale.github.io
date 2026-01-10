@@ -27,7 +27,22 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== BACKGROUND FIELD ===== */
+/* ===== TOGGLE ===== */
+.toggle{
+  position:fixed;
+  top:18px;
+  right:24px;
+  z-index:20;
+  font-size:12px;
+  color:var(--muted);
+}
+.toggle span{
+  cursor:pointer;
+  margin-left:12px;
+}
+.toggle span.active{color:var(--accent)}
+
+/* ===== BACKGROUND ===== */
 canvas#field{
   position:fixed;
   inset:0;
@@ -47,7 +62,6 @@ canvas#field{
   color:rgba(255,255,255,0.035);
   pointer-events:none;
   z-index:-4;
-  transition:transform .4s ease;
 }
 
 /* ===== SECTIONS ===== */
@@ -56,18 +70,11 @@ section{
   padding:140px 24px;
   max-width:1100px;
   margin:auto;
-  position:relative;
   cursor:pointer;
-  transition:.45s;
+  transition:.4s;
 }
-section.dim{
-  opacity:.25;
-  filter:blur(2px);
-}
-section.active{
-  opacity:1;
-  filter:none;
-}
+section.dim{opacity:.25;filter:blur(2px)}
+section.active{opacity:1}
 
 /* ===== HERO ===== */
 .hero img{
@@ -78,11 +85,7 @@ section.active{
   font-size:clamp(38px,6vw,64px);
   margin:30px 0 16px;
 }
-.hero p{
-  max-width:720px;
-  color:var(--muted);
-  font-size:18px;
-}
+.hero p{max-width:720px;color:var(--muted);font-size:18px}
 
 /* ===== TERMINAL ===== */
 .terminal{
@@ -95,78 +98,42 @@ section.active{
 .terminal div{opacity:0}
 .terminal span{color:var(--accent)}
 
-/* ===== AI MODEL ===== */
-.model{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:32px;
-  margin-top:60px;
-}
-.node{
+/* ===== ARCH STACK ===== */
+.arch-layer{
   border:1px solid var(--border);
-  padding:28px;
-  background:rgba(255,255,255,.04);
-  transition:.35s;
-  position:relative;
-}
-.node::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border:1px dashed rgba(125,211,252,.35);
-  opacity:0;
-}
-.node.active{
-  border-color:var(--accent);
-  background:rgba(125,211,252,.08);
-}
-.node.active::after{opacity:.4}
-
-/* ===== CONTACT ===== */
-.contact-wrap{
-  position:relative;
-  padding:70px;
-  border:1px solid var(--border);
-  overflow:hidden;
-}
-.contact-wrap::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:url("GRT LOGO_11.png") center/420px no-repeat;
-  opacity:.08;
-  transform:translate(var(--mx,0),var(--my,0));
-  transition:.2s;
-  pointer-events:none;
-}
-
-input,textarea{
-  width:100%;
-  background:transparent;
-  border:1px solid var(--border);
-  padding:14px;
-  color:var(--fg);
-  margin-bottom:18px;
-  font-family:inherit;
-}
-button{
-  background:var(--accent);
-  border:none;
-  padding:12px 30px;
-  font-weight:600;
+  padding:24px;
+  margin-top:18px;
   cursor:pointer;
+}
+.arch-layer.active{
+  background:rgba(125,211,252,.08);
+  border-color:var(--accent);
+}
+.arch-layer p{display:none;color:var(--muted)}
+.arch-layer.active p{display:block}
+
+/* ===== SVG DIAGRAM ===== */
+.diagram{
+  margin-top:50px;
+  text-align:center;
+}
+.diagram circle{
+  fill:#0b1020;
+  stroke:var(--border);
+  stroke-width:1.5;
+}
+.diagram text{
+  fill:var(--muted);
+  font-size:12px;
+}
+.diagram .active circle{
+  stroke:var(--accent);
+  fill:rgba(125,211,252,.15);
 }
 
 /* ===== FADE ===== */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:.9s;
-}
-.fade.show{
-  opacity:1;
-  transform:none;
-}
+.fade{opacity:0;transform:translateY(40px);transition:.8s}
+.fade.show{opacity:1;transform:none}
 
 footer{
   border-top:1px solid var(--border);
@@ -180,14 +147,21 @@ a{color:var(--accent);text-decoration:none}
 
 <body>
 
-<canvas id="field"></canvas>
-<div class="bg-name" id="bgName">TAKWALE</div>
+<div class="toggle">
+  Mode:
+  <span id="concept" class="active">Conceptual</span>
+  <span id="prod">Production</span>
+</div>
 
-<!-- HERO -->
+<canvas id="field"></canvas>
+<div class="bg-name">TAKWALE</div>
+
 <section class="hero fade">
   <img src="GRT%20LOGO_05.png">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>I architect AI systems where intent, memory, and reasoning operate as a single coherent intelligence.</p>
+  <p id="heroText">
+    I architect AI systems where intent, memory, and reasoning operate as one intelligence.
+  </p>
 
   <div class="terminal" id="terminal">
     <div><span>&gt;</span> boot intelligence.system</div>
@@ -197,25 +171,47 @@ a{color:var(--accent);text-decoration:none}
   </div>
 </section>
 
-<!-- MODEL -->
 <section class="fade">
-  <h2>AI Architect Model</h2>
-  <div class="model">
-    <div class="node">Intent<br><small>Why the system exists</small></div>
-    <div class="node">Prompt Architecture<br><small>Behavior structure</small></div>
-    <div class="node">Memory<br><small>Continuity across time</small></div>
-    <div class="node">Alignment<br><small>Human constraints</small></div>
-  </div>
-</section>
+  <h2>Core Architecture</h2>
 
-<!-- CONTACT -->
-<section class="fade">
-  <h2>Initiate Contact</h2>
-  <div class="contact-wrap" id="contact">
-    <input placeholder="Your name">
-    <input placeholder="Your email">
-    <textarea rows="4" placeholder="Your intent"></textarea>
-    <button>Initiate</button>
+  <div class="arch-layer" data-i="0">
+    Data Layer
+    <p class="concept">Foundation of meaning.</p>
+    <p class="prod">Ingestion, storage, preprocessing pipelines.</p>
+  </div>
+
+  <div class="arch-layer" data-i="1">
+    Model Layer
+    <p class="concept">Where intelligence forms.</p>
+    <p class="prod">Training, validation, experiment tracking.</p>
+  </div>
+
+  <div class="arch-layer" data-i="2">
+    Evaluation
+    <p class="concept">Truth-checking intelligence.</p>
+    <p class="prod">Metrics, drift detection, monitoring.</p>
+  </div>
+
+  <div class="arch-layer" data-i="3">
+    Deployment
+    <p class="concept">Intelligence in motion.</p>
+    <p class="prod">APIs, containers, orchestration.</p>
+  </div>
+
+  <div class="arch-layer" data-i="4">
+    User Layer
+    <p class="concept">Human interaction.</p>
+    <p class="prod">Dashboards, apps, workflows.</p>
+  </div>
+
+  <div class="diagram">
+    <svg width="400" height="120">
+      <g class="dnode"><circle cx="40" cy="60" r="16"/><text x="32" y="65">D</text></g>
+      <g class="dnode"><circle cx="120" cy="60" r="16"/><text x="112" y="65">M</text></g>
+      <g class="dnode"><circle cx="200" cy="60" r="16"/><text x="192" y="65">E</text></g>
+      <g class="dnode"><circle cx="280" cy="60" r="16"/><text x="272" y="65">D</text></g>
+      <g class="dnode"><circle cx="360" cy="60" r="16"/><text x="352" y="65">U</text></g>
+    </svg>
   </div>
 </section>
 
@@ -225,88 +221,61 @@ a{color:var(--accent);text-decoration:none}
 </footer>
 
 <script>
-/* ===== INTELLIGENCE FIELD ===== */
-const c=document.getElementById("field"),ctx=c.getContext("2d");
-let W,H,pts=[];
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
-
-pts=[...Array(120)].map(()=>({
-  x:Math.random()*W,y:Math.random()*H,
-  vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
-}));
-
-(function anim(){
-ctx.clearRect(0,0,W,H);
+/* BACKGROUND FIELD */
+const c=document.getElementById("field"),x=c.getContext("2d");
+let W,H;function r(){W=c.width=innerWidth;H=c.height=innerHeight}
+r();addEventListener("resize",r);
+const pts=[...Array(100)].map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15}));
+(function a(){
+x.clearRect(0,0,W,H);
 pts.forEach(p=>{
-pts.forEach(q=>{
-let d=Math.hypot(p.x-q.x,p.y-q.y);
-if(d<120){
-ctx.strokeStyle="rgba(125,211,252,.08)";
-ctx.beginPath();
-ctx.moveTo(p.x,p.y);
-ctx.lineTo(q.x,q.y);
-ctx.stroke();
-}
-});
 p.x+=p.vx;p.y+=p.vy;
 if(p.x<0||p.x>W)p.vx*=-1;
 if(p.y<0||p.y>H)p.vy*=-1;
-ctx.fillStyle="rgba(125,211,252,.6)";
-ctx.fillRect(p.x,p.y,1.4,1.4);
+x.fillStyle="rgba(125,211,252,.6)";
+x.fillRect(p.x,p.y,1.5,1.5);
 });
-requestAnimationFrame(anim);
+requestAnimationFrame(a);
 })();
 
 /* TERMINAL */
 const lines=document.querySelectorAll('#terminal div');
-let ti=0;
-setTimeout(function type(){
-if(ti<lines.length){
-lines[ti++].style.opacity=1;
-setTimeout(type,600);
-}},800);
+let i=0;setTimeout(function t(){if(i<lines.length){lines[i++].style.opacity=1;setTimeout(t,600)}},800);
 
 /* FADE */
-const fades=document.querySelectorAll('.fade');
-addEventListener('scroll',()=>{
-const y=scrollY;
-document.getElementById('bgName').style.transform=
-`translateY(${y*0.05}px)`;
-fades.forEach(el=>{
-if(el.getBoundingClientRect().top<innerHeight*0.8)
-el.classList.add('show');
+document.addEventListener("scroll",()=>{
+document.querySelectorAll('.fade').forEach(el=>{
+if(el.getBoundingClientRect().top<innerHeight*0.8)el.classList.add('show');
 });
 });
 
-/* SECTION FOCUS */
-const sections=[...document.querySelectorAll("section")];
-sections.forEach(s=>{
-s.onclick=e=>{
-e.stopPropagation();
-sections.forEach(o=>o.classList.toggle("dim",o!==s));
-s.classList.add("active");
+/* TOGGLE */
+let mode="concept";
+document.getElementById("concept").onclick=()=>{
+mode="concept";
+heroText.textContent="I architect AI systems where intent, memory, and reasoning operate as one intelligence.";
 };
-});
-document.body.onclick=()=>{
-sections.forEach(s=>s.classList.remove("dim","active"));
+document.getElementById("prod").onclick=()=>{
+mode="prod";
+heroText.textContent="I design production-grade AI architectures with scalable data, models, and deployment pipelines.";
 };
 
-/* MODEL NODES */
-document.querySelectorAll(".node").forEach(n=>{
-n.onclick=e=>{
-e.stopPropagation();
-document.querySelectorAll(".node").forEach(o=>o.classList.remove("active"));
-n.classList.add("active");
+/* ARCH LAYER + DIAGRAM */
+const layers=document.querySelectorAll(".arch-layer");
+const nodes=document.querySelectorAll(".dnode");
+layers.forEach((l,i)=>{
+l.onclick=e=>{
+layers.forEach(o=>o.classList.remove("active"));
+nodes.forEach(n=>n.classList.remove("active"));
+l.classList.add("active");
+nodes[i].classList.add("active");
+l.querySelectorAll("p").forEach(p=>p.style.display=p.className===mode?"block":"none");
 };
 });
 
-/* CONTACT LOGO MOTION */
-const contact=document.getElementById("contact");
-contact.addEventListener("mousemove",e=>{
-const r=contact.getBoundingClientRect();
-contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/30+"px");
-contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/30+"px");
+/* KEYS */
+document.addEventListener("keydown",e=>{
+if(e.key>0 && e.key<6)layers[e.key-1].click();
 });
 </script>
 
