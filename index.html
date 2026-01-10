@@ -10,7 +10,6 @@
   --bg:#020314;
   --cyan:#6ee7ff;
   --violet:#8b7cff;
-  --pink:#ff6ad5;
   --text:#eef2ff;
   --muted:#b6c0ff;
   --glass:rgba(255,255,255,.08);
@@ -19,28 +18,21 @@
 
 *{box-sizing:border-box}
 
-html,body{height:100%}
-
 body{
   margin:0;
   font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
 }
 
 /* ================= BACKGROUND ================= */
-
-/* Neural canvas */
 canvas{
   position:fixed;
   inset:0;
   z-index:-3;
 }
 
-/* LOGO 11 — BACKGROUND INTELLIGENCE SYMBOL */
 .bg-logo{
   position:fixed;
   inset:0;
@@ -49,12 +41,10 @@ canvas{
     url("GRT LOGO_11.png") repeat;
   background-size:520px,180px;
   opacity:0.14;
-  filter:blur(.2px);
   mix-blend-mode:screen;
   z-index:-2;
 }
 
-/* Luminance control for readability */
 .bg-overlay{
   position:fixed;
   inset:0;
@@ -82,7 +72,6 @@ section{
 h1{
   font-size:clamp(44px,6vw,72px);
   margin:0 0 22px;
-  letter-spacing:-0.01em;
 }
 
 p{
@@ -124,13 +113,13 @@ p{
   border:1px solid var(--border);
   border-radius:16px;
   padding:22px;
+  cursor:pointer;
 }
 
 .metric strong{
   display:block;
   margin-top:6px;
   font-size:18px;
-  color:var(--text);
 }
 
 .metric span{
@@ -138,6 +127,17 @@ p{
   font-size:11px;
   letter-spacing:.12em;
   color:var(--muted);
+}
+
+.metric .detail{
+  display:none;
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.metric.active .detail{
+  display:block;
 }
 
 /* ================= TERMINAL ================= */
@@ -149,7 +149,7 @@ p{
 }
 
 .terminal pre{
-  height:170px;
+  height:180px;
   overflow:auto;
   color:var(--cyan);
   font-size:13px;
@@ -170,7 +170,7 @@ svg{
 }
 
 .node:hover{
-  transform:scale(1.08);
+  transform:scale(1.1);
   opacity:.9;
 }
 
@@ -209,7 +209,7 @@ svg{
 <div class="bg-overlay"></div>
 
 <!-- ================= HERO ================= -->
-<section class="fade">
+<section class="fade" data-state="core-loaded">
   <div class="panel">
     <img src="GRT LOGO_05.png" class="hero-logo" alt="Signature Logo">
 
@@ -222,14 +222,14 @@ svg{
     <h1>Intelligence is not automated.<br>It is architected.</h1>
 
     <p>
-      I design intelligence as a system: memory with continuity, reasoning
-      under constraint, and alignment sustained over time.
+      I design intelligence as a system: memory with continuity,
+      reasoning under constraint, and alignment sustained over time.
     </p>
   </div>
 </section>
 
 <!-- ================= TELEMETRY ================= -->
-<section class="fade">
+<section class="fade" data-state="telemetry-online">
   <div class="panel">
     <div class="badges">
       <span class="badge">SYSTEM TELEMETRY</span>
@@ -239,21 +239,30 @@ svg{
       <div class="metric">
         <span>COHERENCE</span>
         <strong>0.92</strong>
+        <div class="detail">
+          Measures internal consistency across reasoning steps.
+        </div>
       </div>
       <div class="metric">
         <span>ALIGNMENT STABILITY</span>
         <strong>0.89</strong>
+        <div class="detail">
+          Indicates constraint adherence under uncertainty.
+        </div>
       </div>
       <div class="metric">
         <span>MEMORY UTILIZATION</span>
         <strong>74%</strong>
+        <div class="detail">
+          Active context relative to available cognitive bandwidth.
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= COGNITION MAP ================= -->
-<section class="fade">
+<section class="fade" data-state="cognition-mapped">
   <div class="panel">
     <div class="badges">
       <span class="badge">COGNITION MAP</span>
@@ -262,9 +271,9 @@ svg{
     <svg viewBox="0 0 600 300">
       <line class="line" x1="300" y1="150" x2="100" y2="80"/>
       <line class="line" x1="300" y1="150" x2="500" y2="80"/>
-      <circle class="node" cx="300" cy="150" r="18"/>
-      <circle class="node" cx="100" cy="80" r="12"/>
-      <circle class="node" cx="500" cy="80" r="12"/>
+      <circle class="node" cx="300" cy="150" r="18" data-node="core"/>
+      <circle class="node" cx="100" cy="80" r="12" data-node="memory"/>
+      <circle class="node" cx="500" cy="80" r="12" data-node="alignment"/>
     </svg>
 
     <div class="essay" id="essay">
@@ -274,14 +283,14 @@ svg{
 </section>
 
 <!-- ================= TERMINAL ================= -->
-<section class="fade">
+<section class="fade" data-state="console-active">
   <div class="panel">
     <div class="badges">
       <span class="badge">SYSTEM CONSOLE</span>
     </div>
 
     <div class="terminal">
-      <pre>
+      <pre id="terminal">
 > initialize.core
 > attach.memory
 > bind.reasoning
@@ -296,14 +305,9 @@ svg{
 /* ========== BACKGROUND INTELLIGENCE FIELD ========== */
 const c=document.getElementById("bg");
 const ctx=c.getContext("2d");
-
 let W,H;
-function resize(){
-  W=c.width=innerWidth;
-  H=c.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
 
 let mouse={x:0,y:0};
 addEventListener("mousemove",e=>mouse=e);
@@ -329,8 +333,7 @@ const nodes=[...Array(110)].map(()=>({
         ctx.stroke();
       }
     });
-    a.x+=a.vx;
-    a.y+=a.vy;
+    a.x+=a.vx;a.y+=a.vy;
     if(a.x<0||a.x>W)a.vx*=-1;
     if(a.y<0||a.y>H)a.vy*=-1;
     ctx.fillStyle="#6ee7ff";
@@ -339,25 +342,42 @@ const nodes=[...Array(110)].map(()=>({
   requestAnimationFrame(animate);
 })();
 
+/* ========== TELEMETRY INTERACTION ========== */
+document.querySelectorAll(".metric").forEach(m=>{
+  m.onclick=()=>m.classList.toggle("active");
+});
+
 /* ========== COGNITION INTERACTION ========== */
-document.querySelectorAll(".node").forEach((n,i)=>{
+const essay=document.getElementById("essay");
+const explanations={
+  core:"Central reasoning core coordinating inference flow.",
+  memory:"Contextual memory preserving continuity across time.",
+  alignment:"Constraint system maintaining behavioral bounds."
+};
+document.querySelectorAll(".node").forEach(n=>{
   n.onclick=()=>{
-    const content=[
-      "Central reasoning core coordinating inference and decision flow.",
-      "Contextual memory subsystem preserving continuity across states.",
-      "Alignment monitor constraining behavior under uncertainty."
-    ];
-    essay.innerHTML=`<h3>${content[i]||"Cognitive Node"}</h3>
-      <p>This function operates continuously, shaping how intelligence
-      adapts while remaining internally consistent.</p>`;
+    const key=n.dataset.node;
+    essay.innerHTML=`<h3>${key.toUpperCase()}</h3><p>${explanations[key]}</p>`;
   };
 });
 
-/* ========== FADE IN ========== */
+/* ========== CONSOLE STATE FEEDBACK ========== */
+const terminal=document.getElementById("terminal");
+function logState(text){
+  terminal.textContent+=`\n> ${text}`;
+  terminal.scrollTop=terminal.scrollHeight;
+}
+
+/* ========== FADE + STATE AWARENESS ========== */
 addEventListener("scroll",()=>{
-  document.querySelectorAll(".fade").forEach(el=>{
-    if(el.getBoundingClientRect().top<innerHeight*0.82)
-      el.classList.add("show");
+  document.querySelectorAll(".fade").forEach(sec=>{
+    if(sec.getBoundingClientRect().top<innerHeight*0.8){
+      if(!sec.classList.contains("show")){
+        sec.classList.add("show");
+        const state=sec.dataset.state;
+        if(state) logState(`state.transition -> ${state}`);
+      }
+    }
   });
 });
 </script>
