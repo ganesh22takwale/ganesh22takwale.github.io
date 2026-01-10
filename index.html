@@ -1,63 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic SEO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO -->
   <title>Ganesh Takwale | Architected Intelligence</title>
-  <meta name="description" content="Intelligence is not automated. It is architected. Explore business, product, and research systems designed for clarity, alignment, and impact." />
+  <meta name="description" content="Intelligence is not automated. It is architected. Systems across business, product, and research." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Ganesh Takwale | Architected Intelligence" />
-  <meta property="og:description" content="Modern systems thinking across business, product, and research." />
+  <meta property="og:description" content="Designing coherent, aligned, intelligent systems." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ganesh22takwale.github.io/" />
   <meta property="og:image" content="https://ganesh22takwale.github.io/preview.png" />
 
-  <!-- Fonts -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ====== Minified, modern CSS ====== */
-    :root{--bg:#fff;--bg-alt:#f5f7fb;--text:#1f2937;--muted:#6b7280;--primary:#2563eb;--border:#e5e7eb}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .container{max-width:1100px;margin:auto;padding:0 1rem}
-    header{position:sticky;top:0;background:#ffffffcc;backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
-    nav{display:flex;justify-content:space-between;align-items:center;height:64px}
-    nav ul{display:flex;gap:1.25rem;list-style:none}
-    nav a{font-weight:500;color:#374151}
-    nav a:hover{color:var(--primary)}
-    .hero{padding:5rem 0 4rem;background:linear-gradient(180deg,#f8fafc,#fff)}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
-    .hero h1{font-size:clamp(2rem,4vw,3rem);line-height:1.2;margin-bottom:1rem}
-    .hero p{color:var(--muted);max-width:520px;margin-bottom:1.5rem}
-    .btn{display:inline-block;background:var(--primary);color:#fff;padding:.75rem 1.25rem;border-radius:.5rem;font-weight:600}
-    .btn:hover{opacity:.9}
-    section{padding:4rem 0}
-    h2{font-size:1.75rem;margin-bottom:1.5rem}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .card{border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;background:#fff}
-    .card h3{margin-bottom:.5rem}
-    .card p{color:var(--muted)}
-    .health{background:var(--bg-alt)}
-    .health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-    .health-item{padding:1.5rem;border-radius:.75rem;background:#fff;border:1px solid var(--border);text-align:center}
-    .icon{width:48px;height:48px;margin:0 auto 1rem;border-radius:50%;background:rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700}
-    footer{border-top:1px solid var(--border);padding:2rem 0}
-    footer p{color:var(--muted);font-size:.9rem}
-    footer .links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
-    footer a{color:var(--primary);font-weight:500}
+    :root {
+      --bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #1e40af;
+      --border: #e5e7eb;
+    }
 
-    /* Responsive */
-    @media(max-width:900px){
-      .hero-grid{grid-template-columns:1fr}
-      .cards,.health-grid{grid-template-columns:1fr}
-      nav ul{gap:.75rem;font-size:.9rem}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ---------- NAV ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop");
+      background-size: cover;
+      background-position: center;
+      color: #ffffff;
+    }
+
+    .hero-content {
+      max-width: 650px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #e5e7eb;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.4rem;
+      border-radius: 0.4rem;
+      background: #ffffff;
+      color: #111827;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section {
+      padding: 5rem 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    /* ---------- CARDS ---------- */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ---------- SYSTEM HEALTH ---------- */
+    .health {
+      background: #f9fafb;
+    }
+
+    .health-item {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .health-box {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+      border-radius: 12px;
+      background: #e0e7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    footer .links {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--primary);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        gap: 1rem;
+      }
     }
   </style>
 </head>
@@ -79,92 +241,86 @@
 </header>
 
 <main id="home">
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div>
+    <div class="container">
+      <div class="hero-content">
         <h1>Intelligence is not automated.<br>It is architected.</h1>
-        <p>I design systems that think clearly — across business strategy, product design, and research workflows.</p>
-        <a class="btn" href="#what">Explore My Work</a>
-      </div>
-      <div>
-        <!-- Decorative image, lazy-loaded -->
-        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop"
-             alt="Abstract system design visualization"
-             loading="lazy">
+        <p>I work at the intersection of business, product, and research to design systems that remain coherent under complexity.</p>
+        <a href="#what" class="btn">Explore My Work</a>
       </div>
     </div>
   </section>
 
-  <!-- What I Do -->
+  <!-- WHAT I DO -->
   <section id="what">
     <div class="container">
       <h2>What I Do</h2>
-      <div class="cards">
+      <div class="grid-3">
         <div class="card">
           <h3>Business</h3>
-          <p>Translate complex systems into strategic clarity, decision frameworks, and scalable operating models.</p>
+          <p>Strategic clarity, system-level thinking, and long-term decision frameworks.</p>
         </div>
         <div class="card">
           <h3>Product</h3>
-          <p>Architect products with strong internal logic, long-term coherence, and human-centered outcomes.</p>
+          <p>Designing products with internal logic, coherence, and sustained usefulness.</p>
         </div>
         <div class="card">
           <h3>Research</h3>
-          <p>Explore intelligence, systems thinking, and design principles to inform robust real-world solutions.</p>
+          <p>Exploring intelligence, cognition, and systems to inform practical design.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Where This Helps -->
+  <!-- WHERE THIS HELPS -->
   <section id="where">
     <div class="container">
       <h2>Where This Helps</h2>
-      <p class="muted">Early-stage products, complex organizations, AI-assisted systems, and environments where clarity matters more than automation.</p>
+      <p class="muted">
+        Early-stage ventures, complex organizations, AI-assisted workflows, and environments where alignment matters more than speed.
+      </p>
     </div>
   </section>
 
-  <!-- System Health -->
+  <!-- SYSTEM HEALTH -->
   <section id="health" class="health">
     <div class="container">
       <h2>System Health</h2>
-      <div class="health-grid">
+      <div class="grid-3">
         <div class="health-item">
-          <div class="icon">C</div>
+          <div class="health-box">C</div>
           <h3>Coherence</h3>
-          <p>Every component reinforces the same underlying logic.</p>
+          <p class="muted">All parts reinforce a single underlying logic.</p>
         </div>
         <div class="health-item">
-          <div class="icon">A</div>
+          <div class="health-box">A</div>
           <h3>Alignment</h3>
-          <p>Strategy, execution, and outcomes move in the same direction.</p>
+          <p class="muted">Intent, execution, and outcome move together.</p>
         </div>
         <div class="health-item">
-          <div class="icon">M</div>
+          <div class="health-box">M</div>
           <h3>Memory</h3>
-          <p>Systems learn from the past instead of repeating it.</p>
+          <p class="muted">Systems learn instead of repeating mistakes.</p>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<!-- Footer -->
 <footer id="contact">
   <div class="container">
     <p>© <span id="year"></span> Ganesh Takwale</p>
     <div class="links">
       <a href="mailto:ganesh.takwale@email.com">Email</a>
-      <a href="https://github.com/ganesh22takwale" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ganesh22takwale" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Tiny JS for footer year (non-blocking)
-  document.getElementById("year").textContent=new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
