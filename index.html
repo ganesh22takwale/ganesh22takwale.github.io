@@ -1,326 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<title>Ganesh R Takwale — Intelligence Architect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO -->
-  <title>Ganesh Takwale | Architected Intelligence</title>
-  <meta name="description" content="Intelligence is not automated. It is architected. Systems across business, product, and research." />
+<meta name="description" content="Intelligence is not automated. It is architected. Designing coherent, aligned, memory-aware AI systems." />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ganesh Takwale | Architected Intelligence" />
-  <meta property="og:description" content="Designing coherent, aligned, intelligent systems." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ganesh22takwale.github.io/" />
-  <meta property="og:image" content="https://ganesh22takwale.github.io/preview.png" />
+<!-- Open Graph -->
+<meta property="og:title" content="Ganesh R Takwale — Intelligence Architect" />
+<meta property="og:description" content="Architecting intelligent systems that reason, remember, and stay aligned." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ganesh22takwale.github.io/" />
+<meta property="og:image" content="preview.png" />
 
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="google-site-verification" content="google2216e0058875e421" />
 
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --primary: #1e40af;
-      --border: #e5e7eb;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+:root{
+  --bg:#020314;
+  --cyan:#6ee7ff;
+  --violet:#8b7cff;
+  --text:#eef2ff;
+  --muted:#b6c0ff;
+  --soft:#9aa4ff;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.18);
+}
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.7;
-    }
+*{box-sizing:border-box}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+/* ========== NAV (NEW, VERY LIGHT) ========== */
+nav{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(2,3,20,.45);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+}
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  margin-left:18px;
+}
+nav a:hover{color:var(--cyan)}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 0 1.25rem;
-    }
+canvas#bg{position:fixed;inset:0;z-index:-4}
 
-    /* ---------- NAV ---------- */
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
+.bg-logo{
+  position:fixed;
+  inset:0;
+  background:
+    url("GRT LOGO_11.png") center/520px no-repeat,
+    url("GRT LOGO_11.png") repeat;
+  background-size:520px,180px;
+  opacity:.14;
+  mix-blend-mode:screen;
+  z-index:-3;
+}
 
-    nav {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.bg-overlay{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(to bottom, rgba(2,3,20,.25), #020314 70%);
+  z-index:-2;
+}
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-    }
+section{
+  max-width:1150px;
+  margin:auto;
+  padding:140px 24px;
+}
 
-    nav a {
-      color: var(--muted);
-      font-weight: 500;
-    }
+.panel{
+  background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+  border:1px solid var(--border);
+  border-radius:28px;
+  backdrop-filter:blur(22px);
+  padding:64px;
+}
 
-    nav a:hover {
-      color: var(--primary);
-    }
+h1{
+  font-size:clamp(48px,6vw,80px);
+  line-height:1.02;
+  margin:0 0 28px;
+}
 
-    /* ---------- HERO ---------- */
-    .hero {
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.6)),
-        url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop");
-      background-size: cover;
-      background-position: center;
-      color: #ffffff;
-    }
+h2{
+  font-size:22px;
+  letter-spacing:.12em;
+  margin-bottom:28px;
+}
 
-    .hero-content {
-      max-width: 650px;
-    }
+p{
+  font-size:15.5px;
+  line-height:1.75;
+  color:var(--muted);
+  max-width:820px;
+}
 
-    .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-    }
+.badges{margin-bottom:32px}
+.badge{
+  display:inline-block;
+  padding:6px 16px;
+  margin:4px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  color:#000;
+  font-size:10.5px;
+  font-weight:600;
+}
 
-    .hero p {
-      font-size: 1.05rem;
-      color: #e5e7eb;
-      margin-bottom: 2rem;
-    }
+.hero-logo{
+  width:150px;
+  margin-bottom:36px;
+  filter:drop-shadow(0 0 36px rgba(110,231,255,.45));
+}
 
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.4rem;
-      border-radius: 0.4rem;
-      background: #ffffff;
-      color: #111827;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+.explain{
+  margin-top:24px;
+  padding:18px 22px;
+  background:#0008;
+  border-left:3px solid var(--cyan);
+  border-radius:12px;
+  font-size:14px;
+  color:var(--soft);
+}
 
-    /* ---------- SECTIONS ---------- */
-    section {
-      padding: 5rem 0;
-    }
+/* CTA (NEW) */
+.cta{
+  margin-top:36px;
+}
+.cta a{
+  display:inline-block;
+  padding:10px 22px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--text);
+  text-decoration:none;
+}
+.cta a:hover{
+  background:rgba(255,255,255,.08);
+}
 
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-    }
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+}
 
-    .muted {
-      color: var(--muted);
-      max-width: 720px;
-    }
+.card{
+  background:#0007;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:26px;
+}
 
-    /* ---------- CARDS ---------- */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
+/* FOOTER (NEW) */
+footer{
+  max-width:1150px;
+  margin:auto;
+  padding:80px 24px 60px;
+  font-size:13px;
+  color:var(--soft);
+}
+footer a{color:var(--cyan);text-decoration:none;margin-right:18px}
 
-    .card {
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: 0.75rem;
-      background: #ffffff;
-    }
-
-    .card h3 {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    /* ---------- SYSTEM HEALTH ---------- */
-    .health {
-      background: #f9fafb;
-    }
-
-    .health-item {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .health-box {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1rem;
-      border-radius: 12px;
-      background: #e0e7ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 0;
-      font-size: 0.9rem;
-    }
-
-    footer .links {
-      margin-top: 0.75rem;
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    footer a {
-      color: var(--primary);
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 900px) {
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      nav ul {
-        gap: 1rem;
-      }
-    }
-  </style>
+/* FADE */
+.fade{opacity:0;transform:translateY(30px);transition:.9s}
+.fade.show{opacity:1;transform:none}
+</style>
 </head>
+
 <body>
 
-<header>
-  <div class="container">
-    <nav>
-      <strong>Ganesh Takwale</strong>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#what">What I Do</a></li>
-        <li><a href="#where">Where This Helps</a></li>
-        <li><a href="#health">System Health</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<nav>
+  <div class="nav-inner">
+    <strong>Ganesh Takwale</strong>
+    <div>
+      <a href="#what">What I Do</a>
+      <a href="#health">System Health</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-</header>
+</nav>
 
-<main id="home">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Intelligence is not automated.<br>It is architected.</h1>
-        <p>I work at the intersection of business, product, and research to design systems that remain coherent under complexity.</p>
-        <a href="#what" class="btn">Explore My Work</a>
-      </div>
-    </div>
-  </section>
+<canvas id="bg"></canvas>
+<div class="bg-logo"></div>
+<div class="bg-overlay"></div>
 
-  <!-- WHAT I DO -->
-  <section id="what">
-    <div class="container">
-      <h2>What I Do</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Business</h3>
-          <p>Strategic clarity, system-level thinking, and long-term decision frameworks.</p>
-        </div>
-        <div class="card">
-          <h3>Product</h3>
-          <p>Designing products with internal logic, coherence, and sustained usefulness.</p>
-        </div>
-        <div class="card">
-          <h3>Research</h3>
-          <p>Exploring intelligence, cognition, and systems to inform practical design.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="fade">
+  <div class="panel">
+    <img src="GRT LOGO_05.png" id="logo" class="hero-logo" loading="lazy">
 
-  <!-- WHERE THIS HELPS -->
-  <section id="where">
-    <div class="container">
-      <h2>Where This Helps</h2>
-      <p class="muted">
-        Early-stage ventures, complex organizations, AI-assisted workflows, and environments where alignment matters more than speed.
-      </p>
+    <div class="badges">
+      <span class="badge">INTELLIGENCE ARCHITECT</span>
+      <span class="badge">AI SYSTEMS</span>
+      <span class="badge">COGNITIVE DESIGN</span>
     </div>
-  </section>
 
-  <!-- SYSTEM HEALTH -->
-  <section id="health" class="health">
-    <div class="container">
-      <h2>System Health</h2>
-      <div class="grid-3">
-        <div class="health-item">
-          <div class="health-box">C</div>
-          <h3>Coherence</h3>
-          <p class="muted">All parts reinforce a single underlying logic.</p>
-        </div>
-        <div class="health-item">
-          <div class="health-box">A</div>
-          <h3>Alignment</h3>
-          <p class="muted">Intent, execution, and outcome move together.</p>
-        </div>
-        <div class="health-item">
-          <div class="health-box">M</div>
-          <h3>Memory</h3>
-          <p class="muted">Systems learn instead of repeating mistakes.</p>
-        </div>
-      </div>
+    <h1>Intelligence is not automated.<br>It is architected.</h1>
+
+    <p>
+      I design intelligent systems that behave consistently over time —
+      systems that reason, remember, and remain aligned.
+    </p>
+
+    <div class="explain">
+      <strong>In simple words:</strong><br>
+      I help build AI that understands context and avoids unpredictable behavior.
     </div>
-  </section>
-</main>
+
+    <div class="cta">
+      <a href="#what">Explore My Work</a>
+    </div>
+  </div>
+</section>
 
 <footer id="contact">
-  <div class="container">
-    <p>© <span id="year"></span> Ganesh Takwale</p>
-    <div class="links">
-      <a href="mailto:ganesh.takwale@email.com">Email</a>
-      <a href="https://github.com/ganesh22takwale" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
-    </div>
-  </div>
+  © <span id="year"></span> Ganesh R Takwale<br><br>
+  <a href="mailto:ganeshtakwale017@gmail.com">Email</a>
+  <a href="https://github.com/ganesh22takwale" target="_blank">GitHub</a>
+  <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
 </footer>
 
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent=new Date().getFullYear();
 </script>
 
 </body>
