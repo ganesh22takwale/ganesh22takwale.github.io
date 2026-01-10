@@ -5,7 +5,7 @@
 <title>Ganesh R Takwale — Intelligence Architect</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Intelligence is not automated. It is architected. Architecting AI systems with memory, alignment, and intent.">
+<meta name="description" content="I help founders and teams design AI systems that reason, remember, and stay aligned in production.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -27,26 +27,11 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== TOGGLE ===== */
-.toggle{
-  position:fixed;
-  top:18px;
-  right:24px;
-  z-index:20;
-  font-size:12px;
-  color:var(--muted);
-}
-.toggle span{
-  cursor:pointer;
-  margin-left:12px;
-}
-.toggle span.active{color:var(--accent)}
-
-/* ===== BACKGROUND ===== */
+/* ===== BACKGROUND FIELD ===== */
 canvas#field{
   position:fixed;
   inset:0;
-  z-index:-5;
+  z-index:-6;
 }
 
 /* ===== CRYSTAL NAME ===== */
@@ -61,7 +46,7 @@ canvas#field{
   letter-spacing:1vw;
   color:rgba(255,255,255,0.035);
   pointer-events:none;
-  z-index:-4;
+  z-index:-5;
 }
 
 /* ===== SECTIONS ===== */
@@ -70,11 +55,20 @@ section{
   padding:140px 24px;
   max-width:1100px;
   margin:auto;
-  cursor:pointer;
-  transition:.4s;
+  position:relative;
 }
-section.dim{opacity:.25;filter:blur(2px)}
-section.active{opacity:1}
+
+h2{
+  font-size:28px;
+  margin-bottom:24px;
+}
+
+p{
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.7;
+  max-width:820px;
+}
 
 /* ===== HERO ===== */
 .hero img{
@@ -82,58 +76,84 @@ section.active{opacity:1}
   filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
 }
 .hero h1{
-  font-size:clamp(38px,6vw,64px);
+  font-size:clamp(40px,6vw,64px);
   margin:30px 0 16px;
 }
-.hero p{max-width:720px;color:var(--muted);font-size:18px}
-
-/* ===== TERMINAL ===== */
-.terminal{
-  margin-top:50px;
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--border);
-  padding:24px;
-  font-family:monospace;
+.hero .cta{
+  margin-top:40px;
 }
-.terminal div{opacity:0}
-.terminal span{color:var(--accent)}
-
-/* ===== ARCH STACK ===== */
-.arch-layer{
-  border:1px solid var(--border);
-  padding:24px;
-  margin-top:18px;
+.hero .cta button{
+  background:var(--accent);
+  border:none;
+  padding:14px 36px;
+  font-weight:600;
   cursor:pointer;
 }
-.arch-layer.active{
-  background:rgba(125,211,252,.08);
-  border-color:var(--accent);
-}
-.arch-layer p{display:none;color:var(--muted)}
-.arch-layer.active p{display:block}
 
-/* ===== SVG DIAGRAM ===== */
-.diagram{
+/* ===== VALUE GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
   margin-top:50px;
-  text-align:center;
 }
-.diagram circle{
-  fill:#0b1020;
-  stroke:var(--border);
-  stroke-width:1.5;
+.card{
+  border:1px solid var(--border);
+  padding:30px;
+  background:rgba(255,255,255,.04);
 }
-.diagram text{
-  fill:var(--muted);
-  font-size:12px;
-}
-.diagram .active circle{
-  stroke:var(--accent);
-  fill:rgba(125,211,252,.15);
+.card strong{
+  display:block;
+  margin-bottom:10px;
 }
 
-/* ===== FADE ===== */
-.fade{opacity:0;transform:translateY(40px);transition:.8s}
-.fade.show{opacity:1;transform:none}
+/* ===== WORK ===== */
+.work-step{
+  margin-top:30px;
+  border-left:2px solid var(--border);
+  padding-left:20px;
+}
+
+/* ===== RESEARCH ===== */
+.research{
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* ===== CONTACT ===== */
+.contact-wrap{
+  position:relative;
+  padding:90px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.03);
+  overflow:hidden;
+}
+.contact-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:url("GRT LOGO_11.png") center/520px no-repeat;
+  opacity:.12;
+  transform:translate(var(--mx,0),var(--my,0));
+  transition:.25s ease;
+  pointer-events:none;
+}
+
+input,textarea{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border);
+  padding:16px;
+  color:var(--fg);
+  margin-bottom:20px;
+}
+button{
+  background:var(--accent);
+  border:none;
+  padding:14px 36px;
+  font-weight:600;
+  cursor:pointer;
+}
 
 footer{
   border-top:1px solid var(--border);
@@ -141,141 +161,141 @@ footer{
   text-align:center;
   color:var(--muted);
 }
-a{color:var(--accent);text-decoration:none}
 </style>
 </head>
 
 <body>
 
-<div class="toggle">
-  Mode:
-  <span id="concept" class="active">Conceptual</span>
-  <span id="prod">Production</span>
-</div>
-
 <canvas id="field"></canvas>
 <div class="bg-name">TAKWALE</div>
 
-<section class="hero fade">
+<!-- HERO -->
+<section class="hero">
   <img src="GRT%20LOGO_05.png">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p id="heroText">
-    I architect AI systems where intent, memory, and reasoning operate as one intelligence.
+  <p>
+    I help founders, startups, and AI teams design intelligent systems that stay
+    coherent, reliable, and aligned as they scale.
   </p>
 
-  <div class="terminal" id="terminal">
-    <div><span>&gt;</span> boot intelligence.system</div>
-    <div><span>&gt;</span> load architecture.core</div>
-    <div><span>&gt;</span> attach memory.layer</div>
-    <div><span>&gt;</span> status: <span>ONLINE</span></div>
+  <div class="cta">
+    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      Start a Conversation
+    </button>
   </div>
 </section>
 
-<section class="fade">
-  <h2>Core Architecture</h2>
+<!-- VALUE -->
+<section>
+  <h2>What I Help You Solve</h2>
+  <div class="grid">
+    <div class="card">
+      <strong>Unreliable AI Behavior</strong>
+      AI systems that hallucinate, forget context, or behave inconsistently.
+    </div>
+    <div class="card">
+      <strong>Scaling Without Fragility</strong>
+      Systems that break when usage, data, or complexity increases.
+    </div>
+    <div class="card">
+      <strong>Lack of Architectural Clarity</strong>
+      Teams building features without a coherent intelligence model.
+    </div>
+  </div>
+</section>
 
-  <div class="arch-layer" data-i="0">
-    Data Layer
-    <p class="concept">Foundation of meaning.</p>
-    <p class="prod">Ingestion, storage, preprocessing pipelines.</p>
+<!-- WORK -->
+<section>
+  <h2>How We Work Together</h2>
+
+  <div class="work-step">
+    <strong>1. System Diagnosis</strong>
+    <p>I analyze your AI pipeline, prompts, data flow, and failure modes "as a system".</p>
   </div>
 
-  <div class="arch-layer" data-i="1">
-    Model Layer
-    <p class="concept">Where intelligence forms.</p>
-    <p class="prod">Training, validation, experiment tracking.</p>
+  <div class="work-step">
+    <strong>2. Architecture Design</strong>
+    <p>I design a clear intelligence architecture: memory, reasoning, alignment, and control.</p>
   </div>
 
-  <div class="arch-layer" data-i="2">
-    Evaluation
-    <p class="concept">Truth-checking intelligence.</p>
-    <p class="prod">Metrics, drift detection, monitoring.</p>
+  <div class="work-step">
+    <strong>3. Implementation Guidance</strong>
+    <p>Your team implements with confidence using a well-defined blueprint.</p>
   </div>
+</section>
 
-  <div class="arch-layer" data-i="3">
-    Deployment
-    <p class="concept">Intelligence in motion.</p>
-    <p class="prod">APIs, containers, orchestration.</p>
-  </div>
+<!-- RESEARCH -->
+<section>
+  <h2>Research & Engineering Depth</h2>
+  <p class="research">
+    My work is informed by systems thinking, prompt architecture, memory design,
+    AI evaluation, and production-grade engineering practices.
+    <br><br>
+    I focus on *why systems fail over time* — and how architecture prevents that.
+  </p>
+</section>
 
-  <div class="arch-layer" data-i="4">
-    User Layer
-    <p class="concept">Human interaction.</p>
-    <p class="prod">Dashboards, apps, workflows.</p>
-  </div>
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Start a Conversation</h2>
+  <p>
+    If you are building or scaling an AI system and want it to behave reliably,
+    clearly describe your intent below.
+  </p>
 
-  <div class="diagram">
-    <svg width="400" height="120">
-      <g class="dnode"><circle cx="40" cy="60" r="16"/><text x="32" y="65">D</text></g>
-      <g class="dnode"><circle cx="120" cy="60" r="16"/><text x="112" y="65">M</text></g>
-      <g class="dnode"><circle cx="200" cy="60" r="16"/><text x="192" y="65">E</text></g>
-      <g class="dnode"><circle cx="280" cy="60" r="16"/><text x="272" y="65">D</text></g>
-      <g class="dnode"><circle cx="360" cy="60" r="16"/><text x="352" y="65">U</text></g>
-    </svg>
+  <div class="contact-wrap">
+    <input placeholder="Your name">
+    <input placeholder="Your email">
+    <textarea rows="4" placeholder="What are you building? What is breaking?"></textarea>
+    <button>Send</button>
   </div>
 </section>
 
 <footer>
-  Architect Intelligence · Ganesh R Takwale<br>
-  <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a>
+  Ganesh R Takwale · Intelligence Architect<br>
+  ganeshtakwale017@gmail.com
 </footer>
 
 <script>
 /* BACKGROUND FIELD */
-const c=document.getElementById("field"),x=c.getContext("2d");
-let W,H;function r(){W=c.width=innerWidth;H=c.height=innerHeight}
-r();addEventListener("resize",r);
-const pts=[...Array(100)].map(()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15}));
-(function a(){
-x.clearRect(0,0,W,H);
+const c=document.getElementById("field"),ctx=c.getContext("2d");
+let W,H;
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
+
+const pts=[...Array(120)].map(()=>({
+  x:Math.random()*W,y:Math.random()*H,
+  vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
+}));
+
+(function anim(){
+ctx.clearRect(0,0,W,H);
 pts.forEach(p=>{
+pts.forEach(q=>{
+let d=Math.hypot(p.x-q.x,p.y-q.y);
+if(d<120){
+ctx.strokeStyle="rgba(125,211,252,.08)";
+ctx.beginPath();
+ctx.moveTo(p.x,p.y);
+ctx.lineTo(q.x,q.y);
+ctx.stroke();
+}
+});
 p.x+=p.vx;p.y+=p.vy;
 if(p.x<0||p.x>W)p.vx*=-1;
 if(p.y<0||p.y>H)p.vy*=-1;
-x.fillStyle="rgba(125,211,252,.6)";
-x.fillRect(p.x,p.y,1.5,1.5);
+ctx.fillStyle="rgba(125,211,252,.6)";
+ctx.fillRect(p.x,p.y,1.4,1.4);
 });
-requestAnimationFrame(a);
+requestAnimationFrame(anim);
 })();
 
-/* TERMINAL */
-const lines=document.querySelectorAll('#terminal div');
-let i=0;setTimeout(function t(){if(i<lines.length){lines[i++].style.opacity=1;setTimeout(t,600)}},800);
-
-/* FADE */
-document.addEventListener("scroll",()=>{
-document.querySelectorAll('.fade').forEach(el=>{
-if(el.getBoundingClientRect().top<innerHeight*0.8)el.classList.add('show');
-});
-});
-
-/* TOGGLE */
-let mode="concept";
-document.getElementById("concept").onclick=()=>{
-mode="concept";
-heroText.textContent="I architect AI systems where intent, memory, and reasoning operate as one intelligence.";
-};
-document.getElementById("prod").onclick=()=>{
-mode="prod";
-heroText.textContent="I design production-grade AI architectures with scalable data, models, and deployment pipelines.";
-};
-
-/* ARCH LAYER + DIAGRAM */
-const layers=document.querySelectorAll(".arch-layer");
-const nodes=document.querySelectorAll(".dnode");
-layers.forEach((l,i)=>{
-l.onclick=e=>{
-layers.forEach(o=>o.classList.remove("active"));
-nodes.forEach(n=>n.classList.remove("active"));
-l.classList.add("active");
-nodes[i].classList.add("active");
-l.querySelectorAll("p").forEach(p=>p.style.display=p.className===mode?"block":"none");
-};
-});
-
-/* KEYS */
-document.addEventListener("keydown",e=>{
-if(e.key>0 && e.key<6)layers[e.key-1].click();
+/* CONTACT MOTION */
+const contact=document.querySelector(".contact-wrap");
+contact.addEventListener("mousemove",e=>{
+const r=contact.getBoundingClientRect();
+contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/18+"px");
+contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/18+"px");
 });
 </script>
 
