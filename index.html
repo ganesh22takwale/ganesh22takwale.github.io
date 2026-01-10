@@ -5,6 +5,10 @@
 <title>Ganesh R Takwale — Intelligence Architect</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="google-site-verification" content="google2216e0058875e421" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg:#020314;
@@ -24,9 +28,11 @@ body{
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 
-/* ================= BACKGROUND ================= */
+/* ================= BACKGROUND (UNCHANGED) ================= */
 canvas{
   position:fixed;
   inset:0;
@@ -56,7 +62,7 @@ canvas{
 
 /* ================= LAYOUT ================= */
 section{
-  max-width:1100px;
+  max-width:1120px;
   margin:auto;
   padding:120px 24px;
 }
@@ -65,136 +71,69 @@ section{
   background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
   border:1px solid var(--border);
   backdrop-filter:blur(22px);
-  border-radius:24px;
-  padding:52px;
-}
-
-h1{
-  font-size:clamp(44px,6vw,72px);
-  margin:0 0 22px;
-}
-
-p{
-  color:var(--muted);
-  max-width:760px;
-  line-height:1.65;
-}
-
-/* ================= BADGES ================= */
-.badges{margin-bottom:26px}
-.badge{
-  display:inline-block;
-  padding:7px 16px;
-  margin:4px;
-  border-radius:999px;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  color:#000;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.04em;
+  border-radius:26px;
+  padding:60px;
 }
 
 /* ================= HERO ================= */
 .hero-logo{
-  width:180px;
+  width:150px;
+  margin-bottom:32px;
+  filter:drop-shadow(0 0 36px rgba(110,231,255,.4));
+  will-change:transform;
+}
+
+.badges{
   margin-bottom:30px;
-  filter:drop-shadow(0 0 40px rgba(110,231,255,.45));
 }
 
-/* ================= TELEMETRY ================= */
-.metrics{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:22px;
+.badge{
+  display:inline-block;
+  padding:6px 16px;
+  margin:4px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  color:#000;
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:.08em;
 }
 
-.metric{
-  background:#0008;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:22px;
-  cursor:pointer;
+/* === Research-grade headline tuning === */
+h1{
+  font-size:clamp(48px,6vw,78px);
+  font-weight:700;
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  margin:0 0 28px;
+  max-width:840px;
 }
 
-.metric strong{
-  display:block;
-  margin-top:6px;
-  font-size:18px;
-}
-
-.metric span{
-  display:block;
-  font-size:11px;
-  letter-spacing:.12em;
+/* === Research-grade body tuning === */
+.hero p{
+  max-width:720px;
+  font-size:15.25px;
+  line-height:1.72;
   color:var(--muted);
 }
 
-.metric .detail{
-  display:none;
-  margin-top:10px;
-  font-size:13px;
+/* ================= CONTACT ================= */
+.contact{
+  margin-top:52px;
+  font-size:14px;
   color:var(--muted);
 }
-
-.metric.active .detail{
-  display:block;
-}
-
-/* ================= TERMINAL ================= */
-.terminal{
-  background:#000;
-  border-radius:16px;
-  padding:18px;
-  font-family:ui-monospace,monospace;
-}
-
-.terminal pre{
-  height:180px;
-  overflow:auto;
+.contact a{
   color:var(--cyan);
-  font-size:13px;
-  line-height:1.55;
-}
-
-/* ================= COGNITION MAP ================= */
-svg{
-  width:100%;
-  max-width:600px;
-  margin-top:34px;
-}
-
-.node{
-  fill:var(--cyan);
-  cursor:pointer;
-  transition:transform .2s ease, opacity .2s ease;
-}
-
-.node:hover{
-  transform:scale(1.1);
-  opacity:.9;
-}
-
-.line{
-  stroke:var(--violet);
-  stroke-width:1.2;
-  opacity:.65;
-}
-
-.essay{
-  margin-top:22px;
-  padding:22px;
-  background:#0008;
-  border-radius:14px;
-  color:var(--muted);
+  text-decoration:none;
 }
 
 /* ================= FADE ================= */
 .fade{
   opacity:0;
-  transform:translateY(36px);
+  transform:translateY(28px);
   transition:opacity .9s ease, transform .9s ease;
 }
-
 .fade.show{
   opacity:1;
   transform:none;
@@ -208,10 +147,11 @@ svg{
 <div class="bg-logo"></div>
 <div class="bg-overlay"></div>
 
-<!-- ================= HERO ================= -->
-<section class="fade" data-state="core-loaded">
+<section class="fade">
   <div class="panel">
-    <img src="GRT LOGO_05.png" class="hero-logo" alt="Signature Logo">
+
+    <img src="GRT LOGO_05.png" id="logo"
+         class="hero-logo" alt="GRT Signature Logo">
 
     <div class="badges">
       <span class="badge">INTELLIGENCE ARCHITECT</span>
@@ -219,165 +159,52 @@ svg{
       <span class="badge">COGNITIVE STRUCTURES</span>
     </div>
 
-    <h1>Intelligence is not automated.<br>It is architected.</h1>
+    <h1>
+      Intelligence is not automated.<br>
+      It is architected.
+    </h1>
 
     <p>
       I design intelligence as a system: memory with continuity,
       reasoning under constraint, and alignment sustained over time.
     </p>
-  </div>
-</section>
 
-<!-- ================= TELEMETRY ================= -->
-<section class="fade" data-state="telemetry-online">
-  <div class="panel">
-    <div class="badges">
-      <span class="badge">SYSTEM TELEMETRY</span>
+    <div class="contact">
+      Contact:
+      <a href="mailto:ganeshtakwale017@gmail.com">
+        ganeshtakwale017@gmail.com
+      </a>
     </div>
 
-    <div class="metrics">
-      <div class="metric">
-        <span>COHERENCE</span>
-        <strong>0.92</strong>
-        <div class="detail">
-          Measures internal consistency across reasoning steps.
-        </div>
-      </div>
-      <div class="metric">
-        <span>ALIGNMENT STABILITY</span>
-        <strong>0.89</strong>
-        <div class="detail">
-          Indicates constraint adherence under uncertainty.
-        </div>
-      </div>
-      <div class="metric">
-        <span>MEMORY UTILIZATION</span>
-        <strong>74%</strong>
-        <div class="detail">
-          Active context relative to available cognitive bandwidth.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= COGNITION MAP ================= -->
-<section class="fade" data-state="cognition-mapped">
-  <div class="panel">
-    <div class="badges">
-      <span class="badge">COGNITION MAP</span>
-    </div>
-
-    <svg viewBox="0 0 600 300">
-      <line class="line" x1="300" y1="150" x2="100" y2="80"/>
-      <line class="line" x1="300" y1="150" x2="500" y2="80"/>
-      <circle class="node" cx="300" cy="150" r="18" data-node="core"/>
-      <circle class="node" cx="100" cy="80" r="12" data-node="memory"/>
-      <circle class="node" cx="500" cy="80" r="12" data-node="alignment"/>
-    </svg>
-
-    <div class="essay" id="essay">
-      Select a node to inspect a cognitive function and its role in the system.
-    </div>
-  </div>
-</section>
-
-<!-- ================= TERMINAL ================= -->
-<section class="fade" data-state="console-active">
-  <div class="panel">
-    <div class="badges">
-      <span class="badge">SYSTEM CONSOLE</span>
-    </div>
-
-    <div class="terminal">
-      <pre id="terminal">
-> initialize.core
-> attach.memory
-> bind.reasoning
-> verify.alignment
-> state: COHERENT
-      </pre>
-    </div>
   </div>
 </section>
 
 <script>
-/* ========== BACKGROUND INTELLIGENCE FIELD ========== */
-const c=document.getElementById("bg");
-const ctx=c.getContext("2d");
-let W,H;
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
+/* ========= SLOW, HEAVY LOGO MOTION ========= */
+/* feels inertial, not reactive */
 
-let mouse={x:0,y:0};
-addEventListener("mousemove",e=>mouse=e);
+const logo = document.getElementById("logo");
+let targetX = 0, targetY = 0;
+let currentX = 0, currentY = 0;
 
-const nodes=[...Array(110)].map(()=>({
-  x:Math.random()*W,
-  y:Math.random()*H,
-  vx:(Math.random()-.5)*.18,
-  vy:(Math.random()-.5)*.18
-}));
-
-(function animate(){
-  ctx.clearRect(0,0,W,H);
-  nodes.forEach(a=>{
-    nodes.forEach(b=>{
-      const d=Math.hypot(a.x-b.x,a.y-b.y);
-      const m=Math.hypot(a.x-mouse.x,a.y-mouse.y);
-      if(d<130){
-        ctx.strokeStyle=`rgba(139,124,255,${Math.max(0,0.9-m/320)})`;
-        ctx.beginPath();
-        ctx.moveTo(a.x,a.y);
-        ctx.lineTo(b.x,b.y);
-        ctx.stroke();
-      }
-    });
-    a.x+=a.vx;a.y+=a.vy;
-    if(a.x<0||a.x>W)a.vx*=-1;
-    if(a.y<0||a.y>H)a.vy*=-1;
-    ctx.fillStyle="#6ee7ff";
-    ctx.fillRect(a.x,a.y,1.8,1.8);
-  });
-  requestAnimationFrame(animate);
-})();
-
-/* ========== TELEMETRY INTERACTION ========== */
-document.querySelectorAll(".metric").forEach(m=>{
-  m.onclick=()=>m.classList.toggle("active");
+document.addEventListener("mousemove", e => {
+  targetX = (e.clientX / innerWidth - 0.5) * 6;   // smaller range
+  targetY = (e.clientY / innerHeight - 0.5) * 6;
 });
 
-/* ========== COGNITION INTERACTION ========== */
-const essay=document.getElementById("essay");
-const explanations={
-  core:"Central reasoning core coordinating inference flow.",
-  memory:"Contextual memory preserving continuity across time.",
-  alignment:"Constraint system maintaining behavioral bounds."
-};
-document.querySelectorAll(".node").forEach(n=>{
-  n.onclick=()=>{
-    const key=n.dataset.node;
-    essay.innerHTML=`<h3>${key.toUpperCase()}</h3><p>${explanations[key]}</p>`;
-  };
-});
-
-/* ========== CONSOLE STATE FEEDBACK ========== */
-const terminal=document.getElementById("terminal");
-function logState(text){
-  terminal.textContent+=`\n> ${text}`;
-  terminal.scrollTop=terminal.scrollHeight;
+function animateLogo(){
+  currentX += (targetX - currentX) * 0.04; // inertia
+  currentY += (targetY - currentY) * 0.04;
+  logo.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  requestAnimationFrame(animateLogo);
 }
+animateLogo();
 
-/* ========== FADE + STATE AWARENESS ========== */
+/* ========= FADE ========= */
 addEventListener("scroll",()=>{
-  document.querySelectorAll(".fade").forEach(sec=>{
-    if(sec.getBoundingClientRect().top<innerHeight*0.8){
-      if(!sec.classList.contains("show")){
-        sec.classList.add("show");
-        const state=sec.dataset.state;
-        if(state) logState(`state.transition -> ${state}`);
-      }
-    }
+  document.querySelectorAll(".fade").forEach(el=>{
+    if(el.getBoundingClientRect().top < innerHeight*0.8)
+      el.classList.add("show");
   });
 });
 </script>
