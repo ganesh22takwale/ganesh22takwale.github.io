@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ganesh22takwale.github.io/sitemap.xml
