@@ -20,7 +20,7 @@
   <meta name="apple-mobile-web-app-title" content="GRT AI">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <!-- Open Graph (LinkedIn, WhatsApp, iMessage) -->
+  <!-- Open Graph (LinkedIn / WhatsApp / iMessage) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect">
   <meta property="og:description" content="Production-grade AI systems with memory, alignment, and reliability.">
@@ -38,138 +38,119 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#05070d;
-      --fg:#e7ebf4;
-      --muted:#9aa4b2;
-      --accent:#7dd3fc;
-      --border:rgba(255,255,255,.14);
-    }
-
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family:Inter,system-ui,sans-serif;
-      background:var(--bg);
-      color:var(--fg);
-      overflow-x:hidden;
-    }
-
-    canvas#field{
-      position:fixed;
-      inset:0;
-      z-index:-6;
-    }
-
-    .bg-name{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:18vw;
-      font-weight:600;
-      letter-spacing:1vw;
-      color:rgba(255,255,255,0.03);
-      pointer-events:none;
-      z-index:-5;
-    }
-
-    section{
-      min-height:100vh;
-      padding:140px 24px;
-      max-width:1100px;
-      margin:auto;
-    }
-
-    h1{font-size:clamp(40px,6vw,64px)}
-    h2{font-size:28px}
-    p{color:var(--muted);font-size:17px;line-height:1.75}
-
-    .hero img{
-      width:200px;
-      filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
-    }
-
-    .value-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:32px;
-      margin-top:60px;
-    }
-
-    .value{
-      border:1px solid var(--border);
-      padding:28px;
-      background:rgba(255,255,255,.04);
-      transition:.3s;
-    }
-
-    .value.expandable{
-      cursor:pointer;
-    }
-    .value.expandable p{
-      max-height:0;
-      opacity:0;
-      overflow:hidden;
-      transition:.4s ease;
-    }
-    .value.expandable.active p{
-      max-height:300px;
-      opacity:1;
-      margin-top:14px;
-    }
-
-    .contact-wrap{
-      position:relative;
-      padding:80px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      overflow:hidden;
-    }
-    .contact-wrap::before{
-      content:"";
-      position:absolute;
-      inset:-10%;
-      background:url("grt-logo-11.png") center/520px no-repeat;
-      opacity:.14;
-      transform:translate(var(--mx,0),var(--my,0));
-      transition:.25s;
-      pointer-events:none;
-    }
-
-    input,textarea{
-      width:100%;
-      background:transparent;
-      border:1px solid var(--border);
-      padding:14px;
-      color:var(--fg);
-      margin-bottom:18px;
-    }
-    button{
-      background:var(--accent);
-      border:none;
-      padding:14px 34px;
-      font-weight:600;
-      cursor:pointer;
-    }
-
-    .fade{
-      opacity:0;
-      transform:translateY(40px);
-      transition:.9s;
-    }
-    .fade.show{opacity:1;transform:none}
-
-    footer{
-      border-top:1px solid var(--border);
-      padding:60px;
-      text-align:center;
-      color:var(--muted);
-    }
-    a{color:var(--accent);text-decoration:none}
-  </style>
+<style>
+:root{
+  --bg:#05070d;
+  --fg:#e7ebf4;
+  --muted:#9aa4b2;
+  --accent:#7dd3fc;
+  --border:rgba(255,255,255,.14);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--fg);
+  overflow-x:hidden;
+}
+canvas#field{position:fixed;inset:0;z-index:-6}
+.bg-name{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18vw;
+  font-weight:600;
+  letter-spacing:1vw;
+  color:rgba(255,255,255,0.03);
+  pointer-events:none;
+  z-index:-5;
+}
+section{
+  min-height:100vh;
+  padding:140px 24px;
+  max-width:1100px;
+  margin:auto;
+}
+h1{font-size:clamp(40px,6vw,64px)}
+h2{font-size:28px}
+p{color:var(--muted);font-size:17px;line-height:1.75}
+.hero img{
+  width:200px;
+  filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
+}
+.value-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+  margin-top:60px;
+}
+.value{
+  border:1px solid var(--border);
+  padding:28px;
+  background:rgba(255,255,255,.04);
+  transition:.3s;
+}
+.value.expandable{cursor:pointer}
+.value.expandable p{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:.4s ease;
+}
+.value.expandable.active p{
+  max-height:300px;
+  opacity:1;
+  margin-top:14px;
+}
+.contact-wrap{
+  position:relative;
+  padding:80px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.03);
+  overflow:hidden;
+}
+.contact-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:url("grt-logo-11.png") center/520px no-repeat;
+  opacity:.14;
+  transform:translate(var(--mx,0),var(--my,0));
+  transition:.25s;
+  pointer-events:none;
+}
+input,textarea{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border);
+  padding:14px;
+  color:var(--fg);
+  margin-bottom:18px;
+}
+button{
+  background:var(--accent);
+  border:none;
+  padding:14px 34px;
+  font-weight:600;
+  cursor:pointer;
+}
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.9s;
+}
+.fade.show{opacity:1;transform:none}
+footer{
+  border-top:1px solid var(--border);
+  padding:60px;
+  text-align:center;
+  color:var(--muted);
+}
+a{color:var(--accent);text-decoration:none}
+</style>
 </head>
 
 <body>
@@ -177,65 +158,150 @@
 <canvas id="field"></canvas>
 <div class="bg-name">TAKWALE</div>
 
+<!-- HERO -->
 <section class="hero fade">
   <img src="grt-logo-05.png" alt="GRT AI Logo">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
   <p>I help teams build AI systems that stay reliable, aligned, and scalable — long after the demo works.</p>
 </section>
 
-<!-- (ALL YOUR CONTENT SECTIONS REMAIN UNCHANGED) -->
+<!-- WHAT I HELP YOU AVOID -->
+<section class="fade">
+  <h2>What I Help You Avoid</h2>
+  <div class="value-grid">
+    <div class="value expandable">
+      <strong>Unstable AI in Production</strong>
+      <p>AI that breaks when real users arrive, causing failures and lost trust.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Memory & Context Loss</strong>
+      <p>Systems that forget users, conversations, and business context.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Business Misalignment</strong>
+      <p>AI decisions that harm your product, brand, or customers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW I BUILD INTELLIGENCE -->
+<section class="fade">
+  <h2>How I Build Intelligence</h2>
+  <div class="value-grid">
+    <div class="value expandable">
+      <strong>System Design</strong>
+      <p>Information flow, memory, and decision paths defined before models.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Controlled Reasoning</strong>
+      <p>Verification layers and constraints to prevent silent failures.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Safety & Alignment</strong>
+      <p>Rules and guardrails aligned with real business intent.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Production Readiness</strong>
+      <p>Monitoring, fallback logic, and long-term stability.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CORE AI ARCHITECTURE -->
+<section class="fade">
+  <h2>Core AI Architecture</h2>
+  <div class="value-grid">
+    <div class="value expandable">
+      <strong>Memory Engine</strong>
+      <p>Persistent memory across sessions and workflows.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Reasoning Layer</strong>
+      <p>Structured decision logic that prevents hallucinations.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Alignment System</strong>
+      <p>Guardrails that keep AI acting in your best interest.</p>
+    </div>
+    <div class="value expandable">
+      <strong>Infrastructure Layer</strong>
+      <p>Scalable APIs, monitoring, and deployment pipelines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="fade">
+  <h2>Work With Me</h2>
+  <form class="contact-wrap" id="contact" action="https://formspree.io/f/abcdwxyz" method="POST">
+    <input name="name" placeholder="Your name" required>
+    <input name="email" type="email" placeholder="Your email" required>
+    <textarea name="message" rows="4" placeholder="Describe what you're building" required></textarea>
+    <button type="submit">Start the Conversation</button>
+  </form>
+</section>
 
 <footer>
   Ganesh R Takwale · Intelligence Architect<br>
   <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
   <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank" rel="noopener noreferrer">
     LinkedIn: Ganesh Takwale
-  </a>
-  <br><br>
+  </a><br><br>
   <span style="font-size:14px">
     Available for international consulting · USD billing · Remote
   </span>
 </footer>
 
 <script>
-  const c=document.getElementById("field"),ctx=c.getContext("2d");
-  let W,H;
-  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-  resize();addEventListener("resize",resize);
+const c=document.getElementById("field"),ctx=c.getContext("2d");
+let W,H;
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
 
-  const pts=[...Array(120)].map(()=>({
-    x:Math.random()*W,y:Math.random()*H,
-    vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
-  }));
+const pts=[...Array(120)].map(()=>({
+  x:Math.random()*W,y:Math.random()*H,
+  vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
+}));
 
-  (function anim(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      pts.forEach(q=>{
-        let d=Math.hypot(p.x-q.x,p.y-q.y);
-        if(d<120){
-          ctx.strokeStyle="rgba(125,211,252,.08)";
-          ctx.beginPath();
-          ctx.moveTo(p.x,p.y);
-          ctx.lineTo(q.x,q.y);
-          ctx.stroke();
-        }
-      });
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>W)p.vx*=-1;
-      if(p.y<0||p.y>H)p.vy*=-1;
-      ctx.fillStyle="rgba(125,211,252,.6)";
-      ctx.fillRect(p.x,p.y,1.4,1.4);
-    });
-    requestAnimationFrame(anim);
-  })();
+(function anim(){
+ctx.clearRect(0,0,W,H);
+pts.forEach(p=>{
+pts.forEach(q=>{
+let d=Math.hypot(p.x-q.x,p.y-q.y);
+if(d<120){
+ctx.strokeStyle="rgba(125,211,252,.08)";
+ctx.beginPath();
+ctx.moveTo(p.x,p.y);
+ctx.lineTo(q.x,q.y);
+ctx.stroke();
+}
+});
+p.x+=p.vx;p.y+=p.vy;
+if(p.x<0||p.x>W)p.vx*=-1;
+if(p.y<0||p.y>H)p.vy*=-1;
+ctx.fillStyle="rgba(125,211,252,.6)";
+ctx.fillRect(p.x,p.y,1.4,1.4);
+});
+requestAnimationFrame(anim);
+})();
 
-  document.addEventListener("scroll",()=>{
-    document.querySelectorAll('.fade').forEach(el=>{
-      if(el.getBoundingClientRect().top<innerHeight*0.8)
-        el.classList.add('show');
-    });
-  });
+document.addEventListener("scroll",()=>{
+document.querySelectorAll('.fade').forEach(el=>{
+if(el.getBoundingClientRect().top<innerHeight*0.8)
+el.classList.add('show');
+});
+});
+
+document.querySelectorAll(".expandable").forEach(card=>{
+card.addEventListener("click",()=>card.classList.toggle("active"));
+});
+
+const contact=document.getElementById("contact");
+contact.addEventListener("mousemove",e=>{
+const r=contact.getBoundingClientRect();
+contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/20+"px");
+contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/20+"px");
+});
 </script>
 
 </body>
