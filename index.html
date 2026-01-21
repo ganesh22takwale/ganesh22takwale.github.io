@@ -12,7 +12,6 @@
 
   <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="I architect production-grade AI systems with memory, alignment, and reliability. Helping teams build AI that scales without breaking.">
 
@@ -20,18 +19,15 @@
   <meta name="apple-mobile-web-app-title" content="GRT AI">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <!-- Open Graph (LinkedIn / WhatsApp / iMessage) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect">
   <meta property="og:description" content="Production-grade AI systems with memory, alignment, and reliability.">
   <meta property="og:url" content="https://ganesh22takwale.github.io/">
   <meta property="og:image" content="https://ganesh22takwale.github.io/grt-logo-05.png">
 
-  <!-- Twitter / X -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ganesh R Takwale — Intelligence Architect">
-  <meta name="twitter:description" content="Production-grade AI systems that work beyond demos.">
-  <meta name="twitter:image" content="https://ganesh22takwale.github.io/grt-logo-05.png">
 
   <!-- Identity -->
   <link rel="me" href="https://www.linkedin.com/in/ganesh-takwale-80267515b/">
@@ -46,15 +42,23 @@
   --accent:#7dd3fc;
   --border:rgba(255,255,255,.14);
 }
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
 body{
   font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
   color:var(--fg);
   overflow-x:hidden;
 }
-canvas#field{position:fixed;inset:0;z-index:-6}
+
+canvas#field{
+  position:fixed;
+  inset:0;
+  z-index:-6;
+}
+
 .bg-name{
   position:fixed;
   inset:0;
@@ -68,43 +72,73 @@ canvas#field{position:fixed;inset:0;z-index:-6}
   pointer-events:none;
   z-index:-5;
 }
+
 section{
   min-height:100vh;
   padding:140px 24px;
   max-width:1100px;
   margin:auto;
 }
+
 h1{font-size:clamp(40px,6vw,64px)}
 h2{font-size:28px}
 p{color:var(--muted);font-size:17px;line-height:1.75}
+
 .hero img{
   width:200px;
   filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
 }
+
 .value-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:32px;
   margin-top:60px;
 }
+
+/* CARD BASE */
 .value{
+  position:relative;
   border:1px solid var(--border);
   padding:28px;
   background:rgba(255,255,255,.04);
-  transition:.3s;
+  transition:.35s;
+  overflow:hidden;
 }
+
+/* HOVER GLOW */
+.value:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 40px rgba(125,211,252,.18);
+  border-color:rgba(125,211,252,.6);
+}
+
+/* RIPPLE */
+.value::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(125,211,252,.25),transparent 60%);
+  opacity:0;
+  transition:.6s;
+}
+.value.ripple::after{opacity:1}
+
 .value.expandable{cursor:pointer}
+
 .value.expandable p{
   max-height:0;
   opacity:0;
   overflow:hidden;
   transition:.4s ease;
 }
+
 .value.expandable.active p{
   max-height:300px;
   opacity:1;
   margin-top:14px;
 }
+
 .contact-wrap{
   position:relative;
   padding:80px;
@@ -112,6 +146,7 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   background:rgba(255,255,255,.03);
   overflow:hidden;
 }
+
 .contact-wrap::before{
   content:"";
   position:absolute;
@@ -122,6 +157,7 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   transition:.25s;
   pointer-events:none;
 }
+
 input,textarea{
   width:100%;
   background:transparent;
@@ -130,6 +166,7 @@ input,textarea{
   color:var(--fg);
   margin-bottom:18px;
 }
+
 button{
   background:var(--accent);
   border:none;
@@ -137,18 +174,21 @@ button{
   font-weight:600;
   cursor:pointer;
 }
+
 .fade{
   opacity:0;
   transform:translateY(40px);
   transition:.9s;
 }
 .fade.show{opacity:1;transform:none}
+
 footer{
   border-top:1px solid var(--border);
   padding:60px;
   text-align:center;
   color:var(--muted);
 }
+
 a{color:var(--accent);text-decoration:none}
 </style>
 </head>
@@ -169,64 +209,31 @@ a{color:var(--accent);text-decoration:none}
 <section class="fade">
   <h2>What I Help You Avoid</h2>
   <div class="value-grid">
-    <div class="value expandable">
-      <strong>Unstable AI in Production</strong>
-      <p>AI that breaks when real users arrive, causing failures and lost trust.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Memory & Context Loss</strong>
-      <p>Systems that forget users, conversations, and business context.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Business Misalignment</strong>
-      <p>AI decisions that harm your product, brand, or customers.</p>
-    </div>
+    <div class="value expandable"><strong>Unstable AI in Production</strong><p>AI that breaks when real users arrive.</p></div>
+    <div class="value expandable"><strong>Memory & Context Loss</strong><p>Systems that forget users and data.</p></div>
+    <div class="value expandable"><strong>Business Misalignment</strong><p>AI decisions that hurt the product.</p></div>
   </div>
 </section>
 
-<!-- HOW I BUILD INTELLIGENCE -->
+<!-- HOW I BUILD -->
 <section class="fade">
   <h2>How I Build Intelligence</h2>
   <div class="value-grid">
-    <div class="value expandable">
-      <strong>System Design</strong>
-      <p>Information flow, memory, and decision paths defined before models.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Controlled Reasoning</strong>
-      <p>Verification layers and constraints to prevent silent failures.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Safety & Alignment</strong>
-      <p>Rules and guardrails aligned with real business intent.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Production Readiness</strong>
-      <p>Monitoring, fallback logic, and long-term stability.</p>
-    </div>
+    <div class="value expandable"><strong>System Design</strong><p>Architecture before models.</p></div>
+    <div class="value expandable"><strong>Controlled Reasoning</strong><p>Verification layers.</p></div>
+    <div class="value expandable"><strong>Safety & Alignment</strong><p>Business-aligned rules.</p></div>
+    <div class="value expandable"><strong>Production Readiness</strong><p>Monitoring & fallback.</p></div>
   </div>
 </section>
 
-<!-- CORE AI ARCHITECTURE -->
+<!-- CORE -->
 <section class="fade">
   <h2>Core AI Architecture</h2>
   <div class="value-grid">
-    <div class="value expandable">
-      <strong>Memory Engine</strong>
-      <p>Persistent memory across sessions and workflows.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Reasoning Layer</strong>
-      <p>Structured decision logic that prevents hallucinations.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Alignment System</strong>
-      <p>Guardrails that keep AI acting in your best interest.</p>
-    </div>
-    <div class="value expandable">
-      <strong>Infrastructure Layer</strong>
-      <p>Scalable APIs, monitoring, and deployment pipelines.</p>
-    </div>
+    <div class="value expandable"><strong>Memory Engine</strong><p>Persistent memory.</p></div>
+    <div class="value expandable"><strong>Reasoning Layer</strong><p>Structured decisions.</p></div>
+    <div class="value expandable"><strong>Alignment System</strong><p>Guardrails.</p></div>
+    <div class="value expandable"><strong>Infrastructure Layer</strong><p>Scalable systems.</p></div>
   </div>
 </section>
 
@@ -244,21 +251,25 @@ a{color:var(--accent);text-decoration:none}
 <footer>
   Ganesh R Takwale · Intelligence Architect<br>
   <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
-  <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank" rel="noopener noreferrer">
-    LinkedIn: Ganesh Takwale
-  </a><br><br>
-  <span style="font-size:14px">
-    Available for international consulting · USD billing · Remote
-  </span>
+  <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank">LinkedIn</a><br><br>
+  <span style="font-size:14px">International consulting · USD billing · Remote</span>
 </footer>
 
 <script>
 const c=document.getElementById("field"),ctx=c.getContext("2d");
-let W,H;
+let W,H,scrollFactor=1;
 function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
 resize();addEventListener("resize",resize);
 
-const pts=[...Array(120)].map(()=>({
+let pointer={x:null,y:null};
+addEventListener("mousemove",e=>{pointer.x=e.clientX;pointer.y=e.clientY});
+addEventListener("touchmove",e=>{
+  if(e.touches[0]){pointer.x=e.touches[0].clientX;pointer.y=e.touches[0].clientY}
+},{passive:true});
+addEventListener("mouseout",()=>pointer.x=pointer.y=null);
+
+const count=innerWidth<768?70:120;
+const pts=[...Array(count)].map(()=>({
   x:Math.random()*W,y:Math.random()*H,
   vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
 }));
@@ -266,41 +277,43 @@ const pts=[...Array(120)].map(()=>({
 (function anim(){
 ctx.clearRect(0,0,W,H);
 pts.forEach(p=>{
-pts.forEach(q=>{
-let d=Math.hypot(p.x-q.x,p.y-q.y);
-if(d<120){
-ctx.strokeStyle="rgba(125,211,252,.08)";
-ctx.beginPath();
-ctx.moveTo(p.x,p.y);
-ctx.lineTo(q.x,q.y);
-ctx.stroke();
-}
-});
-p.x+=p.vx;p.y+=p.vy;
-if(p.x<0||p.x>W)p.vx*=-1;
-if(p.y<0||p.y>H)p.vy*=-1;
-ctx.fillStyle="rgba(125,211,252,.6)";
-ctx.fillRect(p.x,p.y,1.4,1.4);
+  pts.forEach(q=>{
+    let d=Math.hypot(p.x-q.x,p.y-q.y);
+    if(d<120){
+      ctx.strokeStyle=`rgba(125,211,252,${.05*scrollFactor})`;
+      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+    }
+  });
+  if(pointer.x){
+    let md=Math.hypot(p.x-pointer.x,p.y-pointer.y);
+    if(md<160){
+      ctx.strokeStyle="rgba(125,211,252,.25)";
+      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(pointer.x,pointer.y);ctx.stroke();
+    }
+  }
+  p.x+=p.vx;p.y+=p.vy;
+  if(p.x<0||p.x>W)p.vx*=-1;
+  if(p.y<0||p.y>H)p.vy*=-1;
 });
 requestAnimationFrame(anim);
 })();
 
-document.addEventListener("scroll",()=>{
-document.querySelectorAll('.fade').forEach(el=>{
-if(el.getBoundingClientRect().top<innerHeight*0.8)
-el.classList.add('show');
-});
-});
-
-document.querySelectorAll(".expandable").forEach(card=>{
-card.addEventListener("click",()=>card.classList.toggle("active"));
+addEventListener("scroll",()=>{
+  scrollFactor=Math.min(1.8,1+scrollY/1500);
+  document.querySelectorAll('.fade').forEach(el=>{
+    if(el.getBoundingClientRect().top<innerHeight*0.8)el.classList.add('show');
+  });
 });
 
-const contact=document.getElementById("contact");
-contact.addEventListener("mousemove",e=>{
-const r=contact.getBoundingClientRect();
-contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/20+"px");
-contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/20+"px");
+document.querySelectorAll(".value").forEach(card=>{
+  card.addEventListener("click",e=>{
+    document.querySelectorAll(".value.active").forEach(o=>o!==card&&o.classList.remove("active"));
+    card.classList.toggle("active");
+    card.style.setProperty("--rx",e.offsetX+"px");
+    card.style.setProperty("--ry",e.offsetY+"px");
+    card.classList.add("ripple");
+    setTimeout(()=>card.classList.remove("ripple"),600);
+  });
 });
 </script>
 
