@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Production-grade AI architecture with memory, reasoning, and alignment. Designed for real-world scale.">
+  <meta name="description" content="I architect production-grade AI systems with memory, alignment, and reliability. Helping teams build AI that scales without breaking.">
 
   <!-- Identity -->
   <link rel="me" href="https://www.linkedin.com/in/ganesh-takwale-80267515b/">
@@ -68,7 +68,6 @@ section{
 
 h1{font-size:clamp(40px,6vw,64px)}
 h2{font-size:28px}
-h3{font-size:20px;margin-top:40px}
 p{color:var(--muted);font-size:17px;line-height:1.75}
 
 .hero img{
@@ -90,7 +89,6 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   background:rgba(255,255,255,.04);
   transition:.35s;
   cursor:pointer;
-  overflow:hidden;
 }
 
 .value:hover{
@@ -99,16 +97,6 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   border-color:rgba(125,211,252,.6);
 }
 
-.value::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(125,211,252,.25),transparent 60%);
-  opacity:0;
-  transition:.6s;
-}
-.value.ripple::after{opacity:1}
-
 .value p{
   max-height:0;
   opacity:0;
@@ -116,41 +104,24 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   transition:.4s ease;
 }
 .value.active p{
-  max-height:260px;
+  max-height:300px;
   opacity:1;
   margin-top:14px;
 }
 
-/* CASE STUDY */
-.case-study{
-  margin-top:60px;
-  border:1px solid var(--border);
-  padding:40px;
-  background:rgba(255,255,255,.03);
-}
-
-/* SVG */
-svg{
-  width:100%;
-  margin-top:40px;
-}
-
-/* CONTACT */
 .contact-wrap{
   position:relative;
   padding:80px;
   border:1px solid var(--border);
   background:rgba(255,255,255,.03);
-  overflow:hidden;
 }
+
 .contact-wrap::before{
   content:"";
   position:absolute;
   inset:-10%;
   background:url("grt-logo-11.png") center/520px no-repeat;
   opacity:.14;
-  transform:translate(var(--mx,0),var(--my,0));
-  transition:.25s;
   pointer-events:none;
 }
 
@@ -198,19 +169,16 @@ a{color:var(--accent);text-decoration:none}
 <section class="hero fade">
   <img src="grt-logo-05.png" alt="GRT Logo">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>
-    I design AI systems for founders and CTOs who care about reliability,
-    memory, and long-term scale — not just demos.
-  </p>
+  <p>I help teams build AI systems that stay reliable, aligned, and scalable — long after the demo works.</p>
 </section>
 
 <!-- WHAT I HELP YOU AVOID -->
 <section class="fade">
   <h2>What I Help You Avoid</h2>
   <div class="value-grid">
-    <div class="value"><strong>Production Failures</strong><p>AI that collapses under real usage.</p></div>
-    <div class="value"><strong>Context Amnesia</strong><p>Systems that forget users and decisions.</p></div>
-    <div class="value"><strong>Business Risk</strong><p>Unaligned outputs damaging trust and brand.</p></div>
+    <div class="value"><strong>Unstable AI in Production</strong><p>Systems that fail under real user load.</p></div>
+    <div class="value"><strong>Memory & Context Loss</strong><p>AI that forgets users and goals.</p></div>
+    <div class="value"><strong>Business Misalignment</strong><p>Technically correct but harmful decisions.</p></div>
   </div>
 </section>
 
@@ -218,70 +186,26 @@ a{color:var(--accent);text-decoration:none}
 <section class="fade">
   <h2>How I Build Intelligence</h2>
   <div class="value-grid">
-    <div class="value"><strong>Architecture First</strong><p>Systems before prompts or models.</p></div>
-    <div class="value"><strong>Reasoning Control</strong><p>Verification and decision layers.</p></div>
-    <div class="value"><strong>Production Thinking</strong><p>Monitoring, fallback, and observability.</p></div>
-    <div class="value"><strong>Longevity</strong><p>Designed to evolve safely over time.</p></div>
-  </div>
-</section>
-
-<!-- CASE STUDY -->
-<section class="fade" id="case-studies">
-  <h2>Case Study — Production AI Architecture</h2>
-
-  <div class="case-study">
-    <p><strong>Client Type:</strong> B2B SaaS (US-based)</p>
-    <p><strong>Problem:</strong> AI assistant worked in demos but failed under real customer usage.</p>
-    <p><strong>My Role:</strong> Designed end-to-end intelligence architecture.</p>
-
-    <h3>Solution</h3>
-    <ul>
-      <li>Persistent memory across sessions</li>
-      <li>Structured reasoning layer</li>
-      <li>Alignment rules tied to business logic</li>
-      <li>Monitoring and fallback strategies</li>
-    </ul>
-
-    <h3>Outcome</h3>
-    <p>
-      Stable production deployment, reduced hallucinations,
-      and predictable behavior at scale.
-    </p>
-
-    <!-- SIMPLE ARCHITECTURE DIAGRAM -->
-    <svg viewBox="0 0 800 240">
-      <rect x="20" y="60" width="180" height="60" fill="none" stroke="#7dd3fc"/>
-      <text x="110" y="95" text-anchor="middle" fill="#e7ebf4">User</text>
-
-      <rect x="240" y="60" width="200" height="60" fill="none" stroke="#7dd3fc"/>
-      <text x="340" y="95" text-anchor="middle" fill="#e7ebf4">Reasoning Layer</text>
-
-      <rect x="480" y="20" width="200" height="60" fill="none" stroke="#7dd3fc"/>
-      <text x="580" y="55" text-anchor="middle" fill="#e7ebf4">Memory Engine</text>
-
-      <rect x="480" y="120" width="200" height="60" fill="none" stroke="#7dd3fc"/>
-      <text x="580" y="155" text-anchor="middle" fill="#e7ebf4">Alignment Rules</text>
-
-      <line x1="200" y1="90" x2="240" y2="90" stroke="#7dd3fc"/>
-      <line x1="440" y1="90" x2="480" y2="50" stroke="#7dd3fc"/>
-      <line x1="440" y1="90" x2="480" y2="150" stroke="#7dd3fc"/>
-    </svg>
+    <div class="value"><strong>System Design First</strong><p>Architecture before models.</p></div>
+    <div class="value"><strong>Controlled Reasoning</strong><p>Verification layers & logic.</p></div>
+    <div class="value"><strong>Production Readiness</strong><p>Monitoring & resilience.</p></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="fade">
-  <h2>Start a Conversation</h2>
-  <form class="contact-wrap" id="contact" action="https://formspree.io/f/abcdwxyz" method="POST">
-    <input name="name" placeholder="Your name" required>
-    <input name="email" type="email" placeholder="Your email" required>
-    <textarea name="message" rows="4" placeholder="What are you building?" required></textarea>
-    <button type="submit">Send Message</button>
+  <h2>Work With Me</h2>
+  <form class="contact-wrap">
+    <input placeholder="Your name" required>
+    <input type="email" placeholder="Your email" required>
+    <textarea rows="4" placeholder="Describe what you're building" required></textarea>
+    <button>Start the Conversation</button>
   </form>
 </section>
 
 <footer>
-  <strong>Ganesh R Takwale</strong> · Intelligence Architect<br>
+  <strong>Ganesh Takwale</strong><br>
+  Intelligence Architect<br><br>
   <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
   <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank">
     LinkedIn · Ganesh Takwale
@@ -289,56 +213,87 @@ a{color:var(--accent);text-decoration:none}
   <span style="font-size:14px">International consulting · USD billing · Remote</span>
 </footer>
 
+<!-- ✅ FIXED BACKGROUND SCRIPT -->
 <script>
-const c=document.getElementById("field"),ctx=c.getContext("2d");
-let W,H;
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
+const c = document.getElementById("field");
+const ctx = c.getContext("2d");
 
-const pts=[...Array(innerWidth<768?70:120)].map(()=>({
-  x:Math.random()*W,y:Math.random()*H,
-  vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
+let W, H, scrollFactor = 1;
+function resize() {
+  W = c.width = innerWidth;
+  H = c.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+// Pointer
+let pointer = { x: null, y: null };
+addEventListener("mousemove", e => {
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+});
+addEventListener("touchmove", e => {
+  if (e.touches[0]) {
+    pointer.x = e.touches[0].clientX;
+    pointer.y = e.touches[0].clientY;
+  }
+}, { passive: true });
+addEventListener("mouseout", () => pointer.x = pointer.y = null);
+
+// Scroll intensity
+addEventListener("scroll", () => {
+  scrollFactor = Math.min(2, 1 + scrollY / 1200);
+});
+
+const COUNT = innerWidth < 768 ? 70 : 120;
+const pts = [...Array(COUNT)].map(() => ({
+  x: Math.random() * W,
+  y: Math.random() * H,
+  vx: (Math.random() - 0.5) * 0.3,
+  vy: (Math.random() - 0.5) * 0.3
 }));
 
-(function anim(){
-ctx.clearRect(0,0,W,H);
-pts.forEach(p=>{
-  pts.forEach(q=>{
-    let d=Math.hypot(p.x-q.x,p.y-q.y);
-    if(d<120){
-      ctx.strokeStyle="rgba(125,211,252,.08)";
-      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+(function animate() {
+  ctx.clearRect(0, 0, W, H);
+
+  pts.forEach(p => {
+    pts.forEach(q => {
+      const d = Math.hypot(p.x - q.x, p.y - q.y);
+      if (d < 130) {
+        ctx.strokeStyle = `rgba(125,211,252,${0.04 * scrollFactor})`;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(q.x, q.y);
+        ctx.stroke();
+      }
+    });
+
+    if (pointer.x !== null) {
+      const dx = pointer.x - p.x;
+      const dy = pointer.y - p.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 160) {
+        p.vx += dx / dist * 0.015;
+        p.vy += dy / dist * 0.015;
+      }
     }
+
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
   });
-  p.x+=p.vx;p.y+=p.vy;
-  if(p.x<0||p.x>W)p.vx*=-1;
-  if(p.y<0||p.y>H)p.vy*=-1;
-});
-requestAnimationFrame(anim);
+
+  requestAnimationFrame(animate);
 })();
+</script>
 
-document.addEventListener("scroll",()=>{
-  document.querySelectorAll('.fade').forEach(el=>{
-    if(el.getBoundingClientRect().top<innerHeight*0.8)el.classList.add('show');
-  });
-});
-
+<script>
 document.querySelectorAll(".value").forEach(card=>{
-  card.addEventListener("click",e=>{
+  card.addEventListener("click",()=>{
     document.querySelectorAll(".value.active").forEach(o=>o!==card&&o.classList.remove("active"));
     card.classList.toggle("active");
-    card.style.setProperty("--rx",e.offsetX+"px");
-    card.style.setProperty("--ry",e.offsetY+"px");
-    card.classList.add("ripple");
-    setTimeout(()=>card.classList.remove("ripple"),600);
   });
-});
-
-const contact=document.getElementById("contact");
-contact.addEventListener("mousemove",e=>{
-  const r=contact.getBoundingClientRect();
-  contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/20+"px");
-  contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/20+"px");
 });
 </script>
 
