@@ -13,18 +13,7 @@
   <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Production-grade AI architecture with memory, reasoning, and alignment. Consulting for global teams building real AI systems.">
-
-  <!-- Apple / iOS -->
-  <meta name="apple-mobile-web-app-title" content="GRT AI">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect">
-  <meta property="og:description" content="AI systems that survive production, not just demos.">
-  <meta property="og:url" content="https://ganesh22takwale.github.io/">
-  <meta property="og:image" content="https://ganesh22takwale.github.io/grt-logo-05.png">
+  <meta name="description" content="Production-grade AI architecture with memory, reasoning, and alignment. Designed for real-world scale.">
 
   <!-- Identity -->
   <link rel="me" href="https://www.linkedin.com/in/ganesh-takwale-80267515b/">
@@ -42,6 +31,7 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
 body{
   font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
@@ -49,7 +39,11 @@ body{
   overflow-x:hidden;
 }
 
-canvas#field{position:fixed;inset:0;z-index:-6}
+canvas#field{
+  position:fixed;
+  inset:0;
+  z-index:-6;
+}
 
 .bg-name{
   position:fixed;
@@ -74,6 +68,7 @@ section{
 
 h1{font-size:clamp(40px,6vw,64px)}
 h2{font-size:28px}
+h3{font-size:20px;margin-top:40px}
 p{color:var(--muted);font-size:17px;line-height:1.75}
 
 .hero img{
@@ -95,6 +90,7 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   background:rgba(255,255,255,.04);
   transition:.35s;
   cursor:pointer;
+  overflow:hidden;
 }
 
 .value:hover{
@@ -103,26 +99,68 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   border-color:rgba(125,211,252,.6);
 }
 
+.value::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--rx,50%) var(--ry,50%),rgba(125,211,252,.25),transparent 60%);
+  opacity:0;
+  transition:.6s;
+}
+.value.ripple::after{opacity:1}
+
 .value p{
   max-height:0;
   opacity:0;
   overflow:hidden;
   transition:.4s ease;
 }
-
 .value.active p{
-  max-height:600px;
+  max-height:260px;
   opacity:1;
   margin-top:14px;
 }
 
-.fade{opacity:0;transform:translateY(40px);transition:.9s}
-.fade.show{opacity:1;transform:none}
+/* CASE STUDY */
+.case-study{
+  margin-top:60px;
+  border:1px solid var(--border);
+  padding:40px;
+  background:rgba(255,255,255,.03);
+}
 
+/* SVG */
+svg{
+  width:100%;
+  margin-top:40px;
+}
+
+/* CONTACT */
 .contact-wrap{
+  position:relative;
   padding:80px;
   border:1px solid var(--border);
   background:rgba(255,255,255,.03);
+  overflow:hidden;
+}
+.contact-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:url("grt-logo-11.png") center/520px no-repeat;
+  opacity:.14;
+  transform:translate(var(--mx,0),var(--my,0));
+  transition:.25s;
+  pointer-events:none;
+}
+
+input,textarea{
+  width:100%;
+  background:transparent;
+  border:1px solid var(--border);
+  padding:14px;
+  color:var(--fg);
+  margin-bottom:18px;
 }
 
 button{
@@ -133,6 +171,13 @@ button{
   cursor:pointer;
 }
 
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.9s;
+}
+.fade.show{opacity:1;transform:none}
+
 footer{
   border-top:1px solid var(--border);
   padding:60px;
@@ -141,7 +186,6 @@ footer{
 }
 
 a{color:var(--accent);text-decoration:none}
-svg{width:100%;margin-top:40px}
 </style>
 </head>
 
@@ -150,76 +194,99 @@ svg{width:100%;margin-top:40px}
 <canvas id="field"></canvas>
 <div class="bg-name">TAKWALE</div>
 
+<!-- HERO -->
 <section class="hero fade">
   <img src="grt-logo-05.png" alt="GRT Logo">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>I help global teams design AI systems that remain reliable, aligned, and trustworthy in production.</p>
-</section>
-
-<section class="fade">
-  <h2>What I Help You Avoid</h2>
-  <div class="value-grid">
-    <div class="value"><strong>Production Failure</strong><p>AI breaking under real-world usage.</p></div>
-    <div class="value"><strong>Memory Loss</strong><p>Systems that forget users and intent.</p></div>
-    <div class="value"><strong>Silent Risk</strong><p>Wrong outputs that look confident.</p></div>
-  </div>
-</section>
-
-<section class="fade">
-  <h2>How I Build Intelligence</h2>
-  <div class="value-grid">
-    <div class="value"><strong>Architecture First</strong><p>Models are chosen last, not first.</p></div>
-    <div class="value"><strong>Controlled Reasoning</strong><p>Verification layers before answers.</p></div>
-    <div class="value"><strong>Alignment</strong><p>Business rules embedded in systems.</p></div>
-  </div>
-</section>
-
-<section class="fade" id="case-studies">
-  <h2>Case Studies — Production AI</h2>
-  <p>Representative architectures I design for companies deploying AI at scale.</p>
-
-  <svg viewBox="0 0 800 220">
-    <rect x="20" y="40" width="200" height="80" fill="none" stroke="#7dd3fc"/>
-    <text x="120" y="85" text-anchor="middle" fill="#e7ebf4">Memory Layer</text>
-
-    <rect x="300" y="40" width="200" height="80" fill="none" stroke="#7dd3fc"/>
-    <text x="400" y="85" text-anchor="middle" fill="#e7ebf4">Reasoning Layer</text>
-
-    <rect x="580" y="40" width="200" height="80" fill="none" stroke="#7dd3fc"/>
-    <text x="680" y="85" text-anchor="middle" fill="#e7ebf4">Alignment Layer</text>
-
-    <line x1="220" y1="80" x2="300" y2="80" stroke="#7dd3fc"/>
-    <line x1="500" y1="80" x2="580" y2="80" stroke="#7dd3fc"/>
-  </svg>
-
-  <div class="value-grid">
-    <div class="value"><strong>Enterprise AI Assistant</strong><p>Reduced hallucinations and improved reliability.</p></div>
-    <div class="value"><strong>Executive Decision AI</strong><p>Transparent reasoning and audit trails.</p></div>
-    <div class="value"><strong>Multi-Region AI</strong><p>Policy-aware global deployment.</p></div>
-  </div>
-</section>
-
-<section class="fade">
-  <h2>How I Engage</h2>
   <p>
-    I work directly with founders, CTOs, and AI leaders.<br><br>
-    • Architecture reviews<br>
-    • Production readiness audits<br>
-    • Long-term system design guidance<br><br>
-    Engagements are focused, senior-level, and outcome-driven.
+    I design AI systems for founders and CTOs who care about reliability,
+    memory, and long-term scale — not just demos.
   </p>
 </section>
 
+<!-- WHAT I HELP YOU AVOID -->
 <section class="fade">
-  <h2>Schedule a Conversation</h2>
-  <iframe src="https://calendly.com/ganeshtakwale/30min" width="100%" height="600" frameborder="0"></iframe>
+  <h2>What I Help You Avoid</h2>
+  <div class="value-grid">
+    <div class="value"><strong>Production Failures</strong><p>AI that collapses under real usage.</p></div>
+    <div class="value"><strong>Context Amnesia</strong><p>Systems that forget users and decisions.</p></div>
+    <div class="value"><strong>Business Risk</strong><p>Unaligned outputs damaging trust and brand.</p></div>
+  </div>
+</section>
+
+<!-- HOW I BUILD -->
+<section class="fade">
+  <h2>How I Build Intelligence</h2>
+  <div class="value-grid">
+    <div class="value"><strong>Architecture First</strong><p>Systems before prompts or models.</p></div>
+    <div class="value"><strong>Reasoning Control</strong><p>Verification and decision layers.</p></div>
+    <div class="value"><strong>Production Thinking</strong><p>Monitoring, fallback, and observability.</p></div>
+    <div class="value"><strong>Longevity</strong><p>Designed to evolve safely over time.</p></div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="fade" id="case-studies">
+  <h2>Case Study — Production AI Architecture</h2>
+
+  <div class="case-study">
+    <p><strong>Client Type:</strong> B2B SaaS (US-based)</p>
+    <p><strong>Problem:</strong> AI assistant worked in demos but failed under real customer usage.</p>
+    <p><strong>My Role:</strong> Designed end-to-end intelligence architecture.</p>
+
+    <h3>Solution</h3>
+    <ul>
+      <li>Persistent memory across sessions</li>
+      <li>Structured reasoning layer</li>
+      <li>Alignment rules tied to business logic</li>
+      <li>Monitoring and fallback strategies</li>
+    </ul>
+
+    <h3>Outcome</h3>
+    <p>
+      Stable production deployment, reduced hallucinations,
+      and predictable behavior at scale.
+    </p>
+
+    <!-- SIMPLE ARCHITECTURE DIAGRAM -->
+    <svg viewBox="0 0 800 240">
+      <rect x="20" y="60" width="180" height="60" fill="none" stroke="#7dd3fc"/>
+      <text x="110" y="95" text-anchor="middle" fill="#e7ebf4">User</text>
+
+      <rect x="240" y="60" width="200" height="60" fill="none" stroke="#7dd3fc"/>
+      <text x="340" y="95" text-anchor="middle" fill="#e7ebf4">Reasoning Layer</text>
+
+      <rect x="480" y="20" width="200" height="60" fill="none" stroke="#7dd3fc"/>
+      <text x="580" y="55" text-anchor="middle" fill="#e7ebf4">Memory Engine</text>
+
+      <rect x="480" y="120" width="200" height="60" fill="none" stroke="#7dd3fc"/>
+      <text x="580" y="155" text-anchor="middle" fill="#e7ebf4">Alignment Rules</text>
+
+      <line x1="200" y1="90" x2="240" y2="90" stroke="#7dd3fc"/>
+      <line x1="440" y1="90" x2="480" y2="50" stroke="#7dd3fc"/>
+      <line x1="440" y1="90" x2="480" y2="150" stroke="#7dd3fc"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="fade">
+  <h2>Start a Conversation</h2>
+  <form class="contact-wrap" id="contact" action="https://formspree.io/f/abcdwxyz" method="POST">
+    <input name="name" placeholder="Your name" required>
+    <input name="email" type="email" placeholder="Your email" required>
+    <textarea name="message" rows="4" placeholder="What are you building?" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 </section>
 
 <footer>
-  Ganesh R Takwale · Intelligence Architect<br>
+  <strong>Ganesh R Takwale</strong> · Intelligence Architect<br>
   <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
-  <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank">LinkedIn</a><br><br>
-  International consulting · USD billing · Remote
+  <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank">
+    LinkedIn · Ganesh Takwale
+  </a><br><br>
+  <span style="font-size:14px">International consulting · USD billing · Remote</span>
 </footer>
 
 <script>
@@ -228,7 +295,7 @@ let W,H;
 function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
 resize();addEventListener("resize",resize);
 
-const pts=[...Array(100)].map(()=>({
+const pts=[...Array(innerWidth<768?70:120)].map(()=>({
   x:Math.random()*W,y:Math.random()*H,
   vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15
 }));
@@ -239,7 +306,7 @@ pts.forEach(p=>{
   pts.forEach(q=>{
     let d=Math.hypot(p.x-q.x,p.y-q.y);
     if(d<120){
-      ctx.strokeStyle="rgba(125,211,252,.06)";
+      ctx.strokeStyle="rgba(125,211,252,.08)";
       ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
     }
   });
@@ -257,10 +324,21 @@ document.addEventListener("scroll",()=>{
 });
 
 document.querySelectorAll(".value").forEach(card=>{
-  card.addEventListener("click",()=>{
+  card.addEventListener("click",e=>{
     document.querySelectorAll(".value.active").forEach(o=>o!==card&&o.classList.remove("active"));
     card.classList.toggle("active");
+    card.style.setProperty("--rx",e.offsetX+"px");
+    card.style.setProperty("--ry",e.offsetY+"px");
+    card.classList.add("ripple");
+    setTimeout(()=>card.classList.remove("ripple"),600);
   });
+});
+
+const contact=document.getElementById("contact");
+contact.addEventListener("mousemove",e=>{
+  const r=contact.getBoundingClientRect();
+  contact.style.setProperty("--mx",(e.clientX-r.left-r.width/2)/20+"px");
+  contact.style.setProperty("--my",(e.clientY-r.top-r.height/2)/20+"px");
 });
 </script>
 
