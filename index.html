@@ -39,12 +39,20 @@ body{
   overflow-x:hidden;
 }
 
+/* CANVAS */
 canvas#field{
   position:fixed;
   inset:0;
   z-index:-6;
+  opacity:0.7;
 }
 
+/* iPhone tuning */
+@media (max-width: 768px){
+  canvas#field{opacity:0.45}
+}
+
+/* WATERMARK */
 .bg-name{
   position:fixed;
   inset:0;
@@ -54,12 +62,15 @@ canvas#field{
   font-size:18vw;
   font-weight:600;
   letter-spacing:1vw;
-  color:rgba(255,255,255,0.03);
+  color:rgba(255,255,255,0.02);
   pointer-events:none;
   z-index:-5;
 }
 
-section{
+/* LAYOUT */
+section, footer{
+  position:relative;
+  z-index:1;
   min-height:100vh;
   padding:140px 24px;
   max-width:1100px;
@@ -70,11 +81,13 @@ h1{font-size:clamp(40px,6vw,64px)}
 h2{font-size:28px}
 p{color:var(--muted);font-size:17px;line-height:1.75}
 
+/* HERO (NO FADE) */
 .hero img{
   width:200px;
   filter:drop-shadow(0 0 40px rgba(125,211,252,.35));
 }
 
+/* GRID */
 .value-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -82,21 +95,35 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   margin-top:60px;
 }
 
+/* CARD */
 .value{
   position:relative;
   border:1px solid var(--border);
   padding:28px;
   background:rgba(255,255,255,.04);
-  transition:.35s;
+  transition:.4s;
   cursor:pointer;
+  overflow:hidden;
 }
 
+/* CARD FADE (ONLY CARDS) */
+.value.fade{
+  opacity:0;
+  transform:translateY(40px);
+}
+.value.fade.show{
+  opacity:1;
+  transform:none;
+}
+
+/* HOVER */
 .value:hover{
   transform:translateY(-6px);
   box-shadow:0 0 40px rgba(125,211,252,.18);
   border-color:rgba(125,211,252,.6);
 }
 
+/* EXPAND */
 .value p{
   max-height:0;
   opacity:0;
@@ -104,11 +131,12 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   transition:.4s ease;
 }
 .value.active p{
-  max-height:300px;
+  max-height:260px;
   opacity:1;
   margin-top:14px;
 }
 
+/* CONTACT */
 .contact-wrap{
   position:relative;
   padding:80px;
@@ -121,7 +149,7 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   position:absolute;
   inset:-10%;
   background:url("grt-logo-11.png") center/520px no-repeat;
-  opacity:.14;
+  opacity:.12;
   pointer-events:none;
 }
 
@@ -142,20 +170,12 @@ button{
   cursor:pointer;
 }
 
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:.9s;
-}
-.fade.show{opacity:1;transform:none}
-
 footer{
   border-top:1px solid var(--border);
   padding:60px;
   text-align:center;
   color:var(--muted);
 }
-
 a{color:var(--accent);text-decoration:none}
 </style>
 </head>
@@ -166,129 +186,107 @@ a{color:var(--accent);text-decoration:none}
 <div class="bg-name">TAKWALE</div>
 
 <!-- HERO -->
-<section class="hero fade">
-  <img src="grt-logo-05.png" alt="GRT Logo">
+<section class="hero">
+  <img src="grt-logo-05.png" alt="GRT AI Logo">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
   <p>I help teams build AI systems that stay reliable, aligned, and scalable — long after the demo works.</p>
 </section>
 
 <!-- WHAT I HELP YOU AVOID -->
-<section class="fade">
+<section>
   <h2>What I Help You Avoid</h2>
   <div class="value-grid">
-    <div class="value"><strong>Unstable AI in Production</strong><p>Systems that fail under real user load.</p></div>
-    <div class="value"><strong>Memory & Context Loss</strong><p>AI that forgets users and goals.</p></div>
-    <div class="value"><strong>Business Misalignment</strong><p>Technically correct but harmful decisions.</p></div>
+    <div class="value fade"><strong>Unstable AI in Production</strong><p>Failures that appear only under real users.</p></div>
+    <div class="value fade"><strong>Memory & Context Loss</strong><p>AI that forgets users and decisions.</p></div>
+    <div class="value fade"><strong>Business Misalignment</strong><p>Systems that damage trust or revenue.</p></div>
   </div>
 </section>
 
 <!-- HOW I BUILD -->
-<section class="fade">
+<section>
   <h2>How I Build Intelligence</h2>
   <div class="value-grid">
-    <div class="value"><strong>System Design First</strong><p>Architecture before models.</p></div>
-    <div class="value"><strong>Controlled Reasoning</strong><p>Verification layers & logic.</p></div>
-    <div class="value"><strong>Production Readiness</strong><p>Monitoring & resilience.</p></div>
+    <div class="value fade"><strong>System Design</strong><p>Architecture before models.</p></div>
+    <div class="value fade"><strong>Controlled Reasoning</strong><p>Verification layers.</p></div>
+    <div class="value fade"><strong>Safety & Alignment</strong><p>Business-first rules.</p></div>
+    <div class="value fade"><strong>Production Readiness</strong><p>Monitoring & fallback.</p></div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="fade">
+<section>
   <h2>Work With Me</h2>
-  <form class="contact-wrap">
-    <input placeholder="Your name" required>
-    <input type="email" placeholder="Your email" required>
-    <textarea rows="4" placeholder="Describe what you're building" required></textarea>
-    <button>Start the Conversation</button>
+  <form class="contact-wrap" action="https://formspree.io/f/abcdwxyz" method="POST">
+    <input name="name" placeholder="Your name" required>
+    <input name="email" type="email" placeholder="Your email" required>
+    <textarea name="message" rows="4" placeholder="Describe what you're building" required></textarea>
+    <button type="submit">Start the Conversation</button>
   </form>
 </section>
 
 <footer>
-  <strong>Ganesh Takwale</strong><br>
-  Intelligence Architect<br><br>
+  Ganesh R Takwale · Intelligence Architect<br>
   <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
   <a href="https://www.linkedin.com/in/ganesh-takwale-80267515b/" target="_blank">
-    LinkedIn · Ganesh Takwale
+    LinkedIn — Ganesh Takwale
   </a><br><br>
   <span style="font-size:14px">International consulting · USD billing · Remote</span>
 </footer>
 
-<!-- ✅ FIXED BACKGROUND SCRIPT -->
 <script>
-const c = document.getElementById("field");
-const ctx = c.getContext("2d");
+/* CANVAS */
+const c=document.getElementById("field"),ctx=c.getContext("2d");
+let W,H,scrollFactor=1;
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
 
-let W, H, scrollFactor = 1;
-function resize() {
-  W = c.width = innerWidth;
-  H = c.height = innerHeight;
-}
-resize();
-addEventListener("resize", resize);
+let pointer={x:null,y:null};
+addEventListener("mousemove",e=>pointer={x:e.clientX,y:e.clientY});
+addEventListener("touchmove",e=>{
+  if(e.touches[0]) pointer={x:e.touches[0].clientX,y:e.touches[0].clientY}
+},{passive:true});
+addEventListener("mouseout",()=>pointer={x:null,y:null});
 
-// Pointer
-let pointer = { x: null, y: null };
-addEventListener("mousemove", e => {
-  pointer.x = e.clientX;
-  pointer.y = e.clientY;
-});
-addEventListener("touchmove", e => {
-  if (e.touches[0]) {
-    pointer.x = e.touches[0].clientX;
-    pointer.y = e.touches[0].clientY;
-  }
-}, { passive: true });
-addEventListener("mouseout", () => pointer.x = pointer.y = null);
+addEventListener("scroll",()=>scrollFactor=Math.min(2,1+scrollY/1200));
 
-// Scroll intensity
-addEventListener("scroll", () => {
-  scrollFactor = Math.min(2, 1 + scrollY / 1200);
-});
-
-const COUNT = innerWidth < 768 ? 70 : 120;
-const pts = [...Array(COUNT)].map(() => ({
-  x: Math.random() * W,
-  y: Math.random() * H,
-  vx: (Math.random() - 0.5) * 0.3,
-  vy: (Math.random() - 0.5) * 0.3
+const COUNT=innerWidth<768?60:120;
+const pts=[...Array(COUNT)].map(()=>({
+  x:Math.random()*W,y:Math.random()*H,
+  vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25
 }));
 
-(function animate() {
-  ctx.clearRect(0, 0, W, H);
-
-  pts.forEach(p => {
-    pts.forEach(q => {
-      const d = Math.hypot(p.x - q.x, p.y - q.y);
-      if (d < 130) {
-        ctx.strokeStyle = `rgba(125,211,252,${0.04 * scrollFactor})`;
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(q.x, q.y);
-        ctx.stroke();
+(function anim(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    pts.forEach(q=>{
+      let d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<130){
+        ctx.strokeStyle=`rgba(125,211,252,${0.04*scrollFactor})`;
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
       }
     });
-
-    if (pointer.x !== null) {
-      const dx = pointer.x - p.x;
-      const dy = pointer.y - p.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 160) {
-        p.vx += dx / dist * 0.015;
-        p.vy += dy / dist * 0.015;
+    if(pointer.x){
+      let d=Math.hypot(p.x-pointer.x,p.y-pointer.y);
+      if(d<160){
+        ctx.strokeStyle="rgba(125,211,252,.25)";
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(pointer.x,pointer.y);ctx.stroke();
       }
     }
-
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0 || p.x > W) p.vx *= -1;
-    if (p.y < 0 || p.y > H) p.vy *= -1;
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
   });
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(anim);
 })();
-</script>
 
-<script>
+/* CARD FADE */
+const cards=document.querySelectorAll(".value.fade");
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>e.isIntersecting&&e.target.classList.add("show"));
+},{threshold:.2});
+cards.forEach(c=>io.observe(c));
+
+/* CARD TOGGLE */
 document.querySelectorAll(".value").forEach(card=>{
   card.addEventListener("click",()=>{
     document.querySelectorAll(".value.active").forEach(o=>o!==card&&o.classList.remove("active"));
