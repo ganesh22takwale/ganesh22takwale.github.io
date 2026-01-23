@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GRT · Systems Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8HQ1C1X28F');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#04060c;
+  --fg:#e7ebf4;
+  --muted:#8f9bb3;
+  --accent:#7dd3fc;
+  --border:rgba(255,255,255,.12);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:Inter,system-ui,sans-serif;
+}
+
+header{
+  height:72px;
+  padding:0 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+}
+
+#lab{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  min-height:calc(100vh - 72px);
+}
+
+#controls{
+  padding:36px;
+  border-right:1px solid var(--border);
+}
+
+.control{margin-bottom:28px}
+
+label{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+input[type=range]{width:100%}
+
+#sim{
+  padding:64px;
+}
+
+.metric{margin-bottom:32px}
+
+.bar{
+  height:10px;
+  background:rgba(255,255,255,.08);
+}
+
+.fill{
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:.6s;
+}
+
+#events{
+  margin-top:40px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+}
+
+.event{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <strong>GRT · Systems Simulation</strong>
+  <span>Single session · No rewind</span>
+</header>
+
+<div id="lab">
+  <div id="controls">
+    <div class="control">
+      <label>Budget <span id="bVal"></span></label>
+      <input type="range" id="budget" min="20" max="100" value="60">
+    </div>
+    <div class="control">
+      <label>Memory Depth <span id="mVal"></span></label>
+      <input type="range" id="memory" min="1" max="10" value="4">
+    </div>
+    <div class="control">
+      <label>Alignment <span id="aVal"></span></label>
+      <input type="range" id="alignment" min="1" max="10" value="6">
+    </div>
+    <div class="control">
+      <label>Monitoring <span id="moVal"></span></label>
+      <input type="range" id="monitoring" min="1" max="10" value="3">
+    </div>
+  </div>
+
+  <div id="sim">
+    <div class="metric"><strong>Reliability</strong><div class="bar"><div class="fill" id="reliability"></div></div></div>
+    <div class="metric"><strong>Failure Risk</strong><div class="bar"><div class="fill" id="risk"></div></div></div>
+    <div class="metric"><strong>User Trust</strong><div class="bar"><div class="fill" id="trust"></div></div></div>
+    <div id="events"></div>
+  </div>
+</div>
+
+<script src="lab.js"></script>
+</body>
+</html>
