@@ -1,64 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8HQ1C1X28F');
-  </script>
-
-  <!-- Google Search Console -->
-  <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
-
   <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#05070d;
+  --bg1:#05070d;
   --bg2:#0b1226;
   --fg:#e7ebf4;
   --muted:#9aa4b2;
   --accent:#7dd3fc;
-  --accent2:#a0e7ff;
   --border:rgba(255,255,255,.14);
 }
 
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-
 body{
+  margin:0;
   font-family:Inter,system-ui,sans-serif;
   color:var(--fg);
-  background:radial-gradient(1200px 600px at 10% 0%, var(--bg), var(--bg2));
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
   overflow-x:hidden;
 }
 
-/* Background motion */
-canvas#field{
+/* BACKGROUND FIELD */
+canvas{
   position:fixed;
   inset:0;
   z-index:-1;
-  opacity:.35;
+  opacity:.3;
 }
 
-/* Header */
+/* HEADER */
 header{
   position:sticky;
   top:0;
-  z-index:10;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:14px 22px;
-  background:rgba(5,7,13,.7);
+  align-items:center;
+  padding:14px 24px;
+  background:rgba(5,7,13,.75);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
 }
@@ -67,159 +51,109 @@ header{
   display:flex;
   align-items:center;
   gap:12px;
-  text-decoration:none;
-  color:var(--fg);
+  font-weight:600;
 }
 
-.logo-wrap{
-  display:grid;
-  place-items:center;
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  background:radial-gradient(
-    40px 40px at 50% 50%,
-    rgba(125,211,252,.25),
-    rgba(125,211,252,.05)
-  );
-  box-shadow:0 0 32px rgba(125,211,252,.35);
-}
+.brand img{width:36px}
 
-.brand img{max-width:32px;max-height:32px}
-.fallback{
-  display:none;
-  font-weight:800;
-  font-family:"Space Grotesk",Inter,sans-serif;
-}
-
-nav a{
-  color:var(--fg);
-  text-decoration:none;
-  margin-left:14px;
-  font-size:14px;
-}
-nav a.cta{
-  padding:8px 12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-}
-
-/* Hero */
+/* HERO */
 .hero{
-  min-height:72vh;
+  min-height:90vh;
   display:grid;
-  place-items:center;
-  text-align:center;
-  padding:80px 24px 60px;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:48px;
+  padding:80px 24px;
+  max-width:1200px;
+  margin:auto;
 }
 
 .hero h1{
-  font-family:"Space Grotesk",Inter,sans-serif;
-  font-size:clamp(42px,6vw,72px);
+  font-family:"Space Grotesk",Inter;
+  font-size:clamp(44px,6vw,72px);
   line-height:1.1;
-  margin:0 0 14px;
 }
 
 .hero p{
   color:var(--muted);
-  max-width:820px;
-  margin:0 auto 28px;
   font-size:18px;
   line-height:1.8;
 }
 
-.hero-actions{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  color:var(--fg);
-  text-decoration:none;
-  cursor:pointer;
-}
-.btn.primary{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#041015;
-  font-weight:700;
-}
-.btn.ghost{background:transparent}
-
-/* Sections */
-section.panel{
-  padding:80px 24px;
+/* PANELS */
+section{
   max-width:1100px;
-  margin:0 auto;
+  margin:auto;
+  padding:100px 24px;
 }
 
-section.panel h2{
-  font-family:"Space Grotesk",Inter,sans-serif;
-  font-size:28px;
-  margin-bottom:28px;
+h2{
+  font-family:"Space Grotesk";
+  font-size:30px;
+  margin-bottom:40px;
 }
 
-/* Cards */
-.grid-3{
+/* === SYSTEM CARDS (NOT PPT) === */
+.system-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
 }
 @media(max-width:900px){
-  .grid-3{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr}
+  .system-grid{grid-template-columns:1fr}
 }
 
-.card{
+.system-card{
+  position:relative;
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:26px;
-  background:rgba(255,255,255,.04);
-  transition:.25s;
-}
-.card:hover{
-  border-color:rgba(125,211,252,.6);
-  transform:translateY(-6px);
+  border-radius:18px;
+  padding:28px;
+  background:rgba(255,255,255,.035);
+  cursor:pointer;
+  transition:.35s ease;
+  overflow:hidden;
 }
 
-/* Analysis boxes */
-.analysis-boxes{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin-top:40px;
+/* subtle glow */
+.system-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 30% 20%, rgba(125,211,252,.18), transparent 60%);
+  opacity:0;
+  transition:.35s;
 }
-.analysis-box{
-  flex:1;
-  min-width:220px;
-  padding:24px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:rgba(255,255,255,.04);
-  text-align:center;
-  transition:.3s;
-}
-.analysis-box:hover{
-  background:rgba(125,211,252,.08);
-  transform:translateY(-6px);
-}
-.analysis-box h3{
-  margin:0 0 10px;
-  font-family:"Space Grotesk",Inter,sans-serif;
-}
-.analysis-box p{color:var(--muted)}
 
+.system-card:hover::before{opacity:1}
+
+/* collapsed */
+.system-card p{
+  color:var(--muted);
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:.4s ease;
+}
+
+/* expanded state */
+.system-card.active{
+  background:rgba(10,20,40,.75);
+  transform:translateY(-10px);
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+}
+
+.system-card.active p{
+  max-height:260px;
+  opacity:1;
+  margin-top:14px;
+}
+
+/* FOOTER */
 footer{
-  padding:48px 24px;
-  border-top:1px solid var(--border);
+  padding:60px 24px;
   text-align:center;
+  border-top:1px solid var(--border);
   color:var(--muted);
 }
 </style>
@@ -230,105 +164,50 @@ footer{
 <canvas id="field"></canvas>
 
 <header>
-  <a class="brand" href="#">
-    <div class="logo-wrap">
-      <img src="grt-logo-11.png" alt="GRT Logo"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="fallback">GRT</span>
-    </div>
+  <div class="brand">
+    <img src="grt-logo-05.png">
     <span>Global Reliability Technology</span>
-  </a>
-
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#workflows">Workflows</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="cta">Book</a>
-    <a href="lab.html" class="cta">Simulation</a>
-  </nav>
+  </div>
 </header>
 
 <section class="hero">
-  <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>
-    I architect AI systems that stay reliable, aligned, and scalable —
-    beyond demos and short-term wins.
-  </p>
-  <div class="hero-actions">
-    <a class="btn primary" href="#contact">Start a project</a>
-    <a class="btn ghost" href="lab.html">Play Reliability Tycoon</a>
+  <div>
+    <h1>Intelligence is not automated.<br>It is architected.</h1>
+    <p>
+      I design AI systems and digital products that survive real users,
+      real scale, and real business pressure.
+    </p>
   </div>
+  <img src="architect-2.png" style="width:100%;border-radius:18px;box-shadow:0 40px 120px rgba(0,0,0,.6)">
 </section>
 
-<section id="services" class="panel">
-  <h2>Services</h2>
-  <div class="grid-3">
-    <article class="card">
-      <h3>AI Systems Architecture</h3>
-      <p>Guardrails, observability, memory, and versioned prompts — engineered for reliability.</p>
-    </article>
-    <article class="card">
-      <h3>Premium Websites</h3>
-      <p>High-performance websites that communicate trust, clarity, and authority.</p>
-    </article>
-    <article class="card">
-      <h3>Automation & Integrations</h3>
-      <p>Reliable workflows that reduce friction and scale with confidence.</p>
-    </article>
-  </div>
-</section>
+<section>
+  <h2>Systems I Architect</h2>
 
-<section id="workflows" class="panel">
-  <h2>Workflow Blueprints</h2>
-  <div class="grid-3">
-    <article class="card">
-      <h3>Discovery → Architecture → Pilot → Scale</h3>
-      <p>Clear milestones, fixed deliverables, and measurable outcomes.</p>
-    </article>
-    <article class="card">
-      <h3>Reliability Stack</h3>
-      <p>Testing, monitoring, fallback strategies, and controlled deployments.</p>
-    </article>
-    <article class="card">
-      <h3>Governance & Alignment</h3>
-      <p>Policy-aware systems with auditability and long-term safety.</p>
-    </article>
-  </div>
-
-  <div class="analysis-boxes">
-    <div class="analysis-box">
+  <div class="system-grid">
+    <div class="system-card">
       <h3>Clarity</h3>
-      <p>Systems users understand are systems they trust.</p>
+      <p>
+        Documentation, UX, and reasoning transparency reduce churn,
+        align teams, and increase trust long-term.
+      </p>
     </div>
-    <div class="analysis-box">
+
+    <div class="system-card">
       <h3>Reliability</h3>
-      <p>Failures cost more than speed ever saves.</p>
+      <p>
+        Monitoring, fallback strategies, and testing layers
+        prevent silent failures and revenue loss.
+      </p>
     </div>
-    <div class="analysis-box">
+
+    <div class="system-card">
       <h3>Scalability</h3>
-      <p>Architecture decides what growth breaks.</p>
+      <p>
+        Architecture determines what breaks when usage grows —
+        not the model.
+      </p>
     </div>
-  </div>
-</section>
-
-<section id="about" class="panel">
-  <h2>About</h2>
-  <div class="card">
-    <p><strong>Ganesh R Takwale</strong> — Intelligence Architect.</p>
-    <p>I design AI systems and digital products that prioritize reliability, alignment, and long-term impact.</p>
-  </div>
-</section>
-
-<section id="contact" class="panel">
-  <h2>Book a consultation</h2>
-  <div class="card">
-    <p>
-      Interested in building a reliable system or premium digital product?
-      Reach out to start a focused conversation.
-    </p>
-    <p>
-      <a class="btn primary" href="mailto:ganeshtakwale017@gmail.com">Email me</a>
-    </p>
   </div>
 </section>
 
@@ -337,35 +216,44 @@ footer{
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById("year").textContent=new Date().getFullYear();
 
-  /* Background particles — subtle */
-  const c=document.getElementById("field"),ctx=c.getContext("2d");
-  let W,H;
-  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-  resize();addEventListener("resize",resize);
+/* CARD INTERACTION */
+document.querySelectorAll(".system-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    document.querySelectorAll(".system-card.active")
+      .forEach(c=>c!==card&&c.classList.remove("active"));
+    card.classList.toggle("active");
+  });
+});
 
-  const pts=[...Array(80)].map(()=>({
-    x:Math.random()*W,y:Math.random()*H,
-    vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18
-  }));
+/* BACKGROUND PARTICLES */
+const c=document.getElementById("field"),ctx=c.getContext("2d");
+let W,H;
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
 
-  (function anim(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      pts.forEach(q=>{
-        const d=Math.hypot(p.x-q.x,p.y-q.y);
-        if(d<120){
-          ctx.strokeStyle="rgba(125,211,252,.045)";
-          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
-        }
-      });
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>W)p.vx*=-1;
-      if(p.y<0||p.y>H)p.vy*=-1;
+const pts=[...Array(80)].map(()=>({
+  x:Math.random()*W,y:Math.random()*H,
+  vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2
+}));
+
+(function anim(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    pts.forEach(q=>{
+      const d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<120){
+        ctx.strokeStyle="rgba(125,211,252,.04)";
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
+      }
     });
-    requestAnimationFrame(anim);
-  })();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+  });
+  requestAnimationFrame(anim);
+})();
 </script>
 
 </body>
