@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ✅ Google Analytics (as provided) -->
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,193 +10,424 @@
     gtag('config', 'G-8HQ1C1X28F');
   </script>
 
-  <!-- ✅ Google Search Console (replace content value with your exact code) -->
-  <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
-
   <meta charset="utf-8" />
   <title>Reliability Tycoon — GRT Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#070c18; --bg2:#0b1226; --fg:#e7ebf4; --muted:#9aa4b2;
-      --border:rgba(255,255,255,.14); --accent:#7dd3fc; --accent2:#a0e7ff; --accent3:#e3a7ff;
+      --bg:#060a16;
+      --bg2:#0b1226;
+      --fg:#e7ebf4;
+      --muted:#9aa4b2;
+      --border:rgba(255,255,255,.14);
+      --accent:#7dd3fc;
+      --accent2:#a0e7ff;
+      --accent3:#e3a7ff;
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
-    body{font-family:Inter,system-ui,sans-serif;color:var(--fg);background:linear-gradient(180deg,var(--bg),var(--bg2));}
-    header{position:sticky;top:0;background:rgba(0,0,0,.25);backdrop-filter:blur(6px);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
-    .brand{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;}
-    .brand img{height:26px}
-    .nav a{color:var(--fg);text-decoration:none;margin-left:12px}
-    .hero{padding:60px 24px;text-align:center}
-    .hero h1{font-family:"Space Grotesk",Inter,sans-serif;font-size:clamp(36px,5vw,56px);margin:0 0 10px}
-    .hero p{color:var(--muted)}
-    main{padding:24px;max-width:1100px;margin:auto}
-    .sim-grid{display:grid;grid-template-columns:1.1fr 1.2fr .8fr;gap:18px}
-    @media (max-width:1000px){.sim-grid{grid-template-columns:1fr}}
-    .card{border:1px solid var(--border);border-radius:14px;padding:18px;background:rgba(255,255,255,.04)}
-    .sim-controls label{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:10px;margin-bottom:8px}
+
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(1000px 520px at 15% 0%, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Decorative grid (very light) */
+    .lab-grid{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      background:rgba(6,10,22,.7);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--fg);
+      text-decoration:none;
+    }
+
+    .logo-wrap{
+      display:grid;
+      place-items:center;
+      width:36px;
+      height:36px;
+      border-radius:9px;
+      background:radial-gradient(
+        36px 36px at 50% 50%,
+        rgba(125,211,252,.25),
+        rgba(125,211,252,.05)
+      );
+      box-shadow:0 0 28px rgba(125,211,252,.35);
+    }
+
+    .logo-wrap img{max-width:28px;max-height:28px}
+    .logo-wrap .fallback{
+      display:none;
+      font-family:"Space Grotesk",Inter,sans-serif;
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+
+    nav a{
+      color:var(--fg);
+      text-decoration:none;
+      margin-left:12px;
+      font-size:14px;
+    }
+
+    /* Hero */
+    .hero{
+      padding:64px 24px 48px;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-family:"Space Grotesk",Inter,sans-serif;
+      font-size:clamp(38px,5vw,56px);
+      margin:0 0 12px;
+      line-height:1.15;
+    }
+
+    .hero p{
+      color:var(--muted);
+      max-width:760px;
+      margin:0 auto;
+      font-size:17px;
+      line-height:1.7;
+    }
+
+    /* Layout */
+    main{
+      padding:24px;
+      max-width:1100px;
+      margin:auto;
+    }
+
+    .sim-grid{
+      display:grid;
+      grid-template-columns:1.1fr 1.2fr .9fr;
+      gap:18px;
+    }
+
+    @media (max-width:1000px){
+      .sim-grid{grid-template-columns:1fr}
+    }
+
+    /* Cards */
+    .card{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:20px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .card h2{
+      font-family:"Space Grotesk",Inter,sans-serif;
+      font-size:20px;
+      margin:0 0 14px;
+    }
+
+    /* Controls */
+    .sim-controls label{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      font-size:14px;
+    }
+
     .sim-controls input[type="range"]{width:100%}
-    .alloc-summary{display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);color:var(--fg);text-decoration:none;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#041015;font-weight:700}
+
+    .alloc-summary{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin:10px 0 14px;
+      font-size:14px;
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      color:var(--fg);
+      text-decoration:none;
+      cursor:pointer;
+      background:transparent;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#041015;
+      font-weight:700;
+    }
+
     .btn.ghost{background:transparent}
-    .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-    .tip{color:var(--muted);font-size:.95rem}
-    footer{padding:40px 24px;border-top:1px solid var(--border);text-align:center;color:var(--muted)}
+
+    /* Output */
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      margin-top:14px;
+      font-size:14px;
+    }
+
+    .tip{
+      color:var(--muted);
+      font-size:.95rem;
+      margin-top:12px;
+    }
+
+    footer{
+      padding:40px 24px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <a class="brand" href="index.html">
-      <img src="grt-logo-05.png" alt="GRT Logo">
-      <span>GRT Lab</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#contact">Book</a>
-      <a href="index.html">Home</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h1>Reliability Tycoon</h1>
-    <p>Allocate budget across clarity, reliability, and speed—then ship and see the outcome.</p>
-  </section>
+<div class="lab-grid">
+  <canvas id="labGrid"></canvas>
+</div>
 
-  <main>
-    <div class="sim-grid">
-      <div class="sim-controls card">
-        <h2>Budget allocation</h2>
-        <label><span>Clarity (Docs, UX)</span><input type="range" id="clarity" min="0" max="100" value="33"></label>
-        <label><span>Reliability (Testing, Observability)</span><input type="range" id="reliability" min="0" max="100" value="34"></label>
-        <label><span>Speed (Performance, Delivery)</span><input type="range" id="speed" min="0" max="100" value="33"></label>
-        <div class="alloc-summary">
-          <span>Total: <strong id="total">100</strong>%</span>
-          <button class="btn" id="balanceBtn">Balance</button>
-        </div>
-        <button class="btn primary" id="runBtn">Ship release</button>
-      </div>
-
-      <div class="sim-output card">
-        <h2>Outcome</h2>
-        <canvas id="outcomeChart" width="480" height="240" aria-label="Outcome chart"></canvas>
-        <div class="kpis">
-          <div><strong>Client satisfaction:</strong> <span id="sat">—</span></div>
-          <div><strong>Uptime:</strong> <span id="uptime">—</span></div>
-          <div><strong>Conversion lift:</strong> <span id="conv">—</span></div>
-          <div><strong>Revenue impact:</strong> <span id="rev">—</span></div>
-        </div>
-        <p class="tip">Tip: Higher clarity reduces churn; reliability protects uptime; speed boosts conversions—but balance matters.</p>
-        <a class="btn ghost" href="index.html#contact">Turn this into a real project</a>
-      </div>
-
-      <div class="sim-context card">
-        <h2>Scenario context</h2>
-        <p id="scenarioText">Loading scenario from site information…</p>
-        <button class="btn" id="newScenario">New scenario</button>
-      </div>
+<header>
+  <a class="brand" href="index.html">
+    <div class="logo-wrap">
+      <img src="grt-logo-05.png" alt="GRT Logo"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="fallback">GRT</span>
     </div>
-  </main>
+    <span>GRT Lab</span>
+  </a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#contact">Book</a>
+  </nav>
+</header>
 
-  <footer>© <span id="year"></span> GRT Lab.</footer>
+<section class="hero">
+  <h1>Reliability Tycoon</h1>
+  <p>
+    Allocate budget across clarity, reliability, and speed.
+    Ship the release — and observe the system-level outcome.
+  </p>
+</section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<main>
+  <div class="sim-grid">
 
-    // Controls
-    const clarity = document.getElementById('clarity');
-    const reliability = document.getElementById('reliability');
-    const speed = document.getElementById('speed');
-    const totalEl = document.getElementById('total');
-    const balanceBtn = document.getElementById('balanceBtn');
-    const runBtn = document.getElementById('runBtn');
-    const satEl = document.getElementById('sat');
-    const uptimeEl = document.getElementById('uptime');
-    const convEl = document.getElementById('conv');
-    const revEl = document.getElementById('rev');
-    const chart = document.getElementById('outcomeChart');
-    const ctx = chart.getContext('2d');
-    const scenarioText = document.getElementById('scenarioText');
-    const newScenario = document.getElementById('newScenario');
+    <!-- Controls -->
+    <div class="sim-controls card">
+      <h2>Budget allocation</h2>
 
-    function clampAlloc() {
-      const c = +clarity.value, r = +reliability.value, s = +speed.value;
-      const sum = c + r + s || 1;
-      const scale = 100 / sum;
-      clarity.value = Math.round(c * scale);
-      reliability.value = Math.round(r * scale);
-      speed.value = Math.round(s * scale);
-      totalEl.textContent = (+clarity.value + +reliability.value + +speed.value);
-    }
+      <label>
+        <span>Clarity (Docs, UX)</span>
+        <input type="range" id="clarity" min="0" max="100" value="33">
+      </label>
 
-    function balance() {
-      const avg = Math.round(100 / 3);
-      clarity.value = avg;
-      reliability.value = avg;
-      speed.value = 100 - avg * 2;
-      totalEl.textContent = 100;
-    }
+      <label>
+        <span>Reliability (Testing, Observability)</span>
+        <input type="range" id="reliability" min="0" max="100" value="34">
+      </label>
 
-    function readSiteContext() {
-      const hints = [
-        'Client values uptime and clean design.',
-        'Focus on measurable impact and transparent workflows.',
-        'Clarity reduces churn; reliability protects uptime; speed boosts conversions.'
-      ];
-      scenarioText.textContent = hints[Math.floor(Math.random() * hints.length)];
-    }
+      <label>
+        <span>Speed (Performance, Delivery)</span>
+        <input type="range" id="speed" min="0" max="100" value="33">
+      </label>
 
-    function simulate() {
-      const c = +clarity.value, r = +reliability.value, s = +speed.value;
+      <div class="alloc-summary">
+        <span>Total: <strong id="total">100</strong>%</span>
+        <button class="btn" id="balanceBtn">Balance</button>
+      </div>
 
-      const clarityEffect = Math.min(1, c / 70);
-      const reliabilityEffect = Math.min(1, r / 65);
-      const speedEffect = Math.min(1, s / 60);
+      <button class="btn primary" id="runBtn">Ship release</button>
+    </div>
 
-      const imbalance = Math.abs(c - r) + Math.abs(r - s) + Math.abs(s - c);
-      const penalty = Math.min(0.25, imbalance / 300);
+    <!-- Output -->
+    <div class="sim-output card">
+      <h2>Outcome</h2>
+      <canvas id="outcomeChart" width="480" height="240"></canvas>
 
-      const satisfaction = Math.max(0, 0.35 + 0.4 * clarityEffect + 0.2 * reliabilityEffect - penalty);
-      const uptime = Math.max(0, 0.90 * reliabilityEffect - 0.05 * penalty + 0.05);
-      const conversion = Math.max(0, 0.25 + 0.5 * speedEffect + 0.2 * clarityEffect - 0.1 * penalty);
-      const revenue = (satisfaction * 0.4 + uptime * 0.3 + conversion * 0.3);
+      <div class="kpis">
+        <div><strong>Client satisfaction:</strong> <span id="sat">—</span></div>
+        <div><strong>Uptime:</strong> <span id="uptime">—</span></div>
+        <div><strong>Conversion lift:</strong> <span id="conv">—</span></div>
+        <div><strong>Revenue impact:</strong> <span id="rev">—</span></div>
+      </div>
 
-      satEl.textContent = (satisfaction * 100).toFixed(0) + '%';
-      uptimeEl.textContent = (uptime * 100).toFixed(0) + '%';
-      convEl.textContent = (conversion * 100).toFixed(0) + '%';
-      revEl.textContent = '↑ ' + (revenue * 100).toFixed(0) + ' index';
+      <p class="tip">
+        Tip: Balance matters. Over-optimizing one dimension introduces hidden risk.
+      </p>
 
-      // Bars
-      ctx.clearRect(0, 0, chart.width, chart.height);
-      const bars = [
-        { label: 'Satisfaction', value: satisfaction, color: '#7CFFCB' },
-        { label: 'Uptime', value: uptime, color: '#A0E7FF' },
-        { label: 'Conversion', value: conversion, color: '#FFD580' },
-        { label: 'Revenue', value: revenue, color: '#E3A7FF' }
-      ];
-      const bw = 90, gap = 30, base = chart.height - 24;
-      bars.forEach((b, i) => {
-        const x = 24 + i * (bw + gap);
-        const h = b.value * (base - 24);
-        ctx.fillStyle = b.color;
-        ctx.fillRect(x, base - h, bw, h);
-        ctx.fillStyle = '#fff';
-        ctx.font = '12px Inter';
-        ctx.fillText(b.label, x, base + 14);
-      });
-    }
+      <a class="btn ghost" href="index.html#contact">Turn this into a real project</a>
+    </div>
 
-    [clarity, reliability, speed].forEach(el => el.addEventListener('input', clampAlloc));
-    balanceBtn.addEventListener('click', balance);
-    runBtn.addEventListener('click', () => { clampAlloc(); simulate(); });
-    newScenario.addEventListener('click', readSiteContext);
+    <!-- Context -->
+    <div class="sim-context card">
+      <h2>Scenario context</h2>
+      <p id="scenarioText">Loading scenario…</p>
+      <button class="btn" id="newScenario">New scenario</button>
+    </div>
 
-    clampAlloc();
-    readSiteContext();
-    simulate();
-  </script>
+  </div>
+</main>
+
+<footer>
+  © <span id="year"></span> GRT Lab
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Decorative grid */
+  const gridCanvas = document.getElementById('labGrid');
+  const gctx = gridCanvas.getContext('2d');
+  function resizeGrid(){
+    gridCanvas.width = innerWidth;
+    gridCanvas.height = innerHeight;
+  }
+  resizeGrid(); addEventListener('resize', resizeGrid);
+
+  (function drawGrid(){
+    gctx.clearRect(0,0,gridCanvas.width,gridCanvas.height);
+    gctx.fillStyle = 'rgba(125,211,252,.03)';
+    for(let x=0;x<gridCanvas.width;x+=140){ gctx.fillRect(x,0,1,gridCanvas.height); }
+    for(let y=0;y<gridCanvas.height;y+=140){ gctx.fillRect(0,y,gridCanvas.width,1); }
+    requestAnimationFrame(drawGrid);
+  })();
+
+  // Controls
+  const clarity = document.getElementById('clarity');
+  const reliability = document.getElementById('reliability');
+  const speed = document.getElementById('speed');
+  const totalEl = document.getElementById('total');
+  const balanceBtn = document.getElementById('balanceBtn');
+  const runBtn = document.getElementById('runBtn');
+
+  const satEl = document.getElementById('sat');
+  const uptimeEl = document.getElementById('uptime');
+  const convEl = document.getElementById('conv');
+  const revEl = document.getElementById('rev');
+
+  const chart = document.getElementById('outcomeChart');
+  const ctx = chart.getContext('2d');
+
+  const scenarioText = document.getElementById('scenarioText');
+  const newScenario = document.getElementById('newScenario');
+
+  function clampAlloc(){
+    const c = +clarity.value, r = +reliability.value, s = +speed.value;
+    const sum = c + r + s || 1;
+    const scale = 100 / sum;
+    clarity.value = Math.round(c * scale);
+    reliability.value = Math.round(r * scale);
+    speed.value = 100 - clarity.value - reliability.value;
+    totalEl.textContent = clarity.value + reliability.value + speed.value;
+  }
+
+  function balance(){
+    clarity.value = 33;
+    reliability.value = 34;
+    speed.value = 33;
+    totalEl.textContent = 100;
+  }
+
+  function readSiteContext(){
+    const hints = [
+      'Client values uptime and clean design.',
+      'Stakeholders expect measurable outcomes.',
+      'Reliability failures damage trust faster than speed gains.'
+    ];
+    scenarioText.textContent = hints[Math.floor(Math.random()*hints.length)];
+  }
+
+  function simulate(){
+    const c = +clarity.value, r = +reliability.value, s = +speed.value;
+
+    const clarityEffect = Math.min(1, c / 70);
+    const reliabilityEffect = Math.min(1, r / 65);
+    const speedEffect = Math.min(1, s / 60);
+
+    const imbalance = Math.abs(c - r) + Math.abs(r - s) + Math.abs(s - c);
+    const penalty = Math.min(0.25, imbalance / 300);
+
+    const satisfaction = Math.max(0, 0.35 + 0.4 * clarityEffect + 0.2 * reliabilityEffect - penalty);
+    const uptime = Math.max(0, 0.90 * reliabilityEffect - 0.05 * penalty + 0.05);
+    const conversion = Math.max(0, 0.25 + 0.5 * speedEffect + 0.2 * clarityEffect - 0.1 * penalty);
+    const revenue = satisfaction * 0.4 + uptime * 0.3 + conversion * 0.3;
+
+    satEl.textContent = (satisfaction * 100).toFixed(0) + '%';
+    uptimeEl.textContent = (uptime * 100).toFixed(0) + '%';
+    convEl.textContent = (conversion * 100).toFixed(0) + '%';
+    revEl.textContent = '↑ ' + (revenue * 100).toFixed(0) + ' index';
+
+    // Chart
+    ctx.clearRect(0,0,chart.width,chart.height);
+    const bars = [
+      {label:'Satisfaction', value:satisfaction, color:'#7CFFCB'},
+      {label:'Uptime', value:uptime, color:'#A0E7FF'},
+      {label:'Conversion', value:conversion, color:'#FFD580'},
+      {label:'Revenue', value:revenue, color:'#E3A7FF'}
+    ];
+    const bw = 90, gap = 26, base = chart.height - 24;
+    bars.forEach((b,i)=>{
+      const x = 24 + i*(bw+gap);
+      const h = b.value*(base-24);
+      ctx.fillStyle = b.color;
+      ctx.fillRect(x, base-h, bw, h);
+      ctx.fillStyle = '#fff';
+      ctx.font = '12px Inter';
+      ctx.fillText(b.label, x, base+14);
+    });
+
+    gtag('event','simulation_run',{
+      clarity:c, reliability:r, speed:s
+    });
+  }
+
+  [clarity,reliability,speed].forEach(el=>el.addEventListener('input', clampAlloc));
+  balanceBtn.addEventListener('click', balance);
+  runBtn.addEventListener('click', ()=>{clampAlloc(); simulate();});
+  newScenario.addEventListener('click', readSiteContext);
+
+  clampAlloc();
+  readSiteContext();
+  simulate();
+</script>
+
 </body>
 </html>
