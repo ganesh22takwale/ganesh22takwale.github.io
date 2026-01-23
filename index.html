@@ -1,260 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-8HQ1C1X28F");
+  </script>
+
+  <!-- Search Console -->
+  <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
+
   <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg1:#05070d;
-  --bg2:#0b1226;
-  --fg:#e7ebf4;
-  --muted:#9aa4b2;
-  --accent:#7dd3fc;
-  --border:rgba(255,255,255,.14);
-}
+  <style>
+    :root{
+      --fg:#e7ebf4; --muted:#9aa4b2;
+      --accent1:#7dd3fc; --accent2:#e3a7ff;
+      --border:rgba(255,255,255,.14);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--fg);background:#000;overflow-x:hidden;}
+    canvas#stars{position:fixed;inset:0;z-index:-1;}
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,sans-serif;
-  color:var(--fg);
-  background:linear-gradient(180deg,var(--bg1),var(--bg2));
-  overflow-x:hidden;
-}
+    header{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;
+      padding:14px 24px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:600;}
+    .brand img{width:36px}
 
-/* BACKGROUND FIELD */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  opacity:.3;
-}
+    .hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;
+      padding:80px 24px;max-width:1200px;margin:auto;}
+    .hero h1{font-family:"Space Grotesk",Inter;font-size:clamp(44px,6vw,72px);line-height:1.1;}
+    .hero p{color:var(--muted);font-size:18px;line-height:1.8;}
 
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 24px;
-  background:rgba(5,7,13,.75);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
+    section{max-width:1100px;margin:auto;padding:100px 24px;}
+    h2{font-family:"Space Grotesk";font-size:30px;margin-bottom:40px;}
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:600;
-}
+    .system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.system-grid{grid-template-columns:1fr}}
 
-.brand img{width:36px}
+    .system-card{position:relative;border:1px solid var(--border);border-radius:18px;padding:28px;
+      background:rgba(255,255,255,.05);cursor:pointer;transition:.35s ease;overflow:hidden;}
+    .system-card.active{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#000;box-shadow:0 0 40px var(--accent1);}
+    .system-card p{color:var(--muted);max-height:0;overflow:hidden;opacity:0;transition:.4s ease;}
+    .system-card.active p{max-height:260px;opacity:1;margin-top:14px;color:#000;}
 
-/* HERO */
-.hero{
-  min-height:90vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:48px;
-  padding:80px 24px;
-  max-width:1200px;
-  margin:auto;
-}
+    .workflow-visual{text-align:center;margin:40px 0;}
+    .workflow-visual img{max-width:100%;border-radius:18px;box-shadow:0 0 40px rgba(125,211,252,.4);}
 
-.hero h1{
-  font-family:"Space Grotesk",Inter;
-  font-size:clamp(44px,6vw,72px);
-  line-height:1.1;
-}
-
-.hero p{
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.8;
-}
-
-/* PANELS */
-section{
-  max-width:1100px;
-  margin:auto;
-  padding:100px 24px;
-}
-
-h2{
-  font-family:"Space Grotesk";
-  font-size:30px;
-  margin-bottom:40px;
-}
-
-/* === SYSTEM CARDS (NOT PPT) === */
-.system-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .system-grid{grid-template-columns:1fr}
-}
-
-.system-card{
-  position:relative;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:28px;
-  background:rgba(255,255,255,.035);
-  cursor:pointer;
-  transition:.35s ease;
-  overflow:hidden;
-}
-
-/* subtle glow */
-.system-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 30% 20%, rgba(125,211,252,.18), transparent 60%);
-  opacity:0;
-  transition:.35s;
-}
-
-.system-card:hover::before{opacity:1}
-
-/* collapsed */
-.system-card p{
-  color:var(--muted);
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transition:.4s ease;
-}
-
-/* expanded state */
-.system-card.active{
-  background:rgba(10,20,40,.75);
-  transform:translateY(-10px);
-  box-shadow:0 40px 120px rgba(0,0,0,.6);
-}
-
-.system-card.active p{
-  max-height:260px;
-  opacity:1;
-  margin-top:14px;
-}
-
-/* FOOTER */
-footer{
-  padding:60px 24px;
-  text-align:center;
-  border-top:1px solid var(--border);
-  color:var(--muted);
-}
-</style>
+    footer{padding:60px 24px;text-align:center;border-top:1px solid var(--border);color:var(--muted);}
+  </style>
 </head>
-
 <body>
 
-<canvas id="field"></canvas>
+<canvas id="stars"></canvas>
 
 <header>
   <div class="brand">
-    <img src="grt-logo-05.png">
+    <img src="grt-logo-05.png" alt="Logo">
     <span>Global Reliability Technology</span>
   </div>
+  <a id="sim-entry" href="lab.html"><img src="grt-logo-11.png" alt="Simulation Entry" style="width:40px;cursor:pointer"></a>
 </header>
 
 <section class="hero">
   <div>
     <h1>Intelligence is not automated.<br>It is architected.</h1>
-    <p>
-      I design AI systems and digital products that survive real users,
-      real scale, and real business pressure.
-    </p>
+    <p>I design AI systems and digital products that survive real users, real scale, and real business pressure.</p>
   </div>
-  <img src="architect-2.png" style="width:100%;border-radius:18px;box-shadow:0 40px 120px rgba(0,0,0,.6)">
+  <img src="Architecture-2.png" style="width:100%;border-radius:18px;box-shadow:0 0 40px rgba(0,0,0,.6)">
 </section>
 
 <section>
   <h2>Systems I Architect</h2>
-
   <div class="system-grid">
-    <div class="system-card">
-      <h3>Clarity</h3>
-      <p>
-        Documentation, UX, and reasoning transparency reduce churn,
-        align teams, and increase trust long-term.
-      </p>
-    </div>
-
-    <div class="system-card">
-      <h3>Reliability</h3>
-      <p>
-        Monitoring, fallback strategies, and testing layers
-        prevent silent failures and revenue loss.
-      </p>
-    </div>
-
-    <div class="system-card">
-      <h3>Scalability</h3>
-      <p>
-        Architecture determines what breaks when usage grows —
-        not the model.
-      </p>
-    </div>
+    <div class="system-card"><h3>Clarity</h3><p>Documentation, UX, and reasoning transparency reduce churn, align teams, and increase trust.</p></div>
+    <div class="system-card"><h3>Reliability</h3><p>Monitoring, fallback strategies, and testing layers prevent silent failures and revenue loss.</p></div>
+    <div class="system-card"><h3>Scalability</h3><p>Architecture determines what breaks when usage grows — not the model.</p></div>
   </div>
 </section>
 
-<footer>
-  © <span id="year"></span> Global Reliability Technology
-</footer>
+<section id="workflows">
+  <h2>Workflow Blueprints</h2>
+  <div class="workflow-visual"><img src="eGE1VTj7FQ6ezcMSyggJz.jpeg" alt="AI Failures Visual"></div>
+  <div class="workflow-visual"><img src="YZb6rYPEs2QHszpGmG9yr.jpeg" alt="TAKWALE Branding"></div>
+  <div class="workflow-visual"><img src="na31w2F1arh1qjMr8G99a.jpeg" alt="Metallic GRT Logo"></div>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <p><strong>Ganesh R Takwale</strong> — Intelligence Architect. Location: Mumbai, India.</p>
+  <p>Email: <a href="mailto:hello@grt.example">hello@grt.example</a></p>
+  <p>LinkedIn: <a href="https://www.linkedin.com/in/ganeshrtakwale" target="_blank">linkedin.com/in/ganeshrtakwale</a></p>
+</section>
+
+<footer>© <span id="year"></span> Global Reliability Technology</footer>
 
 <script>
+// Year
 document.getElementById("year").textContent=new Date().getFullYear();
 
-/* CARD INTERACTION */
+// Card interaction
 document.querySelectorAll(".system-card").forEach(card=>{
   card.addEventListener("click",()=>{
-    document.querySelectorAll(".system-card.active")
-      .forEach(c=>c!==card&&c.classList.remove("active"));
+    document.querySelectorAll(".system-card.active").forEach(c=>c!==card&&c.classList.remove("active"));
     card.classList.toggle("active");
   });
 });
 
-/* BACKGROUND PARTICLES */
-const c=document.getElementById("field"),ctx=c.getContext("2d");
-let W,H;
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
-
-const pts=[...Array(80)].map(()=>({
-  x:Math.random()*W,y:Math.random()*H,
-  vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2
-}));
-
-(function anim(){
-  ctx.clearRect(0,0,W,H);
-  pts.forEach(p=>{
-    pts.forEach(q=>{
-      const d=Math.hypot(p.x-q.x,p.y-q.y);
-      if(d<120){
-        ctx.strokeStyle="rgba(125,211,252,.04)";
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
-      }
-    });
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>W)p.vx*=-1;
-    if(p.y<0||p.y>H)p.vy*=-1;
+// Starfield background
+const canvas=document.getElementById("stars"),ctx=canvas.getContext("2d");
+let W,H,stars=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+resize();window.addEventListener("resize",resize);
+function initStars(){stars=[...Array(150)].map(()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*W}));}
+initStars();
+function animate(){
+  ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
+  ctx.fillStyle="white";
+  stars.forEach(s=>{
+    s.z-=2;if(s.z<=0){s.z=W;}
+    const k=128/s.z;const sx=(s.x-W/2)*k+W/2;const sy=(s.y-H/2)*k+H/2;
+    if(sx>=0&&sx<W&&sy>=0&&sy<H){ctx.fillRect(sx,sy,2,2);}
   });
-  requestAnimationFrame(anim);
-})();
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
-
 </body>
 </html>
