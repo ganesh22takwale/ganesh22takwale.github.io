@@ -14,9 +14,6 @@
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description"
-    content="I architect AI systems that stay reliable, aligned, and scalable. Intelligence is designed — not automated.">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -42,8 +39,8 @@ body{
 canvas#field{
   position:fixed;
   inset:0;
-  z-index:-5;
-  opacity:.65;
+  z-index:-6;
+  opacity:.7;
 }
 
 /* WATERMARK */
@@ -58,11 +55,13 @@ canvas#field{
   letter-spacing:1vw;
   color:rgba(255,255,255,0.02);
   pointer-events:none;
-  z-index:-4;
+  z-index:-5;
 }
 
-/* SECTIONS */
+/* SECTIONS ONLY */
 section{
+  position:relative;
+  z-index:1;
   min-height:100vh;
   padding:140px 24px;
   max-width:1100px;
@@ -73,24 +72,7 @@ h1{font-size:clamp(40px,6vw,64px)}
 h2{font-size:28px}
 p{color:var(--muted);font-size:17px;line-height:1.75}
 
-/* GRT ACCESS LOGO */
-#grt-access{
-  position:fixed;
-  right:26px;
-  top:38%;
-  width:66px;
-  cursor:pointer;
-  z-index:10;
-  transition:.4s ease;
-  filter:drop-shadow(0 0 18px rgba(125,211,252,.25));
-}
-
-#grt-access:hover{
-  transform:scale(1.08);
-  filter:drop-shadow(0 0 28px rgba(125,211,252,.45));
-}
-
-/* GRID */
+/* VALUE CARDS */
 .value-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -102,8 +84,8 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   border:1px solid var(--border);
   padding:28px;
   background:rgba(255,255,255,.04);
-  cursor:pointer;
   transition:.4s;
+  cursor:pointer;
 }
 
 .value:hover{
@@ -117,14 +99,13 @@ p{color:var(--muted);font-size:17px;line-height:1.75}
   overflow:hidden;
   transition:.4s;
 }
-
 .value.active p{
-  max-height:240px;
+  max-height:260px;
   opacity:1;
   margin-top:14px;
 }
 
-/* CONTACT */
+/* CONTACT (NO CHAT FEEL) */
 .contact-wrap{
   padding:80px;
   border:1px solid var(--border);
@@ -148,7 +129,7 @@ button{
   cursor:pointer;
 }
 
-/* FOOTER */
+/* FOOTER (FIXED) */
 footer{
   padding:80px 24px;
   border-top:1px solid var(--border);
@@ -156,7 +137,26 @@ footer{
   color:var(--muted);
 }
 
-a{color:var(--accent);text-decoration:none}
+/* GRT SIDE PANEL */
+#grt-panel{
+  position:fixed;
+  right:-20px;
+  top:40%;
+  width:70px;
+  cursor:pointer;
+  z-index:10;
+  animation:float 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px rgba(125,211,252,.35));
+}
+
+#grt-panel:hover{
+  transform:scale(1.08);
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
 </style>
 </head>
 
@@ -165,10 +165,10 @@ a{color:var(--accent);text-decoration:none}
 <canvas id="field"></canvas>
 <div class="bg-name">TAKWALE</div>
 
-<!-- GRT ACCESS LOGO -->
+<!-- GRT SIDE PANEL -->
 <img
-  id="grt-access"
-  src="assets/grt-logo-11.png"
+  id="grt-panel"
+  src="grt-logo-11.png"
   alt="Enter GRT Simulation"
   onclick="location.href='lab.html'"
 />
@@ -176,33 +176,27 @@ a{color:var(--accent);text-decoration:none}
 <!-- HERO -->
 <section>
   <h1>Intelligence is not automated.<br>It is architected.</h1>
-  <p>
-    I help teams design AI systems that remain reliable, aligned,
-    and scalable — long after the demo stops impressing.
-  </p>
+  <p>I help teams build AI systems that stay reliable, aligned, and scalable — long after the demo works.</p>
 </section>
 
-<!-- AVOID -->
 <section>
   <h2>What I Help You Avoid</h2>
   <div class="value-grid">
-    <div class="value"><strong>Production Failures</strong><p>Issues that surface only under real users.</p></div>
-    <div class="value"><strong>Context Collapse</strong><p>AI that forgets decisions and intent.</p></div>
-    <div class="value"><strong>Trust Damage</strong><p>Misaligned systems harming credibility.</p></div>
+    <div class="value"><strong>Unstable AI</strong><p>Failures under real users.</p></div>
+    <div class="value"><strong>Context Loss</strong><p>Memory collapse.</p></div>
+    <div class="value"><strong>Misalignment</strong><p>Trust damage.</p></div>
   </div>
 </section>
 
-<!-- HOW -->
 <section>
-  <h2>How I Architect Intelligence</h2>
+  <h2>How I Build Intelligence</h2>
   <div class="value-grid">
-    <div class="value"><strong>System Design</strong><p>Architecture before models.</p></div>
-    <div class="value"><strong>Verification</strong><p>Controlled reasoning layers.</p></div>
-    <div class="value"><strong>Monitoring</strong><p>Failures caught before users notice.</p></div>
+    <div class="value"><strong>System Design</strong><p>Architecture first.</p></div>
+    <div class="value"><strong>Verification</strong><p>Controlled reasoning.</p></div>
+    <div class="value"><strong>Monitoring</strong><p>Production safety.</p></div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section>
   <h2>Work With Me</h2>
   <form class="contact-wrap" action="https://formspree.io/f/abcdwxyz" method="POST">
@@ -215,19 +209,19 @@ a{color:var(--accent);text-decoration:none}
 
 <footer>
   Ganesh R Takwale · Intelligence Architect<br>
-  <a href="mailto:ganeshtakwale017@gmail.com">ganeshtakwale017@gmail.com</a><br>
-  <span style="font-size:14px">Remote · International · USD Billing</span>
+  ganeshtakwale017@gmail.com<br>
+  International consulting · Remote
 </footer>
 
 <script>
-/* PARTICLE FIELD */
+/* PARTICLES — FIXED STRING BUG */
 const c=document.getElementById("field"),ctx=c.getContext("2d");
-let W,H;function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
+let W,H;function r(){W=c.width=innerWidth;H=c.height=innerHeight}
+r();addEventListener("resize",r);
 
 const pts=[...Array(innerWidth<768?60:120)].map(()=>({
   x:Math.random()*W,y:Math.random()*H,
-  vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3
+  vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25
 }));
 
 (function anim(){
@@ -235,8 +229,8 @@ const pts=[...Array(innerWidth<768?60:120)].map(()=>({
   pts.forEach(p=>{
     pts.forEach(q=>{
       let d=Math.hypot(p.x-q.x,p.y-q.y);
-      if(d<120){
-        ctx.strokeStyle="rgba(125,211,252,.04)";
+      if(d<130){
+        ctx.strokeStyle=`rgba(125,211,252,.04)`;
         ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
       }
     });
@@ -246,11 +240,6 @@ const pts=[...Array(innerWidth<768?60:120)].map(()=>({
   });
   requestAnimationFrame(anim);
 })();
-
-/* CARD TOGGLE */
-document.querySelectorAll(".value").forEach(v=>{
-  v.onclick=()=>v.classList.toggle("active");
-});
 </script>
 
 </body>
