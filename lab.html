@@ -1,122 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GRT · Systems Simulation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8HQ1C1X28F');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<title>GRT Simulation Lab</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#03050a;
-  --fg:#e7ebf4;
-  --muted:#8f9bb3;
-  --accent:#7dd3fc;
-  --border:rgba(255,255,255,.12);
-}
-
-*{box-sizing:border-box}
 body{
   margin:0;
-  background:
-    radial-gradient(900px 600px at 70% 10%,#0a1020 0%,#03050a 60%);
-  color:var(--fg);
-  font-family:Inter,system-ui,sans-serif;
+  background:#03050a;
+  color:#e7ebf4;
+  font-family:Inter,sans-serif;
 }
-
 header{
-  height:80px;
-  padding:0 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid var(--border);
+  padding:28px 40px;
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
-
 #lab{
   display:grid;
-  grid-template-columns:380px 1fr;
+  grid-template-columns:360px 1fr;
   min-height:calc(100vh - 80px);
 }
-
-#controls{
-  padding:48px;
-  border-right:1px solid var(--border);
-}
-
-.control{margin-bottom:34px}
-
-label{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  color:var(--muted);
-  margin-bottom:8px;
-}
-
-input[type=range]{width:100%}
-
-#sim{
-  padding:80px;
-}
-
-.metric{margin-bottom:38px}
-
-.bar{
-  height:12px;
-  background:rgba(255,255,255,.08);
-}
-
-.fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#7dd3fc,#b3e5ff);
-  transition:.8s cubic-bezier(.2,.8,.2,1);
-}
-
-#events{
-  margin-top:60px;
-  padding-top:30px;
-  border-top:1px solid var(--border);
-}
-
-.event{
-  font-size:15px;
-  color:var(--muted);
-  margin-bottom:14px;
-}
+#controls{padding:40px;border-right:1px solid rgba(255,255,255,.12)}
+#sim{padding:70px}
+label{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+input{width:100%}
+.bar{height:12px;background:rgba(255,255,255,.08);margin-bottom:26px}
+.fill{height:100%;background:#7dd3fc;width:0;transition:.7s}
 </style>
 </head>
-
 <body>
 
-<header>
-  <strong>GRT · Systems Simulation</strong>
-  <span>Single session · No rewind</span>
-</header>
+<header><strong>GRT · Systems Simulation</strong></header>
 
 <div id="lab">
   <div id="controls">
-    <div class="control"><label>Budget <span id="bVal"></span></label><input id="budget" type="range" min="20" max="100" value="60"></div>
-    <div class="control"><label>Memory Depth <span id="mVal"></span></label><input id="memory" type="range" min="1" max="10" value="4"></div>
-    <div class="control"><label>Alignment <span id="aVal"></span></label><input id="alignment" type="range" min="1" max="10" value="6"></div>
-    <div class="control"><label>Monitoring <span id="moVal"></span></label><input id="monitoring" type="range" min="1" max="10" value="3"></div>
+    <label>Budget <span id="bVal"></span></label><input id="budget" type="range" min="20" max="100" value="60">
+    <label>Memory <span id="mVal"></span></label><input id="memory" type="range" min="1" max="10" value="4">
+    <label>Alignment <span id="aVal"></span></label><input id="alignment" type="range" min="1" max="10" value="6">
+    <label>Monitoring <span id="moVal"></span></label><input id="monitoring" type="range" min="1" max="10" value="3">
   </div>
-
   <div id="sim">
-    <div class="metric"><strong>System Reliability</strong><div class="bar"><div class="fill" id="reliability"></div></div></div>
-    <div class="metric"><strong>Failure Risk</strong><div class="bar"><div class="fill" id="risk"></div></div></div>
-    <div class="metric"><strong>User Trust</strong><div class="bar"><div class="fill" id="trust"></div></div></div>
-    <div id="events"></div>
+    <div class="bar"><div id="reliability" class="fill"></div></div>
+    <div class="bar"><div id="risk" class="fill"></div></div>
+    <div class="bar"><div id="trust" class="fill"></div></div>
   </div>
 </div>
 
