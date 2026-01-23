@@ -1,43 +1,6 @@
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- STARFIELD BACKGROUND ---------- */
-const canvas = document.getElementById("stars"), ctx = canvas.getContext("2d");
-let W, H, stars = [];
-function resize() {
-  W = canvas.width = innerWidth;
-  H = canvas.height = innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
-
-function initStars() {
-  stars = [...Array(150)].map(() => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    z: Math.random() * W
-  }));
-}
-initStars();
-
-function animateStars() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = "white";
-  stars.forEach(s => {
-    s.z -= 2;
-    if (s.z <= 0) s.z = W;
-    const k = 128 / s.z;
-    const sx = (s.x - W / 2) * k + W / 2;
-    const sy = (s.y - H / 2) * k + H / 2;
-    if (sx >= 0 && sx < W && sy >= 0 && sy < H) {
-      ctx.fillRect(sx, sy, 2, 2);
-    }
-  });
-  requestAnimationFrame(animateStars);
-}
-animateStars();
-
 /* ---------- SIMULATION CONTROLS ---------- */
 const clarity = document.getElementById('clarity');
 const reliability = document.getElementById('reliability');
@@ -113,7 +76,7 @@ function simulate() {
   convEl.textContent = (conversion * 100).toFixed(0) + '%';
   revEl.textContent = '↑ ' + (revenue * 100).toFixed(0) + ' index';
 
-  // Bars
+  // Bars with glow
   cctx.clearRect(0, 0, chart.width, chart.height);
   const bars = [
     { label: 'Satisfaction', value: satisfaction, color: '#7CFFCB' },
@@ -125,8 +88,12 @@ function simulate() {
   bars.forEach((b, i) => {
     const x = 24 + i * (bw + gap);
     const h = b.value * (base - 24);
+    // glow
+    cctx.shadowColor = b.color;
+    cctx.shadowBlur = 18;
     cctx.fillStyle = b.color;
     cctx.fillRect(x, base - h, bw, h);
+    cctx.shadowBlur = 0;
     cctx.fillStyle = '#fff';
     cctx.font = '12px Inter';
     cctx.fillText(b.label, x, base + 14);
