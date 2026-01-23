@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -17,13 +17,6 @@
   <title>Ganesh R Takwale — Intelligence Architect</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Social cards -->
-  <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect">
-  <meta property="og:description" content="Reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="grt-social-card.png">
-  <meta name="twitter:card" content="summary_large_image">
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
@@ -34,6 +27,7 @@
   --fg:#e7ebf4;
   --muted:#9aa4b2;
   --accent:#7dd3fc;
+  --accent2:#a0e7ff;
   --border:rgba(255,255,255,.14);
 }
 
@@ -43,21 +37,11 @@ html,body{margin:0;padding:0}
 body{
   font-family:Inter,system-ui,sans-serif;
   color:var(--fg);
-  background:
-    radial-gradient(1200px 600px at 10% 0%, #0b1226, #05070d 60%);
+  background:radial-gradient(1200px 600px at 10% 0%, var(--bg), var(--bg2));
   overflow-x:hidden;
 }
 
-/* Subtle architectural grid (kept calm) */
-.bg-architecture{
-  position:fixed; inset:0; z-index:-2;
-  background:
-    repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 140px),
-    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 140px);
-  mask-image: radial-gradient(1200px 600px at 10% 0%, rgba(0,0,0,.9), rgba(0,0,0,.25));
-}
-
-/* Motion field */
+/* Background motion */
 canvas#field{
   position:fixed;
   inset:0;
@@ -75,7 +59,7 @@ header{
   justify-content:space-between;
   padding:14px 22px;
   background:rgba(5,7,13,.7);
-  backdrop-filter: blur(10px);
+  backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
 }
 
@@ -93,15 +77,19 @@ header{
   width:40px;
   height:40px;
   border-radius:10px;
-  background: radial-gradient(circle at 50% 50%, rgba(125,211,252,.25), rgba(125,211,252,.05));
+  background:radial-gradient(
+    40px 40px at 50% 50%,
+    rgba(125,211,252,.25),
+    rgba(125,211,252,.05)
+  );
   box-shadow:0 0 32px rgba(125,211,252,.35);
 }
 
-.logo-wrap img{max-width:32px;max-height:32px}
-.logo-wrap .fallback{
+.brand img{max-width:32px;max-height:32px}
+.fallback{
   display:none;
-  font-family:"Space Grotesk",Inter,sans-serif;
   font-weight:800;
+  font-family:"Space Grotesk",Inter,sans-serif;
 }
 
 nav a{
@@ -110,7 +98,6 @@ nav a{
   margin-left:14px;
   font-size:14px;
 }
-
 nav a.cta{
   padding:8px 12px;
   border:1px solid var(--border);
@@ -128,15 +115,15 @@ nav a.cta{
 
 .hero h1{
   font-family:"Space Grotesk",Inter,sans-serif;
-  font-size:clamp(44px,6vw,72px);
+  font-size:clamp(42px,6vw,72px);
   line-height:1.1;
-  margin:0 0 16px;
+  margin:0 0 14px;
 }
 
 .hero p{
   color:var(--muted);
   max-width:820px;
-  margin:0 auto 26px;
+  margin:0 auto 28px;
   font-size:18px;
   line-height:1.8;
 }
@@ -159,18 +146,16 @@ nav a.cta{
   text-decoration:none;
   cursor:pointer;
 }
-
 .btn.primary{
-  background:linear-gradient(135deg,var(--accent),#a0e7ff);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:#041015;
   font-weight:700;
 }
-
 .btn.ghost{background:transparent}
 
 /* Sections */
 section.panel{
-  padding:70px 24px;
+  padding:80px 24px;
   max-width:1100px;
   margin:0 auto;
 }
@@ -185,47 +170,52 @@ section.panel h2{
 .grid-3{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:18px;
+  gap:20px;
 }
-
-@media (max-width:900px){
+@media(max-width:900px){
   .grid-3{grid-template-columns:1fr}
 }
 
 .card{
   border:1px solid var(--border);
   border-radius:14px;
-  padding:24px;
+  padding:26px;
   background:rgba(255,255,255,.04);
-}
-
-.card:hover{
-  border-color:rgba(125,211,252,.6);
-  transform:translateY(-4px);
   transition:.25s;
 }
-
-/* Contact */
-.contact{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.card:hover{
+  border-color:rgba(125,211,252,.6);
+  transform:translateY(-6px);
 }
 
-@media (max-width:900px){
-  .contact{grid-template-columns:1fr}
+/* Analysis boxes */
+.analysis-boxes{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:40px;
 }
-
-.contact input,
-.contact textarea{
-  padding:10px;
-  border-radius:8px;
+.analysis-box{
+  flex:1;
+  min-width:220px;
+  padding:24px;
   border:1px solid var(--border);
+  border-radius:12px;
   background:rgba(255,255,255,.04);
-  color:var(--fg);
+  text-align:center;
+  transition:.3s;
 }
+.analysis-box:hover{
+  background:rgba(125,211,252,.08);
+  transform:translateY(-6px);
+}
+.analysis-box h3{
+  margin:0 0 10px;
+  font-family:"Space Grotesk",Inter,sans-serif;
+}
+.analysis-box p{color:var(--muted)}
 
-/* Footer */
 footer{
   padding:48px 24px;
   border-top:1px solid var(--border);
@@ -237,13 +227,12 @@ footer{
 
 <body>
 
-<div class="bg-architecture"></div>
 <canvas id="field"></canvas>
 
 <header>
   <a class="brand" href="#">
     <div class="logo-wrap">
-      <img src="grt-logo-05.png" alt="GRT Logo"
+      <img src="grt-logo-11.png" alt="GRT Logo"
            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
       <span class="fallback">GRT</span>
     </div>
@@ -262,8 +251,8 @@ footer{
 <section class="hero">
   <h1>Intelligence is not automated.<br>It is architected.</h1>
   <p>
-    I architect AI systems that stay reliable, aligned, and scalable—beyond demos.
-    Reliability-first design, measurable outcomes, and timeless interfaces that earn trust.
+    I architect AI systems that stay reliable, aligned, and scalable —
+    beyond demos and short-term wins.
   </p>
   <div class="hero-actions">
     <a class="btn primary" href="#contact">Start a project</a>
@@ -276,25 +265,49 @@ footer{
   <div class="grid-3">
     <article class="card">
       <h3>AI Systems Architecture</h3>
-      <p>Systems before models—guardrails, observability, and versioned prompts.</p>
+      <p>Guardrails, observability, memory, and versioned prompts — engineered for reliability.</p>
     </article>
     <article class="card">
       <h3>Premium Websites</h3>
-      <p>High-performance, accessible websites—engineered to last.</p>
+      <p>High-performance websites that communicate trust, clarity, and authority.</p>
     </article>
     <article class="card">
       <h3>Automation & Integrations</h3>
-      <p>Reliable workflows that connect tools, data, and teams.</p>
+      <p>Reliable workflows that reduce friction and scale with confidence.</p>
     </article>
   </div>
 </section>
 
 <section id="workflows" class="panel">
-  <h2>Workflow blueprints</h2>
+  <h2>Workflow Blueprints</h2>
   <div class="grid-3">
-    <article class="card">Discovery → Architecture → Pilot → Scale</article>
-    <article class="card">Reliability, monitoring, fallbacks</article>
-    <article class="card">Governance & alignment</article>
+    <article class="card">
+      <h3>Discovery → Architecture → Pilot → Scale</h3>
+      <p>Clear milestones, fixed deliverables, and measurable outcomes.</p>
+    </article>
+    <article class="card">
+      <h3>Reliability Stack</h3>
+      <p>Testing, monitoring, fallback strategies, and controlled deployments.</p>
+    </article>
+    <article class="card">
+      <h3>Governance & Alignment</h3>
+      <p>Policy-aware systems with auditability and long-term safety.</p>
+    </article>
+  </div>
+
+  <div class="analysis-boxes">
+    <div class="analysis-box">
+      <h3>Clarity</h3>
+      <p>Systems users understand are systems they trust.</p>
+    </div>
+    <div class="analysis-box">
+      <h3>Reliability</h3>
+      <p>Failures cost more than speed ever saves.</p>
+    </div>
+    <div class="analysis-box">
+      <h3>Scalability</h3>
+      <p>Architecture decides what growth breaks.</p>
+    </div>
   </div>
 </section>
 
@@ -302,36 +315,37 @@ footer{
   <h2>About</h2>
   <div class="card">
     <p><strong>Ganesh R Takwale</strong> — Intelligence Architect.</p>
-    <p>Mumbai, India · <a href="https://www.linkedin.com/in/ganeshrtakwale" target="_blank" rel="noopener">LinkedIn</a></p>
+    <p>I design AI systems and digital products that prioritize reliability, alignment, and long-term impact.</p>
   </div>
 </section>
 
 <section id="contact" class="panel">
   <h2>Book a consultation</h2>
   <div class="card">
-    <form id="bookingForm" class="contact">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="text" name="goal" placeholder="Project goal" required style="grid-column:span 2;">
-      <button class="btn primary" type="submit">Reserve slot</button>
-    </form>
+    <p>
+      Interested in building a reliable system or premium digital product?
+      Reach out to start a focused conversation.
+    </p>
+    <p>
+      <a class="btn primary" href="mailto:ganeshtakwale017@gmail.com">Email me</a>
+    </p>
   </div>
 </section>
 
 <footer>
-  © <span id="year"></span> GRT — Global Reliability Technology
+  © <span id="year"></span> Global Reliability Technology
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Motion field (lighter + calmer)
+  /* Background particles — subtle */
   const c=document.getElementById("field"),ctx=c.getContext("2d");
   let W,H;
   function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
   resize();addEventListener("resize",resize);
 
-  const pts=[...Array(72)].map(()=>({
+  const pts=[...Array(80)].map(()=>({
     x:Math.random()*W,y:Math.random()*H,
     vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18
   }));
@@ -341,7 +355,7 @@ footer{
     pts.forEach(p=>{
       pts.forEach(q=>{
         const d=Math.hypot(p.x-q.x,p.y-q.y);
-        if(d<110){
+        if(d<120){
           ctx.strokeStyle="rgba(125,211,252,.045)";
           ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();
         }
@@ -352,13 +366,6 @@ footer{
     });
     requestAnimationFrame(anim);
   })();
-
-  // Simple tracking stubs
-  document.getElementById('bookingForm').addEventListener('submit',(e)=>{
-    e.preventDefault();
-    gtag('event','booking_request');
-    alert('Thanks! I’ll reach out to confirm.');
-  });
 </script>
 
 </body>
