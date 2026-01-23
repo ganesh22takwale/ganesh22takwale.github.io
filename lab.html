@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics -->
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,26 +10,61 @@
     gtag("config", "G-8HQ1C1X28F");
   </script>
 
-  <!-- Search Console -->
+  <!-- Google Search Console (replace with your exact code) -->
   <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
 
   <meta charset="UTF-8" />
   <title>Reliability Tycoon — GRT Lab</title>
+  <meta name="description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes. A simulation by Ganesh R Takwale." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Open Graph -->
+  <meta property="og:title" content="Reliability Tycoon — GRT Lab" />
+  <meta property="og:description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Architecture-2.png" />
+  <meta property="og:url" content="https://ganesh22takwale.github.io/lab.html" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Reliability Tycoon — GRT Lab" />
+  <meta name="twitter:description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes." />
+  <meta name="twitter:image" content="Architecture-2.png" />
+
+  <!-- Sitemap -->
+  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --fg:#e7ebf4; --muted:#9aa4b2;
-      --accent1:#7dd3fc; --accent2:#e3a7ff;
       --border:rgba(255,255,255,.14);
+      --accent1:#7dd3fc; --accent2:#e3a7ff;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{font-family:Inter,system-ui,sans-serif;color:var(--fg);background:#000;}
 
-    canvas#stars{position:fixed;inset:0;z-index:-1;}
+    /* Dual-tone starfield + logo shine */
+    canvas#stars{position:fixed;inset:0;z-index:-2;}
+    .shine{
+      position:fixed; inset:0; z-index:-3; pointer-events:none;
+      background:
+        radial-gradient(600px 600px at 15% 20%, rgba(125,211,252,.25), transparent 60%),
+        radial-gradient(600px 600px at 85% 80%, rgba(227,167,255,.25), transparent 60%);
+    }
+    .logo-glow{
+      position:fixed; inset:auto; bottom:24px; right:24px; z-index:-1;
+      width:120px; height:120px; border-radius:50%;
+      background: radial-gradient(closest-side, rgba(125,211,252,.35), transparent 70%);
+      filter: blur(18px);
+    }
+    .logo-glow.alt{
+      bottom:auto; top:24px; left:24px;
+      background: radial-gradient(closest-side, rgba(227,167,255,.35), transparent 70%);
+    }
 
     header{position:sticky;top:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);
       border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
@@ -37,7 +72,7 @@
     .brand img{max-width:32px;max-height:32px}
     .nav a{color:var(--fg);text-decoration:none;margin-left:12px}
 
-    .hero{padding:60px 24px;text-align:center}
+    .hero{padding:50px 24px;text-align:center}
     .hero h1{font-family:"Space Grotesk",Inter;font-size:clamp(36px,5vw,56px);margin:0 0 10px}
     .hero p{color:var(--muted)}
 
@@ -57,15 +92,18 @@
   </style>
 </head>
 <body>
+  <div class="shine" aria-hidden="true"></div>
+  <div class="logo-glow" aria-hidden="true"></div>
+  <div class="logo-glow alt" aria-hidden="true"></div>
   <canvas id="stars"></canvas>
 
   <header>
     <a class="brand" href="index.html">
-      <img src="grt-logo-11.png" alt="GRT Logo 11">
+      <img src="grt-logo-05.png" alt="GRT Logo 05">
       <span>GRT Lab</span>
     </a>
     <nav class="nav">
-      <a href="index.html#contact">Book</a>
+      <a href="index.html#workflows">Blueprints</a>
       <a href="index.html">Home</a>
     </nav>
   </header>
@@ -99,7 +137,7 @@
           <div><strong>Revenue impact:</strong> <span id="rev">—</span></div>
         </div>
         <p class="tip">Tip: Higher clarity reduces churn; reliability protects uptime; scalability boosts conversions—but balance matters.</p>
-        <a class="btn ghost" href="index.html#contact">Turn this into a real project</a>
+        <a class="btn ghost" href="index.html#about">Work with Ganesh</a>
       </div>
 
       <div class="sim-context card">
@@ -112,6 +150,28 @@
 
   <footer>© <span id="year"></span> GRT Lab.</footer>
 
+  <!-- Simulation logic -->
   <script src="lab.js"></script>
+
+  <!-- Starfield background (same feel as index) -->
+  <script>
+    const canvas=document.getElementById("stars"),ctx=canvas.getContext("2d");
+    let W,H,stars=[];
+    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+    resize();addEventListener("resize",resize);
+    function initStars(){stars=[...Array(180)].map(()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*W}))}
+    initStars();
+    function animate(){
+      ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
+      stars.forEach((s,i)=>{
+        s.z-=2;if(s.z<=0){s.z=W;}
+        const k=128/s.z;const sx=(s.x-W/2)*k+W/2;const sy=(s.y-H/2)*k+H/2;
+        const hue = i%2===0 ? "rgba(125,211,252,.9)" : "rgba(227,167,255,.9)";
+        if(sx>=0&&sx<W&&sy>=0&&sy<H){ctx.fillStyle=hue;ctx.fillRect(sx,sy,2,2);}
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
 </body>
 </html>
