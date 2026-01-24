@@ -1,113 +1,86 @@
 :root{
+  --bg:#000;
   --fg:#e7ebf4;
   --muted:#9aa4b2;
-  --accent1:#7dd3fc;
-  --accent2:#e3a7ff;
+  --accent:#7dd3fc;
   --border:rgba(255,255,255,.14);
+  --radius:14px;
 }
 
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
 body{
+  margin:0;
   font-family:Inter,system-ui,sans-serif;
-  background:#000;
+  background:var(--bg);
   color:var(--fg);
-  overflow-x:hidden;
+  line-height:1.7;
 }
 
-canvas#stars{position:fixed;inset:0;z-index:-1;}
-.gradient-overlay{
-  position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(1200px 600px at 10% 0%, rgba(125,211,252,.25), transparent 60%),
-    radial-gradient(900px 500px at 90% 100%, rgba(227,167,255,.25), transparent 60%);
-}
+canvas#stars{position:fixed;inset:0;z-index:-1}
+.gradient-overlay{position:fixed;inset:0;z-index:-2}
 
-/* Header */
 .header{
-  position:sticky;top:0;z-index:10;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
   background:rgba(0,0,0,.6);
   backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
 }
 
-.brand{display:flex;gap:12px;align-items:center;color:var(--fg);text-decoration:none;}
-.logo-wrap{
-  width:42px;height:42px;border-radius:10px;
-  display:grid;place-items:center;
-  background:radial-gradient(circle,rgba(125,211,252,.3),rgba(125,211,252,.1));
-  box-shadow:0 0 30px rgba(125,211,252,.4);
-}
-
-nav a{color:var(--fg);text-decoration:none;margin-left:16px;}
-.cta{padding:8px 12px;border:1px solid var(--border);border-radius:10px}
-
-/* Hero */
 .hero{
-  max-width:1200px;margin:auto;
-  display:grid;grid-template-columns:1.1fr 1fr;
-  gap:36px;padding:80px 24px;
-}
-@media(max-width:900px){.hero{grid-template-columns:1fr}}
-
-.hero h1{font-family:"Space Grotesk";font-size:clamp(42px,6vw,72px);}
-.hero p{color:var(--muted);line-height:1.8}
-
-.hero-actions{display:flex;gap:12px;margin-top:16px}
-.btn{
-  padding:10px 14px;border-radius:10px;
-  border:1px solid var(--border);
-  color:var(--fg);text-decoration:none;
-}
-.btn.primary{
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  color:#02040a;font-weight:700;
+  max-width:900px;
+  margin:80px auto;
+  padding:0 24px;
 }
 
-/* Panels */
-.panel{max-width:1100px;margin:auto;padding:70px 24px}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:900px){.grid-3{grid-template-columns:1fr}}
+.hero h1{
+  font-family:"Space Grotesk";
+  font-size:clamp(40px,6vw,68px);
+}
+
+.hero-sub{color:var(--muted)}
+
+.panel{
+  max-width:1100px;
+  margin:auto;
+  padding:80px 24px;
+}
+
+.architecture-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+@media(max-width:900px){
+  .architecture-grid{grid-template-columns:1fr}
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:900px){
+  .grid-3{grid-template-columns:1fr}
+}
 
 .card{
-  background:rgba(255,255,255,.05);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:var(--radius);
   padding:24px;
+  background:rgba(255,255,255,.05);
 }
 
-/* Interactive cards */
-.system-card{cursor:pointer;transition:.3s}
-.system-card.active{
-  background:linear-gradient(135deg,rgba(125,211,252,.35),rgba(227,167,255,.35));
-  box-shadow:0 0 40px rgba(125,211,252,.6);
-  transform:translateY(-4px);
-}
-
-/* Blueprints */
-.blueprints{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:900px){.blueprints{grid-template-columns:1fr}}
-
-.bp-tile{
+.decision{
+  background:none;
+  color:var(--fg);
   cursor:pointer;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
-  transition:.3s;
-}
-.bp-tile:hover{transform:translateY(-4px)}
-
-/* Modal */
-.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.7)}
-.modal.open{display:grid}
-.modal-content{
-  background:#0a0f1a;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:16px;
 }
 
-/* Footer */
-footer{text-align:center;padding:40px;color:var(--muted)}
+footer{
+  text-align:center;
+  padding:40px;
+  color:var(--muted);
+}
