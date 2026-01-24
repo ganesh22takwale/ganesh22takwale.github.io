@@ -10,10 +10,10 @@
     gtag("config", "G-8HQ1C1X28F");
   </script>
 
-  <!-- Google Search Console (replace with your exact code) -->
+  <!-- Google Search Console -->
   <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
 
-  <!-- Basic SEO -->
+  <!-- SEO -->
   <meta charset="UTF-8" />
   <title>Ganesh R Takwale — Intelligence Architect | Global Reliability Technology</title>
   <meta name="description" content="A living intelligence lab: reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact." />
@@ -22,166 +22,75 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect" />
   <meta property="og:description" content="Reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact." />
-  <meta property="og:type" content="website" />
   <meta property="og:image" content="Architecture-2.png" />
   <meta property="og:url" content="https://ganesh22takwale.github.io/" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Ganesh R Takwale — Intelligence Architect" />
-  <meta name="twitter:description" content="Reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact." />
-  <meta name="twitter:image" content="Architecture-2.png" />
-
-  <!-- Sitemap -->
-  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --fg:#e7ebf4; --muted:#9aa4b2;
-      --accent1:#7dd3fc; --accent2:#e3a7ff; --accent3:#ffd580;
-      --border:rgba(255,255,255,.14);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family:Inter,system-ui,sans-serif; color:var(--fg);
-      background:#000; overflow-x:hidden;
-    }
-
-    /* Dual-tone starfield */
-    canvas#stars{position:fixed;inset:0;z-index:-1;}
-    .gradient-overlay{
-      position:fixed; inset:0; z-index:-2;
-      background: radial-gradient(1200px 600px at 10% 0%, rgba(125,211,252,.25), transparent 60%),
-                  radial-gradient(900px 500px at 90% 100%, rgba(227,167,255,.25), transparent 60%);
-      pointer-events:none;
-    }
-
-    header{
-      position:sticky; top:0; z-index:10;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 22px; background:rgba(0,0,0,.6); backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--border);
-    }
-    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--fg);}
-    .logo-wrap{display:grid; place-items:center; width:42px; height:42px; border-radius:10px;
-      background: radial-gradient(42px 42px at 50% 50%, rgba(125,211,252,.28), rgba(125,211,252,.08));
-      box-shadow: 0 0 40px rgba(125,211,252,.35);
-    }
-    .brand img{max-width:34px; max-height:34px;}
-    nav a{color:var(--fg); text-decoration:none; margin-left:14px;}
-    .cta{padding:8px 12px; border:1px solid var(--border); border-radius:10px;}
-
-    .hero{min-height:80vh; display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:36px;
-      padding:70px 24px; max-width:1200px; margin:auto;}
-    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
-    .hero h1{font-family:"Space Grotesk",Inter; font-size:clamp(44px,6vw,72px); line-height:1.1; margin:0 0 12px;}
-    .hero p{color:var(--muted); font-size:18px; line-height:1.8; margin:0 0 16px;}
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
-      border:1px solid var(--border); color:var(--fg); text-decoration:none; cursor:pointer;}
-    .btn.primary{background:linear-gradient(135deg,var(--accent1),var(--accent2)); color:#041015; font-weight:700;}
-    .btn.ghost{background:transparent;}
-
-    section.panel{padding:70px 24px; max-width:1100px; margin:0 auto;}
-    h2{font-family:"Space Grotesk"; font-size:30px; margin-bottom:24px;}
-
-    .grid-3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px;}
-    @media (max-width:900px){ .grid-3{grid-template-columns:1fr} }
-    .card{border:1px solid var(--border); border-radius:14px; padding:24px; background:rgba(255,255,255,.05);}
-
-    /* Interactive system cards with bright dual-tone glow */
-    .system-card{position:relative; overflow:hidden; cursor:pointer; transition:.25s;}
-    .system-card::before{content:""; position:absolute; inset:0;
-      background:radial-gradient(600px 300px at 20% 10%, rgba(125,211,252,.18), transparent 60%); opacity:0; transition:.35s;}
-    .system-card:hover::before{opacity:1}
-    .system-card p{color:var(--muted); max-height:0; overflow:hidden; opacity:0; transition:.4s;}
-    .system-card.active{
-      background:linear-gradient(135deg, rgba(125,211,252,.35), rgba(227,167,255,.35));
-      box-shadow:0 0 40px rgba(125,211,252,.6), 0 0 60px rgba(227,167,255,.5);
-      transform:translateY(-4px);
-    }
-    .system-card.active p{max-height:260px; opacity:1; margin-top:10px; color:#000; font-weight:600;}
-
-    /* Workflow blueprints — redesigned as clickable tiles */
-    .blueprints{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;}
-    @media (max-width:900px){ .blueprints{grid-template-columns:1fr} }
-    .bp-tile{
-      position:relative; border:1px solid var(--border); border-radius:14px; overflow:hidden;
-      background:rgba(255,255,255,.05); cursor:pointer; transition:.25s;
-    }
-    .bp-tile:hover{transform:translateY(-4px); border-color:rgba(125,211,252,.6);}
-    .bp-thumb{height:180px; background:#02040a; display:grid; place-items:center;}
-    .bp-thumb img{max-width:100%; max-height:100%; object-fit:cover;}
-    .bp-meta{padding:14px;}
-    .bp-title{font-family:"Space Grotesk"; margin:0 0 6px;}
-    .bp-desc{color:var(--muted); font-size:.95rem;}
-
-    /* Modal viewer for blueprint tiles */
-    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.65); z-index:20;}
-    .modal.open{display:flex;}
-    .modal-content{max-width:90vw; max-height:85vh; border-radius:16px; overflow:hidden; background:#0a0f1a; border:1px solid var(--border);}
-    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:linear-gradient(135deg,rgba(125,211,252,.25),rgba(227,167,255,.25));}
-    .modal-header h3{margin:0; font-family:"Space Grotesk";}
-    .modal-body{padding:12px; display:grid; place-items:center;}
-    .modal-body img{max-width:88vw; max-height:70vh; border-radius:12px; box-shadow:0 0 40px rgba(125,211,252,.35);}
-    .close-btn{cursor:pointer; border:1px solid var(--border); border-radius:10px; padding:6px 10px; background:rgba(255,255,255,.08);}
-
-    footer{padding:40px 24px; border-top:1px solid var(--border); text-align:center; color:var(--muted);}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <canvas id="stars"></canvas>
+  <div class="gradient-overlay"></div>
 
-  <div class="gradient-overlay" aria-hidden="true"></div>
-  <canvas id="stars" aria-hidden="true"></canvas>
-
-  <!-- Header with visible logo-05 -->
-  <header>
+  <!-- HEADER -->
+  <header class="header">
     <a class="brand" href="#">
       <div class="logo-wrap">
-        <img src="grt-logo-05.png" alt="GRT Logo 05">
+        <img src="grt-logo-05.png" alt="GRT Logo">
       </div>
       <span>Global Reliability Technology</span>
     </a>
+
     <nav>
       <a href="#services">Services</a>
       <a href="#workflows">Workflows</a>
       <a href="#about">About</a>
-      <a id="sim-entry" href="lab.html" class="cta">Simulation</a>
+      <a href="lab.html" id="sim-entry" class="cta">Simulation</a>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
-    <div>
+    <div class="hero-text">
       <h1>Intelligence is not automated.<br>It is architected.</h1>
-      <p>A living intelligence lab—dual‑tone starfield, glowing systems, and measurable outcomes. Reliability-first design that earns trust.</p>
+      <p>
+        A living intelligence lab—dual-tone starfield, glowing systems, and measurable outcomes.
+        Reliability-first design that earns trust.
+      </p>
+
       <div class="hero-actions">
-        <a class="btn primary" href="#workflows" data-track="open-workflows">Explore blueprints</a>
-        <a class="btn ghost" href="lab.html" data-track="open-simulation">Play Reliability Tycoon</a>
+        <a class="btn primary" href="#workflows" data-track="open-workflows">
+          Explore blueprints
+        </a>
+        <a class="btn ghost" href="lab.html" data-track="open-simulation">
+          Play Reliability Tycoon
+        </a>
       </div>
     </div>
-    <!-- Architecture-2 image (hero-side visual) -->
-    <div class="card" style="background:rgba(255,255,255,.05);">
-      <img src="Architecture-2.png" alt="Architecture decides production — GRT reliability blueprint" style="width:100%;border-radius:12px;box-shadow:0 0 40px rgba(125,211,252,.35)">
+
+    <div class="hero-visual card">
+      <img src="Architecture-2.png" alt="Architecture decides production">
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- SERVICES -->
   <section id="services" class="panel">
     <h2>Systems I Architect</h2>
+
     <div class="grid-3">
       <article class="card system-card">
         <h3>Clarity</h3>
-        <p>Documentation, UX, and reasoning transparency reduce churn, align teams, and increase trust.</p>
+        <p>Documentation, UX, and reasoning transparency reduce churn and increase trust.</p>
       </article>
+
       <article class="card system-card">
         <h3>Reliability</h3>
-        <p>Observability, fallback strategies, and testing layers prevent silent failures and revenue loss.</p>
+        <p>Observability, fallback strategies, and testing layers prevent silent failures.</p>
       </article>
+
       <article class="card system-card">
         <h3>Scalability</h3>
         <p>Architecture determines what breaks when usage grows—not the model.</p>
@@ -189,119 +98,60 @@
     </div>
   </section>
 
-  <!-- Workflow blueprints (redesigned tiles) -->
+  <!-- WORKFLOWS -->
   <section id="workflows" class="panel">
-    <h2>Workflow blueprints</h2>
+    <h2>Workflow Blueprints</h2>
+
     <div class="blueprints">
       <div class="bp-tile" data-title="AI Failures Visual" data-src="5HkLnnrvwgHAfYmXDcSEd.jpeg">
-        <div class="bp-thumb"><img src="5HkLnnrvwgHAfYmXDcSEd.jpeg" alt="AI Failures Visual"></div>
-        <div class="bp-meta">
-          <h3 class="bp-title">AI Failures Visual</h3>
-          <p class="bp-desc">Memory · Reasoning · Alignment — architecture decides production.</p>
-        </div>
+        <img src="5HkLnnrvwgHAfYmXDcSEd.jpeg" alt="">
+        <h3>AI Failures Visual</h3>
+        <p>Memory · Reasoning · Alignment</p>
       </div>
+
       <div class="bp-tile" data-title="TAKWALE Branding" data-src="YZb6rYPEs2QHszpGmG9yr.jpeg">
-        <div class="bp-thumb"><img src="YZb6rYPEs2QHszpGmG9yr.jpeg" alt="TAKWALE Branding"></div>
-        <div class="bp-meta">
-          <h3 class="bp-title">TAKWALE Branding</h3>
-          <p class="bp-desc">Futuristic network aesthetic with constellation‑style logo.</p>
-        </div>
+        <img src="YZb6rYPEs2QHszpGmG9yr.jpeg" alt="">
+        <h3>TAKWALE Branding</h3>
+        <p>Constellation-style network identity</p>
       </div>
+
       <div class="bp-tile" data-title="Metallic GRT Logo" data-src="na31w2F1arh1qjMr8G99a.jpeg">
-        <div class="bp-thumb"><img src="na31w2F1arh1qjMr8G99a.jpeg" alt="Metallic GRT Logo"></div>
-        <div class="bp-meta">
-          <h3 class="bp-title">Metallic GRT Logo</h3>
-          <p class="bp-desc">High‑tech glow with circuit‑like radiance.</p>
-        </div>
+        <img src="na31w2F1arh1qjMr8G99a.jpeg" alt="">
+        <h3>Metallic GRT Logo</h3>
+        <p>High-tech glow & circuitry</p>
       </div>
     </div>
   </section>
 
-  <!-- About (LinkedIn only, no email) -->
+  <!-- ABOUT -->
   <section id="about" class="panel">
     <h2>About</h2>
     <div class="card">
-      <p><strong>Ganesh R Takwale</strong> — Intelligence Architect. Location: Mumbai, India.</p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ganesh-takwale" target="_blank" rel="noopener">linkedin.com/in/ganesh-takwale</a></p>
+      <p><strong>Ganesh R Takwale</strong> — Intelligence Architect<br>Mumbai, India</p>
+      <p>
+        LinkedIn:
+        <a href="https://www.linkedin.com/in/ganesh-takwale" target="_blank" rel="noopener">
+          linkedin.com/in/ganesh-takwale
+        </a>
+      </p>
     </div>
   </section>
 
-  <footer>© <span id="year"></span> GRT — Global Reliability Technology · Systems · Reliability · Alignment</footer>
+  <footer>
+    © <span id="year"></span> Global Reliability Technology
+  </footer>
 
-  <!-- Modal viewer -->
-  <div class="modal" id="bpModal" aria-hidden="true">
+  <!-- MODAL -->
+  <div class="modal" id="bpModal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="bpTitle">Blueprint</h3>
-        <button class="close-btn" id="bpClose">Close</button>
-      </div>
-      <div class="modal-body">
-        <img id="bpImage" src="" alt="Blueprint preview">
-      </div>
+      <header>
+        <h3 id="bpTitle"></h3>
+        <button id="bpClose">Close</button>
+      </header>
+      <img id="bpImage" alt="">
     </div>
   </div>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Interactive system cards
-    document.querySelectorAll(".system-card").forEach(card=>{
-      card.addEventListener("click",()=>{
-        document.querySelectorAll(".system-card.active").forEach(c=>c!==card&&c.classList.remove("active"));
-        card.classList.toggle("active");
-      });
-    });
-
-    // Blueprint modal
-    const modal = document.getElementById('bpModal');
-    const bpTitle = document.getElementById('bpTitle');
-    const bpImage = document.getElementById('bpImage');
-    const bpClose = document.getElementById('bpClose');
-    document.querySelectorAll('.bp-tile').forEach(tile=>{
-      tile.addEventListener('click',()=>{
-        bpTitle.textContent = tile.dataset.title || 'Blueprint';
-        bpImage.src = tile.dataset.src || '';
-        modal.classList.add('open');
-        track('blueprint_open', { title: bpTitle.textContent });
-      });
-    });
-    bpClose.addEventListener('click',()=>{ modal.classList.remove('open'); });
-
-    // Dual-tone starfield
-    const canvas=document.getElementById("stars"),ctx=canvas.getContext("2d");
-    let W,H,stars=[];
-    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
-    resize();addEventListener("resize",resize);
-    function initStars(){stars=[...Array(180)].map(()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*W}))}
-    initStars();
-    function animate(){
-      ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
-      // subtle color twinkle
-      stars.forEach((s,i)=>{
-        s.z-=2;if(s.z<=0){s.z=W;}
-        const k=128/s.z;const sx=(s.x-W/2)*k+W/2;const sy=(s.y-H/2)*k+H/2;
-        const hue = i%2===0 ? "rgba(125,211,252,.9)" : "rgba(227,167,255,.9)";
-        if(sx>=0&&sx<W&&sy>=0&&sy<H){ctx.fillStyle=hue;ctx.fillRect(sx,sy,2,2);}
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // ---------- GRT ANALYTICS (CLEAN GA4 EVENTS) ----------
-    function track(eventName, params = {}) {
-      if (typeof gtag === "function") {
-        gtag("event", eventName, { ...params, page_location: location.href });
-      }
-    }
-    document.querySelectorAll('[data-track="open-workflows"]').forEach(el=>{
-      el.addEventListener("click",()=>track("cta_open_workflows"));
-    });
-    document.querySelectorAll('[data-track="open-simulation"]').forEach(el=>{
-      el.addEventListener("click",()=>track("cta_simulation_open"));
-    });
-    const simEntry = document.getElementById("sim-entry");
-    if(simEntry){ simEntry.addEventListener("click",()=>track("simulation_entry_header")); }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
