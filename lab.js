@@ -1,8 +1,15 @@
-let state={reliability:80};
+const context = document.getElementById("contextText");
 
-document.querySelectorAll(".decision").forEach(b=>{
-  b.onclick=()=>{
-    state.reliability += b.dataset.action==="speed"?-10:10;
-    alert("System reliability now: "+state.reliability+"%");
+if (localStorage.getItem("focusedOnArchitecture")) {
+  context.textContent =
+    "You explored architectural foundations. This simulation emphasizes reliability.";
+} else {
+  context.textContent =
+    "This simulation reveals how speed-first decisions affect trust.";
+}
+
+document.querySelectorAll(".decision").forEach(btn=>{
+  btn.onclick=()=>{
+    alert("Decision registered. Architectural impact recorded.");
   };
 });
