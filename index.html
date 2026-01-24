@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics (KEEP) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -10,20 +10,35 @@
     gtag("config", "G-8HQ1C1X28F");
   </script>
 
-  <!-- Google Search Console -->
+  <!-- Search Console (KEEP) -->
   <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
 
   <!-- SEO -->
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Ganesh R Takwale — Intelligence Architect | Global Reliability Technology</title>
-  <meta name="description" content="A living intelligence lab: reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact." />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A living intelligence lab. Reliability-first systems, editorial clarity, and diagnostic simulations." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect" />
-  <meta property="og:description" content="Reliability-first AI systems and premium websites—architected for clarity, trust, and measurable impact." />
-  <meta property="og:image" content="Architecture-2.png" />
-  <meta property="og:url" content="https://ganesh22takwale.github.io/" />
+  <meta property="og:title" content="Ganesh R Takwale — Intelligence Architect">
+  <meta property="og:description" content="Architecture decides production. Reliability-first intelligence systems.">
+  <meta property="og:image" content="Architecture-2.png">
+
+  <!-- JSON-LD SEO -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Ganesh R Takwale",
+    "jobTitle":"Intelligence Architect",
+    "url":"https://ganesh22takwale.github.io/",
+    "sameAs":["https://www.linkedin.com/in/ganesh-takwale"],
+    "worksFor":{"@type":"Organization","name":"Global Reliability Technology"}
+  }
+  </script>
+
+  <!-- LCP -->
+  <link rel="preload" href="Architecture-2.png" as="image">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
@@ -32,126 +47,95 @@
 </head>
 
 <body>
-  <canvas id="stars"></canvas>
-  <div class="gradient-overlay"></div>
 
-  <!-- HEADER -->
-  <header class="header">
-    <a class="brand" href="#">
-      <div class="logo-wrap">
-        <img src="grt-logo-05.png" alt="GRT Logo">
-      </div>
-      <span>Global Reliability Technology</span>
-    </a>
+<canvas id="stars"></canvas>
+<div class="gradient-overlay"></div>
 
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#workflows">Workflows</a>
-      <a href="#about">About</a>
-      <a href="lab.html" id="sim-entry" class="cta">Simulation</a>
-    </nav>
-  </header>
+<header class="header">
+  <span class="brand-text">Global Reliability Technology</span>
+  <nav>
+    <a href="#architecture">Architecture</a>
+    <a href="#systems">Systems</a>
+    <a href="lab.html">Simulation</a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Intelligence is not automated.<br>It is architected.</h1>
+<!-- HERO -->
+<section class="hero">
+  <h1>Intelligence is not automated.<br>It is architected.</h1>
+  <p class="hero-sub">
+    This is a living intelligence lab.  
+    Designed for systems that must survive scale, ambiguity, and time.
+  </p>
+</section>
+
+<!-- ARCHITECTURE (HIGH ATTENTION AREA) -->
+<section id="architecture" class="panel architecture-focus">
+  <h2>Architecture decides production</h2>
+
+  <div class="architecture-grid">
+    <div class="architecture-text">
       <p>
-        A living intelligence lab—dual-tone starfield, glowing systems, and measurable outcomes.
-        Reliability-first design that earns trust.
+        Most AI failures are not model failures.
+        They are architectural failures — silent, compounding, and expensive.
       </p>
-
-      <div class="hero-actions">
-        <a class="btn primary" href="#workflows" data-track="open-workflows">
-          Explore blueprints
-        </a>
-        <a class="btn ghost" href="lab.html" data-track="open-simulation">
-          Play Reliability Tycoon
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-visual card">
-      <img src="Architecture-2.png" alt="Architecture decides production">
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="panel">
-    <h2>Systems I Architect</h2>
-
-    <div class="grid-3">
-      <article class="card system-card">
-        <h3>Clarity</h3>
-        <p>Documentation, UX, and reasoning transparency reduce churn and increase trust.</p>
-      </article>
-
-      <article class="card system-card">
-        <h3>Reliability</h3>
-        <p>Observability, fallback strategies, and testing layers prevent silent failures.</p>
-      </article>
-
-      <article class="card system-card">
-        <h3>Scalability</h3>
-        <p>Architecture determines what breaks when usage grows—not the model.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- WORKFLOWS -->
-  <section id="workflows" class="panel">
-    <h2>Workflow Blueprints</h2>
-
-    <div class="blueprints">
-      <div class="bp-tile" data-title="AI Failures Visual" data-src="5HkLnnrvwgHAfYmXDcSEd.jpeg">
-        <img src="5HkLnnrvwgHAfYmXDcSEd.jpeg" alt="">
-        <h3>AI Failures Visual</h3>
-        <p>Memory · Reasoning · Alignment</p>
-      </div>
-
-      <div class="bp-tile" data-title="TAKWALE Branding" data-src="YZb6rYPEs2QHszpGmG9yr.jpeg">
-        <img src="YZb6rYPEs2QHszpGmG9yr.jpeg" alt="">
-        <h3>TAKWALE Branding</h3>
-        <p>Constellation-style network identity</p>
-      </div>
-
-      <div class="bp-tile" data-title="Metallic GRT Logo" data-src="na31w2F1arh1qjMr8G99a.jpeg">
-        <img src="na31w2F1arh1qjMr8G99a.jpeg" alt="">
-        <h3>Metallic GRT Logo</h3>
-        <p>High-tech glow & circuitry</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="panel">
-    <h2>About</h2>
-    <div class="card">
-      <p><strong>Ganesh R Takwale</strong> — Intelligence Architect<br>Mumbai, India</p>
       <p>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/ganesh-takwale" target="_blank" rel="noopener">
-          linkedin.com/in/ganesh-takwale
-        </a>
+        This lab focuses on clarity, observability, fallback strategies,
+        and decision-making under uncertainty.
+      </p>
+      <p class="muted">
+        Systems here are designed to be understood — not just deployed.
       </p>
     </div>
-  </section>
 
-  <footer>
-    © <span id="year"></span> Global Reliability Technology
-  </footer>
-
-  <!-- MODAL -->
-  <div class="modal" id="bpModal">
-    <div class="modal-content">
-      <header>
-        <h3 id="bpTitle"></h3>
-        <button id="bpClose">Close</button>
-      </header>
-      <img id="bpImage" alt="">
+    <div class="architecture-image">
+      <img
+        src="Architecture-2.png"
+        alt="Architecture blueprint"
+        width="1200"
+        height="800"
+        loading="eager"
+        decoding="async">
     </div>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- SYSTEMS (DEEP CONTENT = ATTENTION) -->
+<section id="systems" class="panel">
+  <h2>Systems I architect</h2>
+
+  <div class="grid-3">
+    <div class="card system-card">
+      <h3>Clarity</h3>
+      <p>
+        Documentation, UX reasoning, and explicit assumptions
+        reduce long-term operational risk and decision debt.
+      </p>
+    </div>
+
+    <div class="card system-card">
+      <h3>Reliability</h3>
+      <p>
+        Observability, redundancy, and fallback strategies
+        prevent silent failures and protect trust.
+      </p>
+    </div>
+
+    <div class="card system-card">
+      <h3>Scalability</h3>
+      <p>
+        Scale exposes architecture.
+        What survives growth is designed, not optimized later.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Global Reliability Technology  
+  <div class="footer-note">Not optimized for demos. Optimized for production.</div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
