@@ -1,44 +1,61 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Save scroll intent
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 600) {
-    localStorage.setItem("focusedOnArchitecture", "true");
+/* Intent memory */
+window.addEventListener("scroll",()=>{
+  if(window.scrollY > 700){
+    localStorage.setItem("grt_architecture_focus","true");
   }
 });
 
-// Subtle particle background
-const c = document.getElementById("bg");
-const ctx = c.getContext("2d");
-let w, h, particles = [];
-
+/* Starfield */
+const stars = document.getElementById("stars");
+const sctx = stars.getContext("2d");
+let sw,sh;
 function resize(){
-  w = c.width = window.innerWidth;
-  h = c.height = window.innerHeight;
+  sw = stars.width = innerWidth;
+  sh = stars.height = innerHeight;
 }
-resize();
-window.onresize = resize;
+resize(); window.onresize=resize;
 
-particles = Array.from({length:120},()=>({
-  x:Math.random()*w,
-  y:Math.random()*h,
-  r:Math.random()*1.5+0.5,
-  vx:(Math.random()-.5)*0.2,
-  vy:(Math.random()-.5)*0.2
+const starPts = Array.from({length:160},()=>({
+  x:Math.random()*sw,
+  y:Math.random()*sh,
+  z:Math.random()*2+0.5
 }));
 
-function animate(){
-  ctx.clearRect(0,0,w,h);
-  ctx.fillStyle="#fff";
-  particles.forEach(p=>{
-    p.x+=p.vx; p.y+=p.vy;
-    if(p.x<0||p.x>w) p.vx*=-1;
-    if(p.y<0||p.y>h) p.vy*=-1;
-    ctx.globalAlpha=0.15;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
+function drawStars(){
+  sctx.clearRect(0,0,sw,sh);
+  starPts.forEach(p=>{
+    p.y += p.z*0.15;
+    if(p.y>sh) p.y=0;
+    sctx.fillStyle="rgba(255,255,255,.25)";
+    sctx.fillRect(p.x,p.y,1.2,1.2);
   });
-  requestAnimationFrame(animate);
+  requestAnimationFrame(drawStars);
 }
-animate();
+drawStars();
+
+/* Network nodes */
+const nodes = document.getElementById("nodes");
+const nctx = nodes.getContext("2d");
+nodes.width=sw; nodes.height=sh;
+const pts = Array.from({length:40},()=>({
+  x:Math.random()*sw,y:Math.random()*sh
+}));
+function drawNodes(){
+  nctx.clearRect(0,0,sw,sh);
+  pts.forEach((p,i)=>{
+    pts.forEach((q,j)=>{
+      const d=Math.hypot(p.x-q.x,p.y-q.y);
+      if(d<180){
+        nctx.strokeStyle="rgba(125,211,252,.08)";
+        nctx.beginPath();
+        nctx.moveTo(p.x,p.y);
+        nctx.lineTo(q.x,q.y);
+        nctx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(drawNodes);
+}
+drawNodes();
