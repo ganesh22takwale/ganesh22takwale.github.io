@@ -1,80 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Reliability Tycoon — GRT Lab</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO -->
-  <meta name="description" content="Reliability Tycoon — a decision-based simulation about building trustworthy intelligence systems." />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A diagnostic simulation about reliability-first system design.">
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="header">
-  <a class="brand" href="index.html">
-    <div class="logo-wrap">
-      <img src="grt-logo-05.png" alt="GRT Logo">
-    </div>
-    <span>GRT Lab</span>
-  </a>
+<header class="header lab-header">
+  <img src="logo-11.png" alt="GRT Logo 11" class="lab-logo" width="48" height="48">
+  <span class="brand-text">Reliability Tycoon</span>
 </header>
 
 <section class="panel">
-  <h2>Reliability Tycoon</h2>
-  <p class="muted">
-    You are the architect. Every decision shapes system trust over time.
+  <h1>Stress-test a system</h1>
+  <p class="hero-sub">
+    This is not a game.  
+    It is a diagnostic about architectural trade-offs.
   </p>
+</section>
 
-  <!-- DASHBOARD -->
-  <div class="grid-3">
-    <div class="card">
-      <h3>System Health</h3>
-      <p>Reliability: <strong id="reliability">80</strong>%</p>
-      <p>Trust: <strong id="trust">70</strong>%</p>
-    </div>
-
-    <div class="card">
-      <h3>Operations</h3>
-      <p>Velocity: <strong id="velocity">60</strong></p>
-      <p>Cost: <strong id="cost">40</strong></p>
-    </div>
-
-    <div class="card">
-      <h3>Session</h3>
-      <p>Time Remaining</p>
-      <h3 id="timer">45:00</h3>
-    </div>
+<section class="panel grid-3">
+  <div class="card">
+    <h3>Reliability</h3>
+    <p id="reliability">80%</p>
+  </div>
+  <div class="card">
+    <h3>Velocity</h3>
+    <p id="velocity">60</p>
+  </div>
+  <div class="card">
+    <h3>Trust</h3>
+    <p id="trust">70%</p>
   </div>
 </section>
 
 <section class="panel">
-  <h2>Architectural Decisions</h2>
+  <h2>Architectural decisions</h2>
 
   <div class="grid-3">
-    <button class="card decision" data-action="observability">
-      <h3>Add Observability</h3>
-      <p>Improves reliability & trust. Slows velocity.</p>
+    <button class="card decision" data-action="observe">
+      Add Observability
+      <small>+Reliability · −Velocity</small>
     </button>
 
-    <button class="card decision" data-action="ship_fast">
-      <h3>Ship Faster</h3>
-      <p>Boosts velocity. Increases failure risk.</p>
+    <button class="card decision" data-action="ship">
+      Ship Faster
+      <small>+Velocity · −Trust</small>
     </button>
 
-    <button class="card decision" data-action="fallbacks">
-      <h3>Implement Fallbacks</h3>
-      <p>Reduces outages. Raises cost.</p>
+    <button class="card decision" data-action="fallback">
+      Add Fallbacks
+      <small>+Reliability · +Cost</small>
     </button>
   </div>
-</section>
-
-<section class="panel">
-  <button class="btn ghost" id="restart">Restart Simulation</button>
 </section>
 
 <footer>
