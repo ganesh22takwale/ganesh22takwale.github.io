@@ -1,8 +1,9 @@
 :root{
-  --bg:#000;
+  --bg:#05070c;
   --fg:#e7ebf4;
   --muted:#9aa4b2;
-  --border:rgba(255,255,255,.14);
+  --border:rgba(255,255,255,.12);
+  --glass:rgba(255,255,255,.04);
 }
 
 *{box-sizing:border-box}
@@ -16,107 +17,128 @@ body{
   overflow-x:hidden;
 }
 
-canvas#bg{
+/* Background Layers */
+canvas{
   position:fixed;
   inset:0;
+  z-index:-3;
+}
+#nodes{z-index:-2}
+
+/* Symbolic System Logo */
+.symbol-layer{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
   z-index:-1;
 }
+.symbol-layer img{
+  width:360px;
+  opacity:0.12;
+  filter:blur(0.3px);
+}
 
+/* Header */
 .header{
   position:sticky;
   top:0;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:16px 24px;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(10px);
+  background:rgba(5,7,12,.7);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
 }
+.logo-primary{height:36px}
 
+/* Hero */
 .hero{
-  max-width:900px;
-  margin:140px auto;
+  max-width:960px;
+  margin:160px auto;
   padding:0 24px;
 }
-
 .hero h1{
-  font-size:clamp(36px,6vw,64px);
+  font-size:clamp(40px,6vw,68px);
+  font-weight:800;
 }
-
-.hero p{
+.hero-sub{
+  margin-top:18px;
   color:var(--muted);
   font-size:18px;
 }
 
+/* Panels */
 .panel{
   max-width:1100px;
   margin:auto;
-  padding:80px 24px;
+  padding:100px 24px;
 }
 
-.lead{
+/* Architecture */
+.thesis{
   font-size:22px;
-  margin-bottom:32px;
+  margin-bottom:36px;
 }
-
-.architecture-img{
+.architecture-frame{
+  padding:18px;
+  border-radius:20px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.01));
+  box-shadow:0 0 80px rgba(125,211,252,.15);
+}
+.architecture-frame img{
   width:100%;
-  border-radius:12px;
+  border-radius:14px;
 }
 
+/* Pills */
 .pill-row{
   display:flex;
-  gap:12px;
-  margin-top:20px;
+  gap:16px;
+  margin-top:28px;
 }
-
 .pill-row span{
-  border:1px solid var(--border);
-  padding:6px 14px;
+  padding:8px 18px;
   border-radius:999px;
-  font-size:14px;
+  border:1px solid var(--border);
+  background:var(--glass);
 }
 
-.symbol-section{
-  height:60vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-
-.symbol-logo{
-  width:220px;
-  opacity:0.25;
-}
-
-.grid{
+/* Systems */
+.system-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
+  gap:28px;
 }
-
-.card{
+.system-card{
+  padding:28px;
+  border-radius:18px;
   border:1px solid var(--border);
-  padding:24px;
-  border-radius:12px;
+  background:var(--glass);
+  box-shadow:0 0 40px rgba(0,0,0,.4);
 }
 
-.final{
+/* Lab Entry */
+.lab-entry{
   text-align:center;
 }
-
 .cta{
   display:inline-block;
-  margin-top:24px;
-  padding:12px 28px;
+  margin-top:28px;
+  padding:14px 34px;
+  border-radius:14px;
   border:1px solid var(--border);
   text-decoration:none;
   color:var(--fg);
+  background:linear-gradient(135deg,rgba(125,211,252,.15),rgba(227,167,255,.15));
 }
 
+/* Footer */
 footer{
   text-align:center;
-  padding:40px 24px;
+  padding:48px 24px;
   color:var(--muted);
 }
