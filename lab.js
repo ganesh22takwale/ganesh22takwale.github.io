@@ -1,15 +1,15 @@
-const context = document.getElementById("contextText");
+const ctx = document.getElementById("labContext");
 
-if (localStorage.getItem("focusedOnArchitecture")) {
-  context.textContent =
-    "You explored architectural foundations. This simulation emphasizes reliability.";
-} else {
-  context.textContent =
-    "This simulation reveals how speed-first decisions affect trust.";
+if(localStorage.getItem("grt_architecture_focus")){
+  ctx.textContent =
+    "Your focus suggests architectural awareness. This diagnostic emphasizes reliability trade-offs.";
+}else{
+  ctx.textContent =
+    "This diagnostic reveals how speed-first decisions impact trust and stability.";
 }
 
 document.querySelectorAll(".decision").forEach(btn=>{
   btn.onclick=()=>{
-    alert("Decision registered. Architectural impact recorded.");
+    alert("Decision recorded. System state updated.");
   };
 });
