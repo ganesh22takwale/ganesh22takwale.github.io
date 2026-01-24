@@ -1,177 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-8HQ1C1X28F");
-  </script>
-
-  <!-- Google Search Console (replace with your exact code) -->
-  <meta name="google-site-verification" content="YOUR_UNIQUE_CODE" />
-
   <meta charset="UTF-8" />
   <title>Reliability Tycoon — GRT Lab</title>
-  <meta name="description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes. A simulation by Ganesh R Takwale." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Reliability Tycoon — GRT Lab" />
-  <meta property="og:description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="Architecture-2.png" />
-  <meta property="og:url" content="https://ganesh22takwale.github.io/lab.html" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Reliability Tycoon — GRT Lab" />
-  <meta name="twitter:description" content="Allocate clarity, reliability, and scalability—then ship and see outcomes." />
-  <meta name="twitter:image" content="Architecture-2.png" />
-
-  <!-- Sitemap -->
-  <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+  <!-- SEO -->
+  <meta name="description" content="Reliability Tycoon — a decision-based simulation about building trustworthy intelligence systems." />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --fg:#e7ebf4; --muted:#9aa4b2;
-      --border:rgba(255,255,255,.14);
-      --accent1:#7dd3fc; --accent2:#e3a7ff;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{font-family:Inter,system-ui,sans-serif;color:var(--fg);background:#000;}
-
-    /* Dual-tone starfield + logo shine */
-    canvas#stars{position:fixed;inset:0;z-index:-2;}
-    .shine{
-      position:fixed; inset:0; z-index:-3; pointer-events:none;
-      background:
-        radial-gradient(600px 600px at 15% 20%, rgba(125,211,252,.25), transparent 60%),
-        radial-gradient(600px 600px at 85% 80%, rgba(227,167,255,.25), transparent 60%);
-    }
-    .logo-glow{
-      position:fixed; inset:auto; bottom:24px; right:24px; z-index:-1;
-      width:120px; height:120px; border-radius:50%;
-      background: radial-gradient(closest-side, rgba(125,211,252,.35), transparent 70%);
-      filter: blur(18px);
-    }
-    .logo-glow.alt{
-      bottom:auto; top:24px; left:24px;
-      background: radial-gradient(closest-side, rgba(227,167,255,.35), transparent 70%);
-    }
-
-    header{position:sticky;top:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;}
-    .brand{display:flex;align-items:center;gap:10px;color:var(--fg);text-decoration:none;}
-    .brand img{max-width:32px;max-height:32px}
-    .nav a{color:var(--fg);text-decoration:none;margin-left:12px}
-
-    .hero{padding:50px 24px;text-align:center}
-    .hero h1{font-family:"Space Grotesk",Inter;font-size:clamp(36px,5vw,56px);margin:0 0 10px}
-    .hero p{color:var(--muted)}
-
-    main{padding:24px;max-width:1100px;margin:auto}
-    .sim-grid{display:grid;grid-template-columns:1.1fr 1.2fr .8fr;gap:18px}
-    @media (max-width:1000px){.sim-grid{grid-template-columns:1fr}}
-    .card{border:1px solid var(--border);border-radius:14px;padding:18px;background:rgba(255,255,255,.05)}
-    .sim-controls label{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:10px;margin-bottom:8px}
-    .sim-controls input[type="range"]{width:100%}
-    .alloc-summary{display:flex;align-items:center;justify-content:space-between;margin:8px 0 12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);color:var(--fg);text-decoration:none;cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#041015;font-weight:700}
-    .btn.ghost{background:transparent}
-    .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-    .tip{color:var(--muted);font-size:.95rem}
-    footer{padding:40px 24px;border-top:1px solid var(--border);text-align:center;color:var(--muted)}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="shine" aria-hidden="true"></div>
-  <div class="logo-glow" aria-hidden="true"></div>
-  <div class="logo-glow alt" aria-hidden="true"></div>
-  <canvas id="stars"></canvas>
 
-  <header>
-    <a class="brand" href="index.html">
-      <img src="grt-logo-05.png" alt="GRT Logo 05">
-      <span>GRT Lab</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html#workflows">Blueprints</a>
-      <a href="index.html">Home</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h1>Reliability Tycoon</h1>
-    <p>Allocate clarity, reliability, and scalability—then ship and see the outcome.</p>
-  </section>
-
-  <main>
-    <div class="sim-grid">
-      <div class="sim-controls card">
-        <h2>Budget allocation</h2>
-        <label><span>Clarity (Docs, UX)</span><input type="range" id="clarity" min="0" max="100" value="33"></label>
-        <label><span>Reliability (Testing, Observability)</span><input type="range" id="reliability" min="0" max="100" value="34"></label>
-        <label><span>Scalability (Performance, Delivery)</span><input type="range" id="scalability" min="0" max="100" value="33"></label>
-        <div class="alloc-summary">
-          <span>Total: <strong id="total">100</strong>%</span>
-          <button class="btn" id="balanceBtn">Balance</button>
-        </div>
-        <button class="btn primary" id="runBtn">Ship release</button>
-      </div>
-
-      <div class="sim-output card">
-        <h2>Outcome</h2>
-        <canvas id="outcomeChart" width="480" height="240" aria-label="Outcome chart"></canvas>
-        <div class="kpis">
-          <div><strong>Client satisfaction:</strong> <span id="sat">—</span></div>
-          <div><strong>Uptime:</strong> <span id="uptime">—</span></div>
-          <div><strong>Conversion lift:</strong> <span id="conv">—</span></div>
-          <div><strong>Revenue impact:</strong> <span id="rev">—</span></div>
-        </div>
-        <p class="tip">Tip: Higher clarity reduces churn; reliability protects uptime; scalability boosts conversions—but balance matters.</p>
-        <a class="btn ghost" href="index.html#about">Work with Ganesh</a>
-      </div>
-
-      <div class="sim-context card">
-        <h2>Scenario context</h2>
-        <p id="scenarioText">Loading scenario…</p>
-        <button class="btn" id="newScenario">New scenario</button>
-      </div>
+<header class="header">
+  <a class="brand" href="index.html">
+    <div class="logo-wrap">
+      <img src="grt-logo-05.png" alt="GRT Logo">
     </div>
-  </main>
+    <span>GRT Lab</span>
+  </a>
+</header>
 
-  <footer>© <span id="year"></span> GRT Lab.</footer>
+<section class="panel">
+  <h2>Reliability Tycoon</h2>
+  <p class="muted">
+    You are the architect. Every decision shapes system trust over time.
+  </p>
 
-  <!-- Simulation logic -->
-  <script src="lab.js"></script>
+  <!-- DASHBOARD -->
+  <div class="grid-3">
+    <div class="card">
+      <h3>System Health</h3>
+      <p>Reliability: <strong id="reliability">80</strong>%</p>
+      <p>Trust: <strong id="trust">70</strong>%</p>
+    </div>
 
-  <!-- Starfield background (same feel as index) -->
-  <script>
-    const canvas=document.getElementById("stars"),ctx=canvas.getContext("2d");
-    let W,H,stars=[];
-    function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
-    resize();addEventListener("resize",resize);
-    function initStars(){stars=[...Array(180)].map(()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*W}))}
-    initStars();
-    function animate(){
-      ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
-      stars.forEach((s,i)=>{
-        s.z-=2;if(s.z<=0){s.z=W;}
-        const k=128/s.z;const sx=(s.x-W/2)*k+W/2;const sy=(s.y-H/2)*k+H/2;
-        const hue = i%2===0 ? "rgba(125,211,252,.9)" : "rgba(227,167,255,.9)";
-        if(sx>=0&&sx<W&&sy>=0&&sy<H){ctx.fillStyle=hue;ctx.fillRect(sx,sy,2,2);}
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-  </script>
+    <div class="card">
+      <h3>Operations</h3>
+      <p>Velocity: <strong id="velocity">60</strong></p>
+      <p>Cost: <strong id="cost">40</strong></p>
+    </div>
+
+    <div class="card">
+      <h3>Session</h3>
+      <p>Time Remaining</p>
+      <h3 id="timer">45:00</h3>
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Architectural Decisions</h2>
+
+  <div class="grid-3">
+    <button class="card decision" data-action="observability">
+      <h3>Add Observability</h3>
+      <p>Improves reliability & trust. Slows velocity.</p>
+    </button>
+
+    <button class="card decision" data-action="ship_fast">
+      <h3>Ship Faster</h3>
+      <p>Boosts velocity. Increases failure risk.</p>
+    </button>
+
+    <button class="card decision" data-action="fallbacks">
+      <h3>Implement Fallbacks</h3>
+      <p>Reduces outages. Raises cost.</p>
+    </button>
+  </div>
+</section>
+
+<section class="panel">
+  <button class="btn ghost" id="restart">Restart Simulation</button>
+</section>
+
+<footer>
+  Reliability Tycoon · Global Reliability Technology
+</footer>
+
+<script src="lab.js"></script>
 </body>
 </html>
