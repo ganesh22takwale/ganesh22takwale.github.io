@@ -2,67 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Reliability Tycoon — GRT Lab</title>
+  <title>Reliability Lab — Global Reliability Technology</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A diagnostic simulation about reliability-first system design.">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="header lab-header">
-  <img src="logo-11.png" alt="GRT Logo 11" class="lab-logo" width="48" height="48">
-  <span class="brand-text">Reliability Tycoon</span>
+<header class="header">
+  <img src="logo-11.png" alt="GRT Logo" width="48" height="48">
+  <span class="brand">Reliability Lab</span>
 </header>
 
-<section class="panel">
-  <h1>Stress-test a system</h1>
-  <p class="hero-sub">
-    This is not a game.  
-    It is a diagnostic about architectural trade-offs.
-  </p>
+<section class="hero">
+  <h1>Stress-test architectural decisions</h1>
+  <p>This diagnostic explores how systems behave under pressure.</p>
 </section>
 
-<section class="panel grid-3">
-  <div class="card">
-    <h3>Reliability</h3>
-    <p id="reliability">80%</p>
-  </div>
-  <div class="card">
-    <h3>Velocity</h3>
-    <p id="velocity">60</p>
-  </div>
-  <div class="card">
-    <h3>Trust</h3>
-    <p id="trust">70%</p>
-  </div>
+<section class="panel grid">
+  <button class="card decision" data-action="observe">Add observability</button>
+  <button class="card decision" data-action="speed">Ship faster</button>
+  <button class="card decision" data-action="fallback">Add fallbacks</button>
 </section>
 
-<section class="panel">
-  <h2>Architectural decisions</h2>
-
-  <div class="grid-3">
-    <button class="card decision" data-action="observe">
-      Add Observability
-      <small>+Reliability · −Velocity</small>
-    </button>
-
-    <button class="card decision" data-action="ship">
-      Ship Faster
-      <small>+Velocity · −Trust</small>
-    </button>
-
-    <button class="card decision" data-action="fallback">
-      Add Fallbacks
-      <small>+Reliability · +Cost</small>
-    </button>
-  </div>
-</section>
-
-<footer>
-  Reliability Tycoon · Global Reliability Technology
-</footer>
+<footer>Global Reliability Technology</footer>
 
 <script src="lab.js"></script>
 </body>
