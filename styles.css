@@ -144,3 +144,84 @@ footer{
   padding:48px 24px;
   color:var(--muted);
 }
+/* ===============================
+   RELIABILITY LAB — NEON UPGRADE
+================================ */
+
+/* Neon logo 05 as background intelligence pulse */
+.lab-neon-core{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:-3;
+}
+
+.lab-neon-core img{
+  width:460px;
+  opacity:.08;
+  filter:
+    drop-shadow(0 0 40px rgba(125,211,252,.45))
+    drop-shadow(0 0 90px rgba(59,130,246,.35));
+  animation:neonPulse 6s ease-in-out infinite;
+}
+
+@keyframes neonPulse{
+  0%,100%{
+    opacity:.06;
+    filter:
+      drop-shadow(0 0 30px rgba(125,211,252,.35))
+      drop-shadow(0 0 70px rgba(59,130,246,.25));
+  }
+  50%{
+    opacity:.14;
+    filter:
+      drop-shadow(0 0 60px rgba(125,211,252,.75))
+      drop-shadow(0 0 140px rgba(59,130,246,.55));
+  }
+}
+
+/* Upgrade decision cards to neon instrument panels */
+.system-card.decision{
+  background:
+    linear-gradient(180deg,
+      rgba(20,30,60,.65),
+      rgba(10,15,30,.85)
+    );
+  border:1px solid rgba(125,211,252,.35);
+  box-shadow:
+    inset 0 0 30px rgba(125,211,252,.12),
+    0 0 40px rgba(0,0,0,.6);
+  color:#e7ebf4;
+  font-weight:600;
+  letter-spacing:.3px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Inner neon edge */
+.system-card.decision::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:16px;
+  border:1px solid rgba(125,211,252,.25);
+  pointer-events:none;
+}
+
+/* Hover = active system */
+.system-card.decision:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 0 50px rgba(125,211,252,.65),
+    0 0 120px rgba(227,167,255,.45);
+}
+
+/* Click feedback pulse */
+.system-card.decision.active{
+  box-shadow:
+    0 0 80px rgba(125,211,252,.9),
+    0 0 180px rgba(227,167,255,.75);
+}
