@@ -8,39 +8,47 @@
 </head>
 
 <body>
-  <body>
 
   <!-- Neon intelligence pulse background -->
-  <div class="lab-neon-core">
-    <img src="grt-logo-05.png" alt="" aria-hidden="true">
+  <div class="lab-neon-core" aria-hidden="true">
+    <img src="grt-logo-05.png" alt="">
   </div>
 
+  <!-- SINGLE HEADER (ONLY ONE) -->
   <header class="header">
     <img src="grt-logo-11.png" class="logo-ignite" alt="GRT Seal">
     <span>Reliability Lab</span>
   </header>
 
+  <section class="hero">
+    <h1>Architectural Diagnostic</h1>
+    <p id="contextText"></p>
+  </section>
 
-<header class="header">
-  <img src="grt-logo-11.png" class="logo-ignite" alt="GRT Seal">
-  <span>Reliability Lab</span>
-</header>
+  <section class="panel systems">
+    <div class="system-grid">
+      <button class="system-card decision">Increase Observability</button>
+      <button class="system-card decision">Optimize for Speed</button>
+      <button class="system-card decision">Add Fallbacks</button>
+    </div>
 
-<section class="hero">
-  <h1>Architectural Diagnostic</h1>
-  <p id="contextText"></p>
-</section>
+    <!-- Diagnostic Output -->
+    <div class="diagnostic-panel">
+      <div class="score-row">
+        <span>Reliability Score</span>
+        <span id="scoreValue">72</span>
+      </div>
+      <div class="score-bar">
+        <div class="score-fill" id="scoreFill"></div>
+      </div>
+      <p class="diagnostic-text" id="diagnosticText">
+        Awaiting architectural decision…
+      </p>
+    </div>
+  </section>
 
-<section class="panel systems">
-  <div class="system-grid">
-    <button class="system-card decision">Increase Observability</button>
-    <button class="system-card decision">Optimize for Speed</button>
-    <button class="system-card decision">Add Fallbacks</button>
-  </div>
-</section>
+  <footer>Global Reliability Technology</footer>
 
-<footer>Global Reliability Technology</footer>
-
-<script src="lab.js"></script>
+  <script src="lab.js"></script>
 </body>
 </html>
