@@ -1,11 +1,9 @@
-const ctx = document.getElementById("labContext");
+const ctx=document.getElementById("contextText");
 
-if(localStorage.getItem("grt_architecture_focus")){
-  ctx.textContent =
-    "Your focus suggests architectural awareness. This diagnostic emphasizes reliability trade-offs.";
+if(localStorage.getItem("grt_architecture_seen")){
+  ctx.textContent="You examined architectural foundations. This diagnostic emphasizes reliability trade-offs.";
 }else{
-  ctx.textContent =
-    "This diagnostic reveals how speed-first decisions impact trust and stability.";
+  ctx.textContent="This diagnostic highlights how speed-first decisions impact trust and system stability.";
 }
 
 document.querySelectorAll(".decision").forEach(btn=>{
