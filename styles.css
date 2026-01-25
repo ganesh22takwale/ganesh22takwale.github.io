@@ -1,146 +1,74 @@
-:root{
-  --bg:#05070c;
-  --fg:#e7ebf4;
-  --muted:#9aa4b2;
-  --glass:rgba(255,255,255,.04);
-  --border:rgba(255,255,255,.12);
+/* ===============================
+   RELIABILITY LAB — LIGHT SYSTEM
+================================ */
+
+/* Ambient gradient light */
+.lab-glow{
+  position:fixed;
+  inset:-30%;
+  z-index:-3;
+  filter:blur(140px);
+  opacity:0.25;
+  animation:labFloat 26s ease-in-out infinite alternate;
 }
 
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Inter,system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--fg);
-  overflow-x:hidden;
+.lab-glow-1{
+  background:radial-gradient(circle at 30% 40%, rgba(125,211,252,.28), transparent 60%);
 }
 
-/* Background layers */
-canvas{
+.lab-glow-2{
+  background:radial-gradient(circle at 70% 60%, rgba(227,167,255,.22), transparent 60%);
+  animation-delay:6s;
+}
+
+@keyframes labFloat{
+  from{transform:translateY(-40px)}
+  to{transform:translateY(40px)}
+}
+
+/* Floating particles canvas */
+#labParticles{
   position:fixed;
   inset:0;
-  z-index:-4;
-}
-#network{z-index:-3}
-
-/* Silver authority logo */
-.authority-layer{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
   z-index:-2;
 }
-.authority-layer img{
-  width:380px;
-  opacity:.12;
-  filter:blur(.4px);
-}
 
-/* Header */
-.header{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px 28px;
-  backdrop-filter:blur(14px);
-  background:rgba(5,7,12,.65);
-  border-bottom:1px solid var(--border);
-}
-.header nav a{
-  color:var(--fg);
-  text-decoration:none;
-  margin-left:18px;
-}
-.logo-ignite{height:36px}
-
-/* Hero */
-.hero{
-  max-width:980px;
-  margin:160px auto 120px;
-  padding:0 24px;
-}
+/* Headline glow focus */
 .hero h1{
-  font-size:clamp(42px,6vw,72px);
-  font-weight:800;
-}
-.hero p{
-  margin-top:20px;
-  color:var(--muted);
-  font-size:18px;
+  position:relative;
 }
 
-/* Panels */
-.panel{
-  max-width:1100px;
-  margin:auto;
-  padding:110px 24px;
+.hero h1::after{
+  content:"";
+  position:absolute;
+  inset:-70px;
+  background:radial-gradient(circle, rgba(255,255,255,.10), transparent 65%);
+  filter:blur(40px);
+  z-index:-1;
 }
 
-/* Architecture core */
-.thesis{
-  font-size:22px;
-  margin-bottom:36px;
-}
-.architecture-core{
-  padding:18px;
-  border-radius:22px;
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-  box-shadow:0 0 90px rgba(125,211,252,.18);
-}
-.architecture-core img{
-  width:100%;
-  border-radius:14px;
-}
-
-/* Pills */
-.pill-row{
-  display:flex;
-  gap:18px;
-  margin-top:28px;
-}
-.pill-row span{
-  padding:10px 22px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:var(--glass);
-}
-
-/* Systems */
-.system-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:28px;
-}
+/* Decision cards — breathing light */
 .system-card{
-  padding:30px;
-  border-radius:18px;
-  border:1px solid var(--border);
-  background:var(--glass);
-  box-shadow:0 0 40px rgba(0,0,0,.5);
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+  animation:breath 5s ease-in-out infinite;
 }
 
-/* Lab entry */
-.lab-entry{text-align:center}
-.cta{
-  display:inline-block;
-  margin-top:28px;
-  padding:14px 36px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  text-decoration:none;
-  color:var(--fg);
-  background:linear-gradient(135deg,rgba(125,211,252,.18),rgba(227,167,255,.18));
+@keyframes breath{
+  0%,100%{
+    box-shadow:0 0 18px rgba(125,211,252,.15);
+  }
+  50%{
+    box-shadow:
+      0 0 28px rgba(125,211,252,.35),
+      0 0 55px rgba(227,167,255,.25);
+  }
 }
 
-/* Footer */
-footer{
-  text-align:center;
-  padding:48px 24px;
-  color:var(--muted);
+.system-card:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 0 40px rgba(125,211,252,.45),
+    0 0 80px rgba(227,167,255,.35);
 }
