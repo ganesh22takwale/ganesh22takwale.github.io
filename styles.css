@@ -2,8 +2,8 @@
   --bg:#05070c;
   --fg:#e7ebf4;
   --muted:#9aa4b2;
-  --border:rgba(255,255,255,.12);
   --glass:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.12);
 }
 
 *{box-sizing:border-box}
@@ -13,32 +13,31 @@ body{
   font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
   color:var(--fg);
-  line-height:1.7;
   overflow-x:hidden;
 }
 
-/* Background Layers */
+/* Background layers */
 canvas{
   position:fixed;
   inset:0;
-  z-index:-3;
+  z-index:-4;
 }
-#nodes{z-index:-2}
+#network{z-index:-3}
 
-/* Symbolic System Logo */
-.symbol-layer{
+/* Silver authority logo */
+.authority-layer{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   pointer-events:none;
-  z-index:-1;
+  z-index:-2;
 }
-.symbol-layer img{
-  width:360px;
-  opacity:0.12;
-  filter:blur(0.3px);
+.authority-layer img{
+  width:380px;
+  opacity:.12;
+  filter:blur(.4px);
 }
 
 /* Header */
@@ -48,25 +47,30 @@ canvas{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:16px 24px;
-  background:rgba(5,7,12,.7);
-  backdrop-filter:blur(12px);
+  padding:16px 28px;
+  backdrop-filter:blur(14px);
+  background:rgba(5,7,12,.65);
   border-bottom:1px solid var(--border);
 }
-.logo-primary{height:36px}
+.header nav a{
+  color:var(--fg);
+  text-decoration:none;
+  margin-left:18px;
+}
+.logo-ignite{height:36px}
 
 /* Hero */
 .hero{
-  max-width:960px;
-  margin:160px auto;
+  max-width:980px;
+  margin:160px auto 120px;
   padding:0 24px;
 }
 .hero h1{
-  font-size:clamp(40px,6vw,68px);
+  font-size:clamp(42px,6vw,72px);
   font-weight:800;
 }
-.hero-sub{
-  margin-top:18px;
+.hero p{
+  margin-top:20px;
   color:var(--muted);
   font-size:18px;
 }
@@ -75,21 +79,21 @@ canvas{
 .panel{
   max-width:1100px;
   margin:auto;
-  padding:100px 24px;
+  padding:110px 24px;
 }
 
-/* Architecture */
+/* Architecture core */
 .thesis{
   font-size:22px;
   margin-bottom:36px;
 }
-.architecture-frame{
+.architecture-core{
   padding:18px;
-  border-radius:20px;
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.01));
-  box-shadow:0 0 80px rgba(125,211,252,.15);
+  border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  box-shadow:0 0 90px rgba(125,211,252,.18);
 }
-.architecture-frame img{
+.architecture-core img{
   width:100%;
   border-radius:14px;
 }
@@ -97,11 +101,11 @@ canvas{
 /* Pills */
 .pill-row{
   display:flex;
-  gap:16px;
+  gap:18px;
   margin-top:28px;
 }
 .pill-row span{
-  padding:8px 18px;
+  padding:10px 22px;
   border-radius:999px;
   border:1px solid var(--border);
   background:var(--glass);
@@ -114,26 +118,24 @@ canvas{
   gap:28px;
 }
 .system-card{
-  padding:28px;
+  padding:30px;
   border-radius:18px;
   border:1px solid var(--border);
   background:var(--glass);
-  box-shadow:0 0 40px rgba(0,0,0,.4);
+  box-shadow:0 0 40px rgba(0,0,0,.5);
 }
 
-/* Lab Entry */
-.lab-entry{
-  text-align:center;
-}
+/* Lab entry */
+.lab-entry{text-align:center}
 .cta{
   display:inline-block;
   margin-top:28px;
-  padding:14px 34px;
+  padding:14px 36px;
   border-radius:14px;
   border:1px solid var(--border);
   text-decoration:none;
   color:var(--fg);
-  background:linear-gradient(135deg,rgba(125,211,252,.15),rgba(227,167,255,.15));
+  background:linear-gradient(135deg,rgba(125,211,252,.18),rgba(227,167,255,.18));
 }
 
 /* Footer */
