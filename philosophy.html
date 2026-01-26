@@ -8,10 +8,10 @@
 <meta name="description"
 content="Ganesh Takwale | Intelligence Architect | Designing Production-Grade AI Systems with Memory, Alignment & Reliability">
 
-<!-- Tailwind -->
+<!-- Tailwind (utility only, visuals are custom) -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Analytics -->
+<!-- Google Analytics (DO NOT MODIFY) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -21,40 +21,58 @@ gtag('config', 'G-8HQ1C1X28F');
 </script>
 
 <style>
-/* ---------- CORE FEEL ---------- */
+/* ================= FOUNDATION ================= */
 html,body{
+  margin:0;
   background:#000;
   color:#e5e7eb;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",system-ui;
   overflow-x:hidden;
 }
 
-/* Ambient nebula */
+/* Logo-05 watermark + cinematic nebula */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(40% 30% at 50% 20%, rgba(120,255,255,.08), transparent 60%),
-    radial-gradient(30% 30% at 80% 60%, rgba(180,120,255,.07), transparent 60%);
+    url("/grt-logo-05.png") center 62% / 440px no-repeat,
+    radial-gradient(45% 35% at 50% 15%, rgba(120,255,255,.12), transparent 65%),
+    radial-gradient(35% 35% at 80% 75%, rgba(170,120,255,.10), transparent 65%);
+  opacity:.22;
   pointer-events:none;
   z-index:0;
+  animation:nebula 18s ease-in-out infinite alternate;
 }
 
-/* Soft light follower */
+@keyframes nebula{
+  from{filter:brightness(.95);}
+  to{filter:brightness(1.08);}
+}
+
+/* Dynamic light (mouse + touch) */
 #light{
   position:fixed;
-  width:400px;
-  height:400px;
+  width:520px;
+  height:520px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(120,255,255,.18), transparent 65%);
-  filter:blur(40px);
+  background:radial-gradient(circle, rgba(160,255,255,.25), transparent 65%);
+  filter:blur(65px);
   pointer-events:none;
   z-index:1;
   transform:translate(-50%,-50%);
+  transition:opacity .3s ease;
 }
 
-/* ---------- HERO ---------- */
+/* Floating particles */
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* ================= LAYOUT ================= */
 .hero{
   position:relative;
   z-index:2;
@@ -62,44 +80,46 @@ body::before{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:4rem 1.5rem;
+  padding:4.5rem 1.5rem;
 }
 
 .hero-inner{
-  max-width:1100px;
+  max-width:1200px;
   width:100%;
   display:grid;
-  grid-template-columns:1fr 360px;
+  grid-template-columns:1fr 380px;
   gap:4rem;
 }
 
 @media(max-width:1024px){
-  .hero-inner{grid-template-columns:1fr;}
+  .hero-inner{
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
 }
 
-/* Logo */
-.logo{
-  width:70px;
-  margin-bottom:1.5rem;
-  filter:drop-shadow(0 0 20px rgba(200,240,255,.35));
+/* ================= LEFT ================= */
+.authority-logo{
+  width:78px;
+  margin-bottom:1.9rem;
+  filter:drop-shadow(0 0 32px rgba(180,240,255,.65));
 }
 
-/* Headline */
 h1{
-  font-size:clamp(2.4rem,5vw,4rem);
+  font-size:clamp(2.5rem,5vw,4.3rem);
   font-weight:800;
-  line-height:1.1;
+  line-height:1.08;
 }
+
 h1 span{
-  background:linear-gradient(90deg,#aefcff,#c9b6ff);
+  background:linear-gradient(90deg,#bfffff,#d1b6ff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-/* Sub */
 .sub{
-  margin-top:1.2rem;
-  max-width:620px;
+  margin-top:1.4rem;
+  max-width:650px;
   color:#9ca3af;
   font-size:1.05rem;
 }
@@ -108,80 +128,94 @@ h1 span{
 .pillars{
   display:flex;
   gap:1rem;
-  margin-top:2rem;
+  margin-top:2.4rem;
+  flex-wrap:wrap;
 }
+
 .pillar{
-  padding:.6rem 1.2rem;
+  padding:.6rem 1.35rem;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.04);
-  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);
   font-size:.9rem;
 }
 
 /* CTA */
 .cta{
   display:inline-block;
-  margin-top:3rem;
-  padding:1rem 2.2rem;
+  margin-top:3.6rem;
+  padding:1.1rem 2.6rem;
   border-radius:999px;
-  background:linear-gradient(135deg,#9efcff,#c3a6ff);
+  background:linear-gradient(135deg,#bfffff,#c7a6ff);
   color:#000;
   font-weight:700;
-  transition:transform .2s ease, box-shadow .2s ease;
-}
-.cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 40px rgba(160,255,255,.6);
+  letter-spacing:.25px;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
-/* ---------- SIDE PANEL (iOS STYLE) ---------- */
+.cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 52px rgba(180,255,255,.8);
+}
+
+/* ================= RIGHT PANEL ================= */
 .panel{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:22px;
-  padding:2rem;
-  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;
+  padding:2.3rem;
+  backdrop-filter:blur(22px);
 }
 
 .panel h3{
   font-weight:700;
   font-size:1.1rem;
-  margin-bottom:1rem;
+  margin-bottom:1.5rem;
 }
 
 .plan{
-  padding:1rem;
-  border-radius:16px;
-  background:rgba(0,0,0,.4);
-  margin-bottom:1rem;
+  padding:1.25rem;
+  border-radius:20px;
+  background:rgba(0,0,0,.5);
+  margin-bottom:1.15rem;
 }
-.plan strong{font-size:1.1rem;}
-.plan span{color:#9ca3af;font-size:.9rem;}
+
+.plan strong{
+  font-size:1.1rem;
+}
+
+.plan span{
+  display:block;
+  color:#9ca3af;
+  font-size:.9rem;
+  margin-top:.25rem;
+}
 
 .profit{
   margin-top:.6rem;
-  color:#9efcff;
+  color:#bfffff;
   font-weight:600;
   font-size:.9rem;
 }
 
-/* ---------- FOOTER ---------- */
+/* ================= FOOTER ================= */
 footer{
+  position:relative;
+  z-index:2;
   text-align:center;
-  padding:3rem 1rem 2rem;
-  opacity:.7;
+  padding:2.8rem 1rem 2.2rem;
+  opacity:.75;
+  font-size:.9rem;
 }
-footer img{
-  width:40px;
-  margin:0 auto .8rem;
-}
-footer a{color:#9efcff;}
+
+footer a{color:#bfffff;}
 </style>
 </head>
 
 <body>
 
+<canvas id="particles"></canvas>
 <div id="light"></div>
 
 <section class="hero">
@@ -189,17 +223,16 @@ footer a{color:#9efcff;}
 
     <!-- LEFT -->
     <div>
-      <img src="/grt-logo-11.png" class="logo" alt="GRT Logo">
+      <img src="/grt-logo-11.png" class="authority-logo" alt="GRT Authority Seal">
 
       <h1>
-        Intelligence is not automated.<br/>
+        Intelligence is not automated.<br>
         <span>It is architected.</span>
       </h1>
 
       <p class="sub">
-        Ganesh Takwale · Intelligence Architect<br/>
-        Production-grade AI systems built for
-        memory, alignment & long-term reliability.
+        Ganesh Takwale · Intelligence Architect<br>
+        Production-grade AI built for memory, alignment & long-term reliability.
       </p>
 
       <div class="pillars">
@@ -208,36 +241,37 @@ footer a{color:#9efcff;}
         <div class="pillar">Reliability</div>
       </div>
 
-      <a href="https://www.linkedin.com/in/ganeshtakwale" target="_blank" class="cta">
+      <a href="https://www.linkedin.com/in/ganeshtakwale"
+         target="_blank" class="cta">
         Architect My Intelligence →
       </a>
     </div>
 
-    <!-- RIGHT PANEL -->
+    <!-- RIGHT -->
     <aside class="panel">
       <h3>Engagement Models</h3>
 
       <div class="plan">
-        <strong>3 Months</strong><br/>
+        <strong>3 Months</strong>
         <span>Architecture Stabilization</span>
         <div class="profit">↑ ~120% ROI potential</div>
       </div>
 
       <div class="plan">
-        <strong>6 Months</strong><br/>
+        <strong>6 Months</strong>
         <span>Production Intelligence Stack</span>
         <div class="profit">↑ ~260% ROI potential</div>
       </div>
 
       <div class="plan">
-        <strong>12 Months</strong><br/>
+        <strong>12 Months</strong>
         <span>AI as Core Business Asset</span>
         <div class="profit">↑ ~420% ROI potential</div>
       </div>
 
       <p class="text-xs text-slate-400 mt-3">
-        ROI based on reliability uplift, failure reduction
-        and intelligence reuse across products.
+        ROI driven by reliability uplift, failure reduction
+        and reusable intelligence assets.
       </p>
     </aside>
 
@@ -245,17 +279,14 @@ footer a{color:#9efcff;}
 </section>
 
 <footer>
-  <img src="/grt-logo-05.png" alt="Footer Logo">
-  <p>
-    © 2026 Ganesh Takwale · Production-Grade Intelligence<br/>
-    <a href="https://www.linkedin.com/in/ganeshtakwale" target="_blank">
-      linkedin.com/in/ganeshtakwale
-    </a>
-  </p>
+  © 2026 Ganesh Takwale · Production-Grade Intelligence<br>
+  <a href="https://www.linkedin.com/in/ganeshtakwale" target="_blank">
+    linkedin.com/in/ganeshtakwale
+  </a>
 </footer>
 
 <script>
-/* Light follow – mouse + touch (iOS safe) */
+/* ================= LIGHT FOLLOW ================= */
 const light=document.getElementById("light");
 function moveLight(x,y){
   light.style.left=x+"px";
@@ -265,6 +296,42 @@ window.addEventListener("mousemove",e=>moveLight(e.clientX,e.clientY));
 window.addEventListener("touchmove",e=>{
   if(e.touches[0]) moveLight(e.touches[0].clientX,e.touches[0].clientY);
 },{passive:true});
+
+/* ================= PARTICLES ================= */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+let w,h,particles=[];
+function resize(){
+  w=canvas.width=window.innerWidth;
+  h=canvas.height=window.innerHeight;
+}
+window.addEventListener("resize",resize);
+resize();
+
+for(let i=0;i<60;i++){
+  particles.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*1.6+0.6,
+    vx:(Math.random()-.5)*0.15,
+    vy:(Math.random()-.5)*0.15
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="rgba(180,255,255,.25)";
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>w) p.vx*=-1;
+    if(p.y<0||p.y>h) p.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
