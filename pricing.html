@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GRT Engagement Models</title>
+
+<style>
+/* ===== BASE ===== */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont;
+  background: radial-gradient(circle at top, #0b0f14, #000);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* ===== BACKGROUND ===== */
+.bg-logo {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(120,180,255,0.12), transparent 60%),
+    url("grt-logo-05.png") center / 140% no-repeat;
+  opacity: 0.06;
+  filter: blur(2px);
+  pointer-events: none;
+  animation: slowFloat 30s linear infinite;
+}
+
+@keyframes slowFloat {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.05) rotate(1deg); }
+}
+
+/* ===== LIGHT FOLLOW ===== */
+.light {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(120,200,255,0.15), transparent 60%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 32px;
+  text-align: center;
+}
+
+header img {
+  height: 72px;
+  filter: drop-shadow(0 0 20px rgba(180,220,255,.4));
+}
+
+/* ===== MAIN ===== */
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 24px 120px;
+}
+
+h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.sub {
+  opacity: .75;
+  max-width: 720px;
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ===== LEFT ===== */
+.tags span {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.15);
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ===== PRICING PANEL ===== */
+.panel {
+  background: rgba(20,25,35,.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 0 60px rgba(0,0,0,.6);
+}
+
+.tier {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.tier:last-child { border-bottom: none; }
+
+.tier h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.roi {
+  color: #7dd3fc;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* ===== CTA ===== */
+.cta {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 18px 36px;
+  font-size: 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg,#7dd3fc,#c084fc);
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 0 30px rgba(140,200,255,.5);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  opacity: .6;
+  padding: 40px 20px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+<div class="bg-logo"></div>
+<div class="light" id="light"></div>
+
+<header>
+  <img src="grt-logo-11.png" alt="GRT Authority Seal">
+</header>
+
+<main>
+  <h1>Intelligence is not automated.<br>It is architected.</h1>
+  <p class="sub">
+    Production-grade AI systems built for memory, alignment, and long-term reliability.
+  </p>
+
+  <div class="layout">
+    <!-- LEFT -->
+    <div>
+      <div class="tags">
+        <span>Memory</span>
+        <span>Alignment</span>
+        <span>Reliability</span>
+      </div>
+
+      <a class="cta"
+         href="https://www.linkedin.com/in/ganesh-takwale"
+         target="_blank">
+        Architect My Intelligence →
+      </a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel">
+      <h2>Engagement Models</h2>
+
+      <div class="tier">
+        <h3>3 Months</h3>
+        <p>Architecture Stabilization</p>
+        <div class="roi">↑ ~120% ROI potential</div>
+      </div>
+
+      <div class="tier">
+        <h3>6 Months</h3>
+        <p>Production Intelligence Stack</p>
+        <div class="roi">↑ ~260% ROI potential</div>
+      </div>
+
+      <div class="tier">
+        <h3>12 Months</h3>
+        <p>AI as Core Business Asset</p>
+        <div class="roi">↑ ~420% ROI potential</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 Ganesh Takwale · Production-Grade Intelligence<br>
+  linkedin.com/in/ganesh-takwale
+</footer>
+
+<script>
+const light = document.getElementById("light");
+document.addEventListener("pointermove", e => {
+  light.style.left = e.clientX + "px";
+  light.style.top = e.clientY + "px";
+});
+</script>
+
+</body>
+</html>
