@@ -1,0 +1,90 @@
+* { box-sizing: border-box; font-family: Inter, system-ui; }
+body {
+  margin: 0;
+  background: radial-gradient(#1a1f2e, #0b0f14);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.top {
+  position: relative;
+  z-index: 5;
+  padding: 20px;
+  text-align: center;
+}
+.seal { height: 48px; }
+
+.hero {
+  position: relative;
+  z-index: 5;
+  padding: 60px 20px;
+  text-align: center;
+}
+.hero span { color: #9bdcff; }
+
+.pill-row span {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+}
+
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
+  z-index: 5;
+  position: relative;
+}
+
+.tier {
+  min-width: 260px;
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(16px);
+}
+
+.calculator {
+  padding: 40px 20px;
+  max-width: 480px;
+  margin: auto;
+  z-index: 5;
+  position: relative;
+}
+
+.output {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+.gain { color: #6ee7ff; }
+
+.cta {
+  display: block;
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 40px;
+  text-align: center;
+  background: linear-gradient(90deg,#9bdcff,#b69cff);
+  color: black;
+  font-weight: 700;
+}
+
+footer {
+  text-align: center;
+  opacity: .6;
+  padding: 40px 0;
+}
+.watermark {
+  width: 180px;
+  opacity: .08;
+}
