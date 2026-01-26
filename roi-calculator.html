@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>GRT ROI Calculator</title>
+
+<link rel="stylesheet" href="roi-style.css">
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<canvas id="nodes"></canvas>
+
+<header class="top">
+  <img src="grt-logo-11.png" class="seal" />
+</header>
+
+<section class="hero">
+  <h1>Intelligence isn’t sold.<br><span>It’s architected.</span></h1>
+  <p>Quantify risk. Architect intelligence. Capture ROI.</p>
+
+  <div class="pill-row">
+    <span>Memory</span>
+    <span>Alignment</span>
+    <span>Reliability</span>
+  </div>
+</section>
+
+<section class="carousel">
+  <div class="tier active">
+    <h3>ARCHITECTURE AUDIT</h3>
+    <p>Expose failure & yield risk</p>
+    <strong>$25K</strong>
+  </div>
+
+  <div class="tier">
+    <h3>PRODUCTION GUARDIAN</h3>
+    <p>Live reliability oversight</p>
+    <strong>$15K / mo</strong>
+  </div>
+
+  <div class="tier">
+    <h3>FAB ELITE</h3>
+    <p>AI as core business asset</p>
+    <strong>$25K / mo</strong>
+  </div>
+</section>
+
+<section class="calculator">
+  <h2>ROI Simulator</h2>
+
+  <label>Fab Size</label>
+  <input type="range" id="fab" min="1" max="100" value="50"/>
+
+  <label>Failure Exposure ($M)</label>
+  <input type="range" id="risk" min="10" max="100" value="47"/>
+
+  <div class="output">
+    <div>
+      <small>Estimated Risk</small>
+      <strong>$<span id="riskOut">47</span>M</strong>
+    </div>
+    <div>
+      <small>Projected Savings</small>
+      <strong class="gain">$<span id="saveOut">24</span>M</strong>
+    </div>
+  </div>
+
+  <a class="cta" href="https://www.paypal.com" target="_blank">
+    Architect My Intelligence →
+  </a>
+</section>
+
+<footer>
+  <img src="grt-logo-05.png" class="watermark"/>
+  <p>© 2026 Ganesh Takwale · Production-Grade Intelligence</p>
+</footer>
+
+<script src="roi-data.js"></script>
+<script src="roi-calc.js"></script>
+<script src="roi-touch.js"></script>
+<script src="stars-bg.js"></script>
+<script src="nodes-bg.js"></script>
+
+</body>
+</html>
