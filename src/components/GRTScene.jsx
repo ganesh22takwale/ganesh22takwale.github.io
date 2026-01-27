@@ -1,15 +1,64 @@
 import { Canvas, useFrame } from "@react-three/fiber"
-import { OrbitControls, Environment, Float } from "@react-three/drei"
+import {
+  OrbitControls,
+  Environment,
+  Float,
+  shaderMaterial
+} from "@react-three/drei"
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
+import { extend } from "@react-three/fiber"
 import * as THREE from "three"
-import { useRef } from "react"
+import { useRef, useMemo } from "react"
 
+/* ================================
+   SHADER: ENERGY PULSE MATERIAL
+================================ */
+const EnergyMaterial = shaderMaterial(
+  { time: 0 },
+  `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  `
+    uniform float time;
+    varying vec2 vUv;
+
+    void main() {
+      float pulse = sin(vUv.y * 20.0 + time * 4.0) * 0.5 + 0.5;
+      vec3 color = vec3(0.2, 0.8, 1.0);
+      gl_FragColor = vec4(color, pulse);
+    }
+  `
+)
+
+extend({ EnergyMaterial })
+
+/* ================================
+   LOGO PLANE
+================================ */
 function Logo({ image, emissive, intensity }) {
   const mesh = useRef()
-  const texture = new THREE.TextureLoader().load(image)
+  const texture = useMemo(
+    () => new THREE.TextureLoader().load(image),
+    [image]
+  )
 
   useFrame((state) => {
-    mesh.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.15
+    const t = state.clock.elapsedTime
+
+    // Awakening animation
+    const scale = Math.min(t / 2, 1)
+    mesh.current.scale.setScalar(scale)
+
+    // Subtle intelligence motion
+    mesh.current.rotation.y = Math.sin(t * 0.4) * 0.15
+
+    // Mouse proximity reaction
+    mesh.current.rotation.x = state.mouse.y * 0.3
+    mesh.current.rotation.y += state.mouse.x * 0.4
   })
 
   return (
@@ -20,35 +69,47 @@ function Logo({ image, emissive, intensity }) {
         transparent
         emissive={new THREE.Color(emissive)}
         emissiveIntensity={intensity}
-        roughness={0.25}
-        metalness={0.8}
+        metalness={0.85}
+        roughness={0.2}
       />
     </mesh>
   )
 }
 
+/* ================================
+   ENERGY RING
+================================ */
 function EnergyRing() {
+  const ring = useRef()
+
+  useFrame((state) => {
+    ring.current.rotation.z += 0.002
+    ring.current.material.time = state.clock.elapsedTime
+  })
+
   return (
-    <mesh rotation={[Math.PI / 2, 0, 0]}>
-      <torusGeometry args={[2.3, 0.04, 32, 200]} />
-      <meshStandardMaterial
-        emissive="#7f5cff"
-        emissiveIntensity={3}
-        color="#00ffff"
-        metalness={1}
-        roughness={0.1}
-      />
+    <mesh ref={ring} rotation={[Math.PI / 2, 0, 0]}>
+      <torusGeometry args={[2.35, 0.045, 32, 200]} />
+      <energyMaterial transparent />
     </mesh>
   )
 }
 
+/* ================================
+   MAIN SCENE
+================================ */
 export default function GRTScene({ variant = "color" }) {
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={2} />
+    <Canvas
+      camera={{ position: [0, 0, 6], fov: 45 }}
+      gl={{ antialias: true, alpha: false }}
+    >
+      {/* Lighting */}
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[6, 6, 6]} intensity={2.2} />
 
-      <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.4}>
+      {/* Floating Intelligence Core */}
+      <Float speed={1.2} rotationIntensity={0.3} floatIntensity={0.4}>
         <Logo
           image={
             variant === "silver"
@@ -56,22 +117,29 @@ export default function GRTScene({ variant = "color" }) {
               : "/grt-logo-05.jpg"
           }
           emissive={variant === "silver" ? "#ffffff" : "#00ffff"}
-          intensity={variant === "silver" ? 0.8 : 1.6}
+          intensity={variant === "silver" ? 0.7 : 1.5}
         />
         <EnergyRing />
       </Float>
 
+      {/* Environment reflections */}
       <Environment preset="city" />
 
+      {/* Postprocessing Glow */}
       <EffectComposer>
         <Bloom
-          intensity={1.3}
+          intensity={1.25}
           luminanceThreshold={0.25}
           luminanceSmoothing={0.9}
         />
       </EffectComposer>
 
-      <OrbitControls enableZoom={false} enablePan={false} />
+      {/* Controls */}
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        enableRotate={false}
+      />
     </Canvas>
   )
 }
