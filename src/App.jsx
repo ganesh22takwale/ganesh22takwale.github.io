@@ -1,10 +1,17 @@
-import GRTScene from "./components/GRTScene"
+import Hero3D from "./components/Hero3D"
 
 export default function App() {
   return (
-    <div style={{ height: "100vh", background: "black" }}>
-      {/* Use variant="silver" for GRT-LOGO-11 */}
-      <GRTScene variant="color" />
-    </div>
+    <>
+      {/* Philosophy / CTA */}
+      <section id="philosophy">
+        <Hero3D variant="color" />
+      </section>
+
+      {/* Systems page */}
+      <section id="systems">
+        <Hero3D variant="silver" />
+      </section>
+    </>
   )
 }
