@@ -57,7 +57,35 @@
   <label>Failure Exposure ($M)</label>
   <input type="range" id="risk" min="10" max="100" value="47"/>
 
-  <div class="output">
+  <div class="output diagnostic-panel">
+
+<div>
+<small>Annual Risk Exposure</small>
+<strong>$<span id="riskOut">47</span>M</strong>
+</div>
+
+<div>
+<small>Preventable Loss</small>
+<strong class="gain">$<span id="saveOut">24</span>M</strong>
+</div>
+
+<div>
+<small>Architecture Prevention Value</small>
+<strong>$<span id="preventOut">0</span>M</strong>
+</div>
+
+<div>
+<small>Trust / Decision Integrity Value</small>
+<strong>$<span id="trustOut">0</span>M</strong>
+</div>
+
+<div style="margin-top:18px;font-size:22px">
+<small>Total Intelligence ROI</small>
+<strong class="gain">$<span id="totalOut">0</span>M</strong>
+</div>
+
+</div>
+
     <div>
       <small>Estimated Risk</small>
       <strong>$<span id="riskOut">47</span>M</strong>
