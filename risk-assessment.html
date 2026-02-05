@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Intelligence Risk Assessment</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="risk-body">
+
+<h1>Intelligence Risk Assessment</h1>
+
+<div class="risk-form">
+
+<label>System Scale</label>
+<select id="scale">
+<option value="1">Small</option>
+<option value="2">Medium</option>
+<option value="3">Enterprise</option>
+</select>
+
+<label>Downtime Cost / Hour ($)</label>
+<input type="number" id="downtime" value="50000">
+
+<label>Recovery Time (Hours)</label>
+<input type="number" id="recovery" value="4">
+
+<label>Human Intervention Cost ($)</label>
+<input type="number" id="human" value="15000">
+
+<button onclick="runRisk()">Calculate Risk Profile</button>
+
+</div>
+
+<div id="riskOutput" class="risk-output"></div>
+
+<script src="risk-assessment.js"></script>
+
+</body>
+</html>
 
