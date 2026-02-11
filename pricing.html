@@ -3,232 +3,335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Pricing | Intelligence Architected</title>
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8HQ1C1X28F');
-</script>
+<title>GRT Intelligence Commercialization Engine</title>
 
 <style>
-:root {
-  --bg1:#0b0f14;
-  --bg2:#151b2c;
-  --glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
-  --glow:#7dd3fc;
+:root{
+ --bg1:#030712;
+ --bg2:#020617;
+ --glass:rgba(255,255,255,.06);
+ --border:rgba(255,255,255,.14);
+ --accent:#7dd3fc;
 }
 
-* { box-sizing:border-box; }
+*{box-sizing:border-box}
 
-body {
-  margin:0;
-  font-family: Inter, system-ui, sans-serif;
-  background:
-    radial-gradient(circle at 20% 20%, #1f2a44, transparent 40%),
-    radial-gradient(circle at 80% 80%, #2b1f44, transparent 40%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
-  color:#e5e7eb;
-  overflow-x:hidden;
+body{
+ margin:0;
+ font-family:Inter,system-ui,sans-serif;
+ background:radial-gradient(circle at 20% 20%,#0b1a3a,transparent 40%),
+ linear-gradient(180deg,var(--bg1),var(--bg2));
+ color:#e2e8f0;
+ overflow-x:hidden;
 }
 
-/* subtle watermark */
-body::before {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("grt-logo-05.png") center/600px no-repeat;
-  opacity:0.04;
-  pointer-events:none;
+/* ===== WEBGL STYLE CANVAS BG ===== */
+
+#bgCanvas{
+ position:fixed;
+ inset:0;
+ z-index:-1;
 }
 
-/* floating light */
-.light {
-  position:fixed;
-  width:400px;
-  height:400px;
-  background:radial-gradient(circle, rgba(125,211,252,.25), transparent 60%);
-  filter:blur(40px);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
+/* ===== HEADER ===== */
+
+header{
+ text-align:center;
+ padding:30px;
 }
 
-header {
-  padding:28px;
-  text-align:center;
+header img{
+ width:70px;
+ filter:drop-shadow(0 0 20px rgba(125,211,252,.5));
 }
 
-header img {
-  width:64px;
-  filter:drop-shadow(0 0 18px rgba(255,255,255,.35));
-}
+/* ===== LAYOUT ===== */
 
-main {
-  max-width:1100px;
-  margin:auto;
-  padding:40px 20px 80px;
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:40px;
+main{
+ max-width:1200px;
+ margin:auto;
+ padding:40px 20px 100px;
+ display:grid;
+ grid-template-columns:1.2fr .8fr;
+ gap:50px;
 }
 
 @media(max-width:900px){
-  main{grid-template-columns:1fr;}
+ main{grid-template-columns:1fr;}
 }
 
-.hero h1 {
-  font-size:clamp(2rem,4vw,3.2rem);
-  font-weight:800;
-  line-height:1.1;
+/* ===== HERO ===== */
+
+.hero h1{
+ font-size:clamp(2rem,4vw,3.4rem);
+ font-weight:800;
 }
 
-.hero p {
-  max-width:520px;
-  opacity:.85;
-  margin-top:16px;
+.hero p{
+ max-width:520px;
+ opacity:.8;
+ margin-top:18px;
 }
 
-.pills span{
-  display:inline-block;
-  padding:8px 14px;
-  margin:14px 10px 0 0;
-  border:1px solid var(--border);
-  border-radius:999px;
-  font-size:.85rem;
+/* ===== CTA ===== */
+
+.cta{
+ display:inline-block;
+ margin-top:28px;
+ padding:16px 36px;
+ border-radius:999px;
+ background:linear-gradient(135deg,#7dd3fc,#a78bfa);
+ color:#020617;
+ font-weight:700;
+ text-decoration:none;
+ box-shadow:0 0 50px rgba(125,211,252,.45);
+ transition:.3s;
+}
+.cta:hover{transform:scale(1.05)}
+
+/* ===== GLASS PANELS ===== */
+
+.panel{
+ background:var(--glass);
+ border:1px solid var(--border);
+ border-radius:22px;
+ padding:28px;
+ backdrop-filter:blur(18px);
 }
 
-.cta {
-  display:inline-block;
-  margin-top:28px;
-  padding:16px 34px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#7dd3fc,#c084fc);
-  color:#020617;
-  font-weight:700;
-  text-decoration:none;
-  box-shadow:0 0 40px rgba(125,211,252,.45);
-  transition:.3s;
+/* ===== TIERS ===== */
+
+.tier{
+ padding:20px;
+ border-radius:18px;
+ border:1px solid var(--border);
+ margin-bottom:16px;
+ cursor:pointer;
+ transition:.35s;
+ position:relative;
+ overflow:hidden;
 }
 
-.cta:hover{transform:scale(1.05);}
-
-.panel {
-  background:var(--glass);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-  backdrop-filter:blur(14px);
+.tier:hover{
+ transform:translateY(-6px);
+ box-shadow:0 0 40px rgba(125,211,252,.25);
 }
 
-.panel h3 {
-  margin-top:0;
-  margin-bottom:18px;
+.tier.active{
+ border:1px solid var(--accent);
+ box-shadow:0 0 60px rgba(125,211,252,.4);
 }
 
-.tier {
-  padding:18px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  margin-bottom:14px;
-  transition:.3s;
+/* ===== ROI DISPLAY ===== */
+
+.roiBox{
+ margin-top:20px;
+ padding:20px;
+ border-radius:16px;
+ background:rgba(0,0,0,.3);
 }
 
-.tier:hover {
-  transform:translateY(-6px);
-  box-shadow:0 0 30px rgba(125,211,252,.25);
+/* ===== PROGRESS RING ===== */
+
+.ringWrap{
+ display:flex;
+ justify-content:center;
+ margin-top:30px;
 }
 
-.tier strong {
-  font-size:1.1rem;
+.ringText{
+ position:absolute;
+ text-align:center;
+ font-weight:700;
 }
 
-.roi {
-  color:#7dd3fc;
-  font-weight:600;
-  margin-top:6px;
+/* ===== EXPORT BUTTON ===== */
+
+.exportBtn{
+ margin-top:20px;
+ padding:12px 22px;
+ border-radius:12px;
+ border:1px solid var(--border);
+ background:rgba(255,255,255,.05);
+ color:white;
+ cursor:pointer;
+}
+.exportBtn:hover{
+ border-color:var(--accent);
 }
 
-footer {
-  text-align:center;
-  opacity:.6;
-  padding:40px 20px;
+/* ===== PRINT EXPORT MODE ===== */
+
+@media print{
+ body{
+  background:white;
+  color:black;
+ }
+ .noPrint{display:none;}
 }
 </style>
 </head>
 
 <body>
-<div class="light" id="light"></div>
+
+<canvas id="bgCanvas"></canvas>
 
 <header>
-  <img src="grt-logo-11.png" alt="GRT Authority Seal">
+<img src="grt-logo-11.png">
 </header>
 
 <main>
-  <section class="hero">
-    <h1>Intelligence isn’t sold.<br>It’s architected.</h1>
-    <p>
-      Production-grade AI systems designed for
-      memory, alignment and long-term reliability.
-    </p>
 
-    <div class="pills">
-      <span>Memory</span>
-      <span>Alignment</span>
-      <span>Reliability</span>
-    </div>
+<!-- LEFT SIDE -->
+<section class="hero">
 
-    <a class="cta"
-       href="https://www.linkedin.com/in/ganesh-takwale/"
-       target="_blank">
-      Architect My Intelligence →
-    </a>
-  </section>
+<h1>Intelligence isn’t sold.<br>It’s architected.</h1>
 
-  <aside class="panel">
-    <h3>Engagement Models</h3>
+<p>
+Enterprise intelligence commercialization aligned
+to production risk, architecture maturity and
+decision trust.
+</p>
 
-    <div class="tier">
-      <strong>3 Months</strong><br>
-      Architecture Stabilization
-      <div class="roi">↑ ~120% ROI potential</div>
-    </div>
+<a class="cta" href="architecture.html">
+Architect My Intelligence →
+</a>
 
-    <div class="tier">
-      <strong>6 Months</strong><br>
-      Production Intelligence Stack
-      <div class="roi">↑ ~260% ROI potential</div>
-    </div>
+<div class="ringWrap">
+<svg width="160" height="160">
+ <circle cx="80" cy="80" r="70"
+ stroke="rgba(255,255,255,.1)"
+ stroke-width="10"
+ fill="none"/>
 
-    <div class="tier">
-      <strong>12 Months</strong><br>
-      AI as Core Business Asset
-      <div class="roi">↑ ~420% ROI potential</div>
-    </div>
+ <circle id="progressRing"
+ cx="80" cy="80" r="70"
+ stroke="#7dd3fc"
+ stroke-width="10"
+ fill="none"
+ stroke-dasharray="440"
+ stroke-dashoffset="440"
+ stroke-linecap="round"
+ transform="rotate(-90 80 80)"/>
+</svg>
 
-    <p style="font-size:.85rem;opacity:.7;margin-top:10px;">
-      ROI based on reliability uplift, failure reduction,
-      and reusable intelligence architecture.
-    </p>
-  </aside>
+<div class="ringText" id="ringLabel">0%</div>
+</div>
+
+</section>
+
+<!-- RIGHT SIDE -->
+<aside class="panel">
+
+<h3>Select Intelligence Engagement</h3>
+
+<div class="tier active" data-roi="120">
+<strong>3 Months</strong><br>
+Architecture Stabilization
+</div>
+
+<div class="tier" data-roi="260">
+<strong>6 Months</strong><br>
+Production Intelligence Stack
+</div>
+
+<div class="tier" data-roi="420">
+<strong>12 Months</strong><br>
+AI as Core Business Asset
+</div>
+
+<div class="roiBox">
+<div>Projected ROI Uplift</div>
+<h2 id="roiValue">120%</h2>
+</div>
+
+<button class="exportBtn noPrint" onclick="window.print()">
+Export Executive Summary
+</button>
+
+</aside>
+
 </main>
 
-<footer>
-  © 2026 Ganesh Takwale · Production-Grade Intelligence<br>
-  <a href="https://www.linkedin.com/in/ganesh-takwale/" target="_blank" style="color:#7dd3fc;text-decoration:none;">
-    linkedin.com/in/ganesh-takwale
-  </a>
-</footer>
-
 <script>
-const light=document.getElementById("light");
-window.addEventListener("pointermove",e=>{
-  light.style.left=e.clientX+"px";
-  light.style.top=e.clientY+"px";
+
+/* ===== ROI TIER SELECTION ===== */
+
+const tiers=document.querySelectorAll(".tier");
+const roiText=document.getElementById("roiValue");
+const ring=document.getElementById("progressRing");
+const ringLabel=document.getElementById("ringLabel");
+
+function setProgress(percent){
+ const circumference=440;
+ const offset=circumference-(percent/100)*circumference;
+ ring.style.strokeDashoffset=offset;
+ ringLabel.innerText=Math.round(percent)+"%";
+}
+
+tiers.forEach(t=>{
+ t.onclick=()=>{
+  tiers.forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+
+  let roi=t.dataset.roi;
+  roiText.innerText=roi+"%";
+
+  let maturity=Math.min(roi/4.2,100);
+  setProgress(maturity);
+ }
 });
+
+setProgress(30);
+
+/* ===== PARTICLE INTELLIGENCE FIELD ===== */
+
+const canvas=document.getElementById("bgCanvas");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<90;i++){
+ particles.push({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  vx:(Math.random()-.5)*0.4,
+  vy:(Math.random()-.5)*0.4
+ });
+}
+
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ ctx.fillStyle="rgba(125,211,252,.6)";
+
+ particles.forEach(p=>{
+  p.x+=p.vx;
+  p.y+=p.vy;
+
+  if(p.x<0||p.x>canvas.width)p.vx*=-1;
+  if(p.y<0||p.y>canvas.height)p.vy*=-1;
+
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,1.4,0,Math.PI*2);
+  ctx.fill();
+ });
+
+ requestAnimationFrame(draw);
+}
+
+draw();
+
+window.addEventListener("resize",()=>{
+ canvas.width=window.innerWidth;
+ canvas.height=window.innerHeight;
+});
+
 </script>
+
 </body>
 </html>
