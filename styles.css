@@ -8,9 +8,13 @@ GLOBAL DESIGN SYSTEM
 --muted:#9aa4b2;
 --glass:rgba(255,255,255,.04);
 --border:rgba(255,255,255,.12);
+--accent1:#7dd3fc;
+--accent2:#e3a7ff;
 }
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
@@ -27,10 +31,15 @@ BACKGROUND SYSTEM
 canvas{
 position:fixed;
 inset:0;
+}
+
+#stars{
 z-index:-4;
 }
 
-#network{z-index:-3}
+#network{
+z-index:-3;
+}
 
 /* =========================================
 AUTHORITY SYMBOL
@@ -69,6 +78,10 @@ border-bottom:1px solid var(--border);
 z-index:50;
 }
 
+.logo-ignite{
+height:36px;
+}
+
 .header nav a{
 color:var(--fg);
 text-decoration:none;
@@ -79,9 +92,8 @@ transition:.3s;
 
 .header nav a:hover{
 opacity:1;
+color:var(--accent1);
 }
-
-.logo-ignite{height:36px}
 
 /* =========================================
 HERO
@@ -97,6 +109,7 @@ text-align:center;
 .hero h1{
 font-size:clamp(42px,6vw,72px);
 font-weight:800;
+letter-spacing:-1px;
 }
 
 .hero p{
@@ -259,47 +272,33 @@ transform:translateY(-6px);
 }
 
 /* =========================================
-GENERIC GRID SYSTEM (NEW UPGRADE)
+GENERIC GRID SYSTEM
 ========================================= */
 
 .grid{
-
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
-
 }
 
 .card{
-
 background:#0d1320;
 padding:25px;
 border-radius:10px;
 border:1px solid #1e2a38;
-
 opacity:0;
 transform:translateY(40px);
 transition:0.6s;
+}
 
+.card.visible{
+opacity:1;
+transform:translateY(0);
 }
 
 .metrics{
-
 display:flex;
 gap:30px;
-
-}
-.system-card{
-padding:30px;
-border-radius:18px;
-border:1px solid var(--border);
-background:var(--glass);
-box-shadow:0 0 40px rgba(0,0,0,.5);
-transition:.35s ease;
-}
-
-.system-card:hover{
-transform:translateY(-6px);
 }
 
 /* =========================================
@@ -328,14 +327,8 @@ border-radius:16px;
 border:1px solid rgba(125,211,252,.25);
 }
 
-.system-card.decision:hover{
-box-shadow:
-0 0 50px rgba(125,211,252,.65),
-0 0 120px rgba(227,167,255,.45);
-}
-
 /* =========================================
-ROI MINI V4 PANEL
+ROI MINI PANEL
 ========================================= */
 
 .roi-preview{
@@ -360,9 +353,6 @@ rgba(10,15,30,.85)
 padding:22px;
 border-radius:16px;
 border:1px solid rgba(125,211,252,.25);
-box-shadow:
-inset 0 0 25px rgba(125,211,252,.12),
-0 0 40px rgba(0,0,0,.6);
 }
 
 .roi-mini-card label{
@@ -384,91 +374,6 @@ color:var(--fg);
 .mini-roi-output{
 margin-top:30px;
 font-size:1.1rem;
-}
-
-/* =========================================
-RELIABILITY LAB NEON CORE
-========================================= */
-
-.lab-neon-core{
-position:fixed;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-pointer-events:none;
-z-index:-3;
-}
-
-.lab-neon-core img{
-width:460px;
-opacity:.08;
-filter:
-drop-shadow(0 0 40px rgba(125,211,252,.45))
-drop-shadow(0 0 90px rgba(59,130,246,.35));
-animation:neonPulse 6s ease-in-out infinite;
-}
-
-@keyframes neonPulse{
-0%,100%{
-opacity:.06;
-}
-50%{
-opacity:.14;
-}
-}
-
-/* =========================================
-DIAGNOSTIC PANEL SYSTEM
-========================================= */
-
-.diagnostic-panel{
-max-width:760px;
-margin:60px auto 0;
-padding:26px 28px;
-border-radius:18px;
-background:
-linear-gradient(
-180deg,
-rgba(20,30,60,.55),
-rgba(10,15,30,.85)
-);
-border:1px solid rgba(125,211,252,.25);
-box-shadow:
-inset 0 0 30px rgba(125,211,252,.12),
-0 0 50px rgba(0,0,0,.6);
-}
-
-.score-row{
-display:flex;
-justify-content:space-between;
-font-weight:600;
-}
-
-.score-bar{
-height:10px;
-background:rgba(255,255,255,.08);
-border-radius:999px;
-margin:14px 0 18px;
-overflow:hidden;
-}
-
-.score-fill{
-height:100%;
-width:72%;
-background:
-linear-gradient(
-90deg,
-rgba(125,211,252,.9),
-rgba(227,167,255,.9)
-);
-box-shadow:0 0 25px rgba(125,211,252,.6);
-transition:width .6s ease;
-}
-
-.diagnostic-text{
-color:var(--muted);
-line-height:1.6;
 }
 
 /* =========================================
