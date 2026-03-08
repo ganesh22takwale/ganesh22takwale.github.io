@@ -5,58 +5,79 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
+const PARTICLE_COUNT = 90;
+const MAX_DISTANCE = 150;
 
-const PARTICLE_COUNT = 80;
-const MAX_DISTANCE = 140;
+let mouse = {
+x: canvas.width/2,
+y: canvas.height/2
+};
 
-for (let i = 0; i < PARTICLE_COUNT; i++) {
+window.addEventListener("mousemove", e => {
+mouse.x = e.clientX;
+mouse.y = e.clientY;
+});
+
+window.addEventListener("touchmove", e => {
+mouse.x = e.touches[0].clientX;
+mouse.y = e.touches[0].clientY;
+});
+
+for(let i=0;i<PARTICLE_COUNT;i++){
 
 particles.push({
-x: Math.random() * canvas.width,
-y: Math.random() * canvas.height,
-vx: (Math.random() - 0.5) * 0.6,
-vy: (Math.random() - 0.5) * 0.6
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5)*0.4,
+vy:(Math.random()-0.5)*0.4
 });
 
 }
 
-function drawParticles() {
+function draw(){
 
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-for (let i = 0; i < particles.length; i++) {
-
-let p = particles[i];
+particles.forEach(p => {
 
 p.x += p.vx;
 p.y += p.vy;
 
-if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+if(p.x<0 || p.x>canvas.width) p.vx*=-1;
+if(p.y<0 || p.y>canvas.height) p.vy*=-1;
+
+let dx = p.x - mouse.x;
+let dy = p.y - mouse.y;
+let dist = Math.sqrt(dx*dx + dy*dy);
+
+let glow = Math.max(0,1 - dist/180);
 
 ctx.beginPath();
-ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-ctx.fillStyle = "#7dd3fc";
+ctx.arc(p.x,p.y,2+glow*2,0,Math.PI*2);
+
+ctx.fillStyle = `rgba(125,211,252,${0.6+glow})`;
 ctx.fill();
 
-for (let j = i + 1; j < particles.length; j++) {
+});
 
-let p2 = particles[j];
+for(let i=0;i<particles.length;i++){
 
-let dx = p.x - p2.x;
-let dy = p.y - p2.y;
+for(let j=i+1;j<particles.length;j++){
 
-let distance = Math.sqrt(dx * dx + dy * dy);
+let dx = particles[i].x - particles[j].x;
+let dy = particles[i].y - particles[j].y;
+let dist = Math.sqrt(dx*dx + dy*dy);
 
-if (distance < MAX_DISTANCE) {
+if(dist < MAX_DISTANCE){
+
+let opacity = 1 - dist/MAX_DISTANCE;
 
 ctx.beginPath();
-ctx.moveTo(p.x, p.y);
-ctx.lineTo(p2.x, p2.y);
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(particles[j].x,particles[j].y);
 
-ctx.strokeStyle =
-"rgba(125,211,252," + (1 - distance / MAX_DISTANCE) + ")";
-
+ctx.strokeStyle = `rgba(125,211,252,${opacity*.5})`;
+ctx.lineWidth = 1;
 ctx.stroke();
 
 }
@@ -65,13 +86,13 @@ ctx.stroke();
 
 }
 
-requestAnimationFrame(drawParticles);
+requestAnimationFrame(draw);
 
 }
 
-drawParticles();
+draw();
 
-window.addEventListener("resize", () => {
+window.addEventListener("resize", ()=>{
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
