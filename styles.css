@@ -118,6 +118,26 @@ HEADER (FIXED + CLEAN)
   padding:10px 40px;
   background:rgba(5,7,12,.9);
 }
+/* =========================
+AUTHORITY LOGO FIX
+========================= */
+
+.authority-layer{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.authority-layer img{
+  max-width:500px;
+  width:60%;
+  opacity:0.05;   /* VERY IMPORTANT */
+  filter:blur(2px);
+}
 
 /* LOGO FIX (IMPORTANT) */
 .logo-ignite{
