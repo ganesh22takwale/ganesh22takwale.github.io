@@ -1,56 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<title>AI Engineering Insights</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Engineering Insights — GRT</title>
+
 <link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <h2>GRT Intelligence</h2>
   <nav>
     <a href="index.html">Home</a>
     <a href="architecture.html">Architecture</a>
     <a href="systems.html">Systems</a>
+    <a href="case-intelligence.html">Cases</a>
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h1>AI Engineering Insights</h1>
-  <p>Deep thinking on reliability, intelligence systems, and architecture design.</p>
+  <p class="section-sub">
+    Deep thinking on reliability, intelligence systems, and architecture design.
+  </p>
 </section>
 
-<section class="grid">
+<!-- FEATURED INSIGHT -->
+<section class="panel fade-in">
 
-  <div class="card">
-    <h3>Reliability Engineering</h3>
-    <p>
-      Modern AI systems require continuous monitoring, validation pipelines,
-      and failure containment strategies to maintain operational trust.
-    </p>
-  </div>
+  <div class="featured-card">
 
-  <div class="card">
-    <h3>Decision Systems</h3>
-    <p>
-      Intelligence is not prediction — it is structured decision-making under uncertainty.
-    </p>
-  </div>
+    <div class="tag">Featured Insight</div>
 
-  <div class="card">
-    <h3>Risk Architecture</h3>
+    <h2>
+      Most AI Systems Don’t Fail Because of Models — They Fail Because of Architecture
+    </h2>
+
     <p>
-      Risk must be designed at system level, not patched after deployment.
+      Production AI is not about accuracy — it’s about survivability.  
+      Without observability, fallback logic, and structured decision systems, even the most advanced models collapse under real-world conditions.
     </p>
+
   </div>
 
 </section>
 
+<!-- INSIGHTS GRID -->
+<section class="panel">
+
+  <div class="grid">
+
+    <div class="card fade-in">
+      <span class="tag">Reliability</span>
+      <h3>Reliability Engineering</h3>
+      <p>
+        Continuous monitoring, validation pipelines, and failure containment define real AI systems.
+      </p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="tag">Decision</span>
+      <h3>Decision Systems</h3>
+      <p>
+        Intelligence is structured decision-making under uncertainty — not prediction.
+      </p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="tag">Risk</span>
+      <h3>Risk Architecture</h3>
+      <p>
+        Risk must be designed at system level, not patched post-deployment.
+      </p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="tag">Observability</span>
+      <h3>System Observability</h3>
+      <p>
+        If you cannot see failure early, your system is already broken.
+      </p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="tag">AI Ops</span>
+      <h3>AI in Production</h3>
+      <p>
+        Deploying AI is easy. Maintaining trust in production is the real challenge.
+      </p>
+    </div>
+
+    <div class="card fade-in">
+      <span class="tag">Future</span>
+      <h3>Future of Intelligence</h3>
+      <p>
+        Systems will shift from models → architectures → intelligence platforms.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- THINKING LAYERS (VERY PREMIUM SECTION) -->
+<section class="panel fade-in">
+
+  <h2>Intelligence Thinking Layers</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Signal Layer</h3>
+      <p>Raw data, inputs, noise filtering.</p>
+    </div>
+
+    <div class="card">
+      <h3>Reasoning Layer</h3>
+      <p>Structured thinking and decision logic.</p>
+    </div>
+
+    <div class="card">
+      <h3>Execution Layer</h3>
+      <p>Real-world action with fallback strategies.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="panel fade-in">
+
+  <h2>Build Real Intelligence Systems</h2>
+
+  <p class="section-sub">
+    Move beyond experiments. Architect systems that survive production.
+  </p>
+
+  <a href="roi-calculator.html" class="cta">
+    Start Architecture →
+  </a>
+
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Ganesh Takwale — AI Engineering</p>
+  © <span id="year"></span> Ganesh Takwale — AI Engineering
 </footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Scroll animation */
+const els = document.querySelectorAll(".fade-in");
+window.addEventListener("scroll", () => {
+  els.forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 80){
+      el.classList.add("visible");
+    }
+  });
+});
+</script>
 
 </body>
 </html>
