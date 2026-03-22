@@ -1,29 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Case Intelligence — GRT</title>
+
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">GRT</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="philosophy.html">Philosophy</a>
+    <a href="architecture.html">Architecture</a>
+    <a href="systems.html">Systems</a>
+    <a href="lab.html">Reliability Lab</a>
+    <a href="case-intelligence.html">Case Intelligence</a>
+    <a href="insights.html">Insights</a>
+  </nav>
+</header>
+
+<!-- HERO -->
 <section class="hero">
+
   <h1>Case Intelligence</h1>
-  <p>Applying AI systems to real-world problems.</p>
-</section>
 
-<section class="grid">
-
-  <div class="card">
-    <h3>Fraud Detection</h3>
-    <p>
-      Detect anomalies in financial systems using probabilistic intelligence models.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Autonomous Systems</h3>
-    <p>
-      Build reliable frameworks for AI-driven autonomous decision making.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Predictive Risk</h3>
-    <p>
-      Anticipate failures before they occur using structured risk intelligence.
-    </p>
-  </div>
+  <p class="section-sub">
+    Real-world intelligence systems engineered for reliability, not demos.
+  </p>
 
 </section>
+
+<!-- PROBLEM STORY -->
+<section class="panel fade-in">
+
+  <h2>Why Most AI Systems Fail in Production</h2>
+
+  <p class="section-sub">
+    AI doesn't fail because of models — it fails because of architecture.
+    These systems demonstrate how reliability-first thinking prevents collapse.
+  </p>
+
+</section>
+
+<!-- USE CASE GRID -->
+<section class="panel">
+
+  <div class="grid">
+
+    <!-- CARD 1 -->
+    <div class="card fade-in">
+
+      <h3>Fraud Detection</h3>
+
+      <p>
+        Detect financial anomalies in real-time using probabilistic reasoning and signal monitoring.
+      </p>
+
+      <ul>
+        <li>Real-time anomaly detection</li>
+        <li>Adaptive thresholds</li>
+        <li>False-positive reduction</li>
+      </ul>
+
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card fade-in">
+
+      <h3>Autonomous Systems</h3>
+
+      <p>
+        Reliability frameworks for AI-driven decision systems operating in uncertain environments.
+      </p>
+
+      <ul>
+        <li>Fallback decision layers</li>
+        <li>Confidence scoring</li>
+        <li>System observability</li>
+      </ul>
+
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card fade-in">
+
+      <h3>Predictive Risk</h3>
+
+      <p>
+        Forecast risk surfaces before failure occurs using structured intelligence systems.
+      </p>
+
+      <ul>
+        <li>Failure prediction</li>
+        <li>Risk modeling</li>
+        <li>Preventive insights</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- VALUE SECTION -->
+<section class="panel fade-in">
+
+  <h2>What Makes GRT Different</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Architecture First</h3>
+      <p>We design systems that survive production, not demos.</p>
+    </div>
+
+    <div class="card">
+      <h3>Reliability Core</h3>
+      <p>Failure is expected — systems are built to handle it.</p>
+    </div>
+
+    <div class="card">
+      <h3>Decision Integrity</h3>
+      <p>Every output is structured, explainable, and stable.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="panel fade-in">
+
+  <h2>Build Your Intelligence System</h2>
+
+  <p class="section-sub">
+    Move from experimental AI to production-ready intelligence architecture.
+  </p>
+
+  <a href="roi-calculator.html" class="cta">
+    Start Architecture → 
+  </a>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © <span id="year"></span> Global Reliability Technology
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Scroll animation */
+const els = document.querySelectorAll(".fade-in");
+window.addEventListener("scroll", () => {
+  els.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 80){
+      el.classList.add("visible");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
