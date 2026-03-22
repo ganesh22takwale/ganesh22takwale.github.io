@@ -531,3 +531,91 @@ TAG SYSTEM (PRO LOOK)
   background:rgba(124,92,255,.2);
   color:#c9bfff;
 }
+
+/* =========================
+ARCHITECTURE HERO
+========================= */
+
+.architecture-hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:80vh;
+  padding:140px 60px 40px;
+  gap:40px;
+}
+
+.arch-left{
+  max-width:500px;
+}
+
+.arch-left h1{
+  font-size:clamp(40px,5vw,64px);
+  margin-bottom:20px;
+}
+
+.arch-tags span{
+  display:inline-block;
+  margin:10px 10px 0 0;
+  padding:6px 14px;
+  border-radius:20px;
+  background:rgba(124,92,255,.2);
+}
+
+/* =========================
+3D ORB (FUTURE FEEL)
+========================= */
+
+.arch-right{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.orb{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle, var(--accent), transparent 60%);
+  filter:blur(20px);
+  animation:float 6s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+/* =========================
+FLOW SYSTEM
+========================= */
+
+.flow{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+
+.flow-box{
+  padding:14px 24px;
+  border-radius:12px;
+  background:var(--glass);
+  border:1px solid var(--border);
+}
+
+/* =========================
+MOBILE FIX
+========================= */
+
+@media(max-width:768px){
+
+  .architecture-hero{
+    flex-direction:column;
+    text-align:center;
+    padding:120px 20px;
+  }
+
+}
