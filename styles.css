@@ -424,3 +424,36 @@ grid-template-columns:1fr;
 }
 
 }
+
+styles.css/* ===== SCROLL ANIMATION ===== */
+
+.fade-in{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s ease;
+}
+
+.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== HOVER GLOW ===== */
+
+.card{
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent, rgba(124,92,255,.2), transparent);
+  opacity:0;
+  transition:.4s;
+}
+
+.card:hover::before{
+  opacity:1;
+}
