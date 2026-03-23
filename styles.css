@@ -404,3 +404,66 @@ MOBILE
   }
 
 }
+/* =========================
+AI NEURAL SYSTEM SECTION
+========================= */
+
+.systems-ai{
+  text-align:center;
+  position:relative;
+}
+
+.neural-container{
+  position:relative;
+  height:400px;
+  margin-top:60px;
+}
+
+.neural-node{
+  position:absolute;
+  left:var(--x);
+  top:var(--y);
+
+  transform:translate(-50%,-50%);
+  padding:12px 20px;
+  border-radius:20px;
+
+  background:rgba(124,92,255,.15);
+  border:1px solid var(--border);
+
+  backdrop-filter:blur(10px);
+
+  font-size:14px;
+  transition:.3s;
+
+  animation:floatNode 6s infinite ease-in-out;
+}
+
+@keyframes floatNode{
+  0%,100%{transform:translate(-50%,-50%) translateY(0)}
+  50%{transform:translate(-50%,-50%) translateY(-10px)}
+}
+
+.neural-node:hover{
+  background:rgba(124,92,255,.3);
+  box-shadow:0 0 30px rgba(124,92,255,.6);
+  transform:translate(-50%,-50%) scale(1.1);
+}
+
+.neural-lines{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+.neural-lines line{
+  stroke:rgba(0,212,255,.3);
+  stroke-width:1.5;
+  stroke-dasharray:6;
+  animation:flowLine 6s linear infinite;
+}
+
+@keyframes flowLine{
+  0%{stroke-dashoffset:0}
+  100%{stroke-dashoffset:100}
+}
