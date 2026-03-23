@@ -668,3 +668,151 @@ AI LAB UI (HIGH-END)
     grid-template-columns:1fr;
   }
 }
+/* =========================
+CINEMATIC AI LAB UI
+========================= */
+
+.lab-body{
+  margin:0;
+  background:#02040a;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+.lab-bg{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(0,212,255,.15), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(124,92,255,.15), transparent 40%);
+  animation:bgMove 12s infinite alternate;
+  z-index:-2;
+}
+
+@keyframes bgMove{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-40px,-30px)}
+}
+
+/* CONTAINER */
+
+.lab-container{
+  max-width:1200px;
+  margin:80px auto;
+  padding:20px;
+}
+
+/* TITLE */
+
+.lab-title{
+  font-size:52px;
+  font-weight:800;
+  background:linear-gradient(90deg,#00d4ff,#7c5cff);
+  -webkit-background-clip:text;
+  color:transparent;
+  margin-bottom:20px;
+}
+
+/* NAV */
+
+.lab-nav{
+  margin-bottom:40px;
+}
+
+.lab-nav a{
+  margin-right:20px;
+  color:#8b949e;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.lab-nav a:hover{
+  color:#00d4ff;
+}
+
+/* GRID */
+
+.lab-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* CARD */
+
+.lab-card{
+  padding:24px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(14px);
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+/* GLOW EFFECT */
+
+.lab-card.glow::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,rgba(0,212,255,.3),transparent);
+  opacity:0;
+  transition:.5s;
+}
+
+.lab-card.glow:hover::before{
+  opacity:1;
+}
+
+.lab-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 40px rgba(0,212,255,.2);
+}
+
+/* SIZES */
+
+.lab-card.big{
+  grid-column:span 2;
+}
+
+.lab-card.wide{
+  grid-column:span 3;
+}
+
+/* TEXT */
+
+.lab-card h2{
+  margin-bottom:10px;
+}
+
+.lab-card p{
+  color:#8b949e;
+}
+
+/* METER */
+
+.lab-meter{
+  height:6px;
+  margin-top:20px;
+  border-radius:10px;
+  background:linear-gradient(90deg,#00d4ff,#7c5cff);
+  animation:meter 3s infinite;
+}
+
+@keyframes meter{
+  0%{width:20%}
+  50%{width:80%}
+  100%{width:40%}
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+  .lab-grid{
+    grid-template-columns:1fr;
+  }
+}
