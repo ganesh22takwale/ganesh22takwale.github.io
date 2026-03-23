@@ -1,25 +1,65 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title>AI Lab Dashboard</title>
-<link rel="stylesheet" href="../assets/ai-lab.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Research Lab</title>
+
+<link rel="stylesheet" href="../styles.css">
+
 </head>
 
-<body>
+<body class="lab-body">
 
-<h1>AI Research Lab</h1>
+<div class="lab-container">
 
-<nav>
+  <h1 class="lab-title">AI Research Lab</h1>
 
-<a href="dashboard.html">Dashboard</a>
-<a href="neural-training.html">Neural Training</a>
-<a href="system-map.html">System Map</a>
-<a href="vector-search.html">Vector Search</a>
+  <div class="lab-nav">
+    <a href="#">Dashboard</a>
+    <a href="#">Neural Training</a>
+    <a href="#">System Map</a>
+    <a href="#">Vector Search</a>
+  </div>
 
-</nav>
+  <!-- GRID -->
+  <div class="lab-grid">
 
-<p>Welcome to the AI research platform.</p>
+    <div class="lab-card big">
+      <h2>System Status</h2>
+      <p>All core systems operational</p>
+      <div class="lab-meter"></div>
+    </div>
+
+    <div class="lab-card">
+      <h2>Failure Rate</h2>
+      <p>0.02%</p>
+    </div>
+
+    <div class="lab-card">
+      <h2>Temperature</h2>
+      <p>225°C</p>
+    </div>
+
+    <div class="lab-card">
+      <h2>AI Confidence</h2>
+      <p>94%</p>
+    </div>
+
+    <div class="lab-card wide">
+      <h2>Weibull Analysis</h2>
+      <p>Predictive failure modeling active</p>
+    </div>
+
+    <div class="lab-card wide">
+      <h2>System Intelligence Feed</h2>
+      <p>Real-time architecture signals flowing</p>
+    </div>
+
+  </div>
+
+</div>
 
 </body>
 </html>
