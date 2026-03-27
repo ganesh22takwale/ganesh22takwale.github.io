@@ -826,6 +826,24 @@ AI SIGNAL NETWORK
   z-index:-1;
   opacity:0.6;
 }
+/* ENERGY MODE */
+body.energy-mode {
+  background: radial-gradient(circle, #020617, #000);
+}
+
+/* PREMIUM MODE */
+body.premium-mode {
+  background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+/* LOGO STYLE */
+.logo-premium {
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+}
+
+.logo-energy {
+  filter: drop-shadow(0 0 20px cyan);
+}
 
 /* glow pulse */
 
