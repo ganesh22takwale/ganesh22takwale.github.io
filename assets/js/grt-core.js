@@ -91,3 +91,8 @@ function draw(){
 }
 
 draw();
+
+const isMobile = window.innerWidth < 768;
+
+// reduce load
+let particleCount = isMobile ? 60 : 140;
