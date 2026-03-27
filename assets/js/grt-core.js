@@ -6,6 +6,13 @@ canvas.style.top = 0;
 canvas.style.left = 0;
 canvas.style.zIndex = "-2";
 
+const logo = new Image();
+
+// choose logo dynamically
+logo.src = window.GRT_CONFIG.mode === "energy"
+  ? window.GRT_CONFIG.coreLogo
+  : window.GRT_CONFIG.premiumLogo;
+
 const ctx = canvas.getContext("2d");
 
 function resize(){
