@@ -3,16 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AI Research Lab</title>
 
-<link rel="stylesheet" href="../styles.css">
-</head>
-<script src="network.js"></script>
-<body class="lab-body">
+<style>
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  overflow-x: hidden;
+  color: white;
+}
 
-<div class="lab-bg"></div>
-<div class="lab-bg"></div>
+/* Animated gradient overlay */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, #00f5ff33, transparent),
+              radial-gradient(circle at 70% 70%, #ff00ff22, transparent);
+  animation: moveBg 10s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes moveBg {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(-10%, -10%); }
+}
+
+/* ===== LAYOUT ===== */
+.lab-container {
+  padding: 40px;
+}
+
+.lab-title {
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00f5ff, #7a7aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* NAV */
+.lab-nav {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.lab-nav a {
+  margin-right: 20px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.lab-nav a:hover {
+  opacity: 1;
+}
+
+/* GRID */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ===== GLASS CARD ===== */
+.lab-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.lab-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0,255,255,0.2);
+}
+
+/* glow effect */
+.lab-card::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: linear-gradient(120deg, transparent, #00f5ff33, transparent);
+  transform: rotate(25deg);
+  top: -50%;
+  left: -50%;
+  animation: shine 6s infinite;
+}
+
+@keyframes shine {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+.big { grid-column: span 2; }
+.wide { grid-column: span 2; }
+
+/* ===== PROGRESS BAR ===== */
+.lab-meter {
+  height: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.lab-meter span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f5ff, #7a7aff);
+  animation: loadBar 2s forwards;
+}
+
+@keyframes loadBar {
+  to { width: 92%; }
+}
+
+/* ===== SINE WAVE (MATH MAGIC) ===== */
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 60px;
+  background: linear-gradient(transparent, rgba(0,255,255,0.2));
+  animation: waveMove 6s linear infinite;
+  border-radius: 50%;
+  filter: blur(8px);
+}
+
+@keyframes waveMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.value {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* subtle pulse animation */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+</style>
+</head>
+
+<body>
 
 <div class="lab-container">
 
@@ -27,49 +179,74 @@
 
   <div class="lab-grid">
 
-    <div class="lab-card glow big">
+    <!-- SYSTEM STATUS -->
+    <div class="lab-card big">
       <h2>System Status</h2>
-      <p>All core systems operational</p>
-      <div class="lab-meter"></div>
+      <p class="pulse">All core systems operational</p>
+      <div class="lab-meter"><span></span></div>
+      <div class="wave"></div>
     </div>
 
-    <div class="lab-card glow">
+    <!-- FAILURE -->
+    <div class="lab-card">
       <h2>Failure Rate</h2>
-      <p>0.02%</p>
+      <div class="value">0.02%</div>
     </div>
 
-    <div class="lab-card glow">
+    <!-- TEMP -->
+    <div class="lab-card">
       <h2>Temperature</h2>
-      <p>225°C</p>
+      <div class="value">225°C</div>
     </div>
 
-    <div class="lab-card glow">
+    <!-- CONFIDENCE -->
+    <div class="lab-card">
       <h2>AI Confidence</h2>
-      <p>94%</p>
+      <div class="value">94%</div>
     </div>
 
-    <div class="lab-card glow wide">
+    <!-- WEIBULL -->
+    <div class="lab-card wide">
       <h2>Weibull Analysis</h2>
       <p>Predictive failure modeling active</p>
+      <canvas id="chart" height="80"></canvas>
     </div>
 
-    <div class="lab-card glow wide">
+    <!-- FEED -->
+    <div class="lab-card wide">
       <h2>System Intelligence Feed</h2>
       <p>Real-time architecture signals flowing</p>
     </div>
 
   </div>
-
 </div>
 
-<script src="../assets/js/config.js"></script>
-<script src="../assets/js/gsap.min.js"></script>
+<script>
+/* ===== SIMPLE MATH GRAPH (SINE WAVE) ===== */
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
 
-<script src="../assets/js/grt-core.js"></script>
-<script src="../assets/js/three-core.js"></script>
+let t = 0;
 
-<script src="../assets/js/scroll-anim.js"></script>
-<script src="../assets/js/ui-react.js"></script>
-<script src="../assets/js/energy-beams.js"></script>
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x++) {
+    let y = 30 + Math.sin((x + t) * 0.05) * 20;
+    ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = "#00f5ff";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  t += 2;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+
 </body>
 </html>
