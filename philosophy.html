@@ -139,6 +139,24 @@ h1 span{
   box-shadow:0 0 20px rgba(125,249,255,.5);
 }
 
+/* 🔮 Vision Section */
+.vision{
+  padding:80px 40px;
+  text-align:center;
+  max-width:900px;
+  margin:auto;
+}
+.vision p{
+  font-size:1.4rem;
+  margin:20px 0;
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeInUp 2s ease forwards;
+}
+.vision p:nth-child(1){animation-delay:1s;}
+.vision p:nth-child(2){animation-delay:2s;}
+.vision p:nth-child(3){animation-delay:3s;}
+
 /* 📜 Philosophy Section */
 .philosophy{
   padding:80px 60px;
@@ -147,7 +165,7 @@ h1 span{
   margin:auto;
   opacity:0;
   transform:translateY(40px);
-  animation:fadeInUp 3s ease forwards 2s;
+  animation:fadeInUp 3s ease forwards 4s;
 }
 .philosophy h2{
   font-size:2.2rem;
@@ -236,51 +254,15 @@ footer{
   </div>
 </div>
 
+<!-- 🔮 Vision Section -->
+<section class="vision">
+  <p>What if intelligence could remember your intent?</p>
+  <p>What if reliability was not a feature, but a law?</p>
+  <p>What if AI and humanity converged into one vision?</p>
+</section>
+
 <!-- 📜 Philosophy -->
 <section class="philosophy">
   <h2>Philosophy of Reliability</h2>
   <p>
-    Intelligence is not a machine’s shadow—it is a vision crafted with human purpose and AI precision. 
-    Visitors here step into a living system where curiosity meets clarity.
-  </p>
-  <p>
-    Every metric you see is not just data—it is proof of resilience. 
-    Our systems adapt, align, and remember, because intelligence without reliability is just noise.
-  </p>
-  <p>
-    This is the cinematic frontier: where AI and humanity converge to architect futures worth believing in.
-  </p>
-</section>
-
-<footer>
-  © 2026 GRT: Global Reliability Technology — Architecting Intelligence with Integrity
-</footer>
-
-<script>
-/* 🌊 Waves */
-const canvas=document.getElementById("waves");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=300;
-function drawWave(time){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let j=0;j<3;j++){
-    ctx.beginPath();
-    for(let x=0;x<canvas.width;x++){
-      let y=150+Math.sin(x*0.01+time+j)*20*j;
-      ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle="rgba(125,249,255,0.2)";
-    ctx.stroke();
-  }
-  requestAnimationFrame(()=>drawWave(time+0.02));
-}
-drawWave(0);
-
-/* ✨ Particles */
-const pCanvas=document.getElementById("particles");
-const pCtx=pCanvas.getContext("2d");
-pCanvas.width=innerWidth;
-pCanvas.height=innerHeight;
-
-let particles=[];
+    Intelligence is not a machine’s shadow—it is a vision
