@@ -3,106 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Vision Interface</title>
+<title>GRT Intelligence System</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:#000;color:#fff;overflow-x:hidden}
 
-body{
-  background:#000;
-  color:#fff;
-  overflow:hidden;
-}
-
-/* 🌅 SUNRISE SYSTEM */
+/* BACKGROUND */
 .bg{
-  position:fixed;
-  inset:0;
+  position:fixed;inset:0;
   background:
-    radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
-    linear-gradient(to bottom,#010308 0%,#010308 50%,#041a3a 80%,#000 100%);
-  z-index:-3;
-}
-
-/* horizon glow */
-.horizon{
-  position:fixed;
-  top:50%;
-  width:100%;
-  height:200px;
-  background:radial-gradient(ellipse at center, rgba(125,249,255,.5), transparent 70%);
-  filter:blur(80px);
+  radial-gradient(circle at 50% 55%, rgba(120,255,255,.3), transparent 60%),
+  linear-gradient(to bottom,#02040a,#041a3a,#000);
   z-index:-2;
 }
 
-/* 🌊 OCEAN */
-#waves{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:300px;
-  z-index:-1;
-}
-
-/* 🧠 NEURAL FIELD */
-#neural{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
-
-/* 🌀 PARALLAX */
-.parallax{
-  transition:transform .2s ease;
-}
-
-/* HERO */
+/* LAYOUT */
 .container{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  height:100vh;
-  padding:60px;
+  min-height:100vh;
+  padding:50px;
 }
 
 /* LEFT */
 .left{max-width:600px;}
 
-h1{
-  font-size:clamp(2.5rem,5vw,4rem);
-  opacity:0;
-  transform:translateY(40px);
-  animation:fade 1.2s forwards;
-}
-
-@keyframes fade{
-  to{opacity:1;transform:translateY(0);}
-}
-
+h1{font-size:3rem;}
 h1 span{
   background:linear-gradient(90deg,#7df9ff,#c084fc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.sub{
-  margin-top:10px;
-  opacity:.7;
-}
-
-/* 🍏 GRID */
-.grid-panel{
-  margin-top:40px;
-  padding:25px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.15);
-  backdrop-filter:blur(25px);
-  background:rgba(255,255,255,.05);
-}
-
 .grid{
+  margin-top:30px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
@@ -111,51 +49,66 @@ h1 span{
 .cell{
   padding:12px;
   border-radius:10px;
-  border:1px solid rgba(255,255,255,.1);
-  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.2);
+  cursor:pointer;
+  transition:.3s;
 }
+.cell:hover{background:rgba(125,249,255,.1);}
 
-/* 💎 HOLO PANEL */
+/* PANEL */
 .panel{
   width:320px;
-  padding:25px;
-  border-radius:25px;
-  backdrop-filter:blur(40px);
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.2);
-  box-shadow:0 0 60px rgba(125,249,255,.2);
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);
 }
 
-/* METRICS */
-.metric{
-  margin-bottom:20px;
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
 
-.metric strong{
-  font-family:'Orbitron';
-  font-size:26px;
+.modal-content{
+  width:90%;
+  max-width:600px;
+  background:#111;
+  padding:30px;
+  border-radius:20px;
 }
 
-.metric span{
-  font-size:13px;
-  opacity:.6;
-}
+/* GRAPH */
+canvas{width:100%;height:200px}
 
-/* CTA */
+/* BUTTON */
 .cta{
-  margin-top:30px;
+  margin-top:20px;
   display:inline-block;
-  padding:14px 30px;
-  border-radius:30px;
-  background:linear-gradient(135deg,#7df9ff,#c084fc);
+  padding:10px 20px;
+  background:#7df9ff;
   color:#000;
-  text-decoration:none;
+  border-radius:20px;
+  cursor:pointer;
 }
+
+/* FAQ */
+.faq{margin-top:50px}
+.faq-item{margin-bottom:10px;cursor:pointer}
+.answer{display:none;opacity:.7;margin-top:5px}
+
+/* TIMELINE */
+.timeline{margin-top:40px}
+.timeline div{margin-bottom:10px}
 
 /* MOBILE */
 @media(max-width:900px){
-  .container{flex-direction:column;text-align:center;}
-  .panel{width:100%;}
+  .container{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -163,124 +116,120 @@ h1 span{
 <body>
 
 <div class="bg"></div>
-<div class="horizon"></div>
-
-<canvas id="waves"></canvas>
-<canvas id="neural"></canvas>
 
 <div class="container">
 
-  <!-- LEFT -->
-  <div class="left parallax" data-depth="0.2">
+<!-- LEFT -->
+<div class="left">
 
-    <h1>
-      Intelligence is not automated.<br>
-      <span>It is architected.</span>
-    </h1>
+<h1>
+Intelligence is not automated.<br>
+<span>It is architected.</span>
+</h1>
 
-    <p class="sub">
-      Production-grade AI built for memory, alignment & long-term reliability.
-    </p>
+<!-- GRID -->
+<div class="grid">
+<div class="cell" onclick="openModule('Memory Systems')">Memory</div>
+<div class="cell" onclick="openModule('Alignment Logic')">Alignment</div>
+<div class="cell" onclick="openModule('Reliability Engineering')">Reliability</div>
+<div class="cell" onclick="openModule('Failure Control')">Failure</div>
+<div class="cell" onclick="openModule('Decision Integrity')">Decision</div>
+<div class="cell" onclick="openModule('Adaptive AI')">Adaptive</div>
+</div>
 
-    <div class="grid-panel">
-      <div class="grid">
-        <div class="cell">Memory Systems</div>
-        <div class="cell">Alignment Logic</div>
-        <div class="cell">Reliability Layer</div>
-        <div class="cell">Failure Control</div>
-        <div class="cell">Decision Integrity</div>
-        <div class="cell">Adaptive Intelligence</div>
-      </div>
-    </div>
+<div class="cta" onclick="openArchitect()">Architect Intelligence →</div>
 
-    <a class="cta">Architect Intelligence →</a>
+<!-- FAQ -->
+<div class="faq">
+<div class="faq-item" onclick="toggleAnswer(this)">
+What is intelligence architecture?
+<div class="answer">Designing AI systems with memory, alignment, and reliability layers.</div>
+</div>
 
-  </div>
+<div class="faq-item" onclick="toggleAnswer(this)">
+Why reliability matters?
+<div class="answer">Reliable systems reduce failure cost and improve long-term ROI.</div>
+</div>
+</div>
 
-  <!-- RIGHT -->
-  <div class="panel parallax" data-depth="0.4">
-
-    <div class="metric"><strong id="roi">+140%</strong><span>ROI Growth</span></div>
-    <div class="metric"><strong id="risk">-32%</strong><span>Failure Reduction</span></div>
-    <div class="metric"><strong id="eff">+78%</strong><span>Decision Efficiency</span></div>
-
-    <div class="metric"><strong id="mem">+512TB</strong><span>Memory Depth</span></div>
-    <div class="metric"><strong id="align">98.2%</strong><span>Alignment Score</span></div>
-    <div class="metric"><strong id="stable">99.97%</strong><span>System Stability</span></div>
-
-  </div>
+<!-- TIMELINE -->
+<div class="timeline">
+<h3>Philosophy of Reliability</h3>
+<div>Ancient: Engineering resilience in architecture</div>
+<div>Industrial: System reliability theory</div>
+<div>Modern AI: Alignment + safety + robustness</div>
+</div>
 
 </div>
 
+<!-- RIGHT -->
+<div class="panel">
+<h3>Live Algorithm Feed</h3>
+<div id="algo">Neural Optimization</div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+
+<h3 id="title"></h3>
+<canvas id="graph"></canvas>
+<p id="desc"></p>
+
+<div class="cta" onclick="closeModal()">Close</div>
+
+</div>
+</div>
+
 <script>
-/* 🌀 PARALLAX */
-document.addEventListener("mousemove",e=>{
-  document.querySelectorAll(".parallax").forEach(el=>{
-    let d=el.dataset.depth;
-    let x=(innerWidth/2-e.clientX)*d/40;
-    let y=(innerHeight/2-e.clientY)*d/40;
-    el.style.transform=`translate(${x}px,${y}px)`;
-  });
-});
 
-/* 🌊 WAVES */
-const wCanvas=document.getElementById("waves");
-const wCtx=wCanvas.getContext("2d");
-wCanvas.width=innerWidth;
-wCanvas.height=300;
+/* MODULE OPEN */
+function openModule(name){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText=name;
+document.getElementById("desc").innerText="This module controls "+name+" in AI systems.";
 
-function waves(t){
-  wCtx.clearRect(0,0,wCanvas.width,wCanvas.height);
-  for(let i=0;i<3;i++){
-    wCtx.beginPath();
-    for(let x=0;x<wCanvas.width;x++){
-      let y=150+Math.sin(x*0.01+t+i)*20*i;
-      wCtx.lineTo(x,y);
-    }
-    wCtx.strokeStyle="rgba(125,249,255,0.25)";
-    wCtx.stroke();
-  }
-  requestAnimationFrame(()=>waves(t+0.02));
+/* DRAW GRAPH */
+let c=document.getElementById("graph");
+let ctx=c.getContext("2d");
+c.width=400;c.height=200;
+
+ctx.clearRect(0,0,400,200);
+ctx.beginPath();
+for(let i=0;i<400;i++){
+let y=100+Math.sin(i*0.05)*50;
+ctx.lineTo(i,y);
 }
-waves(0);
-
-/* 🧠 NEURAL */
-const nCanvas=document.getElementById("neural");
-const nCtx=nCanvas.getContext("2d");
-nCanvas.width=innerWidth;
-nCanvas.height=innerHeight;
-
-let nodes=[];
-for(let i=0;i<80;i++){
-  nodes.push({x:Math.random()*nCanvas.width,y:Math.random()*nCanvas.height});
+ctx.strokeStyle="#7df9ff";
+ctx.stroke();
 }
 
-function neural(){
-  nCtx.clearRect(0,0,nCanvas.width,nCanvas.height);
-  nodes.forEach(a=>{
-    nodes.forEach(b=>{
-      let dx=a.x-b.x,dy=a.y-b.y;
-      let d=Math.sqrt(dx*dx+dy*dy);
-      if(d<120){
-        nCtx.strokeStyle="rgba(125,249,255,"+(1-d/120)+")";
-        nCtx.beginPath();
-        nCtx.moveTo(a.x,a.y);
-        nCtx.lineTo(b.x,b.y);
-        nCtx.stroke();
-      }
-    });
-  });
-  requestAnimationFrame(neural);
+/* CLOSE */
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
-neural();
 
-/* ⚡ LIVE DATA */
+/* ARCHITECT UI */
+function openArchitect(){
+document.getElementById("modal").style.display="flex";
+document.getElementById("title").innerText="Architecture Simulator";
+document.getElementById("desc").innerText="Simulated ROI: "+(Math.random()*200).toFixed(0)+"%";
+}
+
+/* FAQ */
+function toggleAnswer(el){
+let ans=el.querySelector(".answer");
+ans.style.display=ans.style.display==="block"?"none":"block";
+}
+
+/* ALGO FEED */
+let algos=["Neural Optimization","Reinforcement Learning","Bayesian Systems","Cognitive Models"];
 setInterval(()=>{
-  document.getElementById("roi").innerText="+"+(120+Math.random()*100).toFixed(0)+"%";
-  document.getElementById("risk").innerText="-"+(20+Math.random()*40).toFixed(0)+"%";
-  document.getElementById("eff").innerText="+"+(60+Math.random()*80).toFixed(0)+"%";
-  document.getElementById("mem").innerText="+"+(200+Math.random()*800).toFixed(0)+"TB";
-},4000);
+document.getElementById("algo").innerText=algos[Math.floor(Math.random()*algos.length)];
+},3000);
+
 </script>
 
 </body>
