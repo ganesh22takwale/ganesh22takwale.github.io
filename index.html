@@ -161,7 +161,7 @@ AI MICRO LEARNING PANEL (NEW)
         “What information am I missing before acting?”
       </p>
 
-      <small id="insight-date">Updated: 30 March 2026</small>
+      <small id="insight-date"></small>
 
     </div>
 
@@ -612,5 +612,22 @@ SCRIPTS
   document.getElementById("year").innerText = new Date().getFullYear();
 </script>
 <script src="intelligence-runtime.js"></script>
+<script>
+function updateDate() {
+  const today = new Date();
+
+  const options = { 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  };
+
+  const formattedDate = today.toLocaleDateString('en-IN', options);
+
+  document.getElementById("insight-date").innerText = "Updated: " + formattedDate;
+}
+
+updateDate();
+</script>
 </body>
 </html>
