@@ -1134,3 +1134,88 @@ UNIVERSE FLOATING HERO UI
     align-items: center;
   }
 }
+/* =====================================
+🔥 FINAL LAYOUT FIX (OVERRIDES EVERYTHING)
+===================================== */
+
+/* FIX HERO SPACING */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: var(--max-width);
+  margin: 100px auto 40px; /* 🔥 reduced */
+  padding: 0 40px;
+  gap: 40px;
+
+  min-height: 75vh; /* prevents empty gap */
+}
+
+/* FIX FLOATING UI POSITION */
+
+.hero-floating-ui {
+  margin-top: 20px;
+}
+
+/* FIX PANEL SPACING */
+
+.panel {
+  max-width: var(--max-width);
+  margin: 60px auto; /* 🔥 fixed */
+  padding: 0 40px;
+}
+
+/* REMOVE EXTRA GAP AFTER HERO */
+
+.hero + .panel {
+  margin-top: 20px;
+}
+
+/* FIX DAILY PANEL HEIGHT */
+
+.ai-growth-panel {
+  padding: 40px 20px; /* 🔥 reduced from 120px */
+}
+
+/* FIX GLASS CARD SIZE */
+
+.glass-card.strong {
+  padding: 35px;
+}
+
+/* FIX SECTION GLOBAL SPACING */
+
+section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* FIX FOOTER POSITION */
+
+footer {
+  margin-top: 40px;
+  padding: 40px 20px;
+}
+
+/* FIX BUTTON SIZE ALIGNMENT */
+
+.floating-actions .cta {
+  width: 200px;
+  text-align: center;
+}
+
+/* MOBILE FIX */
+
+@media(max-width:768px){
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+  }
+
+  .hero-floating-ui {
+    align-items: center;
+  }
+}
