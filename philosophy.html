@@ -6,35 +6,41 @@
 <title>GRT Philosophy</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',system-ui;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
-  color:#e5e7eb;
-  overflow-x:hidden;
   background:#000;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* 🌅 SUNRISE + 🌊 OCEAN BACKGROUND */
+/* 🌅 SUNRISE + 🌊 OCEAN */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(60% 40% at 50% 0%, rgba(120,255,255,.25), transparent 60%),
-    radial-gradient(50% 50% at 50% 100%, rgba(0,40,90,.9), #000 70%);
-  z-index:-2;
+    radial-gradient(50% 40% at 50% 0%, rgba(120,255,255,.25), transparent 60%),
+    radial-gradient(60% 60% at 50% 100%, rgba(0,30,80,.9), #000 70%);
+  z-index:-3;
 }
 
-/* MATRIX CANVAS */
+/* CURSOR GLOW */
+#cursorGlow{
+  position:fixed;
+  width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(125,249,255,.25), transparent 70%);
+  pointer-events:none;
+  z-index:-1;
+  transform:translate(-50%,-50%);
+}
+
+/* CANVAS */
 canvas{
   position:fixed;
   inset:0;
-  z-index:-1;
+  z-index:-2;
 }
 
 /* HERO */
@@ -43,7 +49,14 @@ canvas{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:60px 20px;
+  padding:60px;
+  opacity:0;
+  transform:translateY(40px);
+  animation:fadeUp 1.4s ease forwards;
+}
+
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0);}
 }
 
 .container{
@@ -72,26 +85,7 @@ h1 span{
   -webkit-text-fill-color:transparent;
 }
 
-.sub{
-  margin-top:15px;
-  color:#9ca3af;
-}
-
-/* PILLS */
-.pills{
-  margin-top:25px;
-  display:flex;
-  gap:10px;
-}
-
-.pill{
-  padding:8px 16px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.05);
-}
-
-/* CTA */
+/* BUTTON */
 .cta{
   margin-top:40px;
   display:inline-block;
@@ -99,70 +93,35 @@ h1 span{
   border-radius:30px;
   background:linear-gradient(135deg,#7df9ff,#c084fc);
   color:#000;
-  font-weight:600;
   text-decoration:none;
 }
 
-/* RIGHT PANEL */
+/* PANEL */
 .panel{
-  backdrop-filter:blur(25px);
+  backdrop-filter:blur(30px);
   background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.2);
   border-radius:25px;
   padding:25px;
+  border:1px solid rgba(255,255,255,.2);
+  transform:translateZ(0);
 }
 
-.plan{
-  background:rgba(0,0,0,.5);
-  padding:18px;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-
-.plan strong{
-  font-size:18px;
-}
-
-.plan span{
-  display:block;
-  color:#aaa;
-}
-
-.profit{
-  color:#7df9ff;
-  margin-top:5px;
-}
-
-/* TOP TEXT */
-.top{
-  text-align:center;
-  margin-bottom:40px;
-  opacity:.8;
-}
-
-/* MOBILE */
-@media(max-width:1000px){
-  .container{
-    grid-template-columns:1fr;
-  }
+/* PARALLAX */
+.parallax{
+  transition:transform .2s ease;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="matrix"></canvas>
+<div id="cursorGlow"></div>
+<canvas id="grid"></canvas>
 
 <section class="hero">
   <div class="container">
 
-    <!-- LEFT -->
-    <div>
-      <div class="top">
-        <h3>Applied Intelligence</h3>
-        <p>Philosophy without execution is theory. GRT is execution.</p>
-      </div>
-
+    <div class="parallax" data-depth="0.2">
       <img src="grt-logo-11.png" class="logo">
 
       <h1>
@@ -170,87 +129,83 @@ h1 span{
         <span>It is architected.</span>
       </h1>
 
-      <p class="sub">
+      <p style="opacity:.7;margin-top:10px;">
         Production-grade AI built for memory, alignment & long-term reliability.
       </p>
 
-      <div class="pills">
-        <div class="pill">Memory</div>
-        <div class="pill">Alignment</div>
-        <div class="pill">Reliability</div>
-      </div>
-
-      <a href="#" class="cta">Architect My Intelligence →</a>
+      <a class="cta">Architect My Intelligence →</a>
     </div>
 
-    <!-- RIGHT -->
-    <div class="panel">
+    <div class="panel parallax" data-depth="0.4">
       <h3>Engagement Models</h3>
 
-      <div class="plan">
-        <strong>3 Months</strong>
-        <span>Architecture Stabilization</span>
-        <div class="profit">↑ ~120% ROI</div>
-      </div>
-
-      <div class="plan">
-        <strong>6 Months</strong>
-        <span>Production Intelligence Stack</span>
-        <div class="profit">↑ ~260% ROI</div>
-      </div>
-
-      <div class="plan">
-        <strong>12 Months</strong>
-        <span>AI as Core Business Asset</span>
-        <div class="profit">↑ ~420% ROI</div>
-      </div>
-
+      <div>3 Months → ↑120% ROI</div>
+      <div>6 Months → ↑260% ROI</div>
+      <div>12 Months → ↑420% ROI</div>
     </div>
 
   </div>
 </section>
 
 <script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+/* 🌀 PARALLAX */
+document.addEventListener("mousemove",e=>{
+  document.querySelectorAll(".parallax").forEach(el=>{
+    let depth=el.dataset.depth;
+    let x=(window.innerWidth/2 - e.clientX)*depth/40;
+    let y=(window.innerHeight/2 - e.clientY)*depth/40;
+    el.style.transform=`translate(${x}px,${y}px)`;
+  });
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+  // cursor glow
+  let glow=document.getElementById("cursorGlow");
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
+});
 
-let beams = [];
+/* ⚡ NEURAL GRID */
+const canvas=document.getElementById("grid");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 
+let nodes=[];
 for(let i=0;i<80;i++){
-  beams.push({
+  nodes.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    speed:Math.random()*2+1,
-    len:Math.random()*120+40
+    vx:(Math.random()-.5)*0.5,
+    vy:(Math.random()-.5)*0.5
   });
 }
 
 function draw(){
-  ctx.fillStyle="rgba(0,0,0,0.2)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  beams.forEach(b=>{
-    b.y+=b.speed;
-    if(b.y>canvas.height) b.y=0;
+  nodes.forEach(a=>{
+    a.x+=a.vx;
+    a.y+=a.vy;
 
-    let g=ctx.createLinearGradient(b.x,b.y,b.x,b.y+b.len);
-    g.addColorStop(0,"transparent");
-    g.addColorStop(.5,"#7df9ff");
-    g.addColorStop(1,"transparent");
+    nodes.forEach(b=>{
+      let dx=a.x-b.x;
+      let dy=a.y-b.y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
 
-    ctx.strokeStyle=g;
-    ctx.beginPath();
-    ctx.moveTo(b.x,b.y);
-    ctx.lineTo(b.x,b.y+b.len);
-    ctx.stroke();
+      if(dist<120){
+        ctx.strokeStyle="rgba(125,249,255,"+(1-dist/120)+")";
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(b.x,b.y);
+        ctx.stroke();
+      }
+    });
+
+    ctx.fillStyle="#7df9ff";
+    ctx.fillRect(a.x,a.y,2,2);
   });
 
   requestAnimationFrame(draw);
 }
-
 draw();
 </script>
 
