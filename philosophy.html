@@ -5,82 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRT Philosophy</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
   background:#000;
   color:#fff;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
-/* 🌅 SUNRISE + 🌊 OCEAN (REAL) */
-.sun-ocean{
+/* 🌅 SUNRISE + 🌊 OCEAN */
+.bg{
   position:fixed;
   inset:0;
-  z-index:-3;
   background:
-    radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
-    linear-gradient(to bottom,
-      #02040a 0%,
-      #02040a 40%,
-      #0a1a3a 60%,
-      #02040a 100%);
+    radial-gradient(circle at 50% 55%, rgba(120,255,255,.35), transparent 60%),
+    linear-gradient(to bottom,#02040a 0%,#02040a 50%,#041a3a 80%,#000 100%);
+  z-index:-2;
 }
 
 /* horizon glow */
-.sun-ocean::after{
+.bg::after{
   content:"";
   position:absolute;
   width:100%;
   height:200px;
-  bottom:40%;
-  background:radial-gradient(ellipse at center, rgba(125,249,255,.5), transparent 70%);
-  filter:blur(60px);
+  top:50%;
+  background:radial-gradient(ellipse at center, rgba(125,249,255,.6), transparent 70%);
+  filter:blur(80px);
 }
 
-/* cursor glow */
-#glow{
+/* 🌊 OCEAN DATA WAVES */
+#waves{
   position:fixed;
-  width:400px;height:400px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(125,249,255,.2), transparent 70%);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:2;
+  bottom:0;
+  width:100%;
+  height:300px;
+  z-index:-1;
 }
 
 /* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:60px;
-  text-align:left;
-  opacity:0;
-  transform:translateY(60px);
-  animation:reveal 1.5s ease forwards;
-}
-
-@keyframes reveal{
-  to{opacity:1;transform:translateY(0);}
-}
-
 .container{
-  max-width:1200px;
-  width:100%;
-  display:grid;
-  grid-template-columns:1fr 380px;
-  gap:60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  height:100vh;
+  padding:60px;
 }
 
-/* TEXT */
+/* LEFT */
+.left{
+  max-width:600px;
+}
+
 h1{
-  font-size:clamp(2.8rem,5vw,4.5rem);
-  font-weight:800;
+  font-size:clamp(2.5rem,5vw,4rem);
 }
 
 h1 span{
@@ -89,19 +68,59 @@ h1 span{
   -webkit-text-fill-color:transparent;
 }
 
-/* HOLOGRAPHIC PANEL */
-.panel{
-  backdrop-filter:blur(40px);
-  background:rgba(255,255,255,.05);
-  border-radius:25px;
-  padding:25px;
-  border:1px solid rgba(255,255,255,.2);
-  box-shadow:0 0 60px rgba(125,249,255,.15);
-  transition:.3s;
+.sub{
+  margin-top:10px;
+  opacity:.7;
 }
 
-.panel:hover{
-  box-shadow:0 0 80px rgba(125,249,255,.4);
+/* 🍏 APPLE GRID PANEL */
+.grid-panel{
+  margin-top:40px;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.05);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.cell{
+  padding:12px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  font-size:14px;
+  text-align:center;
+  background:rgba(255,255,255,.02);
+}
+
+/* 💎 HOLOGRAPHIC PANEL */
+.panel{
+  width:320px;
+  padding:25px;
+  border-radius:25px;
+  backdrop-filter:blur(25px);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 0 40px rgba(125,249,255,.15);
+}
+
+.metric{
+  margin-bottom:20px;
+}
+
+.metric strong{
+  font-size:22px;
+  display:block;
+}
+
+.metric span{
+  font-size:13px;
+  opacity:.6;
 }
 
 /* CTA */
@@ -113,130 +132,106 @@ h1 span{
   background:linear-gradient(135deg,#7df9ff,#c084fc);
   color:#000;
   text-decoration:none;
-  font-weight:600;
 }
 
-/* SCROLL SECTION */
-.section{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transform:translateY(80px);
-  transition:1s;
+/* MOBILE */
+@media(max-width:900px){
+  .container{
+    flex-direction:column;
+    gap:40px;
+    text-align:center;
+  }
 }
-
-.section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="sun-ocean"></div>
-<div id="glow"></div>
+<div class="bg"></div>
+<canvas id="waves"></canvas>
 
-<section class="hero">
-  <div class="container">
+<div class="container">
 
-    <div>
-      <h3 style="opacity:.6;">Applied Intelligence</h3>
+  <!-- LEFT -->
+  <div class="left">
 
-      <h1>
-        Intelligence is not automated.<br>
-        <span>It is architected.</span>
-      </h1>
+    <h1>
+      Intelligence is not automated.<br>
+      <span>It is architected.</span>
+    </h1>
 
-      <p style="opacity:.7;margin-top:10px;">
-        Production-grade AI built for memory, alignment & long-term reliability.
-      </p>
+    <p class="sub">
+      Production-grade AI built for memory, alignment & long-term reliability.
+    </p>
 
-      <a class="cta">Architect My Intelligence →</a>
+    <!-- 🍏 GRID -->
+    <div class="grid-panel">
+      <div class="grid">
+        <div class="cell">Memory Systems</div>
+        <div class="cell">Alignment Logic</div>
+        <div class="cell">Reliability Layer</div>
+        <div class="cell">Failure Control</div>
+        <div class="cell">Decision Integrity</div>
+        <div class="cell">Adaptive Intelligence</div>
+      </div>
     </div>
 
-    <div class="panel">
-      <h3>Engagement Models</h3>
-      <p>3 Months → ↑120% ROI</p>
-      <p>6 Months → ↑260% ROI</p>
-      <p>12 Months → ↑420% ROI</p>
+    <a class="cta">Architect Intelligence →</a>
+
+  </div>
+
+  <!-- RIGHT LIVE PANEL -->
+  <div class="panel">
+
+    <div class="metric">
+      <strong id="roi">+120%</strong>
+      <span>System ROI Growth</span>
+    </div>
+
+    <div class="metric">
+      <strong id="risk">-38%</strong>
+      <span>Failure Reduction</span>
+    </div>
+
+    <div class="metric">
+      <strong id="eff">+64%</strong>
+      <span>Decision Efficiency</span>
     </div>
 
   </div>
-</section>
 
-<section class="section">
-  <h2>AI Systems are not built. They are architected.</h2>
-</section>
+</div>
 
 <script>
-/* 🌈 CURSOR GLOW */
-document.addEventListener("mousemove",e=>{
-  let g=document.getElementById("glow");
-  g.style.left=e.clientX+"px";
-  g.style.top=e.clientY+"px";
-});
+/* 🌊 DATA WAVES */
+const canvas=document.getElementById("waves");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=300;
 
-/* 🎬 SCROLL REVEAL */
-const sections=document.querySelectorAll(".section");
-window.addEventListener("scroll",()=>{
-  sections.forEach(sec=>{
-    let rect=sec.getBoundingClientRect();
-    if(rect.top<window.innerHeight-100){
-      sec.classList.add("show");
+function drawWave(time){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  for(let j=0;j<3;j++){
+    ctx.beginPath();
+    for(let x=0;x<canvas.width;x++){
+      let y=150+Math.sin(x*0.01+time+j)*20*j;
+      ctx.lineTo(x,y);
     }
-  });
-});
+    ctx.strokeStyle="rgba(125,249,255,0.2)";
+    ctx.stroke();
+  }
 
-/* 🧠 THREE.JS (3D BACKGROUND) */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({alpha:true});
-renderer.setSize(innerWidth,innerHeight);
-document.body.appendChild(renderer.domElement);
-renderer.domElement.style.position="fixed";
-renderer.domElement.style.top="0";
-renderer.domElement.style.zIndex="-2";
-
-camera.position.z=5;
-
-/* particles */
-const geometry=new THREE.BufferGeometry();
-const vertices=[];
-for(let i=0;i<1000;i++){
-  vertices.push(
-    (Math.random()-0.5)*20,
-    (Math.random()-0.5)*20,
-    (Math.random()-0.5)*20
-  );
+  requestAnimationFrame(()=>drawWave(time+0.02));
 }
-geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+drawWave(0);
 
-const material=new THREE.PointsMaterial({
-  color:0x7df9ff,
-  size:0.05
-});
-
-const points=new THREE.Points(geometry,material);
-scene.add(points);
-
-/* animate */
-function animate(){
-  requestAnimationFrame(animate);
-  points.rotation.y+=0.0008;
-  points.rotation.x+=0.0004;
-  renderer.render(scene,camera);
-}
-animate();
-
-window.addEventListener("resize",()=>{
-  renderer.setSize(innerWidth,innerHeight);
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-});
+/* 🧠 LIVE DATA */
+setInterval(()=>{
+  document.getElementById("roi").innerText = "+"+(100+Math.random()*100).toFixed(0)+"%";
+  document.getElementById("risk").innerText = "-"+(20+Math.random()*40).toFixed(0)+"%";
+  document.getElementById("eff").innerText = "+"+(40+Math.random()*80).toFixed(0)+"%";
+},2000);
 </script>
 
 </body>
