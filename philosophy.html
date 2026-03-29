@@ -21,7 +21,7 @@ body{
   inset:0;
   background:linear-gradient(120deg,#02040a,#041a3a,#000);
   background-size:400% 400%;
-  animation:bgShift 20s ease infinite;
+  animation:bgShift 25s ease infinite;
   z-index:-3;
 }
 @keyframes bgShift{
@@ -240,15 +240,15 @@ footer{
 <section class="philosophy">
   <h2>Philosophy of Reliability</h2>
   <p>
-    At GRT, intelligence is not a machine’s echo—it is a symphony of design. 
-    We merge human insight with AI precision to craft systems that breathe, adapt, and endure.
+    Intelligence is not a machine’s shadow—it is a vision crafted with human purpose and AI precision. 
+    Visitors here step into a living system where curiosity meets clarity.
   </p>
   <p>
-    Reliability is our canvas, memory our brush, and alignment our guiding hand. 
-    Together, they paint intelligence that is not fleeting, but timeless.
+    Every metric you see is not just data—it is proof of resilience. 
+    Our systems adapt, align, and remember, because intelligence without reliability is just noise.
   </p>
   <p>
-    This is the future: where AI and humanity converge, not in competition, but in collaboration.
+    This is the cinematic frontier: where AI and humanity converge to architect futures worth believing in.
   </p>
 </section>
 
@@ -281,4 +281,6 @@ drawWave(0);
 const pCanvas=document.getElementById("particles");
 const pCtx=pCanvas.getContext("2d");
 pCanvas.width=innerWidth;
-pCanvas
+pCanvas.height=innerHeight;
+
+let particles=[];
