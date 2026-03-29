@@ -1058,3 +1058,79 @@ FINAL DAILY PANEL (CLEAN + PROFESSIONAL)
   justify-content: center;
   flex-wrap: wrap;
 }
+/* =====================================
+UNIVERSE FLOATING HERO UI
+===================================== */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: var(--max-width);
+  margin: 120px auto 60px;
+  padding: 0 40px;
+  gap: 40px;
+}
+
+/* FLOATING UI CONTAINER */
+
+.hero-floating-ui {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* FLOATING INFO CARDS */
+
+.floating-info {
+  padding: 14px 20px;
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  backdrop-filter: blur(12px);
+
+  font-size: 13px;
+
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.floating-info strong {
+  display: block;
+  font-size: 16px;
+  margin-top: 4px;
+  color: var(--accent2);
+}
+
+/* FLOATING BUTTON GROUP */
+
+.floating-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  animation: floatY 5s ease-in-out infinite;
+}
+
+/* FLOAT ANIMATION */
+
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-floating-ui {
+    align-items: center;
+  }
+}
