@@ -6,246 +6,261 @@
 <title>AI Research Lab</title>
 
 <style>
-/* ===== GLOBAL ===== */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  overflow-x: hidden;
-  color: white;
+  margin:0;
+  font-family:-apple-system;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white;
+  overflow-x:hidden;
 }
 
-/* Animated gradient overlay */
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, #00f5ff33, transparent),
-              radial-gradient(circle at 70% 70%, #ff00ff22, transparent);
-  animation: moveBg 10s infinite alternate;
-  z-index: -1;
-}
-
-@keyframes moveBg {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-10%, -10%); }
-}
-
-/* ===== LAYOUT ===== */
-.lab-container {
-  padding: 40px;
-}
-
+/* HEADER */
 .lab-title {
-  font-size: 42px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #00f5ff, #7a7aff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size:42px;
+  padding:20px;
+  color:#00f5ff;
 }
 
-/* NAV */
 .lab-nav {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  padding:0 20px 20px;
 }
-
 .lab-nav a {
-  margin-right: 20px;
-  opacity: 0.7;
-  cursor: pointer;
+  margin-right:15px;
+  opacity:0.7;
+  cursor:pointer;
 }
-
-.lab-nav a:hover {
-  opacity: 1;
-}
+.lab-nav a:hover { opacity:1; }
 
 /* GRID */
-.lab-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
-/* ===== GLASS CARD ===== */
-.lab-card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  padding: 20px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: 0.3s;
-  position: relative;
-  overflow: hidden;
+/* CARD */
+.card {
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  padding:20px;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
 }
-
-.lab-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(0,255,255,0.2);
-}
-
-/* glow effect */
-.lab-card::before {
-  content: "";
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  background: linear-gradient(120deg, transparent, #00f5ff33, transparent);
-  transform: rotate(25deg);
-  top: -50%;
-  left: -50%;
-  animation: shine 6s infinite;
-}
-
-@keyframes shine {
-  0% { left: -50%; }
-  100% { left: 100%; }
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 0 30px rgba(0,255,255,0.3);
 }
 
 .big { grid-column: span 2; }
 .wide { grid-column: span 2; }
 
-/* ===== PROGRESS BAR ===== */
-.lab-meter {
-  height: 6px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.1);
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.lab-meter span {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00f5ff, #7a7aff);
-  animation: loadBar 2s forwards;
-}
-
-@keyframes loadBar {
-  to { width: 92%; }
-}
-
-/* ===== SINE WAVE (MATH MAGIC) ===== */
-.wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200%;
-  height: 60px;
-  background: linear-gradient(transparent, rgba(0,255,255,0.2));
-  animation: waveMove 6s linear infinite;
-  border-radius: 50%;
-  filter: blur(8px);
-}
-
-@keyframes waveMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
+/* VALUE */
 .value {
-  font-size: 28px;
-  font-weight: bold;
-  margin-top: 10px;
+  font-size:28px;
+  font-weight:bold;
 }
 
-/* subtle pulse animation */
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+/* PROGRESS */
+.bar {
+  height:6px;
+  background:#ffffff22;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.bar span {
+  display:block;
+  height:100%;
+  width:90%;
+  background:linear-gradient(90deg,#00f5ff,#7a7aff);
 }
 
-.pulse {
-  animation: pulse 2s infinite;
+/* WAVE */
+canvas {
+  width:100%;
+}
+
+/* ===== AI FLOOR ===== */
+.ai-floor {
+  position: relative;
+  height: 300px;
+  margin-top: 60px;
+  overflow: hidden;
+  background: linear-gradient(to top, #000, transparent);
+}
+
+#particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.center-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 4s ease-in-out infinite;
+}
+
+.center-logo img {
+  width: 120px;
+  filter: drop-shadow(0 0 20px #00f5ff);
+}
+
+@keyframes float {
+  0%,100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-10px); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="lab-container">
+<h1 class="lab-title">AI Research Lab</h1>
 
-  <h1 class="lab-title">AI Research Lab</h1>
+<div class="lab-nav">
+<a>Dashboard</a>
+<a>Neural Training</a>
+<a>System Map</a>
+<a>Vector Search</a>
+</div>
 
-  <div class="lab-nav">
-    <a>Dashboard</a>
-    <a>Neural Training</a>
-    <a>System Map</a>
-    <a>Vector Search</a>
-  </div>
+<div class="grid">
 
-  <div class="lab-grid">
+<div class="card big">
+<h2>System Status</h2>
+<p>All systems operational</p>
+<div class="bar"><span></span></div>
+</div>
 
-    <!-- SYSTEM STATUS -->
-    <div class="lab-card big">
-      <h2>System Status</h2>
-      <p class="pulse">All core systems operational</p>
-      <div class="lab-meter"><span></span></div>
-      <div class="wave"></div>
-    </div>
+<div class="card">
+<h2>Failure Rate</h2>
+<div class="value">0.02%</div>
+</div>
 
-    <!-- FAILURE -->
-    <div class="lab-card">
-      <h2>Failure Rate</h2>
-      <div class="value">0.02%</div>
-    </div>
+<div class="card">
+<h2>Temperature</h2>
+<div class="value">225°C</div>
+</div>
 
-    <!-- TEMP -->
-    <div class="lab-card">
-      <h2>Temperature</h2>
-      <div class="value">225°C</div>
-    </div>
+<div class="card">
+<h2>AI Confidence</h2>
+<div class="value">94%</div>
+</div>
 
-    <!-- CONFIDENCE -->
-    <div class="lab-card">
-      <h2>AI Confidence</h2>
-      <div class="value">94%</div>
-    </div>
+<div class="card wide">
+<h2>Weibull Analysis</h2>
+<canvas id="wave"></canvas>
+</div>
 
-    <!-- WEIBULL -->
-    <div class="lab-card wide">
-      <h2>Weibull Analysis</h2>
-      <p>Predictive failure modeling active</p>
-      <canvas id="chart" height="80"></canvas>
-    </div>
+<div class="card wide">
+<h2>System Intelligence Feed</h2>
+<p>Signals flowing...</p>
+</div>
 
-    <!-- FEED -->
-    <div class="lab-card wide">
-      <h2>System Intelligence Feed</h2>
-      <p>Real-time architecture signals flowing</p>
-    </div>
+</div>
 
+<!-- 🔥 AI VISUAL FLOOR -->
+<div class="ai-floor">
+  <canvas id="particles"></canvas>
+
+  <div class="center-logo">
+    <img src="grt-logo.png">
   </div>
 </div>
 
 <script>
-/* ===== SIMPLE MATH GRAPH (SINE WAVE) ===== */
-const canvas = document.getElementById("chart");
+
+/* ===== WAVE ===== */
+const canvas = document.getElementById("wave");
 const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = 100;
 
 let t = 0;
 
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawWave(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
   ctx.beginPath();
-  for (let x = 0; x < canvas.width; x++) {
-    let y = 30 + Math.sin((x + t) * 0.05) * 20;
-    ctx.lineTo(x, y);
+  for(let x=0;x<canvas.width;x++){
+    let y = 50 + Math.sin((x+t)*0.03)*20;
+    ctx.lineTo(x,y);
   }
 
-  ctx.strokeStyle = "#00f5ff";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle="#00f5ff";
   ctx.stroke();
 
-  t += 2;
-  requestAnimationFrame(draw);
+  t+=2;
+  requestAnimationFrame(drawWave);
+}
+drawWave();
+
+
+/* ===== PARTICLES ===== */
+const canvasP = document.getElementById("particles");
+const ctxP = canvasP.getContext("2d");
+
+canvasP.width = window.innerWidth;
+canvasP.height = 300;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvasP.width,
+    y: Math.random() * canvasP.height,
+    speed: Math.random() * 1 + 0.2,
+    size: Math.random() * 2
+  });
 }
 
-draw();
+function animateParticles() {
+  ctxP.clearRect(0, 0, canvasP.width, canvasP.height);
+
+  particles.forEach(p => {
+    p.y -= p.speed;
+
+    if (p.y < 0) {
+      p.y = canvasP.height;
+      p.x = Math.random() * canvasP.width;
+    }
+
+    ctxP.beginPath();
+    ctxP.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctxP.fillStyle = "#00f5ff";
+    ctxP.fill();
+  });
+
+  connect();
+  requestAnimationFrame(animateParticles);
+}
+
+function connect() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i; j < particles.length; j++) {
+      let dx = particles[i].x - particles[j].x;
+      let dy = particles[i].y - particles[j].y;
+      let dist = dx * dx + dy * dy;
+
+      if (dist < 10000) {
+        ctxP.beginPath();
+        ctxP.strokeStyle = "rgba(0,255,255,0.05)";
+        ctxP.moveTo(particles[i].x, particles[i].y);
+        ctxP.lineTo(particles[j].x, particles[j].y);
+        ctxP.stroke();
+      }
+    }
+  }
+}
+
+animateParticles();
+
 </script>
 
 </body>
