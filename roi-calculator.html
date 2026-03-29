@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>GRT ROI Calculator</title>
 
-<link rel="stylesheet" href="roi-style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<canvas id="stars"></canvas>
-<canvas id="nodes"></canvas>
+<canvas id="bg"></canvas>
 
 <header class="top">
   <img src="grt-logo-11.png" class="seal" />
@@ -57,48 +56,28 @@
   <label>Failure Exposure ($M)</label>
   <input type="range" id="risk" min="10" max="100" value="47"/>
 
-  <div class="output diagnostic-panel">
-
-<div>
-<small>Annual Risk Exposure</small>
-<strong>$<span id="riskOut">47</span>M</strong>
-</div>
-
-<div>
-<small>Preventable Loss</small>
-<strong class="gain">$<span id="saveOut">24</span>M</strong>
-</div>
-
-<div>
-<small>Architecture Prevention Value</small>
-<strong>$<span id="preventOut">0</span>M</strong>
-</div>
-
-<div>
-<small>Trust / Decision Integrity Value</small>
-<strong>$<span id="trustOut">0</span>M</strong>
-</div>
-
-<div style="margin-top:18px;font-size:22px">
-<small>Total Intelligence ROI</small>
-<strong class="gain">$<span id="totalOut">0</span>M</strong>
-</div>
-
-</div>
+  <div class="output">
 
     <div>
-      <small>Estimated Risk</small>
+      <small>Annual Risk Exposure</small>
       <strong>$<span id="riskOut">47</span>M</strong>
     </div>
+
     <div>
-      <small>Projected Savings</small>
+      <small>Preventable Loss</small>
       <strong class="gain">$<span id="saveOut">24</span>M</strong>
     </div>
+
+    <div>
+      <small>Total Intelligence ROI</small>
+      <strong class="gain">$<span id="totalOut">24</span>M</strong>
+    </div>
+
   </div>
 
- <a class="cta primary" href="https://www.paypal.com" target="_blank">
-Activate Intelligence Architecture →
-</a>
+  <a class="cta primary" href="#" target="_blank">
+    Activate Intelligence Architecture →
+  </a>
 
 </section>
 
@@ -107,13 +86,8 @@ Activate Intelligence Architecture →
   <p>© 2026 Ganesh Takwale · Production-Grade Intelligence</p>
 </footer>
 
-<script src="roi-data.js"></script>
-<script src="roi-calc.js"></script>
-<script src="roi-touch.js"></script>
-<script src="stars-bg.js"></script>
-<script src="nodes-bg.js"></script>
+<script src="bg.js"></script>
+<script src="calc.js"></script>
 
-<script src="assets/js/ai-core-bg.js"></script>
-<script src="assets/js/ai-core-bg.js"></script>
 </body>
 </html>
