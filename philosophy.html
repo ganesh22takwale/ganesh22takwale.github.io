@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Spatial OS</title>
+<title>GRT Spatial Intelligence OS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -16,16 +17,16 @@ color:#fff;
 overflow:hidden;
 }
 
-/* 🌅 BACKGROUND */
+/* 🌅 LIGHT */
 .bg{
 position:fixed;inset:0;
 background:
-radial-gradient(circle at 50% 55%, rgba(120,255,255,.2), transparent 60%),
+radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
 linear-gradient(to bottom,#010308,#041a3a,#000);
 z-index:-3;
 }
 
-/* 🌊 WAVES */
+/* 🌊 OCEAN */
 #waves{
 position:fixed;
 bottom:0;
@@ -34,14 +35,7 @@ height:200px;
 z-index:-1;
 }
 
-/* 🧠 PARTICLES (NEW STYLE) */
-#particles{
-position:fixed;
-inset:0;
-z-index:-2;
-}
-
-/* LAYOUT */
+/* HERO */
 .container{
 display:flex;
 justify-content:space-between;
@@ -50,9 +44,7 @@ height:100vh;
 padding:60px;
 }
 
-/* LEFT */
-.left{max-width:600px;}
-
+/* TEXT */
 h1{
 font-size:clamp(2.8rem,5vw,4.5rem);
 font-weight:600;
@@ -80,9 +72,8 @@ background:rgba(255,255,255,.03);
 cursor:pointer;
 transition:.3s;
 }
-
 .cell:hover{
-background:rgba(125,249,255,.1);
+background:rgba(125,249,255,.15);
 transform:translateY(-4px);
 }
 
@@ -99,67 +90,40 @@ cursor:pointer;
 
 /* 💎 PANEL */
 .panel{
-width:300px;
+width:320px;
 padding:25px;
 border-radius:25px;
 background:rgba(255,255,255,.05);
-backdrop-filter:blur(25px);
+backdrop-filter:blur(30px);
 border:1px solid rgba(255,255,255,.2);
+box-shadow:0 0 60px rgba(125,249,255,.2);
 }
 
-/* ALGO */
-.bars{
-display:flex;
-gap:4px;
-margin-top:10px;
+/* SYSTEM METRICS */
+.metric{
+margin-bottom:15px;
 }
-.bar{
-width:6px;
-background:#7df9ff;
-animation:up 1s infinite;
+.metric strong{
+font-family:'Orbitron';
+font-size:22px;
 }
-@keyframes up{
-0%,100%{height:10px}
-50%{height:40px}
+.metric span{
+font-size:12px;
+opacity:.6;
 }
 
-/* ❓ FAQ */
-.faq{
-margin-top:40px;
-}
-.faq-item{
-cursor:pointer;
-margin-bottom:10px;
-padding:10px;
-border-radius:10px;
-background:rgba(255,255,255,.03);
-}
-.answer{
-max-height:0;
-overflow:hidden;
-transition:.3s;
-opacity:.7;
-}
+/* FAQ */
+.faq{margin-top:30px;}
+.faq-item{cursor:pointer;margin-bottom:10px;}
+.answer{max-height:0;overflow:hidden;transition:.3s;opacity:.7;}
 
-/* 📚 PHILOSOPHY */
+/* PHILOSOPHY */
 .philosophy{
 position:absolute;
-bottom:80px;
+bottom:60px;
 left:60px;
 font-size:13px;
 opacity:.8;
-}
-
-.step{
-opacity:0;
-transform:translateY(10px);
-animation:fadeIn 1s forwards;
-}
-.step:nth-child(2){animation-delay:.4s}
-.step:nth-child(3){animation-delay:.8s}
-
-@keyframes fadeIn{
-to{opacity:1;transform:translateY(0);}
 }
 
 /* MOBILE */
@@ -173,14 +137,11 @@ to{opacity:1;transform:translateY(0);}
 <body>
 
 <div class="bg"></div>
-<canvas id="particles"></canvas>
 <canvas id="waves"></canvas>
 
 <div class="container">
 
-<!-- LEFT -->
-<div class="left">
-
+<div>
 <h1>
 Intelligence is not automated.<br>
 <span>It is architected by GRT Lab.</span>
@@ -197,40 +158,36 @@ Intelligence is not automated.<br>
 
 <div class="cta">Architect Intelligence →</div>
 
-<!-- FAQ -->
 <div class="faq">
 <div class="faq-item" onclick="toggle(this)">
 What is intelligence architecture?
-<div class="answer">Designing AI systems with memory, alignment, and reliability layers.</div>
+<div class="answer">It integrates memory, alignment, and reliability into a system.</div>
 </div>
-
 <div class="faq-item" onclick="toggle(this)">
 Why reliability matters?
-<div class="answer">Reliable systems reduce failure cost and increase long-term trust.</div>
+<div class="answer">It ensures consistent outcomes and reduces systemic risk.</div>
 </div>
 </div>
 
 </div>
 
-<!-- RIGHT -->
+<!-- RIGHT PANEL -->
 <div class="panel">
-<h3 style="font-family:Orbitron">Algorithm Activity</h3>
-<div class="bars">
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-<div class="bar"></div>
-</div>
-</div>
+
+<div class="metric"><strong id="t">98%</strong><span>Intelligence Throughput</span></div>
+<div class="metric"><strong id="m">512TB</strong><span>Memory Index</span></div>
+<div class="metric"><strong id="r">99.97%</strong><span>Reliability Score</span></div>
+<div class="metric"><strong id="d">12ms</strong><span>Decision Latency</span></div>
+<div class="metric"><strong id="a">97.4%</strong><span>Alignment Confidence</span></div>
 
 </div>
 
-<!-- 📚 PHILOSOPHY -->
+</div>
+
 <div class="philosophy">
-<div class="step">Ancient: Resilient structures</div>
-<div class="step">Industrial: Reliability theory</div>
-<div class="step">AI Era: Alignment + robustness</div>
+<div>Ancient: Structural resilience</div>
+<div>Industrial: Reliability engineering</div>
+<div>AI Era: Alignment + robustness</div>
 </div>
 
 <script>
@@ -240,38 +197,6 @@ function toggle(el){
 let ans=el.querySelector(".answer");
 ans.style.maxHeight=ans.style.maxHeight?null:"100px";
 }
-
-/* 🧠 PARTICLES (IMPROVED) */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let particles=[];
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*innerWidth,
-y:Math.random()*innerHeight,
-vx:(Math.random()-.5)*0.3,
-vy:(Math.random()-.5)*0.3
-});
-}
-
-function draw(){
-ctx.clearRect(0,0,innerWidth,innerHeight);
-
-particles.forEach(p=>{
-p.x+=p.vx;
-p.y+=p.vy;
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,2,0,Math.PI*2);
-ctx.fillStyle="rgba(125,249,255,0.8)";
-ctx.fill();
-});
-requestAnimationFrame(draw);
-}
-draw();
 
 /* 🌊 WAVES */
 const w=document.getElementById("waves");
@@ -284,7 +209,7 @@ wc.clearRect(0,0,w.width,w.height);
 for(let i=0;i<3;i++){
 wc.beginPath();
 for(let x=0;x<w.width;x++){
-let y=100+Math.sin(x*0.01+t+i)*15*i;
+let y=100+Math.sin(x*0.01+t+i)*20*i;
 wc.lineTo(x,y);
 }
 wc.strokeStyle="rgba(125,249,255,0.2)";
@@ -293,6 +218,50 @@ wc.stroke();
 requestAnimationFrame(()=>waves(t+0.02));
 }
 waves(0);
+
+/* 🧠 THREE.JS PARTICLES */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+document.body.appendChild(renderer.domElement);
+renderer.domElement.style.position="fixed";
+renderer.domElement.style.top="0";
+renderer.domElement.style.zIndex="-2";
+
+camera.position.z=5;
+
+const geometry=new THREE.BufferGeometry();
+const vertices=[];
+for(let i=0;i<1500;i++){
+vertices.push(
+(Math.random()-0.5)*20,
+(Math.random()-0.5)*20,
+(Math.random()-0.5)*20
+);
+}
+geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+
+const material=new THREE.PointsMaterial({color:0x7df9ff,size:0.03});
+const points=new THREE.Points(geometry,material);
+scene.add(points);
+
+function animate(){
+requestAnimationFrame(animate);
+points.rotation.y+=0.0008;
+points.rotation.x+=0.0004;
+renderer.render(scene,camera);
+}
+animate();
+
+/* ⚡ LIVE DATA */
+setInterval(()=>{
+document.getElementById("t").innerText=(90+Math.random()*10).toFixed(0)+"%";
+document.getElementById("m").innerText=(400+Math.random()*300).toFixed(0)+"TB";
+document.getElementById("r").innerText=(99.5+Math.random()*0.5).toFixed(2)+"%";
+document.getElementById("d").innerText=(5+Math.random()*20).toFixed(0)+"ms";
+document.getElementById("a").innerText=(90+Math.random()*10).toFixed(1)+"%";
+},4000);
 
 </script>
 
