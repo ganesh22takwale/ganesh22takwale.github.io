@@ -303,7 +303,7 @@ GRID
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
+  gap:20px;
   margin-top:40px;
 }
 
@@ -983,4 +983,78 @@ DAILY INTELLIGENCE PANEL (VISIBLE)
 section {
   margin-top: 60px;
   margin-bottom: 60px;
+}
+/* =====================================
+FINAL DAILY PANEL (CLEAN + PROFESSIONAL)
+===================================== */
+
+.ai-growth-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.glass-card.strong {
+  width: 100%;
+  max-width: 850px;
+  padding: 40px;
+
+  background: rgba(10, 15, 25, 0.95);
+  border-radius: 18px;
+
+  border: 1px solid rgba(0, 212, 255, 0.25);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+
+  text-align: center;
+}
+
+.daily-insight-box {
+  margin: 30px 0;
+  padding: 25px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.daily-action {
+  margin: 25px 0;
+  padding: 20px;
+
+  border-radius: 12px;
+
+  background: rgba(0,212,255,0.08);
+  border: 1px solid rgba(0,212,255,0.2);
+}
+
+.growth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.growth-box {
+  padding: 18px;
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+
+  transition: 0.3s;
+}
+
+.growth-box:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0,212,255,0.4);
+}
+
+.insight-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
