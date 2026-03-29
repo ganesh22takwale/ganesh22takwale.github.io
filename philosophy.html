@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRT Philosophy</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
@@ -14,33 +16,40 @@ body{
   overflow-x:hidden;
 }
 
-/* 🌅 SUNRISE + 🌊 OCEAN */
-body::before{
-  content:"";
+/* 🌅 SUNRISE + 🌊 OCEAN (REAL) */
+.sun-ocean{
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(50% 40% at 50% 0%, rgba(120,255,255,.25), transparent 60%),
-    radial-gradient(60% 60% at 50% 100%, rgba(0,30,80,.9), #000 70%);
   z-index:-3;
+  background:
+    radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
+    linear-gradient(to bottom,
+      #02040a 0%,
+      #02040a 40%,
+      #0a1a3a 60%,
+      #02040a 100%);
 }
 
-/* CURSOR GLOW */
-#cursorGlow{
+/* horizon glow */
+.sun-ocean::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:200px;
+  bottom:40%;
+  background:radial-gradient(ellipse at center, rgba(125,249,255,.5), transparent 70%);
+  filter:blur(60px);
+}
+
+/* cursor glow */
+#glow{
   position:fixed;
-  width:500px;height:500px;
+  width:400px;height:400px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(125,249,255,.25), transparent 70%);
+  background:radial-gradient(circle, rgba(125,249,255,.2), transparent 70%);
   pointer-events:none;
-  z-index:-1;
   transform:translate(-50%,-50%);
-}
-
-/* CANVAS */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-2;
+  z-index:2;
 }
 
 /* HERO */
@@ -50,12 +59,13 @@ canvas{
   align-items:center;
   justify-content:center;
   padding:60px;
+  text-align:left;
   opacity:0;
-  transform:translateY(40px);
-  animation:fadeUp 1.4s ease forwards;
+  transform:translateY(60px);
+  animation:reveal 1.5s ease forwards;
 }
 
-@keyframes fadeUp{
+@keyframes reveal{
   to{opacity:1;transform:translateY(0);}
 }
 
@@ -67,15 +77,9 @@ canvas{
   gap:60px;
 }
 
-/* LEFT */
-.logo{
-  width:80px;
-  margin-bottom:20px;
-  filter:drop-shadow(0 0 20px #7df9ff);
-}
-
+/* TEXT */
 h1{
-  font-size:clamp(2.5rem,5vw,4rem);
+  font-size:clamp(2.8rem,5vw,4.5rem);
   font-weight:800;
 }
 
@@ -85,44 +89,62 @@ h1 span{
   -webkit-text-fill-color:transparent;
 }
 
-/* BUTTON */
+/* HOLOGRAPHIC PANEL */
+.panel{
+  backdrop-filter:blur(40px);
+  background:rgba(255,255,255,.05);
+  border-radius:25px;
+  padding:25px;
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 0 60px rgba(125,249,255,.15);
+  transition:.3s;
+}
+
+.panel:hover{
+  box-shadow:0 0 80px rgba(125,249,255,.4);
+}
+
+/* CTA */
 .cta{
-  margin-top:40px;
+  margin-top:30px;
   display:inline-block;
   padding:14px 30px;
   border-radius:30px;
   background:linear-gradient(135deg,#7df9ff,#c084fc);
   color:#000;
   text-decoration:none;
+  font-weight:600;
 }
 
-/* PANEL */
-.panel{
-  backdrop-filter:blur(30px);
-  background:rgba(255,255,255,.05);
-  border-radius:25px;
-  padding:25px;
-  border:1px solid rgba(255,255,255,.2);
-  transform:translateZ(0);
+/* SCROLL SECTION */
+.section{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transform:translateY(80px);
+  transition:1s;
 }
 
-/* PARALLAX */
-.parallax{
-  transition:transform .2s ease;
+.section.show{
+  opacity:1;
+  transform:translateY(0);
 }
+
 </style>
 </head>
 
 <body>
 
-<div id="cursorGlow"></div>
-<canvas id="grid"></canvas>
+<div class="sun-ocean"></div>
+<div id="glow"></div>
 
 <section class="hero">
   <div class="container">
 
-    <div class="parallax" data-depth="0.2">
-      <img src="grt-logo-11.png" class="logo">
+    <div>
+      <h3 style="opacity:.6;">Applied Intelligence</h3>
 
       <h1>
         Intelligence is not automated.<br>
@@ -136,77 +158,85 @@ h1 span{
       <a class="cta">Architect My Intelligence →</a>
     </div>
 
-    <div class="panel parallax" data-depth="0.4">
+    <div class="panel">
       <h3>Engagement Models</h3>
-
-      <div>3 Months → ↑120% ROI</div>
-      <div>6 Months → ↑260% ROI</div>
-      <div>12 Months → ↑420% ROI</div>
+      <p>3 Months → ↑120% ROI</p>
+      <p>6 Months → ↑260% ROI</p>
+      <p>12 Months → ↑420% ROI</p>
     </div>
 
   </div>
 </section>
 
-<script>
-/* 🌀 PARALLAX */
-document.addEventListener("mousemove",e=>{
-  document.querySelectorAll(".parallax").forEach(el=>{
-    let depth=el.dataset.depth;
-    let x=(window.innerWidth/2 - e.clientX)*depth/40;
-    let y=(window.innerHeight/2 - e.clientY)*depth/40;
-    el.style.transform=`translate(${x}px,${y}px)`;
-  });
+<section class="section">
+  <h2>AI Systems are not built. They are architected.</h2>
+</section>
 
-  // cursor glow
-  let glow=document.getElementById("cursorGlow");
-  glow.style.left=e.clientX+"px";
-  glow.style.top=e.clientY+"px";
+<script>
+/* 🌈 CURSOR GLOW */
+document.addEventListener("mousemove",e=>{
+  let g=document.getElementById("glow");
+  g.style.left=e.clientX+"px";
+  g.style.top=e.clientY+"px";
 });
 
-/* ⚡ NEURAL GRID */
-const canvas=document.getElementById("grid");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let nodes=[];
-for(let i=0;i<80;i++){
-  nodes.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    vx:(Math.random()-.5)*0.5,
-    vy:(Math.random()-.5)*0.5
+/* 🎬 SCROLL REVEAL */
+const sections=document.querySelectorAll(".section");
+window.addEventListener("scroll",()=>{
+  sections.forEach(sec=>{
+    let rect=sec.getBoundingClientRect();
+    if(rect.top<window.innerHeight-100){
+      sec.classList.add("show");
+    }
   });
+});
+
+/* 🧠 THREE.JS (3D BACKGROUND) */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(innerWidth,innerHeight);
+document.body.appendChild(renderer.domElement);
+renderer.domElement.style.position="fixed";
+renderer.domElement.style.top="0";
+renderer.domElement.style.zIndex="-2";
+
+camera.position.z=5;
+
+/* particles */
+const geometry=new THREE.BufferGeometry();
+const vertices=[];
+for(let i=0;i<1000;i++){
+  vertices.push(
+    (Math.random()-0.5)*20,
+    (Math.random()-0.5)*20,
+    (Math.random()-0.5)*20
+  );
 }
+geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+const material=new THREE.PointsMaterial({
+  color:0x7df9ff,
+  size:0.05
+});
 
-  nodes.forEach(a=>{
-    a.x+=a.vx;
-    a.y+=a.vy;
+const points=new THREE.Points(geometry,material);
+scene.add(points);
 
-    nodes.forEach(b=>{
-      let dx=a.x-b.x;
-      let dy=a.y-b.y;
-      let dist=Math.sqrt(dx*dx+dy*dy);
-
-      if(dist<120){
-        ctx.strokeStyle="rgba(125,249,255,"+(1-dist/120)+")";
-        ctx.beginPath();
-        ctx.moveTo(a.x,a.y);
-        ctx.lineTo(b.x,b.y);
-        ctx.stroke();
-      }
-    });
-
-    ctx.fillStyle="#7df9ff";
-    ctx.fillRect(a.x,a.y,2,2);
-  });
-
-  requestAnimationFrame(draw);
+/* animate */
+function animate(){
+  requestAnimationFrame(animate);
+  points.rotation.y+=0.0008;
+  points.rotation.x+=0.0004;
+  renderer.render(scene,camera);
 }
-draw();
+animate();
+
+window.addEventListener("resize",()=>{
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+});
 </script>
 
 </body>
