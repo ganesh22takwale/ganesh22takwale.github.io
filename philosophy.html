@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Philosophy</title>
+<title>GRT Cinematic Philosophy</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
@@ -15,15 +15,22 @@ body{
   line-height:1.6;
 }
 
-/* 🌌 BACKGROUND */
+/* 🌌 Animated Background */
 .bg{
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(circle at 50% 55%, rgba(120,255,255,.35), transparent 60%),
-    linear-gradient(to bottom,#02040a 0%,#02040a 50%,#041a3a 80%,#000 100%);
-  z-index:-2;
+  background:linear-gradient(120deg,#02040a,#041a3a,#000);
+  background-size:400% 400%;
+  animation:bgShift 20s ease infinite;
+  z-index:-3;
 }
+@keyframes bgShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Horizon glow */
 .bg::after{
   content:"";
   position:absolute;
@@ -32,14 +39,23 @@ body{
   top:50%;
   background:radial-gradient(ellipse at center, rgba(125,249,255,.6), transparent 70%);
   filter:blur(80px);
+  z-index:-2;
 }
 
-/* 🌊 WAVES */
+/* 🌊 Waves */
 #waves{
   position:fixed;
   bottom:0;
   width:100%;
   height:300px;
+  z-index:-1;
+}
+
+/* ✨ Particles */
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
   z-index:-1;
 }
 
@@ -70,6 +86,7 @@ h1 span{
   border:1px solid rgba(255,255,255,.15);
   backdrop-filter:blur(20px);
   background:rgba(255,255,255,.05);
+  animation:fadeInUp 2s ease forwards;
 }
 .grid{
   display:grid;
@@ -87,7 +104,7 @@ h1 span{
 }
 .cell:hover{
   background:rgba(125,249,255,.1);
-  transform:translateY(-3px);
+  transform:translateY(-3px) scale(1.05);
 }
 
 /* PANEL */
@@ -99,8 +116,9 @@ h1 span{
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.2);
   box-shadow:0 0 40px rgba(125,249,255,.15);
+  animation:fadeInRight 2s ease forwards;
 }
-.metric{margin-bottom:20px;}
+.metric{margin-bottom:20px;opacity:0;transform:translateY(20px);}
 .metric strong{font-size:22px;display:block;}
 .metric span{font-size:13px;opacity:.6;}
 
@@ -127,6 +145,9 @@ h1 span{
   text-align:center;
   max-width:900px;
   margin:auto;
+  opacity:0;
+  transform:translateY(40px);
+  animation:fadeInUp 3s ease forwards 2s;
 }
 .philosophy h2{
   font-size:2.2rem;
@@ -150,6 +171,14 @@ footer{
   border-top:1px solid rgba(255,255,255,.1);
 }
 
+/* Animations */
+@keyframes fadeInUp{
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeInRight{
+  to{opacity:1;transform:translateX(0);}
+}
+
 /* MOBILE */
 @media(max-width:900px){
   .container{flex-direction:column;gap:40px;text-align:center;}
@@ -162,6 +191,7 @@ footer{
 
 <div class="bg"></div>
 <canvas id="waves"></canvas>
+<canvas id="particles"></canvas>
 
 <div class="container">
   <!-- LEFT -->
@@ -210,16 +240,15 @@ footer{
 <section class="philosophy">
   <h2>Philosophy of Reliability</h2>
   <p>
-    At GRT, we believe intelligence is not a product of chance—it is a discipline of design. 
-    Every system we build is guided by principles of clarity, integrity, and resilience.
+    At GRT, intelligence is not a machine’s echo—it is a symphony of design. 
+    We merge human insight with AI precision to craft systems that breathe, adapt, and endure.
   </p>
   <p>
-    True intelligence is not about speed alone, but about decisions that endure. 
-    Reliability is not a feature—it is the foundation.
+    Reliability is our canvas, memory our brush, and alignment our guiding hand. 
+    Together, they paint intelligence that is not fleeting, but timeless.
   </p>
   <p>
-    Our philosophy: Architect systems that remember, align, and adapt. 
-    Because intelligence without reliability is just noise.
+    This is the future: where AI and humanity converge, not in competition, but in collaboration.
   </p>
 </section>
 
@@ -228,12 +257,11 @@ footer{
 </footer>
 
 <script>
-/* 🌊 DATA WAVES */
+/* 🌊 Waves */
 const canvas=document.getElementById("waves");
 const ctx=canvas.getContext("2d");
 canvas.width=innerWidth;
 canvas.height=300;
-
 function drawWave(time){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let j=0;j<3;j++){
@@ -249,13 +277,8 @@ function drawWave(time){
 }
 drawWave(0);
 
-/* 🧠 LIVE DATA */
-setInterval(()=>{
-  document.getElementById("roi").innerText = "+"+(100+Math.random()*100).toFixed(0)+"%";
-  document.getElementById("risk").innerText = "-"+(20+Math.random()*40).toFixed(0)+"%";
-  document.getElementById("eff").innerText = "+"+(40+Math.random()*80).toFixed(0)+"%";
-},2000);
-</script>
-
-</body>
-</html>
+/* ✨ Particles */
+const pCanvas=document.getElementById("particles");
+const pCtx=pCanvas.getContext("2d");
+pCanvas.width=innerWidth;
+pCanvas
