@@ -912,3 +912,48 @@ AI GROWTH PANEL (GLASS EFFECT)
   transform: translateY(-5px);
   border-color: rgba(0, 200, 255, 0.4);
 }
+/* =====================================
+DAILY INTELLIGENCE PANEL (VISIBLE)
+===================================== */
+
+.ai-growth-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 20px;
+}
+
+.glass-card.strong {
+  width: 90%;
+  max-width: 900px;
+  padding: 50px;
+
+  background: rgba(10, 15, 25, 0.9);
+  border-radius: 20px;
+
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(0, 200, 255, 0.25);
+
+  text-align: center;
+
+  box-shadow: 
+    0 20px 80px rgba(0,0,0,0.6),
+    0 0 40px rgba(0,212,255,0.1);
+}
+
+.daily-insight-box {
+  margin: 40px 0;
+  padding: 30px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.insight-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
