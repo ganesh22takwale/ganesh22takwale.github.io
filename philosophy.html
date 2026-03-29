@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Spatial Intelligence OS</title>
+<title>GRT Spatial OS</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -17,16 +17,16 @@ color:#fff;
 overflow:hidden;
 }
 
-/* 🌅 LIGHT */
+/* 🌅 BACKGROUND */
 .bg{
 position:fixed;inset:0;
 background:
-radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
+radial-gradient(circle at 50% 60%, rgba(120,255,255,.2), transparent 60%),
 linear-gradient(to bottom,#010308,#041a3a,#000);
 z-index:-3;
 }
 
-/* 🌊 OCEAN */
+/* 🌊 WAVES */
 #waves{
 position:fixed;
 bottom:0;
@@ -35,101 +35,63 @@ height:200px;
 z-index:-1;
 }
 
-/* HERO */
-.container{
-display:flex;
-justify-content:space-between;
-align-items:center;
-height:100vh;
-padding:60px;
+/* 🪟 WINDOW */
+.window{
+position:absolute;
+width:320px;
+padding:20px;
+border-radius:20px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(30px);
+border:1px solid rgba(255,255,255,.2);
+box-shadow:0 0 40px rgba(125,249,255,.2);
+cursor:grab;
+user-select:none;
 }
 
-/* TEXT */
-h1{
-font-size:clamp(2.8rem,5vw,4.5rem);
-font-weight:600;
+.window:active{cursor:grabbing}
+
+/* HEADER */
+.header{
+font-family:'Orbitron';
+margin-bottom:10px;
 }
 
+/* METRICS */
+.metric{margin-bottom:10px;}
+.metric strong{display:block;font-size:18px}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+.cell{
+padding:10px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,.2);
+cursor:pointer;
+}
+
+/* FAQ */
+.faq-item{margin-top:8px;cursor:pointer;}
+.answer{display:none;font-size:13px;opacity:.7}
+
+/* TITLE */
+.title{
+position:absolute;
+top:50px;
+left:50px;
+max-width:600px;
+}
+
+h1{font-size:3.5rem;}
 h1 span{
 background:linear-gradient(90deg,#7df9ff,#c084fc);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-}
-
-/* GRID */
-.grid{
-margin-top:30px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-}
-
-.cell{
-padding:14px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(255,255,255,.03);
-cursor:pointer;
-transition:.3s;
-}
-.cell:hover{
-background:rgba(125,249,255,.15);
-transform:translateY(-4px);
-}
-
-/* CTA */
-.cta{
-margin-top:20px;
-display:inline-block;
-padding:12px 25px;
-border-radius:20px;
-background:#7df9ff;
-color:#000;
-cursor:pointer;
-}
-
-/* 💎 PANEL */
-.panel{
-width:320px;
-padding:25px;
-border-radius:25px;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(30px);
-border:1px solid rgba(255,255,255,.2);
-box-shadow:0 0 60px rgba(125,249,255,.2);
-}
-
-/* SYSTEM METRICS */
-.metric{
-margin-bottom:15px;
-}
-.metric strong{
-font-family:'Orbitron';
-font-size:22px;
-}
-.metric span{
-font-size:12px;
-opacity:.6;
-}
-
-/* FAQ */
-.faq{margin-top:30px;}
-.faq-item{cursor:pointer;margin-bottom:10px;}
-.answer{max-height:0;overflow:hidden;transition:.3s;opacity:.7;}
-
-/* PHILOSOPHY */
-.philosophy{
-position:absolute;
-bottom:60px;
-left:60px;
-font-size:13px;
-opacity:.8;
-}
-
-/* MOBILE */
-@media(max-width:900px){
-.container{flex-direction:column;text-align:center}
-.panel{width:100%}
 }
 </style>
 </head>
@@ -139,14 +101,16 @@ opacity:.8;
 <div class="bg"></div>
 <canvas id="waves"></canvas>
 
-<div class="container">
-
-<div>
+<div class="title">
 <h1>
 Intelligence is not automated.<br>
-<span>It is architected by GRT Lab.</span>
+<span>It is architected.</span>
 </h1>
+</div>
 
+<!-- 🧠 MODULE WINDOW -->
+<div class="window" style="top:200px;left:60px">
+<div class="header">Modules</div>
 <div class="grid">
 <div class="cell">Memory</div>
 <div class="cell">Alignment</div>
@@ -155,101 +119,116 @@ Intelligence is not automated.<br>
 <div class="cell">Decision</div>
 <div class="cell">Adaptive</div>
 </div>
+</div>
 
-<div class="cta">Architect Intelligence →</div>
+<!-- 📊 METRICS WINDOW -->
+<div class="window" style="top:180px;right:60px">
+<div class="header">System Metrics</div>
+<div class="metric"><strong id="t">98%</strong>Throughput</div>
+<div class="metric"><strong id="m">512TB</strong>Memory</div>
+<div class="metric"><strong id="r">99.97%</strong>Reliability</div>
+<div class="metric"><strong id="d">12ms</strong>Latency</div>
+</div>
 
-<div class="faq">
+<!-- ❓ FAQ WINDOW -->
+<div class="window" style="top:400px;left:80px">
+<div class="header">Knowledge</div>
+
 <div class="faq-item" onclick="toggle(this)">
 What is intelligence architecture?
-<div class="answer">It integrates memory, alignment, and reliability into a system.</div>
+<div class="answer">It integrates memory, alignment and reliability.</div>
 </div>
+
 <div class="faq-item" onclick="toggle(this)">
 Why reliability matters?
-<div class="answer">It ensures consistent outcomes and reduces systemic risk.</div>
-</div>
-</div>
-
-</div>
-
-<!-- RIGHT PANEL -->
-<div class="panel">
-
-<div class="metric"><strong id="t">98%</strong><span>Intelligence Throughput</span></div>
-<div class="metric"><strong id="m">512TB</strong><span>Memory Index</span></div>
-<div class="metric"><strong id="r">99.97%</strong><span>Reliability Score</span></div>
-<div class="metric"><strong id="d">12ms</strong><span>Decision Latency</span></div>
-<div class="metric"><strong id="a">97.4%</strong><span>Alignment Confidence</span></div>
-
+<div class="answer">Ensures consistent and safe outcomes.</div>
 </div>
 
 </div>
 
-<div class="philosophy">
-<div>Ancient: Structural resilience</div>
-<div>Industrial: Reliability engineering</div>
-<div>AI Era: Alignment + robustness</div>
+<!-- 📚 PHILOSOPHY WINDOW -->
+<div class="window" style="top:420px;right:80px">
+<div class="header">Reliability Evolution</div>
+<div>Ancient → Structural resilience</div>
+<div>Industrial → Reliability theory</div>
+<div>AI → Alignment systems</div>
 </div>
 
 <script>
 
+/* 🖱️ DRAG SYSTEM */
+document.querySelectorAll(".window").forEach(win=>{
+let offsetX, offsetY, isDown=false;
+
+win.addEventListener("mousedown",e=>{
+isDown=true;
+offsetX=e.clientX-win.offsetLeft;
+offsetY=e.clientY-win.offsetTop;
+win.style.zIndex=1000;
+});
+
+document.addEventListener("mouseup",()=>isDown=false);
+
+document.addEventListener("mousemove",e=>{
+if(!isDown)return;
+win.style.left=(e.clientX-offsetX)+"px";
+win.style.top=(e.clientY-offsetY)+"px";
+});
+});
+
 /* ❓ FAQ */
 function toggle(el){
-let ans=el.querySelector(".answer");
-ans.style.maxHeight=ans.style.maxHeight?null:"100px";
+let a=el.querySelector(".answer");
+a.style.display=a.style.display==="block"?"none":"block";
 }
 
 /* 🌊 WAVES */
 const w=document.getElementById("waves");
-const wc=w.getContext("2d");
+const ctx=w.getContext("2d");
 w.width=innerWidth;
 w.height=200;
 
 function waves(t){
-wc.clearRect(0,0,w.width,w.height);
+ctx.clearRect(0,0,w.width,w.height);
 for(let i=0;i<3;i++){
-wc.beginPath();
+ctx.beginPath();
 for(let x=0;x<w.width;x++){
 let y=100+Math.sin(x*0.01+t+i)*20*i;
-wc.lineTo(x,y);
+ctx.lineTo(x,y);
 }
-wc.strokeStyle="rgba(125,249,255,0.2)";
-wc.stroke();
+ctx.strokeStyle="rgba(125,249,255,0.2)";
+ctx.stroke();
 }
 requestAnimationFrame(()=>waves(t+0.02));
 }
 waves(0);
 
-/* 🧠 THREE.JS PARTICLES */
+/* 🧠 THREE.JS BACKGROUND */
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
 const renderer=new THREE.WebGLRenderer({alpha:true});
 renderer.setSize(innerWidth,innerHeight);
 document.body.appendChild(renderer.domElement);
 renderer.domElement.style.position="fixed";
-renderer.domElement.style.top="0";
 renderer.domElement.style.zIndex="-2";
 
 camera.position.z=5;
 
-const geometry=new THREE.BufferGeometry();
-const vertices=[];
-for(let i=0;i<1500;i++){
-vertices.push(
-(Math.random()-0.5)*20,
-(Math.random()-0.5)*20,
-(Math.random()-0.5)*20
-);
+const geo=new THREE.BufferGeometry();
+let verts=[];
+for(let i=0;i<1200;i++){
+verts.push((Math.random()-0.5)*20,(Math.random()-0.5)*20,(Math.random()-0.5)*20);
 }
-geometry.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
+geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));
 
-const material=new THREE.PointsMaterial({color:0x7df9ff,size:0.03});
-const points=new THREE.Points(geometry,material);
-scene.add(points);
+const mat=new THREE.PointsMaterial({color:0x7df9ff,size:0.03});
+const mesh=new THREE.Points(geo,mat);
+scene.add(mesh);
 
 function animate(){
 requestAnimationFrame(animate);
-points.rotation.y+=0.0008;
-points.rotation.x+=0.0004;
+mesh.rotation.y+=0.0007;
+mesh.rotation.x+=0.0003;
 renderer.render(scene,camera);
 }
 animate();
@@ -260,8 +239,7 @@ document.getElementById("t").innerText=(90+Math.random()*10).toFixed(0)+"%";
 document.getElementById("m").innerText=(400+Math.random()*300).toFixed(0)+"TB";
 document.getElementById("r").innerText=(99.5+Math.random()*0.5).toFixed(2)+"%";
 document.getElementById("d").innerText=(5+Math.random()*20).toFixed(0)+"ms";
-document.getElementById("a").innerText=(90+Math.random()*10).toFixed(1)+"%";
-},4000);
+},3000);
 
 </script>
 
