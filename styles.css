@@ -154,7 +154,9 @@ HEADER
   align-items:center;
 
   max-width:var(--max-width);
-  margin:160px auto 0;
+  .hero{
+  margin:120px auto 40px; /* balanced */
+}
   padding:0 60px;
 
   gap:60px;
@@ -287,10 +289,9 @@ SECTIONS
 
 .panel{
   max-width:var(--max-width);
-  margin:140px auto;
-  padding:0 60px;
+  margin:80px auto; /* 🔥 reduced */
+  padding:0 40px;
 }
-
 .section-sub{
   margin-top:10px;
 }
@@ -867,14 +868,28 @@ body.premium-mode {
 /* =====================================
 AI GROWTH PANEL (GLASS EFFECT)
 ===================================== */
-
 .ai-growth-panel {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 20px;
+  padding: 60px 20px; /* reduced */
 }
 
+.glass-card.strong {
+  width: 100%;
+  max-width: 850px;
+  padding: 40px;
+
+  background: rgba(10, 15, 25, 0.95); /* 🔥 stronger */
+  border-radius: 18px;
+
+  border: 1px solid rgba(0, 212, 255, 0.25);
+
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.5);
+
+  text-align: center;
+}
 .glass-card {
   width: 90%;
   max-width: 1100px;
@@ -964,4 +979,8 @@ DAILY INTELLIGENCE PANEL (VISIBLE)
 
   background: rgba(0, 212, 255, 0.08);
   border: 1px solid rgba(0, 212, 255, 0.2);
+}
+section {
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
