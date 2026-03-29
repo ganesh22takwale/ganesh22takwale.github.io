@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Cinematic Philosophy</title>
+<title>GRT Vision Interface</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
@@ -11,38 +13,31 @@
 body{
   background:#000;
   color:#fff;
-  overflow-x:hidden;
-  line-height:1.6;
+  overflow:hidden;
 }
 
-/* 🌌 Animated Background */
+/* 🌅 SUNRISE SYSTEM */
 .bg{
   position:fixed;
   inset:0;
-  background:linear-gradient(120deg,#02040a,#041a3a,#000);
-  background-size:400% 400%;
-  animation:bgShift 25s ease infinite;
+  background:
+    radial-gradient(circle at 50% 55%, rgba(120,255,255,.25), transparent 60%),
+    linear-gradient(to bottom,#010308 0%,#010308 50%,#041a3a 80%,#000 100%);
   z-index:-3;
 }
-@keyframes bgShift{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
 
-/* Horizon glow */
-.bg::after{
-  content:"";
-  position:absolute;
+/* horizon glow */
+.horizon{
+  position:fixed;
+  top:50%;
   width:100%;
   height:200px;
-  top:50%;
-  background:radial-gradient(ellipse at center, rgba(125,249,255,.6), transparent 70%);
+  background:radial-gradient(ellipse at center, rgba(125,249,255,.5), transparent 70%);
   filter:blur(80px);
   z-index:-2;
 }
 
-/* 🌊 Waves */
+/* 🌊 OCEAN */
 #waves{
   position:fixed;
   bottom:0;
@@ -51,12 +46,16 @@ body{
   z-index:-1;
 }
 
-/* ✨ Particles */
-#particles{
+/* 🧠 NEURAL FIELD */
+#neural{
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:-1;
+}
+
+/* 🌀 PARALLAX */
+.parallax{
+  transition:transform .2s ease;
 }
 
 /* HERO */
@@ -64,63 +63,83 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  min-height:100vh;
+  height:100vh;
   padding:60px;
 }
 
 /* LEFT */
 .left{max-width:600px;}
-h1{font-size:clamp(2.5rem,5vw,4rem);}
+
+h1{
+  font-size:clamp(2.5rem,5vw,4rem);
+  opacity:0;
+  transform:translateY(40px);
+  animation:fade 1.2s forwards;
+}
+
+@keyframes fade{
+  to{opacity:1;transform:translateY(0);}
+}
+
 h1 span{
   background:linear-gradient(90deg,#7df9ff,#c084fc);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-.sub{margin-top:10px;opacity:.7;font-size:1.1rem;}
 
-/* GRID PANEL */
+.sub{
+  margin-top:10px;
+  opacity:.7;
+}
+
+/* 🍏 GRID */
 .grid-panel{
   margin-top:40px;
   padding:25px;
   border-radius:20px;
   border:1px solid rgba(255,255,255,.15);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(25px);
   background:rgba(255,255,255,.05);
-  animation:fadeInUp 2s ease forwards;
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
 }
+
 .cell{
   padding:12px;
-  border:1px solid rgba(255,255,255,.1);
   border-radius:10px;
-  font-size:14px;
-  text-align:center;
+  border:1px solid rgba(255,255,255,.1);
   background:rgba(255,255,255,.02);
-  transition:all .3s ease;
-}
-.cell:hover{
-  background:rgba(125,249,255,.1);
-  transform:translateY(-3px) scale(1.05);
 }
 
-/* PANEL */
+/* 💎 HOLO PANEL */
 .panel{
   width:320px;
   padding:25px;
   border-radius:25px;
-  backdrop-filter:blur(25px);
-  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(40px);
+  background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.2);
-  box-shadow:0 0 40px rgba(125,249,255,.15);
-  animation:fadeInRight 2s ease forwards;
+  box-shadow:0 0 60px rgba(125,249,255,.2);
 }
-.metric{margin-bottom:20px;opacity:0;transform:translateY(20px);}
-.metric strong{font-size:22px;display:block;}
-.metric span{font-size:13px;opacity:.6;}
+
+/* METRICS */
+.metric{
+  margin-bottom:20px;
+}
+
+.metric strong{
+  font-family:'Orbitron';
+  font-size:26px;
+}
+
+.metric span{
+  font-size:13px;
+  opacity:.6;
+}
 
 /* CTA */
 .cta{
@@ -131,75 +150,11 @@ h1 span{
   background:linear-gradient(135deg,#7df9ff,#c084fc);
   color:#000;
   text-decoration:none;
-  font-weight:bold;
-  transition:all .3s ease;
-}
-.cta:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(125,249,255,.5);
-}
-
-/* 🔮 Vision Section */
-.vision{
-  padding:80px 40px;
-  text-align:center;
-  max-width:900px;
-  margin:auto;
-}
-.vision p{
-  font-size:1.4rem;
-  margin:20px 0;
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeInUp 2s ease forwards;
-}
-.vision p:nth-child(1){animation-delay:1s;}
-.vision p:nth-child(2){animation-delay:2s;}
-.vision p:nth-child(3){animation-delay:3s;}
-
-/* 📜 Philosophy Section */
-.philosophy{
-  padding:80px 60px;
-  text-align:center;
-  max-width:900px;
-  margin:auto;
-  opacity:0;
-  transform:translateY(40px);
-  animation:fadeInUp 3s ease forwards 4s;
-}
-.philosophy h2{
-  font-size:2.2rem;
-  margin-bottom:20px;
-  background:linear-gradient(90deg,#7df9ff,#c084fc);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.philosophy p{
-  opacity:.8;
-  font-size:1.1rem;
-  margin-bottom:20px;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
-  font-size:.9rem;
-  opacity:.6;
-  border-top:1px solid rgba(255,255,255,.1);
-}
-
-/* Animations */
-@keyframes fadeInUp{
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes fadeInRight{
-  to{opacity:1;transform:translateX(0);}
 }
 
 /* MOBILE */
 @media(max-width:900px){
-  .container{flex-direction:column;gap:40px;text-align:center;}
+  .container{flex-direction:column;text-align:center;}
   .panel{width:100%;}
 }
 </style>
@@ -208,21 +163,25 @@ footer{
 <body>
 
 <div class="bg"></div>
+<div class="horizon"></div>
+
 <canvas id="waves"></canvas>
-<canvas id="particles"></canvas>
+<canvas id="neural"></canvas>
 
 <div class="container">
+
   <!-- LEFT -->
-  <div class="left">
+  <div class="left parallax" data-depth="0.2">
+
     <h1>
       Intelligence is not automated.<br>
       <span>It is architected.</span>
     </h1>
+
     <p class="sub">
       Production-grade AI built for memory, alignment & long-term reliability.
     </p>
 
-    <!-- GRID -->
     <div class="grid-panel">
       <div class="grid">
         <div class="cell">Memory Systems</div>
@@ -235,34 +194,94 @@ footer{
     </div>
 
     <a class="cta">Architect Intelligence →</a>
+
   </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="panel">
-    <div class="metric">
-      <strong id="roi">+120%</strong>
-      <span>System ROI Growth</span>
-    </div>
-    <div class="metric">
-      <strong id="risk">-38%</strong>
-      <span>Failure Reduction</span>
-    </div>
-    <div class="metric">
-      <strong id="eff">+64%</strong>
-      <span>Decision Efficiency</span>
-    </div>
+  <!-- RIGHT -->
+  <div class="panel parallax" data-depth="0.4">
+
+    <div class="metric"><strong id="roi">+140%</strong><span>ROI Growth</span></div>
+    <div class="metric"><strong id="risk">-32%</strong><span>Failure Reduction</span></div>
+    <div class="metric"><strong id="eff">+78%</strong><span>Decision Efficiency</span></div>
+
+    <div class="metric"><strong id="mem">+512TB</strong><span>Memory Depth</span></div>
+    <div class="metric"><strong id="align">98.2%</strong><span>Alignment Score</span></div>
+    <div class="metric"><strong id="stable">99.97%</strong><span>System Stability</span></div>
+
   </div>
+
 </div>
 
-<!-- 🔮 Vision Section -->
-<section class="vision">
-  <p>What if intelligence could remember your intent?</p>
-  <p>What if reliability was not a feature, but a law?</p>
-  <p>What if AI and humanity converged into one vision?</p>
-</section>
+<script>
+/* 🌀 PARALLAX */
+document.addEventListener("mousemove",e=>{
+  document.querySelectorAll(".parallax").forEach(el=>{
+    let d=el.dataset.depth;
+    let x=(innerWidth/2-e.clientX)*d/40;
+    let y=(innerHeight/2-e.clientY)*d/40;
+    el.style.transform=`translate(${x}px,${y}px)`;
+  });
+});
 
-<!-- 📜 Philosophy -->
-<section class="philosophy">
-  <h2>Philosophy of Reliability</h2>
-  <p>
-    Intelligence is not a machine’s shadow—it is a vision
+/* 🌊 WAVES */
+const wCanvas=document.getElementById("waves");
+const wCtx=wCanvas.getContext("2d");
+wCanvas.width=innerWidth;
+wCanvas.height=300;
+
+function waves(t){
+  wCtx.clearRect(0,0,wCanvas.width,wCanvas.height);
+  for(let i=0;i<3;i++){
+    wCtx.beginPath();
+    for(let x=0;x<wCanvas.width;x++){
+      let y=150+Math.sin(x*0.01+t+i)*20*i;
+      wCtx.lineTo(x,y);
+    }
+    wCtx.strokeStyle="rgba(125,249,255,0.25)";
+    wCtx.stroke();
+  }
+  requestAnimationFrame(()=>waves(t+0.02));
+}
+waves(0);
+
+/* 🧠 NEURAL */
+const nCanvas=document.getElementById("neural");
+const nCtx=nCanvas.getContext("2d");
+nCanvas.width=innerWidth;
+nCanvas.height=innerHeight;
+
+let nodes=[];
+for(let i=0;i<80;i++){
+  nodes.push({x:Math.random()*nCanvas.width,y:Math.random()*nCanvas.height});
+}
+
+function neural(){
+  nCtx.clearRect(0,0,nCanvas.width,nCanvas.height);
+  nodes.forEach(a=>{
+    nodes.forEach(b=>{
+      let dx=a.x-b.x,dy=a.y-b.y;
+      let d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        nCtx.strokeStyle="rgba(125,249,255,"+(1-d/120)+")";
+        nCtx.beginPath();
+        nCtx.moveTo(a.x,a.y);
+        nCtx.lineTo(b.x,b.y);
+        nCtx.stroke();
+      }
+    });
+  });
+  requestAnimationFrame(neural);
+}
+neural();
+
+/* ⚡ LIVE DATA */
+setInterval(()=>{
+  document.getElementById("roi").innerText="+"+(120+Math.random()*100).toFixed(0)+"%";
+  document.getElementById("risk").innerText="-"+(20+Math.random()*40).toFixed(0)+"%";
+  document.getElementById("eff").innerText="+"+(60+Math.random()*80).toFixed(0)+"%";
+  document.getElementById("mem").innerText="+"+(200+Math.random()*800).toFixed(0)+"TB";
+},4000);
+</script>
+
+</body>
+</html>
