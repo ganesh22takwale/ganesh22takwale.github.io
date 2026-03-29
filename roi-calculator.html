@@ -10,7 +10,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family:'Segoe UI',sans-serif;
 }
 
 body{
@@ -19,89 +19,87 @@ body{
   overflow-x:hidden;
 }
 
-/* BACKGROUND */
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
+/* HERO IMAGE FIX */
+.hero-bg{
+  width:100%;
+  height:400px;
+  background:url('4578701.jpg') center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* HERO */
-.hero{
+/* OVERLAY */
+.overlay{
   text-align:center;
-  margin-top:80px;
+  background:rgba(0,0,0,0.5);
+  padding:30px;
+  border-radius:12px;
 }
 
-.hero h1{
-  font-size:48px;
+/* TEXT */
+.overlay h1{
+  font-size:40px;
   font-weight:300;
 }
 
-.hero span{
+.overlay span{
   color:#4cc9ff;
 }
 
-.hero p{
-  opacity:.7;
+.overlay p{
   margin-top:10px;
+  opacity:.7;
 }
 
 /* FLOATING CARDS */
 .carousel{
   display:flex;
   justify-content:center;
-  gap:40px;
-  margin-top:80px;
+  gap:30px;
+  margin:60px;
+  flex-wrap:wrap;
 }
 
 .tier{
-  width:240px;
+  width:250px;
   padding:25px;
-  border-radius:18px;
-  backdrop-filter:blur(12px);
+  border-radius:16px;
   background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,0.1);
-  transition:.3s;
   animation:float 6s ease-in-out infinite;
 }
 
-.tier:nth-child(2){ animation-delay:1s;}
-.tier:nth-child(3){ animation-delay:2s;}
+.tier:nth-child(2){animation-delay:1s;}
+.tier:nth-child(3){animation-delay:2s;}
 
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-20px);}
+  50%{transform:translateY(-15px);}
 }
 
-.tier:hover{
-  transform:scale(1.05);
-  background:rgba(76,201,255,0.15);
-}
-
-/* ROI PANEL STYLE 4 */
+/* ROI PANEL */
 .calculator{
   max-width:800px;
-  margin:120px auto;
-  padding:40px;
-  border-radius:20px;
-  backdrop-filter:blur(20px);
+  margin:80px auto;
+  padding:30px;
+  border-radius:16px;
   background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
 }
 
 .calculator h2{
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 
-/* sliders */
-input[type=range]{
+input{
   width:100%;
-  margin:10px 0 25px;
+  margin:10px 0 20px;
 }
 
-/* OUTPUT GRID */
+/* OUTPUT */
 .output{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -111,69 +109,38 @@ input[type=range]{
 .metric{
   background:rgba(255,255,255,0.05);
   padding:20px;
-  border-radius:12px;
+  border-radius:10px;
   text-align:center;
-}
-
-.metric small{
-  opacity:.6;
 }
 
 .metric strong{
   display:block;
-  font-size:24px;
-  margin-top:8px;
+  font-size:22px;
+  margin-top:5px;
 }
 
 .gain{
   color:#4cffc3;
 }
 
-/* TOTAL BIG */
 .total{
   grid-column:span 2;
-  font-size:28px;
   background:rgba(76,201,255,0.15);
-}
-
-/* BUTTON */
-.cta{
-  display:block;
-  text-align:center;
-  margin-top:30px;
-  padding:14px;
-  border-radius:30px;
-  background:#4cc9ff;
-  color:#000;
-  text-decoration:none;
-}
-
-/* LOGO */
-.top{
-  text-align:center;
-  margin-top:20px;
-}
-
-.seal{
-  width:90px;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
-
-<header class="top">
-  <img src="grt-logo-11.png" class="seal">
-</header>
-
-<section class="hero">
-  <h1>Intelligence isn’t sold.<br><span>It’s architected.</span></h1>
-  <p>Quantify risk. Architect intelligence. Capture ROI.</p>
+<!-- HERO -->
+<section class="hero-bg">
+  <div class="overlay">
+    <h1>Intelligence isn’t sold.<br><span>It’s architected.</span></h1>
+    <p>Quantify risk. Architect intelligence. Capture ROI.</p>
+  </div>
 </section>
 
-<!-- FLOATING TIERS -->
+<!-- CARDS -->
 <section class="carousel">
   <div class="tier">
     <h3>ARCHITECTURE AUDIT</h3>
@@ -194,7 +161,7 @@ input[type=range]{
   </div>
 </section>
 
-<!-- ROI PANEL -->
+<!-- ROI -->
 <section class="calculator">
   <h2>ROI Simulator</h2>
 
@@ -205,24 +172,23 @@ input[type=range]{
   <input type="range" id="risk" min="10" max="100" value="47">
 
   <div class="output">
-
     <div class="metric">
-      <small>Annual Risk</small>
+      <small>Risk</small>
       <strong>$<span id="riskOut">47</span>M</strong>
     </div>
 
     <div class="metric">
-      <small>Preventable Loss</small>
+      <small>Preventable</small>
       <strong class="gain">$<span id="saveOut">24</span>M</strong>
     </div>
 
     <div class="metric">
-      <small>Architecture Value</small>
+      <small>Architecture</small>
       <strong>$<span id="archOut">0</span>M</strong>
     </div>
 
     <div class="metric">
-      <small>Trust Value</small>
+      <small>Trust</small>
       <strong>$<span id="trustOut">0</span>M</strong>
     </div>
 
@@ -230,22 +196,12 @@ input[type=range]{
       <small>Total ROI</small>
       <strong class="gain">$<span id="totalOut">0</span>M</strong>
     </div>
-
   </div>
-
-  <a class="cta">Activate Intelligence →</a>
 </section>
 
 <script>
-// ROI CALC
 const fab = document.getElementById("fab");
 const risk = document.getElementById("risk");
-
-const riskOut = document.getElementById("riskOut");
-const saveOut = document.getElementById("saveOut");
-const archOut = document.getElementById("archOut");
-const trustOut = document.getElementById("trustOut");
-const totalOut = document.getElementById("totalOut");
 
 function update(){
   let r = +risk.value;
@@ -254,82 +210,18 @@ function update(){
   let save = r * 0.5;
   let arch = f * 0.3;
   let trust = f * 0.2;
-
   let total = save + arch + trust;
 
-  riskOut.innerText = r;
-  saveOut.innerText = save.toFixed(0);
-  archOut.innerText = arch.toFixed(0);
-  trustOut.innerText = trust.toFixed(0);
-  totalOut.innerText = total.toFixed(0);
+  document.getElementById("riskOut").innerText = r;
+  document.getElementById("saveOut").innerText = save.toFixed(0);
+  document.getElementById("archOut").innerText = arch.toFixed(0);
+  document.getElementById("trustOut").innerText = trust.toFixed(0);
+  document.getElementById("totalOut").innerText = total.toFixed(0);
 }
 
 fab.oninput = update;
 risk.oninput = update;
 update();
-
-// BACKGROUND (BEAMS + PARTICLES)
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-let beams = [];
-let particles = [];
-
-for(let i=0;i<60;i++){
-  beams.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    speed:Math.random()*2+1,
-    len:Math.random()*120+50
-  });
-}
-
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    vx:(Math.random()-.5)*.5,
-    vy:(Math.random()-.5)*.5
-  });
-}
-
-function draw(){
-  ctx.fillStyle="rgba(0,0,0,0.2)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  // beams
-  beams.forEach(b=>{
-    b.y+=b.speed;
-    if(b.y>canvas.height){b.y=0;}
-
-    let g=ctx.createLinearGradient(b.x,b.y,b.x,b.y+b.len);
-    g.addColorStop(0,"transparent");
-    g.addColorStop(.5,"#4cc9ff");
-    g.addColorStop(1,"transparent");
-
-    ctx.strokeStyle=g;
-    ctx.beginPath();
-    ctx.moveTo(b.x,b.y);
-    ctx.lineTo(b.x,b.y+b.len);
-    ctx.stroke();
-  });
-
-  // particles
-  particles.forEach(p=>{
-    p.x+=p.vx;
-    p.y+=p.vy;
-
-    ctx.fillStyle="#4cc9ff";
-    ctx.fillRect(p.x,p.y,2,2);
-  });
-
-  requestAnimationFrame(draw);
-}
-
-draw();
 </script>
 
 </body>
