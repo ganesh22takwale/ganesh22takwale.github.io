@@ -4,227 +4,239 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT Intelligence System</title>
+<title>GRT Intelligence</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
 <style>
 :root{
 --cyan:#00e5ff;
---glass:rgba(10,15,30,0.65);
---border:rgba(0,229,255,0.2);
+--purple:#7c3aed;
 --text:#e6edf3;
---sub:#7c8aa5;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:'Inter';
-background:#05070f;
+background:#03040a;
 color:var(--text);
 overflow:hidden;
 }
 
-/* BACKGROUND */
-#bg{position:fixed;inset:0;z-index:-1}
-
-/* LAYOUT */
-.layout{
-display:grid;
-grid-template-columns:260px 1fr 260px;
-gap:20px;
-padding:20px;
-height:100vh;
+/* CANVAS */
+#bg{
+position:fixed;
+inset:0;
+z-index:-3;
 }
 
-/* PANEL */
-.panel{
-background:var(--glass);
-border:1px solid var(--border);
-border-radius:16px;
-padding:15px;
-backdrop-filter:blur(20px);
-overflow:auto;
+/* GLOW LAYER */
+.glow{
+position:fixed;
+inset:0;
+z-index:-2;
+background:
+radial-gradient(circle at 20% 30%, rgba(0,229,255,0.15), transparent),
+radial-gradient(circle at 80% 70%, rgba(124,58,237,0.15), transparent);
+filter:blur(80px);
 }
 
-/* CENTER */
+/* TEXT LAYER */
+#text-layer{
+position:fixed;
+inset:0;
+z-index:-1;
+pointer-events:none;
+}
+
+/* WORDS */
+.word{
+position:absolute;
+font-weight:700;
+color:rgba(0,229,255,0.05);
+white-space:nowrap;
+}
+.layer1{font-size:100px;}
+.layer2{font-size:50px;}
+.layer3{font-size:20px;}
+
+/* CENTER UI */
 .center{
-display:flex;
-flex-direction:column;
-gap:15px;
-align-items:center;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
 }
 
 h1{
-font-size:2rem;
-color:var(--cyan);
+font-size:3.5rem;
+background:linear-gradient(90deg,#fff,#00e5ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-/* ROW */
-.row{
-display:flex;
-justify-content:space-between;
-font-size:12px;
-padding:6px 0;
-border-bottom:1px solid rgba(255,255,255,0.05);
-}
-
-.news{font-size:12px;color:var(--sub);margin-bottom:6px}
-.mono{font-size:11px;color:var(--sub);line-height:1.5}
-.chart{width:100%;height:250px}
+p{opacity:.6;margin-top:10px;}
 </style>
 </head>
 
 <body>
 
 <canvas id="bg"></canvas>
+<div class="glow"></div>
+<div id="text-layer"></div>
 
-<div class="layout">
-
-<!-- LEFT -->
-<div class="panel">
-<h3>Crypto</h3>
-<div id="crypto"></div>
-
-<h3 style="margin-top:10px">Stocks</h3>
-<div id="stocks"></div>
-</div>
-
-<!-- CENTER -->
-<div class="panel center">
+<div class="center">
 <h1>GRT Intelligence</h1>
-
-<div id="tvchart" class="chart"></div>
-<canvas id="reliabilityChart"></canvas>
-</div>
-
-<!-- RIGHT -->
-<div class="panel">
-<h3>Global News</h3>
-<div id="news"></div>
-
-<h3 style="margin-top:10px">Signal</h3>
-<div id="signal"></div>
-</div>
-
-<!-- MONETIZATION PANEL -->
-<div class="panel" style="position:absolute;bottom:20px;right:20px;width:280px;height:300px;">
-<h3>Monetization Engine</h3>
-<div class="mono">
-1. AI SaaS tools ($10–$99/mo recurring)<br>
-2. Automation systems for businesses<br>
-3. Data dashboards (subscription model)<br>
-4. API-as-a-service monetization<br>
-5. Trading signal platforms<br>
-6. AI consulting ($1K–$50K/client)<br>
-7. Digital products (courses, templates)<br>
-8. Affiliate systems (compounding income)<br>
-9. Micro-SaaS tools for niche markets<br>
-10. Predictive analytics services<br>
-11. Market intelligence subscriptions<br>
-12. Enterprise AI deployment services<br>
-13. Workflow automation for SMEs<br>
-14. AI-powered research tools<br>
-15. Licensing proprietary algorithms
-</div>
-</div>
-
+<p>Architecting Autonomous Systems</p>
 </div>
 
 <script>
-/* BACKGROUND */
+/* =========================
+   THREE ENGINE
+========================= */
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({canvas:bg,alpha:true});
+
+const renderer=new THREE.WebGLRenderer({
+canvas:document.getElementById("bg"),
+alpha:true,
+antialias:true
+});
 renderer.setSize(innerWidth,innerHeight);
 
-const geo=new THREE.BufferGeometry();
-const arr=new Float32Array(1500*3);
-for(let i=0;i<arr.length;i++){arr[i]=(Math.random()-0.5)*50;}
-geo.setAttribute('position',new THREE.BufferAttribute(arr,3));
+/* PARTICLES */
+const pGeo=new THREE.BufferGeometry();
+const pCount=2500;
+const pArr=new Float32Array(pCount*3);
 
-const mat=new THREE.PointsMaterial({size:0.02,color:0x00e5ff});
-const stars=new THREE.Points(geo,mat);
-scene.add(stars);
+for(let i=0;i<pArr.length;i++){
+pArr[i]=(Math.random()-0.5)*100;
+}
 
-camera.position.z=10;
+pGeo.setAttribute('position',new THREE.BufferAttribute(pArr,3));
 
+const pMat=new THREE.PointsMaterial({
+size:0.02,
+color:0x00e5ff
+});
+
+const particles=new THREE.Points(pGeo,pMat);
+scene.add(particles);
+
+/* TYPO SPHERE */
+const words=["AI","DATA","SYSTEM","MARKET","SIGNAL","ALGO","INTEL","NETWORK"];
+
+const group=new THREE.Group();
+
+for(let i=0;i<300;i++){
+const canvas=document.createElement("canvas");
+const ctx=canvas.getContext("2d");
+canvas.width=256;
+canvas.height=128;
+
+ctx.fillStyle="white";
+ctx.font="bold 40px Inter";
+ctx.fillText(words[Math.floor(Math.random()*words.length)],20,60);
+
+const texture=new THREE.CanvasTexture(canvas);
+
+const material=new THREE.SpriteMaterial({
+map:texture,
+transparent:true,
+opacity:0.9
+});
+
+const sprite=new THREE.Sprite(material);
+
+const phi=Math.acos(-1+(2*i)/300);
+const theta=Math.sqrt(300*Math.PI)*phi;
+
+sprite.position.setFromSphericalCoords(6,phi,theta);
+sprite.scale.set(1.8,0.9,1);
+
+group.add(sprite);
+}
+
+scene.add(group);
+
+camera.position.z=12;
+
+/* ANIMATION */
 function animate(){
 requestAnimationFrame(animate);
-stars.rotation.y+=0.0006;
+
+particles.rotation.y+=0.0006;
+group.rotation.y+=0.002;
+group.rotation.x+=0.001;
+
 renderer.render(scene,camera);
 }
 animate();
 
-/* CRYPTO */
-async function loadCrypto(){
-try{
-let res=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=5");
-let data=await res.json();
-document.getElementById("crypto").innerHTML=data.map(c=>
-`<div class="row">${c.symbol} $${c.current_price}</div>`).join("");
-}catch{}
+/* =========================
+   FLOATING TEXT
+========================= */
+const words2=["INTELLIGENCE","AUTOMATION","ANALYTICS","AI","SYSTEM","DATA","SIGNAL","NETWORK"];
+const container=document.getElementById("text-layer");
+
+function createWord(layer){
+const el=document.createElement("div");
+el.className="word layer"+layer;
+el.innerText=words2[Math.floor(Math.random()*words2.length)];
+
+el.style.left=Math.random()*100+"%";
+el.style.top=Math.random()*100+"%";
+
+container.appendChild(el);
+
+let speed=Math.random()*0.3;
+
+function move(){
+let x=parseFloat(el.style.left);
+let y=parseFloat(el.style.top);
+
+x+=speed*0.05;
+y+=speed*0.03;
+
+if(x>100) x=0;
+if(y>100) y=0;
+
+el.style.left=x+"%";
+el.style.top=y+"%";
+
+requestAnimationFrame(move);
+}
+move();
 }
 
-/* STOCK */
-const stocks=[{s:"AAPL",p:220},{s:"NVDA",p:870}];
-function updateStocks(){
-stocks.forEach(s=>s.p+=(Math.random()-0.5)*2);
-document.getElementById("stocks").innerHTML=stocks.map(s=>
-`<div class="row">${s.s} $${s.p.toFixed(2)}</div>`).join("");
-}
+for(let i=0;i<20;i++) createWord(1);
+for(let i=0;i<30;i++) createWord(2);
+for(let i=0;i<40;i++) createWord(3);
 
-/* NEWS */
-async function loadNews(){
-try{
-let r=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=5");
-let d=await r.json();
-document.getElementById("news").innerHTML=d.results.map(n=>
-`<div class="news">• ${n.title}</div>`).join("");
-}catch{}
-}
+/* =========================
+   PARALLAX + CAMERA
+========================= */
+window.addEventListener("mousemove",e=>{
+let x=(e.clientX/window.innerWidth-0.5)*20;
+let y=(e.clientY/window.innerHeight-0.5)*20;
 
-/* SIGNAL */
-function signal(){
-const s=["AI Boom","Crypto Surge","Market Stable","Liquidity Rising"];
-document.getElementById("signal").innerText=s[Math.floor(Math.random()*s.length)];
-}
+camera.position.x=x*0.15;
+camera.position.y=-y*0.15;
 
-/* CHART */
-const chart=LightweightCharts.createChart(document.getElementById('tvchart'),{
-layout:{backgroundColor:'transparent',textColor:'#ccc'}
+container.style.transform=`translate(${x}px,${y}px)`;
 });
-const series=chart.addAreaSeries();
-let value=1400,time=Math.floor(Date.now()/1000);
 
-setInterval(()=>{
-time+=5;
-value+=(Math.random()-0.5)*5;
-series.update({time,value});
-},2000);
-
-/* RELIABILITY */
-new Chart(document.getElementById("reliabilityChart"),{
-type:"line",
-data:{labels:["1","2","3","4","5"],datasets:[{data:[90,92,94,93,95]}]},
-options:{plugins:{legend:{display:false}}}
+/* =========================
+   RESIZE
+========================= */
+window.addEventListener("resize",()=>{
+camera.aspect=innerWidth/innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(innerWidth,innerHeight);
 });
-
-/* LOOP */
-loadCrypto();
-loadNews();
-updateStocks();
-signal();
-
-setInterval(loadCrypto,60000);
-setInterval(loadNews,60000);
-setInterval(updateStocks,2000);
-setInterval(signal,4000);
 </script>
 
 </body>
