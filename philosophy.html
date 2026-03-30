@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GRT Intelligence System</title>
+<title>GRT Intelligence</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -13,7 +12,7 @@
 <style>
 :root{
 --cyan:#00e5ff;
---glass:rgba(10,15,30,0.6);
+--glass:rgba(15,20,35,0.45);
 --border:rgba(0,229,255,0.2);
 --text:#e6edf3;
 --sub:#7c8aa5;
@@ -22,7 +21,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
 font-family:'Inter';
-background:#03040a;
+background:#02030a;
 color:var(--text);
 overflow:hidden;
 }
@@ -32,40 +31,55 @@ overflow:hidden;
 .glow{
 position:fixed;inset:0;z-index:-2;
 background:
-radial-gradient(circle at 20% 30%, rgba(0,229,255,0.15), transparent),
-radial-gradient(circle at 80% 70%, rgba(124,58,237,0.15), transparent);
-filter:blur(80px);
+radial-gradient(circle at 20% 30%, rgba(0,229,255,0.2), transparent),
+radial-gradient(circle at 80% 70%, rgba(124,58,237,0.2), transparent);
+filter:blur(100px);
 }
 #text-layer{position:fixed;inset:0;z-index:-1;pointer-events:none;}
 
-.word{position:absolute;color:rgba(0,229,255,0.05);font-weight:700;}
-.layer1{font-size:90px;}
+.word{
+position:absolute;
+font-weight:700;
+color:rgba(0,229,255,0.05);
+}
+.layer1{font-size:100px;}
 .layer2{font-size:50px;}
 .layer3{font-size:20px;}
 
-/* ===== LAYOUT ===== */
-.layout{
-display:grid;
-grid-template-columns:260px 1fr 260px;
-gap:20px;
-padding:20px;
-height:100vh;
-}
-
-/* PANEL */
+/* ===== GLASS PANELS ===== */
 .panel{
+position:absolute;
 background:var(--glass);
 border:1px solid var(--border);
 border-radius:16px;
-padding:15px;
 backdrop-filter:blur(20px);
+padding:15px;
+width:260px;
+pointer-events:auto;
+}
+
+/* POSITIONS */
+.left{top:20px;left:20px;height:80vh;overflow:auto;}
+.right{top:20px;right:20px;height:70vh;overflow:auto;}
+.center{
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:420px;
+text-align:center;
+}
+
+/* FLOAT PANEL */
+.float{
+bottom:20px;
+right:20px;
+height:280px;
 overflow:auto;
 }
 
-/* CENTER */
-.center{text-align:center;}
+/* TEXT */
 h1{
-font-size:2.5rem;
+font-size:2.3rem;
 background:linear-gradient(90deg,#fff,#00e5ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -80,10 +94,9 @@ border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 .news{font-size:12px;color:var(--sub);margin-bottom:6px}
+.clock{font-size:12px;color:var(--sub);margin-top:10px}
 
-/* CHART */
-.chart{height:250px;margin-top:10px}
-
+.chart{height:220px;margin-top:10px}
 .mono{font-size:11px;color:var(--sub);line-height:1.5}
 </style>
 </head>
@@ -94,54 +107,52 @@ border-bottom:1px solid rgba(255,255,255,0.05);
 <div class="glow"></div>
 <div id="text-layer"></div>
 
-<div class="layout">
-
-<!-- LEFT -->
-<div class="panel">
+<!-- LEFT PANEL -->
+<div class="panel left">
 <h3>Crypto</h3>
 <div id="crypto"></div>
 
-<h3 style="margin-top:10px">Stocks</h3>
+<h3 style="margin-top:10px">Indian Stocks</h3>
 <div id="stocks"></div>
+
+<div class="clock" id="clock"></div>
 </div>
 
-<!-- CENTER -->
+<!-- CENTER PANEL -->
 <div class="panel center">
 <h1>GRT Intelligence</h1>
 <div id="chart" class="chart"></div>
 </div>
 
-<!-- RIGHT -->
-<div class="panel">
-<h3>AI News</h3>
+<!-- RIGHT PANEL -->
+<div class="panel right">
+<h3>AI Signals</h3>
+<div id="signals"></div>
+
+<h3 style="margin-top:10px">Global News</h3>
 <div id="news"></div>
-
-<h3 style="margin-top:10px">Signal</h3>
-<div id="signal"></div>
 </div>
 
-<!-- MONETIZATION -->
-<div class="panel" style="position:absolute;bottom:20px;right:20px;width:260px;">
-<h3>Monetization</h3>
+<!-- FLOAT PANEL -->
+<div class="panel float">
+<h3>AI Industry</h3>
 <div class="mono">
-AI SaaS tools<br>
-Automation systems<br>
-Data dashboards<br>
-API monetization<br>
-Trading signals<br>
-AI consulting<br>
-Digital products<br>
-Affiliate systems<br>
-Micro SaaS<br>
-Predictive analytics<br>
-Market intelligence<br>
-Enterprise AI<br>
-Workflow automation<br>
-AI research tools<br>
-Algorithm licensing
+AI SaaS platforms scaling globally<br>
+Automation replacing workflows<br>
+Data infrastructure booming<br>
+AI trading intelligence rising<br>
+Predictive analytics growth<br>
+Micro SaaS expansion<br>
+AI consulting high-value<br>
+Recurring subscription models<br>
+API-first ecosystems<br>
+AI decision systems<br>
+Global AI adoption surge<br>
+Autonomous economy forming<br>
+AI infra startups rising<br>
+Digital intelligence economy<br>
+Algorithmic advantage dominance
 </div>
-</div>
-
 </div>
 
 <script>
@@ -151,28 +162,28 @@ const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
 const renderer=new THREE.WebGLRenderer({canvas:bg,alpha:true});
 renderer.setSize(innerWidth,innerHeight);
 
+/* PARTICLES */
 const geo=new THREE.BufferGeometry();
-const arr=new Float32Array(2000*3);
-for(let i=0;i<arr.length;i++) arr[i]=(Math.random()-0.5)*80;
+const arr=new Float32Array(2500*3);
+for(let i=0;i<arr.length;i++) arr[i]=(Math.random()-0.5)*100;
 geo.setAttribute('position',new THREE.BufferAttribute(arr,3));
-
 const mat=new THREE.PointsMaterial({size:0.02,color:0x00e5ff});
 const particles=new THREE.Points(geo,mat);
 scene.add(particles);
 
-/* TYPO SPHERE */
+/* TYPOGRAPHY SPHERE */
 const group=new THREE.Group();
+const words=["AI","DATA","SYSTEM","INTEL"];
 for(let i=0;i<200;i++){
 const canvas=document.createElement("canvas");
 const ctx=canvas.getContext("2d");
 canvas.width=256;canvas.height=128;
 ctx.fillStyle="white";
 ctx.font="bold 40px Inter";
-ctx.fillText("AI",20,60);
+ctx.fillText(words[Math.floor(Math.random()*words.length)],20,60);
 
 const tex=new THREE.CanvasTexture(canvas);
-const mat2=new THREE.SpriteMaterial({map:tex,transparent:true});
-const spr=new THREE.Sprite(mat2);
+const spr=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));
 
 const phi=Math.acos(-1+(2*i)/200);
 const theta=Math.sqrt(200*Math.PI)*phi;
@@ -185,20 +196,19 @@ camera.position.z=10;
 
 function animate(){
 requestAnimationFrame(animate);
-particles.rotation.y+=0.0005;
+particles.rotation.y+=0.0006;
 group.rotation.y+=0.002;
 renderer.render(scene,camera);
 }
 animate();
 
 /* FLOATING TEXT */
-const words=["AI","DATA","SYSTEM","INTELLIGENCE"];
 const container=document.getElementById("text-layer");
-
-for(let i=0;i<50;i++){
+const words2=["INTELLIGENCE","AI","DATA","SYSTEM"];
+for(let i=0;i<60;i++){
 const el=document.createElement("div");
 el.className="word layer"+(1+Math.floor(Math.random()*3));
-el.innerText=words[Math.floor(Math.random()*words.length)];
+el.innerText=words2[Math.floor(Math.random()*words2.length)];
 el.style.left=Math.random()*100+"%";
 el.style.top=Math.random()*100+"%";
 container.appendChild(el);
@@ -213,39 +223,60 @@ camera.position.y=-y*0.1;
 container.style.transform=`translate(${x}px,${y}px)`;
 });
 
-/* ===== DATA ===== */
+/* ===== DATA SYSTEM ===== */
 async function crypto(){
-let r=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=5");
+let r=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=6");
 let d=await r.json();
-document.getElementById("crypto").innerHTML=d.map(c=>`<div class="row">${c.symbol} $${c.current_price}</div>`).join("");
+document.getElementById("crypto").innerHTML=d.map(c=>`<div class="row">${c.symbol.toUpperCase()} $${c.current_price}</div>`).join("");
 }
-crypto();setInterval(crypto,60000);
 
-const stocks=[{s:"AAPL",p:220},{s:"NVDA",p:870}];
-function stock(){
-stocks.forEach(s=>s.p+=(Math.random()-0.5)*2);
-document.getElementById("stocks").innerHTML=stocks.map(s=>`<div class="row">${s.s} $${s.p.toFixed(2)}</div>`).join("");
+const stocks=[
+{n:"RELIANCE",p:2950},
+{n:"TCS",p:4100},
+{n:"INFY",p:1500},
+{n:"HDFC",p:1600}
+];
+
+function updateStocks(){
+stocks.forEach(s=>s.p+=(Math.random()-0.5)*8);
+document.getElementById("stocks").innerHTML=
+stocks.map(s=>`<div class="row">${s.n} ₹${s.p.toFixed(0)}</div>`).join("");
 }
-setInterval(stock,2000);stock();
 
 async function news(){
-let r=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=3");
+let r=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=15");
 let d=await r.json();
-document.getElementById("news").innerHTML=d.results.map(n=>`<div class="news">${n.title}</div>`).join("");
+document.getElementById("news").innerHTML=
+d.results.slice(0,8).map(n=>`<div class="news">• ${n.title}</div>`).join("");
 }
-news();setInterval(news,60000);
 
-function signal(){
-const s=["AI Surge","Crypto Uptrend","Market Stable"];
-document.getElementById("signal").innerText=s[Math.floor(Math.random()*s.length)];
+function signals(){
+const s=["AI surge","Crypto momentum","Market stable","Automation rising"];
+document.getElementById("signals").innerText=s[Math.floor(Math.random()*s.length)];
 }
-setInterval(signal,4000);signal();
+
+function clock(){
+document.getElementById("clock").innerText=new Date().toLocaleTimeString();
+}
+setInterval(clock,1000);
 
 /* CHART */
 const chart=LightweightCharts.createChart(document.getElementById('chart'),{layout:{backgroundColor:'transparent'}});
 const series=chart.addAreaSeries();
 let val=1400,time=Math.floor(Date.now()/1000);
-setInterval(()=>{time+=5;val+=(Math.random()-0.5)*5;series.update({time,value:val});},2000);
+
+setInterval(()=>{
+time+=5;
+val+=(Math.random()-0.5)*5;
+series.update({time,value:val});
+},2000);
+
+/* LOOPS */
+crypto(); news(); updateStocks(); signals();
+setInterval(crypto,60000);
+setInterval(news,60000);
+setInterval(updateStocks,60000);
+setInterval(signals,5000);
 </script>
 
 </body>
