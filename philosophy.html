@@ -3,243 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Philosophy | Market Intelligence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
-    --bg: #f5f7fb;
-    --glass: rgba(255,255,255,0.6);
-    --border: rgba(0,0,0,0.08);
-    --text: #0a0a0a;
-    --sub: #6b7280;
-    --accent: #2563eb;
-    --up: #16a34a;
-    --down: #dc2626;
+--bg:#f6f8fc;
+--glass:rgba(255,255,255,0.7);
+--border:rgba(0,0,0,0.06);
+--text:#0f172a;
+--sub:#64748b;
+--accent:#2563eb;
+--up:#16a34a;
+--down:#dc2626;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-    font-family: "Inter", sans-serif;
-    background: linear-gradient(120deg,#eef2ff,#f8fafc);
-    color:var(--text);
-    height:100vh;
-    overflow:hidden;
+font-family:'Inter',sans-serif;
+background:linear-gradient(120deg,#eef2ff,#f8fafc);
+color:var(--text);
+height:100vh;
+overflow:hidden;
 }
 
-/* BACKGROUND LIGHT */
-.bg-blur{
-    position:fixed;
-    inset:0;
-    background: radial-gradient(circle at 20% 30%, rgba(37,99,235,0.2), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(99,102,241,0.2), transparent 40%);
-    filter: blur(80px);
-    z-index:-1;
+/* BACKGROUND */
+.bg{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 30%, rgba(37,99,235,.15), transparent),
+radial-gradient(circle at 80% 70%, rgba(124,58,237,.15), transparent);
+filter:blur(80px);
+z-index:-1;
 }
 
 /* LAYOUT */
-.container{
-    display:grid;
-    grid-template-columns: 1fr 1.2fr 1fr;
-    gap:20px;
-    padding:30px;
-    height:100vh;
+.layout{
+display:grid;
+grid-template-columns:280px 1fr 280px;
+grid-template-rows:50px 1fr 50px;
+gap:14px;
+padding:14px;
+height:100vh;
 }
 
-/* GLASS PANEL */
+/* TOPBAR */
+.topbar{
+grid-column:1/-1;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 15px;
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:12px;
+backdrop-filter:blur(20px);
+font-size:13px;
+}
+
+.nav a{
+margin:0 8px;
+text-decoration:none;
+color:var(--sub);
+}
+.nav a:hover{color:var(--accent);}
+
+/* PANEL */
 .panel{
-    background:var(--glass);
-    backdrop-filter: blur(20px);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:16px;
+padding:15px;
+backdrop-filter:blur(20px);
+display:flex;
+flex-direction:column;
+gap:10px;
+overflow:hidden;
 }
 
-/* CENTER */
-.center{
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:20px;
-}
-
-h1{
-    font-size: clamp(2rem,5vw,3rem);
-    font-weight:600;
-}
-
-.subtitle{
-    color:var(--sub);
-    font-size:14px;
-}
-
-/* BUTTON */
-button{
-    padding:12px 24px;
-    border:none;
-    border-radius:10px;
-    background:var(--accent);
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-}
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
-
-/* STOCK PANEL */
+/* STOCKS */
 .stock{
-    display:flex;
-    justify-content:space-between;
-    margin:10px 0;
-    font-size:14px;
+display:flex;
+justify-content:space-between;
+padding:8px;
+border-radius:8px;
+background:rgba(255,255,255,.6);
+font-size:13px;
 }
 
 .up{color:var(--up);}
 .down{color:var(--down);}
 
-/* CONTENT */
-.card-title{
-    font-weight:600;
-    margin-bottom:10px;
+/* CENTER */
+.center{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+gap:15px;
 }
 
-.small{
-    font-size:13px;
-    color:var(--sub);
-    line-height:1.6;
+h1{font-size:2.5rem;}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:var(--accent);
+color:#fff;
+cursor:pointer;
 }
 
-footer{
-    position:fixed;
-    bottom:10px;
-    width:100%;
-    text-align:center;
-    font-size:12px;
-    color:var(--sub);
+/* FOOTER */
+.footer{
+grid-column:1/-1;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:12px;
+color:var(--sub);
 }
 
+/* MOBILE */
 @media(max-width:900px){
-    .container{
-        grid-template-columns:1fr;
-        overflow:auto;
-    }
+.layout{grid-template-columns:1fr;height:auto;overflow:auto;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-blur"></div>
+<div class="bg"></div>
 
-<div class="container">
+<div class="layout">
 
-    <!-- LEFT PANEL -->
-    <div class="panel">
-        <div>
-            <div class="card-title">AI Market Insight</div>
-            <div class="small">
-                AI is shifting from tools → infrastructure.  
-                Companies monetizing automation layers (not models) are scaling faster.
-                <br><br>
-                Real opportunity:
-                <br>• SaaS + AI integration  
-                <br>• Data pipelines  
-                <br>• GPU infra leasing
-            </div>
-        </div>
+<div class="topbar">
+<div><strong>Market Intelligence</strong></div>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Philosophy</a>
+<a href="#">Systems</a>
+</div>
+<div id="time"></div>
+</div>
 
-        <div>
-            <div class="card-title">Live Stocks</div>
+<!-- LEFT -->
+<div class="panel">
+<h3>Live Stocks</h3>
+<div id="stocks"></div>
 
-            <div id="stocks"></div>
-        </div>
-    </div>
+<canvas id="chart1"></canvas>
+</div>
 
-    <!-- CENTER -->
-    <div class="panel center">
-        <div>
-            <div class="subtitle">SYSTEM PHILOSOPHY</div>
-            <h1>MARKET INTELLIGENCE</h1>
-        </div>
+<!-- CENTER -->
+<div class="panel center">
+<h1>Market Intelligence</h1>
+<p>Build systems that earn, not interfaces that impress.</p>
+<button>Explore Systems</button>
+</div>
 
-        <div class="small">
-            Build systems that earn, not screens that impress.  
-            The future is autonomous income driven by data + AI.
-        </div>
+<!-- RIGHT -->
+<div class="panel">
+<h3>AI Opportunities</h3>
+<p style="font-size:13px;color:var(--sub)">
+• AI SaaS<br>
+• Data Platforms<br>
+• Automation Tools<br>
+• Trading Systems
+</p>
 
-        <button>Explore Systems</button>
-    </div>
+<canvas id="chart2"></canvas>
+</div>
 
-    <!-- RIGHT PANEL -->
-    <div class="panel">
-        <div>
-            <div class="card-title">Opportunities</div>
-            <div class="small">
-                • AI Agents as a Service  
-                • Automated trading tools  
-                • Data monetization platforms  
-                • Subscription-based intelligence dashboards  
-            </div>
-        </div>
-
-        <div>
-            <div class="card-title">Website Ideas</div>
-            <div class="small">
-                Add:
-                <br>• Live dashboards  
-                <br>• AI tools marketplace  
-                <br>• Portfolio tracker  
-                <br>• Insight blog (daily signals)
-            </div>
-        </div>
-    </div>
+<div class="footer">
+© 2026 Intelligence Systems
+</div>
 
 </div>
 
-<footer>
-    © 2026 Intelligence Systems — Minimal. Useful. Profitable.
-</footer>
-
 <script>
-const stocks = [
-    {s:"AAPL",p:247},
-    {s:"MSFT",p:415},
-    {s:"NVDA",p:822},
-    {s:"TSLA",p:185},
-    {s:"GOOGL",p:152}
+const stocks=[
+{sym:"AAPL",p:220},
+{sym:"MSFT",p:415},
+{sym:"NVDA",p:870},
+{sym:"TSLA",p:190}
 ];
 
-function renderStocks(){
-    const el = document.getElementById("stocks");
-    el.innerHTML = stocks.map(stk=>`
-        <div class="stock">
-            <span>${stk.s}</span>
-            <span id="p-${stk.s}">$${stk.p.toFixed(2)}</span>
-        </div>
-    `).join("");
+function render(){
+const el=document.getElementById("stocks");
+el.innerHTML=stocks.map(s=>`
+<div class="stock">
+<span>${s.sym}</span>
+<span id="p-${s.sym}">$${s.p.toFixed(2)}</span>
+</div>`).join("");
 }
 
-function updateStocks(){
-    stocks.forEach(stk=>{
-        let change = (Math.random()-0.5)*2;
-        stk.p += change;
-
-        let el = document.getElementById(`p-${stk.s}`);
-        el.innerText = "$"+stk.p.toFixed(2);
-        el.className = change>=0 ? "up" : "down";
-    });
+function update(){
+stocks.forEach(s=>{
+let change=(Math.random()-0.5)*2;
+s.p+=change;
+let el=document.getElementById(`p-${s.sym}`);
+el.innerText="$"+s.p.toFixed(2);
+el.className=change>=0?"up":"down";
+});
 }
 
-renderStocks();
-setInterval(updateStocks,1500);
+setInterval(update,1500);
+render();
+
+/* TIME */
+setInterval(()=>{
+document.getElementById("time").innerText=new Date().toLocaleTimeString();
+},1000);
+
+/* CHARTS */
+new Chart(document.getElementById("chart1"),{
+type:"line",
+data:{labels:[1,2,3,4,5],datasets:[{data:[10,20,15,30,25]}]},
+options:{plugins:{legend:{display:false}}}
+});
+
+new Chart(document.getElementById("chart2"),{
+type:"bar",
+data:{labels:["AI","Data","Infra"],datasets:[{data:[40,30,20]}]},
+options:{plugins:{legend:{display:false}}}
+});
 </script>
 
 </body>
