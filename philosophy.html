@@ -7,6 +7,8 @@
 <title>GRT | Intelligence System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
@@ -20,8 +22,8 @@
 --down:#ff4d4d;
 }
 
-/* BASE */
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
 background:radial-gradient(circle at 20% 20%, #0a1a2f, #05070f 70%);
 color:var(--text);
@@ -29,46 +31,46 @@ font-family:'Inter',sans-serif;
 overflow:hidden;
 }
 
-/* FLOATING PARTICLE BG */
-.canvas-bg{
-position:fixed;
-inset:0;
-z-index:-1;
+/* THREE BACKGROUND */
+#bg{position:fixed;inset:0;z-index:-1;}
+
+/* GRID */
+.layout{
+display:grid;
+grid-template-columns:300px 1fr 300px;
+gap:20px;
+padding:20px;
+height:100vh;
 }
 
-/* PANELS */
+/* PANEL */
 .panel{
-position:absolute;
 background:var(--glass);
-backdrop-filter:blur(20px);
 border:1px solid var(--border);
 border-radius:16px;
 padding:15px;
-width:300px;
+backdrop-filter:blur(20px);
+overflow:auto;
 }
-
-/* POSITIONS */
-.left{top:20px;left:20px;height:85vh;overflow:auto;}
-.right{top:20px;right:20px;height:60vh;overflow:auto;}
-.bottom{bottom:20px;left:50%;transform:translateX(-50%);width:500px;text-align:center;}
 
 /* CENTER */
 .center{
-position:absolute;
-top:50%;left:50%;
-transform:translate(-50%,-50%);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 text-align:center;
 }
+
 h1{
 font-size:3rem;
-font-weight:700;
 background:linear-gradient(90deg,#fff,#00e5ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
 
-/* CRYPTO */
-.crypto{
+/* LISTS */
+.row{
 display:flex;
 justify-content:space-between;
 font-size:12px;
@@ -77,11 +79,7 @@ border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 /* NEWS */
-.news{
-font-size:12px;
-margin-bottom:10px;
-color:var(--sub);
-}
+.news{font-size:12px;margin-bottom:8px;color:var(--sub);}
 
 /* FOOTER */
 footer{
@@ -99,114 +97,147 @@ color:var(--sub);
 
 <canvas id="bg"></canvas>
 
-<!-- CENTER -->
-<div class="center">
-<h1>Market Intelligence</h1>
-<p style="color:var(--sub)">Real-time autonomous systems</p>
-</div>
+<div class="layout">
 
-<!-- CRYPTO PANEL -->
-<div class="panel left">
-<b>Global Crypto Market</b>
+<!-- LEFT -->
+<div class="panel">
+<h3>Crypto Market</h3>
 <div id="crypto"></div>
+
+<h3 style="margin-top:15px">Stocks</h3>
+<div id="stocks"></div>
 </div>
 
-<!-- AI NEWS -->
-<div class="panel right">
-<b>AI Intelligence Feed</b>
+<!-- CENTER -->
+<div class="panel center">
+<h1>Market Intelligence</h1>
+<p style="color:var(--sub)">Systems that earn > manual effort</p>
+
+<canvas id="chart" style="height:200px"></canvas>
+</div>
+
+<!-- RIGHT -->
+<div class="panel">
+<h3>AI Intelligence</h3>
 <div id="news"></div>
+
+<h3 style="margin-top:15px">System Signal</h3>
+<div id="signal"></div>
 </div>
 
-<!-- SIGNAL -->
-<div class="panel bottom">
-<b>System Signal</b>
-<div id="signal">Analyzing global data...</div>
 </div>
 
 <footer>GRT — Global Reliability Technology</footer>
 
 <script>
-/* ======================
-   PARTICLE BACKGROUND
-====================== */
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+/* =======================
+   THREE BACKGROUND
+======================= */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('bg'),alpha:true});
+renderer.setSize(innerWidth,innerHeight);
 
-let particles=[];
-for(let i=0;i<120;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:Math.random()-0.5,vy:Math.random()-0.5});
-}
+const geo=new THREE.IcosahedronGeometry(2,1);
+const mat=new THREE.MeshBasicMaterial({color:0x00e5ff,wireframe:true,opacity:0.2,transparent:true});
+const mesh=new THREE.Mesh(geo,mat);
+scene.add(mesh);
+
+camera.position.z=6;
 
 function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-particles.forEach(p=>{
-p.x+=p.vx;
-p.y+=p.vy;
-ctx.fillStyle="#00e5ff";
-ctx.fillRect(p.x,p.y,2,2);
-});
 requestAnimationFrame(animate);
+mesh.rotation.y+=0.004;
+renderer.render(scene,camera);
 }
 animate();
 
-/* ======================
-   CRYPTO API (CoinGecko)
-====================== */
+/* =======================
+   CRYPTO API
+======================= */
 async function loadCrypto(){
-let res=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1");
+let res=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10");
 let data=await res.json();
 
 document.getElementById("crypto").innerHTML=
 data.map(c=>`
-<div class="crypto">
+<div class="row">
 <span>${c.symbol.toUpperCase()}</span>
 <span>$${c.current_price}</span>
-</div>
-`).join("");
+</div>`).join("");
 }
 
-/* ======================
-   AI NEWS (Free API)
-====================== */
+/* =======================
+   STOCK SIMULATION
+======================= */
+const stocks=[
+{sym:"AAPL",p:220},
+{sym:"MSFT",p:415},
+{sym:"NVDA",p:870}
+];
+
+function renderStocks(){
+document.getElementById("stocks").innerHTML=
+stocks.map(s=>`
+<div class="row">
+<span>${s.sym}</span>
+<span id="s-${s.sym}">$${s.p.toFixed(2)}</span>
+</div>`).join("");
+}
+
+function updateStocks(){
+stocks.forEach(s=>{
+s.p+=(Math.random()-0.5)*2;
+document.getElementById(`s-${s.sym}`).innerText="$"+s.p.toFixed(2);
+});
+}
+
+/* =======================
+   NEWS API
+======================= */
 async function loadNews(){
-try{
 let res=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=5");
 let data=await res.json();
 
 document.getElementById("news").innerHTML=
-data.results.map(n=>`
-<div class="news">• ${n.title}</div>
-`).join("");
-}catch{
-document.getElementById("news").innerHTML="Live feed unavailable";
-}
+data.results.map(n=>`<div class="news">• ${n.title}</div>`).join("");
 }
 
-/* ======================
+/* =======================
    SIGNAL ENGINE
-====================== */
-function updateSignal(){
-let signals=[
-"AI sector momentum increasing",
-"Crypto volatility detected",
-"Market liquidity stable",
-"Automation demand rising"
+======================= */
+function signal(){
+const arr=[
+"AI sector rising",
+"Crypto volatility high",
+"Liquidity stable",
+"Automation demand increasing"
 ];
-document.getElementById("signal").innerText=
-signals[Math.floor(Math.random()*signals.length)];
+document.getElementById("signal").innerText=arr[Math.floor(Math.random()*arr.length)];
 }
+
+/* =======================
+   CHART
+======================= */
+new Chart(document.getElementById("chart"),{
+type:"line",
+data:{
+labels:["1","2","3","4","5"],
+datasets:[{data:[10,20,15,25,30]}]
+},
+options:{plugins:{legend:{display:false}}}
+});
 
 /* INIT */
 loadCrypto();
 loadNews();
-updateSignal();
+renderStocks();
+signal();
 
 setInterval(loadCrypto,60000);
 setInterval(loadNews,60000);
-setInterval(updateSignal,5000);
-
+setInterval(updateStocks,2000);
+setInterval(signal,4000);
 </script>
 
 </body>
