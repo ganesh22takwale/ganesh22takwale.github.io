@@ -4,67 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT | Intelligence System</title>
+<title>GRT Intelligence System</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 
 <style>
 :root{
---bg:#05070f;
---cyan:#00f2ff;
---glass:rgba(10,15,30,0.7);
---border:rgba(0,242,255,0.15);
+--cyan:#00e5ff;
+--glass:rgba(10,15,30,0.65);
+--border:rgba(0,229,255,0.2);
 --text:#e6edf3;
 --sub:#7c8aa5;
---up:#00ff88;
---down:#ff4d4d;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-background:radial-gradient(circle at 20% 20%, #0a1a2f, #05070f 70%);
+font-family:'Inter';
+background:#05070f;
 color:var(--text);
-font-family:'Inter',sans-serif;
 overflow:hidden;
 }
 
-/* ===== TICKER ===== */
-.ticker{
-position:fixed;
-top:0;width:100%;
-height:30px;
-background:#000;
-display:flex;
-align-items:center;
-overflow:hidden;
-z-index:1000;
-font-size:11px;
-}
-.ticker-inner{
-display:flex;
-animation:ticker 30s linear infinite;
-}
-@keyframes ticker{
-0%{transform:translateX(0)}
-100%{transform:translateX(-50%)}
-}
-
-/* ===== BACKGROUND ===== */
+/* BACKGROUND */
 #bg{position:fixed;inset:0;z-index:-1}
 
-/* ===== LAYOUT ===== */
+/* LAYOUT */
 .layout{
 display:grid;
-grid-template-columns:280px 1fr 280px;
+grid-template-columns:260px 1fr 260px;
 gap:20px;
-padding:50px 20px 20px;
+padding:20px;
 height:100vh;
 }
 
-/* ===== PANEL ===== */
+/* PANEL */
 .panel{
 background:var(--glass);
 border:1px solid var(--border);
@@ -74,26 +52,17 @@ backdrop-filter:blur(20px);
 overflow:auto;
 }
 
-/* ===== CENTER ===== */
+/* CENTER */
 .center{
 display:flex;
 flex-direction:column;
-align-items:center;
-justify-content:flex-start;
 gap:15px;
+align-items:center;
 }
 
 h1{
-font-size:2.5rem;
-background:linear-gradient(90deg,#fff,#00e5ff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* CHART */
-.chart{
-width:100%;
-height:350px;
+font-size:2rem;
+color:var(--cyan);
 }
 
 /* ROW */
@@ -105,25 +74,13 @@ padding:6px 0;
 border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-.news{font-size:12px;color:var(--sub);margin-bottom:8px}
-
-footer{
-position:fixed;
-bottom:10px;
-width:100%;
-text-align:center;
-font-size:11px;
-color:var(--sub);
-}
+.news{font-size:12px;color:var(--sub);margin-bottom:6px}
+.mono{font-size:11px;color:var(--sub);line-height:1.5}
+.chart{width:100%;height:250px}
 </style>
 </head>
 
 <body>
-
-<!-- TICKER -->
-<div class="ticker">
-<div class="ticker-inner" id="ticker"></div>
-</div>
 
 <canvas id="bg"></canvas>
 
@@ -141,35 +98,57 @@ color:var(--sub);
 <!-- CENTER -->
 <div class="panel center">
 <h1>GRT Intelligence</h1>
-<div id="chart" class="chart"></div>
+
+<div id="tvchart" class="chart"></div>
+<canvas id="reliabilityChart"></canvas>
 </div>
 
 <!-- RIGHT -->
 <div class="panel">
-<h3>AI Feed</h3>
+<h3>Global News</h3>
 <div id="news"></div>
 
-<h3>Signal</h3>
+<h3 style="margin-top:10px">Signal</h3>
 <div id="signal"></div>
 </div>
 
+<!-- MONETIZATION PANEL -->
+<div class="panel" style="position:absolute;bottom:20px;right:20px;width:280px;height:300px;">
+<h3>Monetization Engine</h3>
+<div class="mono">
+1. AI SaaS tools ($10–$99/mo recurring)<br>
+2. Automation systems for businesses<br>
+3. Data dashboards (subscription model)<br>
+4. API-as-a-service monetization<br>
+5. Trading signal platforms<br>
+6. AI consulting ($1K–$50K/client)<br>
+7. Digital products (courses, templates)<br>
+8. Affiliate systems (compounding income)<br>
+9. Micro-SaaS tools for niche markets<br>
+10. Predictive analytics services<br>
+11. Market intelligence subscriptions<br>
+12. Enterprise AI deployment services<br>
+13. Workflow automation for SMEs<br>
+14. AI-powered research tools<br>
+15. Licensing proprietary algorithms
+</div>
 </div>
 
-<footer>GRT — Global Reliability Technology</footer>
+</div>
 
 <script>
-/* THREE BG */
+/* BACKGROUND */
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
 const renderer=new THREE.WebGLRenderer({canvas:bg,alpha:true});
 renderer.setSize(innerWidth,innerHeight);
 
 const geo=new THREE.BufferGeometry();
-const arr=new Float32Array(1000*3);
+const arr=new Float32Array(1500*3);
 for(let i=0;i<arr.length;i++){arr[i]=(Math.random()-0.5)*50;}
 geo.setAttribute('position',new THREE.BufferAttribute(arr,3));
 
-const mat=new THREE.PointsMaterial({size:0.02,color:0x00f2ff});
+const mat=new THREE.PointsMaterial({size:0.02,color:0x00e5ff});
 const stars=new THREE.Points(geo,mat);
 scene.add(stars);
 
@@ -177,67 +156,75 @@ camera.position.z=10;
 
 function animate(){
 requestAnimationFrame(animate);
-stars.rotation.y+=0.0005;
+stars.rotation.y+=0.0006;
 renderer.render(scene,camera);
 }
 animate();
 
-/* CHART */
-const chart=LightweightCharts.createChart(document.getElementById('chart'),{
-layout:{backgroundColor:'transparent',textColor:'#ccc'}
-});
-const series=chart.addAreaSeries();
-let value=1400;
-let time=Math.floor(Date.now()/1000);
-
-setInterval(()=>{
-time+=5;
-value+= (Math.random()-0.5)*5;
-series.update({time,value});
-},2000);
-
 /* CRYPTO */
-async function crypto(){
+async function loadCrypto(){
+try{
 let res=await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=5");
 let data=await res.json();
 document.getElementById("crypto").innerHTML=data.map(c=>
-`<div class="row"><span>${c.symbol}</span><span>$${c.current_price}</span></div>`
-).join("");
+`<div class="row">${c.symbol} $${c.current_price}</div>`).join("");
+}catch{}
 }
-crypto();
-setInterval(crypto,60000);
 
 /* STOCK */
 const stocks=[{s:"AAPL",p:220},{s:"NVDA",p:870}];
-function renderStock(){
-stocks.forEach(s=>{
-s.p+=(Math.random()-0.5)*2;
-});
+function updateStocks(){
+stocks.forEach(s=>s.p+=(Math.random()-0.5)*2);
 document.getElementById("stocks").innerHTML=stocks.map(s=>
 `<div class="row">${s.s} $${s.p.toFixed(2)}</div>`).join("");
 }
-setInterval(renderStock,2000);
-renderStock();
 
 /* NEWS */
-async function news(){
-let r=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=3");
+async function loadNews(){
+try{
+let r=await fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=5");
 let d=await r.json();
-document.getElementById("news").innerHTML=d.results.map(n=>`<div class="news">${n.title}</div>`).join("");
+document.getElementById("news").innerHTML=d.results.map(n=>
+`<div class="news">• ${n.title}</div>`).join("");
+}catch{}
 }
-news();
 
 /* SIGNAL */
 function signal(){
-const s=["AI boom","Crypto surge","Market stable"];
+const s=["AI Boom","Crypto Surge","Market Stable","Liquidity Rising"];
 document.getElementById("signal").innerText=s[Math.floor(Math.random()*s.length)];
 }
-setInterval(signal,3000);
+
+/* CHART */
+const chart=LightweightCharts.createChart(document.getElementById('tvchart'),{
+layout:{backgroundColor:'transparent',textColor:'#ccc'}
+});
+const series=chart.addAreaSeries();
+let value=1400,time=Math.floor(Date.now()/1000);
+
+setInterval(()=>{
+time+=5;
+value+=(Math.random()-0.5)*5;
+series.update({time,value});
+},2000);
+
+/* RELIABILITY */
+new Chart(document.getElementById("reliabilityChart"),{
+type:"line",
+data:{labels:["1","2","3","4","5"],datasets:[{data:[90,92,94,93,95]}]},
+options:{plugins:{legend:{display:false}}}
+});
+
+/* LOOP */
+loadCrypto();
+loadNews();
+updateStocks();
 signal();
 
-/* TICKER */
-const tick=["BTC +2.4%","NVDA +1.2%","AI +5.8%"];
-document.getElementById("ticker").innerHTML=tick.map(t=>`<span style="padding:0 20px">${t}</span>`).join('').repeat(5);
+setInterval(loadCrypto,60000);
+setInterval(loadNews,60000);
+setInterval(updateStocks,2000);
+setInterval(signal,4000);
 </script>
 
 </body>
