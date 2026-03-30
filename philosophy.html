@@ -3,344 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRT | Spatial OS v2.0</title>
+    <title>GRT | NEURAL ARCHITECT OS</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #bc13fe;
-            --glass: rgba(10, 20, 40, 0.7);
-            --border: rgba(0, 242, 255, 0.3);
+            --accent: #00f2ff;
+            --secondary: #7000ff;
+            --bg-dark: #02040a;
+            --glass: rgba(0, 10, 20, 0.6);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Sora', sans-serif;
-            background: #010308;
+            background: var(--bg-dark);
             color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
             overflow: hidden;
-            height: 100vh;
+            height: 100dvh; /* Mobile support */
+            cursor: crosshair;
         }
 
-        /* SCANLINE EFFECT */
-        body::before {
-            content: " ";
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 100;
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-        }
-
-        /* BACKGROUND ELEMENTS */
-        #canvas-container { position: fixed; inset: 0; z-index: -1; }
-        
-        .overlay-grid {
+        /* VIRTUAL HUD OVERLAY */
+        #hud-overlay {
             position: fixed;
             inset: 0;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), 
-                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            perspective: 1000px;
-            transform: rotateX(60deg) translateY(-200px);
-            opacity: 0.15;
-            z-index: -2;
+            pointer-events: none;
+            border: 20px solid transparent;
+            border-image: radial-gradient(circle, transparent 70%, rgba(0, 242, 255, 0.05) 100%) 30;
+            z-index: 100;
         }
 
-        /* TITLES */
-        .title-container {
+        /* ANIMATED BACKGROUND CANVAS */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: -1;
+            filter: blur(1px) contrast(1.2);
+        }
+
+        /* TOP NAVIGATION / STATUS BAR */
+        .status-bar {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            z-index: 101;
+            letter-spacing: 2px;
+        }
+
+        /* MAIN ARCHITECTURE TITLE */
+        .hero-section {
             position: absolute;
-            top: 40px;
-            left: 50px;
+            top: 15%;
+            left: 5%;
             z-index: 10;
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 3rem;
-            letter-spacing: -1px;
-            line-height: 1;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            line-height: 0.9;
             text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
         }
 
-        h1 span {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: var(--neon-blue);
-            letter-spacing: 8px;
-            margin-top: 10px;
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* MODERN WINDOWS */
-        .window {
+        /* FLOATING SPATIAL MODULES */
+        .spatial-node {
             position: absolute;
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            border-top: 4px solid var(--neon-blue);
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,242,255,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .window:hover { border-color: var(--neon-blue); }
-
-        .header {
-            font-family: 'Orbitron';
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            color: var(--neon-blue);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* METRIC STYLING */
-        .metric { margin-bottom: 15px; border-left: 2px solid var(--neon-purple); padding-left: 10px; }
-        .metric strong { display: block; font-size: 22px; font-family: 'JetBrains Mono'; color: #fff; }
-        .metric span { font-size: 10px; text-transform: uppercase; opacity: 0.6; }
-
-        /* MODULE GRID */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .cell {
-            padding: 12px;
-            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255,255,255,0.1);
-            font-size: 11px;
-            text-transform: uppercase;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        .cell:hover {
-            background: var(--neon-blue);
-            color: #000;
-            font-weight: bold;
-            box-shadow: 0 0 15px var(--neon-blue);
+            padding: 20px;
+            border-radius: 2px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            max-width: 300px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* SIDEBAR DATA STREAM */
-        .data-stream {
+        .spatial-node:hover {
+            border-color: var(--accent);
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
+        }
+
+        /* CIRCULAR PROGRESS MATRIX */
+        .matrix-ring {
             position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            font-family: 'JetBrains Mono';
-            font-size: 9px;
-            color: var(--neon-blue);
-            opacity: 0.4;
-            pointer-events: none;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: spin 20s linear infinite;
         }
 
-        /* HOLO PANEL ENHANCED */
-        .holo {
-            position: fixed;
-            bottom: 50px;
-            right: 50px;
-            width: 350px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(0,242,255,0.1), transparent);
-            border-right: 1px solid var(--neon-blue);
-            border-bottom: 1px solid var(--neon-blue);
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* MOBILE OPTIMIZED DATA GRID */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .holo.active { opacity: 1; transform: translateY(0); }
+        .data-bit {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            border-left: 2px solid var(--secondary);
+        }
 
-        .cta {
-            margin-top: 15px;
-            padding: 12px;
+        /* BUTTONS */
+        .btn-glitch {
+            margin-top: 20px;
+            padding: 15px 30px;
             background: transparent;
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            text-transform: uppercase;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Syncopate';
+            font-size: 10px;
             font-weight: bold;
-            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
             transition: 0.3s;
         }
 
-        .cta:hover { background: var(--neon-blue); color: #000; }
-
-        /* HUD ELEMENTS */
-        .compass {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            width: 100px;
-            height: 100px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.5;
-        }
-        .compass::after {
-            content: '';
-            width: 80%;
-            height: 1px;
-            background: var(--neon-blue);
-            animation: rotate 4s linear infinite;
+        .btn-glitch:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent);
         }
 
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* RESPONSIVE LAYOUT */
+        @media (max-width: 768px) {
+            .hero-section { top: 10%; width: 90%; }
+            .spatial-node { position: relative; margin: 20px auto; top: 0 !important; left: 0 !important; right: 0 !important; }
+            body { overflow-y: auto; } /* Scrollable on mobile */
+            .matrix-ring { display: none; }
+        }
 
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div class="overlay-grid"></div>
-<div id="canvas-container"></div>
+    <div id="hud-overlay"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="matrix-ring"></div>
 
-<div class="data-stream" id="stream"></div>
-
-<div class="title-container">
-    <div class="header">System Status: Operational</div>
-    <h1>Spatial OS<span>Neural Architecture</span></h1>
-</div>
-
-<div class="window" style="top:220px; left:50px; width: 340px;">
-    <div class="header">Core Sub-Systems <span>v4.0.2</span></div>
-    <div class="grid">
-        <div class="cell" onmouseover="showInfo('Memory')">Cognitive Mesh</div>
-        <div class="cell" onmouseover="showInfo('Alignment')">Ethics Engine</div>
-        <div class="cell" onmouseover="showInfo('Reliability')">Flux Shield</div>
-        <div class="cell" onmouseover="showInfo('Failure')">Heuristic Logic</div>
-        <div class="cell" onmouseover="showInfo('Decision')">Quantum Path</div>
-        <div class="cell" onmouseover="showInfo('Adaptive')">Synapse Sync</div>
+    <div class="status-bar">
+        <div id="clock">00:00:00</div>
+        <div>GRT_CORE_v7.0 // ACTIVE_NODE: 04</div>
+        <div id="battery">SYNCING...</div>
     </div>
-    <div class="cta" onclick="igniteSystem()">Initialize Master Protocol</div>
-</div>
 
-<div class="window" style="top:150px; right:50px; width: 280px;">
-    <div class="header">Real-time Telemetry</div>
-    <div class="metric">
-        <span>Neural Throughput</span>
-        <strong id="t">98.2%</strong>
-    </div>
-    <div class="metric">
-        <span>Active Synapses</span>
-        <strong id="m">842.0k</strong>
-    </div>
-    <div class="metric">
-        <span>Integrity Matrix</span>
-        <strong id="r">99.99%</strong>
-    </div>
-    <div class="metric">
-        <span>Processing Delay</span>
-        <strong id="d">0.002ms</strong>
-    </div>
-</div>
-
-<div id="holo" class="holo">
-    <div class="header" style="color:var(--neon-purple)">File Analysis</div>
-    <h2 id="hTitle" style="font-family:Orbitron; margin-bottom:10px;"></h2>
-    <p id="hDesc" style="font-size:12px; line-height:1.6; opacity:0.8; margin-bottom:15px;"></p>
-    <div id="hMetrics" style="font-family:'JetBrains Mono'; color:var(--neon-blue); font-size:12px;"></div>
-</div>
-
-<div class="compass"></div>
-
-<script>
-    /* CONTENT DATA */
-    const DATA = {
-        Memory: { title: "COGNITIVE MESH", desc: "Non-linear memory storage utilizing spatial indexing. Allows the system to recall context across multi-session high-latency environments.", stats: "Uptime: 100% | Latency: 0ms" },
-        Alignment: { title: "ETHICS ENGINE", desc: "Hard-coded recursive safety protocols. Matches architectural output with human intent via real-time vector alignment.", stats: "Safety: 99.9% | Bias: 0.01%" },
-        Reliability: { title: "FLUX SHIELD", desc: "Automated error-correction cycles. Predicts hardware failures before they cascade using probabilistic forecasting.", stats: "Resilience: Level 5" },
-        Failure: { title: "HEURISTIC LOGIC", desc: "The science of 'failing gracefully'. Creates localized sandboxes for rogue processes to expire without affecting the core.", stats: "Containment: Active" },
-        Decision: { title: "QUANTUM PATH", desc: "Massively parallel decision tree analysis. Resolves 14 million variables per second to find the optimal action path.", stats: "Pathing: Optimal" },
-        Adaptive: { title: "SYNAPSE SYNC", desc: "Self-evolving neural weights. The architecture learns from its own environment, modifying its code structure in real-time.", stats: "Growth: +14% / hour" }
-    };
-
-    /* THREE.JS BACKGROUND */
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-    const particles = new THREE.BufferGeometry();
-    const particleCount = 2000;
-    const posArray = new Float32Array(particleCount * 3);
-
-    for(let i=0; i < particleCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 15;
-    }
-    particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    const material = new THREE.PointsMaterial({ size: 0.005, color: 0x00f2ff, transparent: true, opacity: 0.5 });
-    const particleMesh = new THREE.Points(particles, material);
-    scene.add(particleMesh);
-    camera.position.z = 3;
-
-    function animate() {
-        requestAnimationFrame(animate);
-        particleMesh.rotation.y += 0.001;
-        particleMesh.rotation.x += 0.0005;
-        renderer.render(scene, camera);
-    }
-    animate();
-
-    /* INTERACTION FUNCTIONS */
-    function showInfo(key) {
-        const item = DATA[key];
-        document.getElementById('hTitle').innerText = item.title;
-        document.getElementById('hDesc').innerText = item.desc;
-        document.getElementById('hMetrics').innerText = item.stats;
+    <section class="hero-section">
+        <p style="color: var(--accent); letter-spacing: 5px; font-size: 12px; margin-bottom: 10px;">PHILOSOPHY OF ARCHITECTURE</p>
+        <h1>SYSTEMIC<br><span style="color: #fff;">EVOLUTION</span></h1>
         
-        const holo = document.getElementById('holo');
-        holo.classList.add('active');
-        clearTimeout(window.holoTimer);
-        window.holoTimer = setTimeout(() => holo.classList.remove('active'), 5000);
-    }
+        <div class="spatial-node" style="margin-top: 40px; border-left: 4px solid var(--accent);">
+            <div style="font-family: 'Share Tech Mono'; color: var(--accent);">[ MEMORY_EXPANSION ]</div>
+            <p style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
+                Intelligence requires context. We build spatial memory maps that allow data to reside in the dimensions where it was created.
+            </p>
+            <div class="data-grid">
+                <div class="data-bit">LATENCY: 0.04ms</div>
+                <div class="data-bit">SYNC: GLOBAL</div>
+            </div>
+        </div>
 
-    function igniteSystem() {
-        gsap.to(particleMesh.scale, { x: 5, y: 5, z: 5, duration: 1, ease: "power4.in" });
-        gsap.to(material.color, { r: 0.7, g: 0, b: 1, duration: 0.5 });
-        setTimeout(() => {
-            gsap.to(particleMesh.scale, { x: 1, y: 1, z: 1, duration: 2 });
-            gsap.to(material.color, { r: 0, g: 0.95, b: 1, duration: 1 });
-        }, 1200);
-    }
+        <button class="btn-glitch" onclick="triggerSequence()">UPGRADE PROTOCOL</button>
+    </section>
 
-    /* DATA STREAM SIMULATOR */
-    const stream = document.getElementById('stream');
-    setInterval(() => {
-        const line = document.createElement('div');
-        line.innerText = `> ${Math.random().toString(36).substring(7).toUpperCase()} ... [OK]`;
-        stream.prepend(line);
-        if(stream.children.length > 20) stream.lastChild.remove();
-    }, 500);
+    <div class="spatial-node" style="top: 20%; right: 5%; width: 250px;">
+        <div style="font-family: 'Share Tech Mono';">LIVE_TELEMETRY</div>
+        <hr style="opacity: 0.2; margin: 10px 0;">
+        <div id="metrics-container">
+            </div>
+    </div>
 
-    /* UPDATING METRICS */
-    setInterval(() => {
-        document.getElementById("t").innerText = (97 + Math.random() * 3).toFixed(1) + "%";
-        document.getElementById("m").innerText = (800 + Math.random() * 100).toFixed(1) + "k";
-        document.getElementById("r").innerText = (99.98 + Math.random() * 0.02).toFixed(2) + "%";
-        document.getElementById("d").innerText = (0.001 + Math.random() * 0.005).toFixed(3) + "ms";
-    }, 2000);
-
-    // Resize handler
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+    <script>
+        // 1. DYNAMIC BACKGROUND (THREE.JS)
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-    });
 
-</script>
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x00f2ff, 
+            wireframe: true, 
+            transparent: true, 
+            opacity: 0.15 
+        });
+        const torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
+
+        camera.position.z = 30;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            torus.rotation.x += 0.002;
+            torus.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // 2. LIVE DATA FEED
+        const metrics = [
+            { label: "NEURAL_LOAD", val: 88, unit: "%" },
+            { label: "FLUX_STATE", val: 1.04, unit: "ghz" },
+            { label: "ETHICS_ALIGN", val: 99, unit: "%" }
+        ];
+
+        function updateMetrics() {
+            const container = document.getElementById('metrics-container');
+            container.innerHTML = metrics.map(m => `
+                <div style="margin-bottom: 15px;">
+                    <div style="display:flex; justify-content:space-between; font-size: 10px; opacity:0.6;">
+                        <span>${m.label}</span>
+                        <span>${(m.val + Math.random()).toFixed(2)}${m.unit}</span>
+                    </div>
+                    <div style="width:100%; height:2px; background:rgba(255,255,255,0.1); margin-top:5px;">
+                        <div style="width:${m.val}%; height:100%; background:var(--accent); box-shadow: 0 0 10px var(--accent);"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        setInterval(updateMetrics, 1000);
+
+        // 3. CLOCK & UI
+        function updateUI() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
+        }
+        setInterval(updateUI, 1000);
+
+        // 4. INTERACTION SEQUENCE
+        function triggerSequence() {
+            gsap.to(torus.scale, { x: 2, y: 2, z: 2, duration: 0.5, yoyo: true, repeat: 1 });
+            gsap.to("body", { backgroundColor: "#100020", duration: 0.2, yoyo: true, repeat: 1 });
+            alert("PROTOCOL UPGRADED: Neural Architecture Expanded.");
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // 5. TOUCH/MOUSE INTERACTION
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            gsap.to(torus.rotation, { x: y * 2, y: x * 2, duration: 2 });
+        });
+    </script>
 </body>
 </html>
