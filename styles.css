@@ -1219,3 +1219,40 @@ footer {
     align-items: center;
   }
 }
+.green{color:#00ff9c;}
+.red{color:#ff4d6d;}
+
+.spark{
+height:20px;
+width:100%;
+background:linear-gradient(90deg,#00e5ff33,#00e5ff00);
+margin-top:4px;
+position:relative;
+overflow:hidden;
+}
+
+.spark::after{
+content:"";
+position:absolute;
+width:40%;
+height:100%;
+background:linear-gradient(90deg,transparent,#00e5ff,transparent);
+animation:move 2s linear infinite;
+}
+
+@keyframes move{
+0%{left:-40%;}
+100%{left:100%;}
+}
+
+.bar{
+height:6px;
+background:#00e5ff;
+margin:6px 0;
+animation:grow 2s ease;
+}
+
+@keyframes grow{
+0%{width:0;}
+100%{width:100%;}
+}
