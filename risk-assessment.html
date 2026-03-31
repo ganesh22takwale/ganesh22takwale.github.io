@@ -1,43 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Intelligence Risk Assessment</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiskIntel | Enterprise Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
+<body>
+    <div class="background-glow"></div>
+    
+    <main class="container">
+        <header>
+            <h1>Intelligence <span class="accent">Risk Assessment</span></h1>
+            <p>Calculate operational exposure and architectural maturity requirements.</p>
+        </header>
 
-<body class="risk-body">
+        <section class="glass-card">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="scale">System Scale</label>
+                    <select id="scale" onchange="runRisk()">
+                        <option value="1">Small (Standard Ops)</option>
+                        <option value="2">Medium (Regional Hub)</option>
+                        <option value="3">Enterprise (Global Core)</option>
+                    </select>
+                </div>
 
-<h1>Intelligence Risk Assessment</h1>
+                <div class="input-group">
+                    <label for="downtime">Downtime Cost / Hour ($)</label>
+                    <input type="number" id="downtime" value="50000" oninput="runRisk()">
+                </div>
 
-<div class="risk-form">
+                <div class="input-group">
+                    <label for="recovery">Recovery Time (Hours)</label>
+                    <input type="number" id="recovery" value="4" oninput="runRisk()">
+                </div>
 
-<label>System Scale</label>
-<select id="scale">
-<option value="1">Small</option>
-<option value="2">Medium</option>
-<option value="3">Enterprise</option>
-</select>
+                <div class="input-group">
+                    <label for="human">Human Intervention Cost ($)</label>
+                    <input type="number" id="human" value="15000" oninput="runRisk()">
+                </div>
+            </div>
 
-<label>Downtime Cost / Hour ($)</label>
-<input type="number" id="downtime" value="50000">
+            <div class="action-area">
+                <button onclick="runRisk()" class="btn-primary">Generate Profile</button>
+            </div>
+        </section>
 
-<label>Recovery Time (Hours)</label>
-<input type="number" id="recovery" value="4">
+        <section id="resultWrapper" class="result-container hidden">
+            <div class="risk-meter-box">
+                <div class="meter-label">Total Risk Exposure</div>
+                <div id="riskValue" class="risk-amount">$0</div>
+                <div id="maturityBadge" class="badge">MODERATE</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-title">Operational Loss</span>
+                    <span id="opLoss" class="stat-val">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-title">Labor Impact</span>
+                    <span id="laborImpact" class="stat-val">$0</span>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<label>Human Intervention Cost ($)</label>
-<input type="number" id="human" value="15000">
-
-<button onclick="runRisk()">Calculate Risk Profile</button>
-
-</div>
-
-<div id="riskOutput" class="risk-output"></div>
-
-<script src="risk-assessment.js"></script>
-
-<script src="assets/js/ai-core-bg.js"></script>
-<script src="assets/js/ai-core-bg.js"></script>
+    <script src="risk-assessment.js"></script>
 </body>
 </html>
-
