@@ -289,3 +289,6 @@ footer{
   }
 
 }
+#network{
+  filter: blur(0.5px) contrast(130%);
+}
