@@ -292,3 +292,70 @@ footer{
 #network{
   filter: blur(0.5px) contrast(130%);
 }
+/* =========================
+🔥 LEVEL 6 LAB UI
+========================= */
+
+/* CORE REACTOR */
+
+.lab-neon-core{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:-2;
+  opacity:.12;
+}
+
+.lab-neon-core img{
+  width:500px;
+  animation:pulseCore 6s infinite ease-in-out;
+}
+
+@keyframes pulseCore{
+  50%{transform:scale(1.05);}
+}
+
+/* SYSTEM GRID */
+
+.system-grid{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.system-card{
+  padding:20px 30px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.system-card:hover{
+  box-shadow:0 0 30px rgba(0,229,255,.4);
+}
+
+/* DIAGNOSTIC */
+
+.diagnostic-panel{
+  margin-top:40px;
+  text-align:center;
+}
+
+.score-bar{
+  height:10px;
+  background:#111;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.score-fill{
+  height:100%;
+  width:72%;
+  background:linear-gradient(90deg,#7c5cff,#00e5ff);
+  transition:1s;
+}
