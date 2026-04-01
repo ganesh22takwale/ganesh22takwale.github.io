@@ -1,56 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Reliability Lab — GRT</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Reliability Lab — GRT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- Neon intelligence pulse background -->
-  <div class="lab-neon-core" aria-hidden="true">
-    <img src="grt-logo-05.png" alt="">
+<!-- 🧠 AI CORE BACKGROUND -->
+<canvas id="network"></canvas>
+
+<!-- ⚡ NEON CORE (LOGO REACTOR) -->
+<div class="lab-neon-core" id="coreReactor">
+  <img src="grt-logo-05.png" alt="">
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <img src="grt-logo-11.png" class="logo-ignite">
+  <span>Reliability Lab</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Architectural Diagnostic</h1>
+  <p id="contextText">System awaiting intelligent input...</p>
+</section>
+
+<!-- SYSTEM PANEL -->
+<section class="panel systems">
+
+  <div class="system-grid">
+
+    <button class="system-card decision" data-impact="15">
+      Increase Observability
+    </button>
+
+    <button class="system-card decision" data-impact="-10">
+      Optimize for Speed
+    </button>
+
+    <button class="system-card decision" data-impact="20">
+      Add Fallbacks
+    </button>
+
   </div>
 
-  <!-- SINGLE HEADER (ONLY ONE) -->
-  <header class="header">
-    <img src="grt-logo-11.png" class="logo-ignite" alt="GRT Seal">
-    <span>Reliability Lab</span>
-  </header>
+  <!-- DIAGNOSTIC OUTPUT -->
+  <div class="diagnostic-panel">
 
-  <section class="hero">
-    <h1>Architectural Diagnostic</h1>
-    <p id="contextText"></p>
-  </section>
-
-  <section class="panel systems">
-    <div class="system-grid">
-      <button class="system-card decision">Increase Observability</button>
-      <button class="system-card decision">Optimize for Speed</button>
-      <button class="system-card decision">Add Fallbacks</button>
+    <div class="score-row">
+      <span>Reliability Score</span>
+      <span id="scoreValue">72</span>
     </div>
 
-    <!-- Diagnostic Output -->
-    <div class="diagnostic-panel">
-      <div class="score-row">
-        <span>Reliability Score</span>
-        <span id="scoreValue">72</span>
-      </div>
-      <div class="score-bar">
-        <div class="score-fill" id="scoreFill"></div>
-      </div>
-      <p class="diagnostic-text" id="diagnosticText">
-        Awaiting architectural decision…
-      </p>
+    <div class="score-bar">
+      <div class="score-fill" id="scoreFill"></div>
     </div>
-  </section>
 
-  <footer>Global Reliability Technology</footer>
+    <p class="diagnostic-text" id="diagnosticText">
+      Awaiting architectural decision…
+    </p>
 
-  <script src="lab.js"></script>
-<script src="assets/js/ai-core-bg.js"></script>
-<script src="assets/js/ai-core-bg.js"></script>
+  </div>
+
+</section>
+
+<footer>Global Reliability Technology</footer>
+
+<!-- SCRIPTS -->
+<script src="assets/js/three-core.js"></script>
+
+<script>
+let score = 72;
+
+const scoreEl = document.getElementById("scoreValue");
+const fill = document.getElementById("scoreFill");
+const text = document.getElementById("diagnosticText");
+const core = document.getElementById("coreReactor");
+
+function updateUI(){
+  scoreEl.innerText = score;
+
+  fill.style.width = score + "%";
+
+  if(score > 85){
+    text.innerText = "System stable. High reliability.";
+    core.style.filter = "drop-shadow(0 0 40px #00e5ff)";
+  }
+  else if(score > 60){
+    text.innerText = "Moderate reliability. Improvements needed.";
+    core.style.filter = "drop-shadow(0 0 30px #7c5cff)";
+  }
+  else{
+    text.innerText = "System unstable. Critical risk detected.";
+    core.style.filter = "drop-shadow(0 0 40px red)";
+  }
+}
+
+document.querySelectorAll(".decision").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+
+    let impact = parseInt(btn.dataset.impact);
+    score += impact;
+
+    score = Math.max(0, Math.min(100, score));
+
+    btn.style.transform = "scale(1.1)";
+    setTimeout(()=>btn.style.transform="scale(1)",200);
+
+    updateUI();
+  });
+});
+
+updateUI();
+</script>
+
 </body>
 </html>
