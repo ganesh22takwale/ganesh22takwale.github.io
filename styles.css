@@ -359,3 +359,41 @@ footer{
   background:linear-gradient(90deg,#7c5cff,#00e5ff);
   transition:1s;
 }
+/* 🧠 SIDE PANEL */
+
+.ai-side-panel{
+  position:fixed;
+  right:20px;
+  top:120px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:50;
+}
+
+.ai-box{
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(12px);
+  padding:12px 16px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.1);
+  font-size:13px;
+}
+
+/* ⚡ FOOTER FLOAT EFFECT */
+
+.smart-footer{
+  position:sticky;
+  bottom:0;
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(10px);
+}
+
+/* ✨ DEPTH SCROLL */
+
+.hero{
+  transform:translateZ(0);
+  will-change:transform;
+}
