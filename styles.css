@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT ULTRA CORE</title>
+<title>GRT CORE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
 
@@ -26,7 +26,7 @@ color:var(--text);
 overflow-x:hidden;
 }
 
-/* 🌌 PARTICLE BACKGROUND */
+/* 🌌 BACKGROUND */
 canvas{
 position:fixed;
 top:0;
@@ -34,22 +34,22 @@ left:0;
 z-index:-2;
 }
 
-/* LOGO AMBIENT */
+/* LOGO BACKGROUND (SUBTLE) */
 body::after{
 content:"";
 position:fixed;
 inset:0;
 background:url("grt-logo-05.png");
-background-size:200px;
-opacity:0.01;
+background-size:220px;
+opacity:0.015;
 z-index:-3;
 }
 
-/* 🧠 MOUSE GLOW */
+/* 🧠 GLOW */
 .glow{
 position:fixed;
-width:350px;
-height:350px;
+width:300px;
+height:300px;
 background:radial-gradient(circle, rgba(0,229,255,0.15), transparent 60%);
 pointer-events:none;
 transform:translate(-50%,-50%);
@@ -59,48 +59,44 @@ z-index:-1;
 /* HEADER */
 .header{
 position:fixed;
-top:20px;
+top:10px;
 left:50%;
 transform:translateX(-50%);
-width:90%;
+width:95%;
 display:flex;
 justify-content:space-between;
-padding:14px 25px;
+align-items:center;
+padding:10px 15px;
 background:var(--glass);
 backdrop-filter:blur(20px);
-border-radius:20px;
+border-radius:15px;
 border:1px solid var(--border);
 z-index:100;
 }
 
-.header a{
-margin-left:20px;
+.logo{
+height:28px;
+}
+
+.header nav a{
+margin-left:12px;
+font-size:12px;
 text-decoration:none;
 color:var(--text);
 opacity:0.7;
-transition:.3s;
 }
-.header a:hover{color:var(--accent);}
+.header nav a:hover{color:var(--accent);}
 
-/* PAGE SYSTEM */
+/* PAGE */
 .page{
-display:none;
-padding:120px 8%;
+padding:100px 15px 40px;
 min-height:100vh;
-opacity:0;
-transform:translateY(30px);
-transition:0.5s;
-}
-.page.active{
-display:block;
-opacity:1;
-transform:translateY(0);
 }
 
 /* TITLE */
 h1{
 font-family:'Sora';
-font-size:70px;
+font-size:40px;
 background:linear-gradient(90deg,var(--accent),var(--accent2));
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -108,68 +104,31 @@ background:linear-gradient(90deg,var(--accent),var(--accent2));
 
 /* CARD */
 .card{
-margin-top:20px;
-padding:20px;
-border-radius:20px;
+margin-top:15px;
+padding:15px;
+border-radius:15px;
 background:var(--glass);
 border:1px solid var(--border);
-transition:.3s;
-}
-.card:hover{
-transform:translateY(-5px);
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+grid-template-columns:1fr;
+gap:15px;
 }
 
-/* BUTTON */
-.btn{
-margin-top:20px;
-padding:14px;
-background:linear-gradient(135deg,var(--accent),var(--accent2));
-border-radius:10px;
-display:inline-block;
-cursor:pointer;
+/* DESKTOP */
+@media(min-width:768px){
+h1{font-size:60px;}
+.grid{grid-template-columns:repeat(2,1fr);}
+.page{padding:120px 8%;}
 }
 
-/* LOGIN */
-.login{
-position:fixed;
-inset:0;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:999;
+/* LARGE */
+@media(min-width:1100px){
+.grid{grid-template-columns:repeat(4,1fr);}
 }
-.scan{
-width:140px;
-height:140px;
-border:2px solid var(--accent);
-border-radius:50%;
-overflow:hidden;
-position:relative;
-}
-.scan::after{
-content:"";
-position:absolute;
-width:100%;
-height:2px;
-background:var(--accent);
-animation:scan 2s infinite;
-}
-@keyframes scan{
-0%{top:0}
-100%{top:100%}
-}
-.fade{animation:fade 1s forwards;}
-@keyframes fade{to{opacity:0;visibility:hidden}}
-
 </style>
 </head>
 
@@ -178,75 +137,33 @@ animation:scan 2s infinite;
 <div class="glow" id="glow"></div>
 <canvas id="bg"></canvas>
 
-<!-- LOGIN -->
-<div class="login" id="login">
-<div class="scan"></div>
-<p>Biometric Verification...</p>
-</div>
-
 <header class="header">
-<div>GRT</div>
+<img src="grt-logo-05.png" class="logo">
 <nav>
-<a onclick="showPage('home')">HOME</a>
-<a onclick="showPage('lab')">LAB</a>
-<a onclick="showPage('tools')">PHILOSOPHY</a>
-<a onclick="showPage('core')">ARCHITECTURE</a>
+<a href="#">HOME</a>
+<a href="#">LAB</a>
+<a href="#">PHILOSOPHY</a>
+<a href="#">ARCHITECTURE</a>
 </nav>
 </header>
 
-<!-- HOME -->
-<div class="page active" id="home">
-<h1>Quantum Interface</h1>
+<div class="page">
+<h1>GRT QUANTUM INTERFACE</h1>
+
 <div class="card">
-Reliable AI Infrastructure for real-world deployment.
-<div class="btn">Initialize Core</div>
-</div>
+Reliable AI systems built for real-world performance.
 </div>
 
-<!-- LAB DASHBOARD -->
-<div class="page" id="lab">
-<h1>Reliability Lab</h1>
 <div class="grid">
-<div class="card">Active Users: <b id="u">2</b></div>
-<div class="card">Events: <b id="e">203</b></div>
-<div class="card">Engagement: <b id="g">30%</b></div>
+<div class="card">Active Users: 2</div>
+<div class="card">Events: 203</div>
+<div class="card">Engagement: +30%</div>
 <div class="card">Uptime: 99.9%</div>
 </div>
-</div>
 
-<!-- TOOLS -->
-<div class="page" id="tools">
-<h1>AI Philosophy</h1>
-<div class="grid">
-<div class="card">Memory Engine</div>
-<div class="card">Multi-Agent AI</div>
-<div class="card">Decision System</div>
-</div>
-</div>
-
-<!-- CORE -->
-<div class="page" id="core">
-<h1>Architecture</h1>
-<div class="grid">
-<div class="card">Nodes: 1402</div>
-<div class="card">Latency: 12ms</div>
-<div class="card">Health: Optimal</div>
-</div>
 </div>
 
 <script>
-
-/* PAGE SWITCH */
-function showPage(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-/* LOGIN */
-setTimeout(()=>{
-document.getElementById("login").classList.add("fade");
-},2000);
-
 /* MOUSE GLOW */
 document.addEventListener("mousemove",(e)=>{
 glow.style.left=e.clientX+"px";
@@ -260,31 +177,21 @@ canvas.width=innerWidth;
 canvas.height=innerHeight;
 
 let particles=[];
-for(let i=0;i<100;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5),vy:(Math.random()-0.5)});
+for(let i=0;i<60;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height});
 }
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 particles.forEach(p=>{
-p.x+=p.vx;
-p.y+=p.vy;
 ctx.beginPath();
 ctx.arc(p.x,p.y,2,0,Math.PI*2);
-ctx.fillStyle="rgba(0,229,255,0.5)";
+ctx.fillStyle="rgba(0,229,255,0.4)";
 ctx.fill();
 });
 requestAnimationFrame(animate);
 }
 animate();
-
-/* LIVE DATA */
-setInterval(()=>{
-u.innerText=Math.floor(Math.random()*3)+1;
-e.innerText=Math.floor(Math.random()*300);
-g.innerText=Math.floor(Math.random()*40)+"%";
-},3000);
-
 </script>
 
 </body>
