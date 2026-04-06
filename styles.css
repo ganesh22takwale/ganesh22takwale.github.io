@@ -1,174 +1,291 @@
-:root {
-  --bg: #05070d;
-  --glass: rgba(255,255,255,0.05);
-  --accent: #6cf2ff;
-  --accent2: #a66cff;
-  --text: #e6f1ff;
-  --border: rgba(255,255,255,0.1);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRT ULTRA CORE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#02040a;
+--accent:#00e5ff;
+--accent2:#7c5cff;
+--text:#e6edf3;
+--glass:rgba(255,255,255,0.05);
+--border:rgba(255,255,255,0.1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Inter';
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
+/* 🌌 PARTICLE BACKGROUND */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
 }
 
-/* 🌌 BACKGROUND */
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(108,242,255,0.08), transparent),
-    radial-gradient(circle at 80% 70%, rgba(166,108,255,0.08), transparent);
-  animation: bgMove 20s linear infinite;
-  z-index: -3;
-}
-@keyframes bgMove {
-  0% { transform: translate(0,0) }
-  50% { transform: translate(-5%,-5%) }
-  100% { transform: translate(0,0) }
+/* LOGO AMBIENT */
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:url("grt-logo-05.png");
+background-size:200px;
+opacity:0.01;
+z-index:-3;
 }
 
-/* LOGO DRIFT */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("grt-logo-05.png");
-  background-size: 200px;
-  opacity: 0.01;
-  z-index: -2;
-}
-
-/* MOUSE GLOW */
-.glow {
-  position: fixed;
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(108,242,255,0.15), transparent 60%);
-  pointer-events: none;
-  transform: translate(-50%,-50%);
-  z-index: -1;
+/* 🧠 MOUSE GLOW */
+.glow{
+position:fixed;
+width:350px;
+height:350px;
+background:radial-gradient(circle, rgba(0,229,255,0.15), transparent 60%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:-1;
 }
 
 /* HEADER */
-.header {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 20px;
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  z-index: 100;
-}
-.header a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: var(--text);
-  opacity: 0.7;
-}
-.header a:hover {
-  color: var(--accent);
+.header{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+display:flex;
+justify-content:space-between;
+padding:14px 25px;
+background:var(--glass);
+backdrop-filter:blur(20px);
+border-radius:20px;
+border:1px solid var(--border);
+z-index:100;
 }
 
-/* PAGES */
-.page {
-  display: none;
-  padding: 120px 8%;
-  min-height: 100vh;
+.header a{
+margin-left:20px;
+text-decoration:none;
+color:var(--text);
+opacity:0.7;
+transition:.3s;
 }
-.page.active {
-  display: block;
+.header a:hover{color:var(--accent);}
+
+/* PAGE SYSTEM */
+.page{
+display:none;
+padding:120px 8%;
+min-height:100vh;
+opacity:0;
+transform:translateY(30px);
+transition:0.5s;
+}
+.page.active{
+display:block;
+opacity:1;
+transform:translateY(0);
 }
 
 /* TITLE */
-h1 {
-  font-family: 'Sora';
-  font-size: 60px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+h1{
+font-family:'Sora';
+font-size:70px;
+background:linear-gradient(90deg,var(--accent),var(--accent2));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 /* CARD */
-.card {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 16px;
-  background: var(--glass);
-  border: 1px solid var(--border);
+.card{
+margin-top:20px;
+padding:20px;
+border-radius:20px;
+background:var(--glass);
+border:1px solid var(--border);
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-5px);
 }
 
 /* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 20px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
 /* BUTTON */
-.btn {
-  padding: 12px 20px;
-  margin-top: 15px;
-  display: inline-block;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.btn:hover {
-  transform: scale(1.05);
+.btn{
+margin-top:20px;
+padding:14px;
+background:linear-gradient(135deg,var(--accent),var(--accent2));
+border-radius:10px;
+display:inline-block;
+cursor:pointer;
 }
 
 /* LOGIN */
-.login {
-  position: fixed;
-  inset: 0;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 999;
+.login{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
 }
-.scan {
-  width: 120px;
-  height: 120px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
+.scan{
+width:140px;
+height:140px;
+border:2px solid var(--accent);
+border-radius:50%;
+overflow:hidden;
+position:relative;
 }
-.scan::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: var(--accent);
-  animation: scan 2s infinite;
+.scan::after{
+content:"";
+position:absolute;
+width:100%;
+height:2px;
+background:var(--accent);
+animation:scan 2s infinite;
 }
-@keyframes scan {
-  0% { top: 0 }
-  100% { top: 100% }
+@keyframes scan{
+0%{top:0}
+100%{top:100%}
 }
-.fade {
-  animation: fade 1s forwards;
+.fade{animation:fade 1s forwards;}
+@keyframes fade{to{opacity:0;visibility:hidden}}
+
+</style>
+</head>
+
+<body>
+
+<div class="glow" id="glow"></div>
+<canvas id="bg"></canvas>
+
+<!-- LOGIN -->
+<div class="login" id="login">
+<div class="scan"></div>
+<p>Biometric Verification...</p>
+</div>
+
+<header class="header">
+<div>GRT</div>
+<nav>
+<a onclick="showPage('home')">HOME</a>
+<a onclick="showPage('lab')">LAB</a>
+<a onclick="showPage('tools')">PHILOSOPHY</a>
+<a onclick="showPage('core')">ARCHITECTURE</a>
+</nav>
+</header>
+
+<!-- HOME -->
+<div class="page active" id="home">
+<h1>Quantum Interface</h1>
+<div class="card">
+Reliable AI Infrastructure for real-world deployment.
+<div class="btn">Initialize Core</div>
+</div>
+</div>
+
+<!-- LAB DASHBOARD -->
+<div class="page" id="lab">
+<h1>Reliability Lab</h1>
+<div class="grid">
+<div class="card">Active Users: <b id="u">2</b></div>
+<div class="card">Events: <b id="e">203</b></div>
+<div class="card">Engagement: <b id="g">30%</b></div>
+<div class="card">Uptime: 99.9%</div>
+</div>
+</div>
+
+<!-- TOOLS -->
+<div class="page" id="tools">
+<h1>AI Philosophy</h1>
+<div class="grid">
+<div class="card">Memory Engine</div>
+<div class="card">Multi-Agent AI</div>
+<div class="card">Decision System</div>
+</div>
+</div>
+
+<!-- CORE -->
+<div class="page" id="core">
+<h1>Architecture</h1>
+<div class="grid">
+<div class="card">Nodes: 1402</div>
+<div class="card">Latency: 12ms</div>
+<div class="card">Health: Optimal</div>
+</div>
+</div>
+
+<script>
+
+/* PAGE SWITCH */
+function showPage(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
-@keyframes fade {
-  to { opacity: 0; visibility: hidden }
+
+/* LOGIN */
+setTimeout(()=>{
+document.getElementById("login").classList.add("fade");
+},2000);
+
+/* MOUSE GLOW */
+document.addEventListener("mousemove",(e)=>{
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
+});
+
+/* PARTICLES */
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=[];
+for(let i=0;i<100;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5),vy:(Math.random()-0.5)});
 }
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.vx;
+p.y+=p.vy;
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle="rgba(0,229,255,0.5)";
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+/* LIVE DATA */
+setInterval(()=>{
+u.innerText=Math.floor(Math.random()*3)+1;
+e.innerText=Math.floor(Math.random()*300);
+g.innerText=Math.floor(Math.random()*40)+"%";
+},3000);
+
+</script>
+
+</body>
+</html>
