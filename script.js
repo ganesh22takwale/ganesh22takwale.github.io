@@ -183,3 +183,65 @@ card.style.transform =
 });
 });
 }
+/* =========================
+   🧊 ISLAND LOGIC
+   ========================= */
+
+const island = document.getElementById("island");
+
+ScrollTrigger.create({
+trigger:".panel",
+start:"top center",
+onEnter:()=> island.classList.add("expand"),
+onLeaveBack:()=> island.classList.remove("expand")
+});
+}
+/* =========================
+   🎬 GSAP CINEMATIC SCROLL
+   ========================= */
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO ZOOM OUT */
+gsap.to(".hero h1",{
+scale:1.5,
+opacity:0,
+scrollTrigger:{
+trigger:".hero",
+start:"top top",
+end:"bottom top",
+scrub:true
+}
+});
+/* =========================
+   🧠 TEXT SCRAMBLE
+   ========================= */
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+document.querySelectorAll("h2").forEach(el=>{
+let original = el.innerText;
+
+el.addEventListener("mouseenter",()=>{
+let iteration = 0;
+
+let interval = setInterval(()=>{
+el.innerText = original
+.split("")
+.map((letter,index)=>{
+if(index < iteration){
+return original[index];
+}
+return letters[Math.floor(Math.random()*26)];
+})
+.join("");
+
+if(iteration >= original.length){
+clearInterval(interval);
+}
+
+iteration += 1/3;
+
+},30);
+});
+});
