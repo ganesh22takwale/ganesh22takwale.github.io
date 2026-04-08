@@ -245,3 +245,16 @@ iteration += 1/3;
 },30);
 });
 });
+/* =========================
+   🧠 PINNED ARCHITECTURE
+   ========================= */
+
+gsap.to(".architecture",{
+scrollTrigger:{
+trigger:".architecture",
+start:"top top",
+end:"+=500",
+pin:true,
+scrub:true
+}
+});
