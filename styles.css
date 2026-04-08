@@ -46,9 +46,10 @@ content:"";
 position:fixed;
 inset:0;
 background:url("grt-logo-05.png");
-background-size:220px;
-opacity:0.012;
-z-index:-3;
+background-size:180px;
+opacity:0.015;
+z-index:-4;
+filter:blur(2px);
 }
 
 /* mouse glow */
