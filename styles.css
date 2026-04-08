@@ -37,10 +37,14 @@ canvas{
 position:fixed;
 top:0;
 left:0;
+}
+
 #stars{z-index:-4;}
 #network{z-index:-3;}
 #neural{z-index:-2;}
-}
+#stars{z-index:-4;}
+#network{z-index:-3;}
+#neural{z-index:-2;}
 
 /* ambient branding */
 body::after{
@@ -91,7 +95,9 @@ z-index:1000; /* VERY IMPORTANT */
 .logo{
 height:28px;
 }
-
+.logo-ignite{
+height:32px;
+}
 nav{
 display:flex;
 gap:20px;
@@ -583,6 +589,12 @@ pointer-events:none;
 /* smooth floating */
 animation:floatHero 12s ease-in-out infinite;
 }
+/* ONLY hero image controlled — safe */
+.hero-img{
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
 
 /* floating animation */
 @keyframes floatHero{
@@ -668,28 +680,6 @@ letter-spacing:-0.5px;
 /* =========================
    🚨 MASTER IMAGE FIX
    ========================= */
-
-/* prevent ANY image from breaking layout */
-.hero img,
-.panel img,
-.intelligence-os img{
-position:absolute !important;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-
-width:70%;
-max-width:900px;
-
-opacity:0.15;
-pointer-events:none;
-
-z-index:0;
-
-/* cinematic look */
-mix-blend-mode:screen;
-filter:blur(1px) drop-shadow(0 0 40px rgba(0,229,255,0.3));
-}
 
 /* ensure sections don't stretch because of image */
 .hero,
