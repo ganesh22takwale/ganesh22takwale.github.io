@@ -208,7 +208,7 @@ transform:translateY(0);
 
 h1{
 font-family:'Sora';
-font-size:clamp(42px,7vw,80px);
+font-size:clamp(36px,6vw,72px);
 line-height:1.1;
 letter-spacing:-1px;
 max-width:700px;
@@ -572,12 +572,40 @@ transition:background 0.5s ease;
 
 .hero{
 position:relative;
-overflow:hidden;
+min-height:100vh;
+
 display:flex;
 align-items:center;
-justify-content:center;
+justify-content:space-between;
+
+padding:0 6%;
+gap:40px;
+
+flex-wrap:wrap; /* IMPORTANT for mobile */
+
+overflow:hidden;
+}
+/* =========================
+   HERO GRID STRUCTURE
+========================= */
+
+.hero-left{
+flex:1;
+min-width:280px;
+z-index:2;
 }
 
+.hero-right{
+flex:1;
+min-width:280px;
+
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:flex-end;
+
+z-index:2;
+}
 /* THE MAGIC FIX */
 .hero-img{
 position:absolute;
@@ -757,4 +785,21 @@ to bottom,
 transparent,
 rgba(0,229,255,0.4)
 );
+}
+@media(max-width:768px){
+
+.hero{
+flex-direction:column;
+justify-content:center;
+text-align:center;
+}
+
+.hero-right{
+align-items:center;
+}
+
+.hero-left{
+text-align:center;
+}
+
 }
