@@ -70,26 +70,22 @@ z-index:-1;
    ========================= */
 .header{
 position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-
-width:90%;
-max-width:1100px;
+top:0;
+left:0;
+width:100%;
 
 display:flex;
 justify-content:space-between;
 align-items:center;
 
-padding:12px 20px;
+padding:15px 40px;
 
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(25px);
+background:rgba(5,5,5,0.6);
+backdrop-filter:blur(20px);
 
-border-radius:18px;
-border:1px solid rgba(255,255,255,0.08);
+border-bottom:1px solid rgba(255,255,255,0.08);
 
-z-index:100;
+z-index:1000; /* VERY IMPORTANT */
 }
 
 .logo{
@@ -126,7 +122,21 @@ nav a:hover{
 opacity:1;
 color:var(--accent);
 }
+nav{
+display:flex;
+gap:24px;
+}
 
+nav a{
+color:#A1A1A1;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00F0FF;
+}
 /* =========================
    📱 MOBILE DOCK NAVIGATION
    ========================= */
@@ -655,3 +665,47 @@ box-shadow:0 0 60px rgba(0,240,255,0.1);
 h1,h2{
 letter-spacing:-0.5px;
 }
+/* =========================
+   🚨 MASTER IMAGE FIX
+   ========================= */
+
+/* prevent ANY image from breaking layout */
+.hero img,
+.panel img,
+.intelligence-os img{
+position:absolute !important;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+
+width:70%;
+max-width:900px;
+
+opacity:0.15;
+pointer-events:none;
+
+z-index:0;
+
+/* cinematic look */
+mix-blend-mode:screen;
+filter:blur(1px) drop-shadow(0 0 40px rgba(0,229,255,0.3));
+}
+
+/* ensure sections don't stretch because of image */
+.hero,
+.panel{
+position:relative;
+overflow:hidden;
+}
+/* =========================
+   🎯 Z-INDEX SYSTEM
+   ========================= */
+
+#stars{z-index:-5;}
+#network{z-index:-4;}
+#neural{z-index:-3;}
+
+.hero img{z-index:-2;}
+
+.panel{z-index:1;}
+.header{z-index:1000;}
