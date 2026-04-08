@@ -84,6 +84,23 @@ function drawStars(){
     sctx.fillStyle="rgba(255,255,255,.3)";
     sctx.fillRect(p.x,p.y,1.2,1.2);
   });
+  ripples.forEach(r=>{
+r.r += 3;
+
+ctx.beginPath();
+ctx.arc(r.x, r.y, r.r, 0, Math.PI*2);
+ctx.strokeStyle = "rgba(0,229,255,0.15)";
+ctx.stroke();
+});
+let gradient = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,6);
+gradient.addColorStop(0,"#00e5ff");
+gradient.addColorStop(1,"transparent");
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,3,0,Math.PI*2);
+ctx.fillStyle = gradient;
+ctx.fill();
+ripples = ripples.filter(r => r.r < 200);
   requestAnimationFrame(drawStars);
 }
 drawStars();
@@ -123,3 +140,46 @@ function drawNetwork(){
 }
 
 drawNetwork();
+
+/* =========================
+   🧊 3D TOUCH + GYRO SYSTEM
+   ========================= */
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.addEventListener("mousemove",e=>{
+const rect = card.getBoundingClientRect();
+
+let x = e.clientX - rect.left;
+let y = e.clientY - rect.top;
+
+card.style.transform =
+`rotateX(${-(y - rect.height/2)/12}deg)
+ rotateY(${(x - rect.width/2)/12}deg)
+ scale(1.03)`;
+});
+
+card.addEventListener("mouseleave",()=>{
+card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+});
+
+});
+/* =========================
+   🌊 TOUCH RIPPLE
+   ========================= */
+
+let ripples = [];
+
+window.addEventListener("click",e=>{
+ripples.push({x:e.clientX, y:e.clientY, r:0});
+});
+/* 📱 GYRO */
+if(window.DeviceOrientationEvent){
+window.addEventListener("deviceorientation",e=>{
+document.querySelectorAll(".card").forEach(card=>{
+card.style.transform =
+`rotateX(${e.beta/30}deg)
+ rotateY(${e.gamma/30}deg)`;
+});
+});
+}
