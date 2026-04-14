@@ -105,6 +105,10 @@
 </head>
 
 <body>
+<div class="neural-bg"></div>
+
+<canvas id="neuralCanvas"></canvas>
+
   <!-- 🎨 Cursor Glow (Performance Optimized) -->
   <div class="glow" id="cursorGlow" aria-hidden="true"></div>
   
@@ -118,9 +122,7 @@
   </div>
 
   <!-- 🌌 Background System (Lazy Load) -->
-  <canvas id="stars" aria-hidden="true"></canvas>
-  <canvas id="network" aria-hidden="true"></canvas>
-
+ 
   <!-- 🧭 HEADER (Sticky + Conversion Optimized) -->
   <header class="header">
     <a href="index.html" class="logo-link" aria-label="GRT Home">
@@ -184,7 +186,24 @@
        🚀 HERO SECTION (High-Converting)
        ===================================== -->
   <section class="hero intelligence-os" id="home">
-    
+  <section class="panel glass-card" id="ai-deal-engine">
+  <div class="panel-center">
+    <h2>🤖 AI Deal Intelligence Engine</h2>
+    <p class="section-sub">
+      Enter your niche → get real opportunities, risks, and revenue predictions.
+    </p>
+  </div>
+
+  <div class="deal-box">
+    <input type="text" id="dealInput" placeholder="Example: Real estate in Mumbai / Pharma exports / Factory automation">
+
+    <button onclick="runDealAI()" class="btn btn-primary">
+      Analyze Opportunity →
+    </button>
+
+    <div id="dealOutput" class="deal-output"></div>
+  </div>
+</section>  
     <!-- Background Watermark -->
     <img src="grt-logo-05.png" class="hero-img" alt="" aria-hidden="true" loading="lazy">
     
@@ -209,7 +228,7 @@
       <!-- Hero CTAs -->
       <div class="hero-ctas">
         <a href="roi-calculator.html" class="btn btn-primary btn-lg" onclick="trackConversion('hero_roi_click', 1)">
-          Calculate Your Savings →
+          Start AI Revenue Analysis →
         </a>
         <a href="#contact" class="btn btn-secondary btn-lg">
           Book Strategy Session
@@ -899,6 +918,93 @@
   <!-- =====================================
        🧠 JAVASCRIPT (Conversion-Optimized)
        ===================================== -->
+// ===============================
+// 🔥 NEURAL BACKGROUND ENGINE
+// ===============================
+const canvas = document.getElementById("neuralCanvas");
+
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize", resize);
+
+  let nodes = [];
+  let count = window.innerWidth < 768 ? 40 : 80;
+
+  for (let i = 0; i < count; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  let pointer = { x: null, y: null };
+
+  window.addEventListener("mousemove", e => {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+  });
+
+  window.addEventListener("touchmove", e => {
+    pointer.x = e.touches[0].clientX;
+    pointer.y = e.touches[0].clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    nodes.forEach(n => {
+      nodes.forEach(o => {
+        let dx = n.x - o.x;
+        let dy = n.y - o.y;
+        let d = Math.sqrt(dx * dx + dy * dy);
+
+        if (d < 140) {
+          ctx.strokeStyle = `rgba(0,229,255,${1 - d / 140})`;
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(o.x, o.y);
+          ctx.stroke();
+        }
+      });
+
+      n.x += n.vx;
+      n.y += n.vy;
+
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = "#00e5ff";
+      ctx.fill();
+
+      if (pointer.x) {
+        let dx = n.x - pointer.x;
+        let dy = n.y - pointer.y;
+        let d = Math.sqrt(dx * dx + dy * dy);
+
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(124,92,255,0.8)";
+          ctx.fill();
+        }
+      }
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
   <script>
     // ✅ Safe DOM Loading
     document.addEventListener('DOMContentLoaded', function() {
