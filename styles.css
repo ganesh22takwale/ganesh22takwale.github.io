@@ -2197,3 +2197,25 @@ footer {
 /* =========================
    END SYSTEM — MONEY ENGINE READY
    ========================= */
+.deal-box {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.deal-box input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.deal-output {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(0,229,255,0.05);
+}
