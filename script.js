@@ -252,74 +252,96 @@ const CONFIG = {
     });
   }
   
-  // =========================
-  // 🎯 8. NETWORK BACKGROUND (Optimized)
-  // =========================
-  const netCanvas = document.getElementById('network');
-  
-  if(netCanvas && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    const nctx = netCanvas.getContext('2d');
-    let networkAnimationId;
-    
+ // ===============================
+// 🔥 8. ADVANCED NEURAL ENGINE (UPGRADE)
+// ===============================
+
+const netCanvas = document.getElementById('network');
+
+if(netCanvas && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const ctx = netCanvas.getContext('2d');
+  let animationId;
+
+  netCanvas.width = window.innerWidth;
+  netCanvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
     netCanvas.width = window.innerWidth;
     netCanvas.height = window.innerHeight;
-    
-    // Create nodes with velocity for subtle movement
-    const nodes = Array.from({ length: 30 }, () => ({
-      x: Math.random() * netCanvas.width,
-      y: Math.random() * netCanvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3
-    }));
-    
-    function animateNetwork() {
-      nctx.clearRect(0, 0, netCanvas.width, netCanvas.height);
-      
-      // Update and draw nodes
-      nodes.forEach(node => {
-        // Move node
-        node.x += node.vx;
-        node.y += node.vy;
-        
-        // Bounce off edges
-        if(node.x < 0 || node.x > netCanvas.width) node.vx *= -1;
-        if(node.y < 0 || node.y > netCanvas.height) node.vy *= -1;
-        
-        // Draw connections to nearby nodes
-        nodes.forEach(other => {
-          const dx = node.x - other.x;
-          const dy = node.y - other.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if(distance < 150) {
-            const opacity = (150 - distance) / 150 * 0.08;
-            nctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-            nctx.lineWidth = 0.5;
-            nctx.beginPath();
-            nctx.moveTo(node.x, node.y);
-            nctx.lineTo(other.x, other.y);
-            nctx.stroke();
-          }
-        });
-        
-        // Draw node
-        nctx.fillStyle = 'rgba(0, 229, 255, 0.6)';
-        nctx.beginPath();
-        nctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
-        nctx.fill();
+  });
+
+  let nodes = Array.from({ length: window.innerWidth < 768 ? 40 : 80 }, () => ({
+    x: Math.random() * netCanvas.width,
+    y: Math.random() * netCanvas.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5
+  }));
+
+  let pointer = { x: null, y: null };
+
+  window.addEventListener('mousemove', e => {
+    pointer.x = e.clientX;
+    pointer.y = e.clientY;
+  });
+
+  window.addEventListener('touchmove', e => {
+    pointer.x = e.touches[0].clientX;
+    pointer.y = e.touches[0].clientY;
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, netCanvas.width, netCanvas.height);
+
+    nodes.forEach((node, i) => {
+
+      nodes.forEach((other) => {
+        let dx = node.x - other.x;
+        let dy = node.y - other.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if(dist < 160) {
+          ctx.strokeStyle = `rgba(0,229,255,${1 - dist / 160})`;
+          ctx.lineWidth = 0.7;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
       });
-      
-      networkAnimationId = requestAnimationFrame(animateNetwork);
-    }
-    
-    animateNetwork();
-    
-    // Cleanup
-    window.addEventListener('beforeunload', () => {
-      cancelAnimationFrame(networkAnimationId);
+
+      node.x += node.vx;
+      node.y += node.vy;
+
+      if(node.x < 0 || node.x > netCanvas.width) node.vx *= -1;
+      if(node.y < 0 || node.y > netCanvas.height) node.vy *= -1;
+
+      // core node
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = "#00e5ff";
+      ctx.fill();
+
+      // hover glow
+      if(pointer.x) {
+        let dx = node.x - pointer.x;
+        let dy = node.y - pointer.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+
+        if(dist < 120) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(124,92,255,0.8)";
+          ctx.fill();
+        }
+      }
+
     });
+
+    animationId = requestAnimationFrame(animate);
   }
-  
+
+  animate();
+}  
   // =========================
   // 🎯 9. CARD 3D EFFECT (Mobile-Safe + Performance Guard)
   // =========================
