@@ -2219,3 +2219,28 @@ footer {
   border-radius: 12px;
   background: rgba(0,229,255,0.05);
 }
+/* Update your .page h1 to be invisible but maintain space */
+.page h1 {
+    opacity: 0;
+    pointer-events: none;
+    height: 180px; /* Reservoir for the canvas text */
+}
+
+/* Ensure canvas is the absolute master background */
+#neuralCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Behind UI, above deep background */
+    background: #02040a;
+}
+
+/* Luxury Touch for Mobile Dock */
+.mobile-dock {
+    backdrop-filter: blur(30px) saturate(150%);
+    background: rgba(2, 4, 10, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -10px 40px rgba(0, 229, 255, 0.05);
+}
