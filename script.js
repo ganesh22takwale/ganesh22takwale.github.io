@@ -990,7 +990,102 @@ if(netCanvas && window.matchMedia('(prefers-reduced-motion: no-preference)').mat
       // Performance API not fully supported - fail silently
     }
   }
-  
+// =========================================================
+  // 🎯 24. LIQUID PARTICLE TEXT (The "Architected" Engine)
+  // =========================================================
+  const textCanvas = document.getElementById('neuralCanvas'); // Ensure your HTML has this ID
+  if (textCanvas) {
+    const tctx = textCanvas.getContext('2d');
+    let textParticles = [];
+    let textMouse = { x: 0, y: 0, radius: 100 };
+
+    window.addEventListener('mousemove', (e) => {
+      textMouse.x = e.clientX;
+      textMouse.y = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      textMouse.x = e.touches[0].clientX;
+      textMouse.y = e.touches[0].clientY;
+    }, { passive: true });
+
+    class TextParticle {
+      constructor(x, y, color) {
+        this.x = Math.random() * textCanvas.width;
+        this.y = Math.random() * textCanvas.height;
+        this.destX = x;
+        this.destY = y;
+        this.color = color;
+        this.vx = 0;
+        this.vy = 0;
+        this.friction = 0.92;
+        this.ease = 0.08;
+      }
+      draw() {
+        tctx.fillStyle = this.color;
+        tctx.beginPath();
+        tctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
+        tctx.fill();
+      }
+      update() {
+        let dx = textMouse.x - this.x;
+        let dy = textMouse.y - this.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < textMouse.radius) {
+          let force = (textMouse.radius - dist) / textMouse.radius;
+          this.vx -= (dx / dist) * force * 10;
+          this.vy -= (dy / dist) * force * 10;
+        } else {
+          this.vx += (this.destX - this.x) * this.ease;
+          this.vy += (this.destY - this.y) * this.ease;
+        }
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+        this.x += this.vx;
+        this.y += this.vy;
+      }
+    }
+
+    function initLiquidText() {
+      textCanvas.width = window.innerWidth;
+      textCanvas.height = window.innerHeight;
+      textParticles = [];
+      const fontSize = window.innerWidth < 768 ? 32 : 64;
+      tctx.font = `bold ${fontSize}px Sora, sans-serif`;
+      tctx.textAlign = 'center';
+      tctx.fillText("Intelligence is not automated.", textCanvas.width / 2, textCanvas.height / 2 - 30);
+      tctx.fillText("It is architected.", textCanvas.width / 2, textCanvas.height / 2 + 40);
+
+      const pixels = tctx.getImageData(0, 0, textCanvas.width, textCanvas.height).data;
+      tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+
+      const gap = window.innerWidth < 768 ? 5 : 3;
+      for (let y = 0; y < textCanvas.height; y += gap) {
+        for (let x = 0; x < textCanvas.width; x += gap) {
+          const index = (y * textCanvas.width + x) * 4;
+          if (pixels[index + 3] > 128) {
+            const color = x < textCanvas.width / 2 ? '#00e5ff' : '#7c5cff';
+            textParticles.push(new TextParticle(x, y, color));
+          }
+        }
+      }
+    }
+
+    function animateLiquidText() {
+      tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+      textParticles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateLiquidText);
+    }
+
+    window.addEventListener('resize', () => {
+        clearTimeout(window.textResizer);
+        window.textResizer = setTimeout(initLiquidText, 200);
+    });
+    
+    initLiquidText();
+    animateLiquidText();
+  }
+   
   // =========================
   // 🎯 24. LAZY LOAD IMAGES (Native + Fallback)
   // =========================
