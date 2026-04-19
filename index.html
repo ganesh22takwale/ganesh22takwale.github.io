@@ -1,1153 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  
-  <!-- 🔥 SEO & Monetization Meta Tags -->
-  <title>Global Reliability Technology | AI Architecture for Enterprise Revenue</title>
-  <meta name="description" content="Architecture-first AI systems that prevent $50K+/hr downtime. Used by Real Estate, Pharma & Industrial leaders. Free ROI Calculator inside.">
-  <meta name="keywords" content="AI architecture, enterprise AI, predictive maintenance, real estate AI, pharma compliance, industrial IoT, ROI calculator">
-  <meta name="author" content="Global Reliability Technology">
-  <meta name="robots" content="index, follow">
-  
-  <!-- 💰 Conversion Tracking -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8HQ1C1X28F', {
-      'send_page_view': true,
-      'custom_map': {'dimension1': 'user_type'}
-    });
-    // Track high-intent events
-    window.trackConversion = function(event, value) {
-      gtag('event', event, {
-        'event_category': 'conversion',
-        'event_label': window.location.pathname,
-        'value': value
-      });
-    };
-  </script>
-  
-  <!-- 🔍 Search Console & Verification -->
-  <meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
-  
-  <!-- 💸 Social Sharing = Free Marketing -->
-  <meta property="og:title" content="Stop AI Failures. Start Architecting Revenue.">
-  <meta property="og:description" content="Enterprise AI that prevents $50K/hr downtime. Free ROI Calculator → See your savings in 60 seconds.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ganesh22takwale.github.io/">
-  <meta property="og:image" content="https://ganesh22takwale.github.io/grt-og-image.png">
-  <meta property="og:site_name" content="Global Reliability Technology">
-  
-  <!-- Twitter Card for LinkedIn/Twitter Shares -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Architecture That Prints Money">
-  <meta name="twitter:description" content="Free ROI Calculator: See how much downtime costs you—and how GRT saves it.">
-  <meta name="twitter:image" content="https://ganesh22takwale.github.io/grt-twitter-card.png">
-  
-  <!-- 🎨 Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
-  
-  <!-- 💎 CSS -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- ⚡ Animation Libraries (Defer for Performance) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  
-  <!-- 🧠 Structured Data for Rich Snippets -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Global Reliability Technology",
-    "image": "https://ganesh22takwale.github.io/grt-logo-05.png",
-    "url": "https://ganesh22takwale.github.io/",
-    "telephone": "+1-XXX-XXX-XXXX",
-    "priceRange": "$$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
-    },
-    "areaServed": ["US", "IN", "EU", "SG"],
-    "serviceType": ["AI Architecture", "Predictive Maintenance", "Compliance Automation"],
-    "makesOffer": [
-      {
-        "@type": "Offer",
-        "name": "Free ROI Calculator",
-        "description": "Calculate preventable downtime costs in 60 seconds",
-        "url": "https://ganesh22takwale.github.io/roi-calculator.html"
-      },
-      {
-        "@type": "Offer", 
-        "name": "Strategy Session",
-        "description": "30-min consultation with AI architecture expert",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "47"
-    }
-  }
-  </script>
-  
-  <!-- 🚀 Preload Critical Assets -->
-  <link rel="preload" href="grt-logo-05.png" as="image">
-  <link rel="preload" href="Architecture-2.png" as="image">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Global Reliability Technology | AI Architecture</title>
+
+<meta name="description" content="Enterprise AI architecture that prevents downtime and scales revenue.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 
 <body>
-<div class="neural-bg"></div>
 
-<canvas id="neuralCanvas"></canvas>
+<!-- ================= BACKGROUND ================= -->
+<canvas id="network"></canvas>
+<div id="cursorGlow" class="glow"></div>
 
-  <!-- 🎨 Cursor Glow (Performance Optimized) -->
-  <div class="glow" id="cursorGlow" aria-hidden="true"></div>
-  
-  <!-- 🧊 Dynamic Island Notification -->
-  <div class="island" id="island" role="status" aria-live="polite">
-    <div class="island-content">
-      <span class="island-icon">🔥</span>
-      <span class="island-text">New: Free ROI Calculator Live</span>
-      <button class="island-close" id="islandClose" aria-label="Close notification">×</button>
-    </div>
-  </div>
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <img src="grt-logo-05.png" class="logo">
 
-  <!-- 🌌 Background System (Lazy Load) -->
- 
-  <!-- 🧭 HEADER (Sticky + Conversion Optimized) -->
-  <header class="header">
-    <a href="index.html" class="logo-link" aria-label="GRT Home">
-      <img src="grt-logo-05.png" class="logo" alt="Global Reliability Technology" width="120" height="32" loading="eager">
-    </a>
-    
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="philosophy.html" class="nav-link">Philosophy</a>
-      <a href="architecture.html" class="nav-link">Architecture</a>
-      <a href="systems.html" class="nav-link">Systems</a>
-      <a href="lab.html" class="nav-link">Reliability Lab</a>
-      <a href="case-intelligence.html" class="nav-link">Case Studies</a>
-      <a href="insights.html" class="nav-link">Insights</a>
-      <a href="ai-lab/dashboard.html" class="nav-link highlight">🤖 AI Lab</a>
-    </nav>
-    
-    <!-- Desktop CTA -->
-    <div class="header-cta">
-      <a href="roi-calculator.html" class="btn btn-primary btn-sm" onclick="trackConversion('roi_click', 1)">
-        Free ROI Calculator →
-      </a>
-    </div>
-    
-    <!-- Mobile Hamburger -->
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-  </header>
-
-  <!-- 📱 Mobile Navigation (Slide-in) -->
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-    <a href="index.html" class="mobile-link active">🏠 Home</a>
-    <a href="philosophy.html" class="mobile-link">🧭 Philosophy</a>
-    <a href="architecture.html" class="mobile-link">🏗️ Architecture</a>
-    <a href="systems.html" class="mobile-link">⚙️ Systems</a>
-    <a href="lab.html" class="mobile-link">🔬 Reliability Lab</a>
-    <a href="case-intelligence.html" class="mobile-link">📊 Case Studies</a>
-    <a href="insights.html" class="mobile-link">💡 Insights</a>
-    <a href="ai-lab/dashboard.html" class="mobile-link highlight">🤖 AI Lab</a>
-    <hr class="mobile-divider">
-    <a href="roi-calculator.html" class="mobile-link cta-mobile" onclick="trackConversion('roi_click_mobile', 1)">
-      💰 Free ROI Calculator
-    </a>
-    <a href="mailto:hello@grt.ai" class="mobile-link">📧 Contact Sales</a>
+  <nav class="desktop-nav">
+    <a href="#" class="nav-link active">Home</a>
+    <a href="#industries" class="nav-link">Industries</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#roi" class="nav-link highlight">ROI</a>
   </nav>
+</header>
 
-  <!-- 📱 Mobile Bottom Dock (Thumb-Friendly) -->
-  <nav class="mobile-dock" role="navigation" aria-label="Quick actions">
-    <a href="index.html" class="dock-link active" title="Home" aria-label="Home">🏠</a>
-    <a href="lab.html" class="dock-link" title="Reliability Lab" aria-label="Lab">🔬</a>
-    <a href="roi-calculator.html" class="dock-link cta-dock" title="ROI Calculator" aria-label="ROI Calculator" onclick="trackConversion('roi_dock_click', 1)">💰</a>
-    <a href="ai-lab/dashboard.html" class="dock-link" title="AI Lab" aria-label="AI Lab">🤖</a>
-    <a href="#contact" class="dock-link" title="Contact" aria-label="Contact">💬</a>
-  </nav>
+<!-- ================= HERO ================= -->
+<section class="hero">
 
-  <!-- =====================================
-       🚀 HERO SECTION (High-Converting)
-       ===================================== -->
-  <section class="hero intelligence-os" id="home">
-  <section class="panel glass-card" id="ai-deal-engine">
-  <div class="panel-center">
-    <h2>🤖 AI Deal Intelligence Engine</h2>
-    <p class="section-sub">
-      Enter your niche → get real opportunities, risks, and revenue predictions.
-    </p>
-  </div>
+<div class="hero-left">
+<div class="trust-badge">
+<span class="trust-dot"></span> Trusted by 50+ Teams
+</div>
 
-  <div class="deal-box">
-    <input type="text" id="dealInput" placeholder="Example: Real estate in Mumbai / Pharma exports / Factory automation">
+<h1 id="particle-text">
+Intelligence is not automated.<br>
+<span class="gradient-text">It is architected.</span>
+</h1>
 
-    <button onclick="runDealAI()" class="btn btn-primary">
-      Analyze Opportunity →
-    </button>
+<p class="hero-sub">
+Stop losing <strong>$50,000/hour</strong> to AI failures.
+</p>
 
-    <div id="dealOutput" class="deal-output"></div>
-  </div>
-</section>  
-    <!-- Background Watermark -->
-    <img src="grt-logo-05.png" class="hero-img" alt="" aria-hidden="true" loading="lazy">
-    
-    <!-- Left: Headline + Social Proof -->
-    <div class="hero-left">
-      <div class="trust-badge">
-        <span class="trust-dot"></span>
-        Trusted by 50+ Enterprise Teams
-      </div>
-      
-      <h1>
-        Intelligence is not automated.<br>
-        <span class="gradient-text">It is architected.</span>
-      </h1>
-      
-      <p class="hero-sub">
-        Stop losing <strong>$50,000/hour</strong> to AI failures. 
-        We build architecture-first systems for Real Estate, Pharma & Industrial leaders 
-        that prevent downtime, ensure compliance, and scale revenue.
-      </p>
-      
-      <!-- Hero CTAs -->
-      <div class="hero-ctas">
-        <a href="roi-calculator.html" class="btn btn-primary btn-lg" onclick="trackConversion('hero_roi_click', 1)">
-          Start AI Revenue Analysis →
-        </a>
-        <a href="#contact" class="btn btn-secondary btn-lg">
-          Book Strategy Session
-        </a>
-      </div>
-      
-      <!-- Micro Social Proof -->
-      <div class="hero-proof">
-        <div class="proof-item">
-          <span class="proof-number">98.7%</span>
-          <span class="proof-label">System Reliability</span>
-        </div>
-        <div class="proof-item">
-          <span class="proof-number">$10M+</span>
-          <span class="proof-label">Revenue Protected</span>
-        </div>
-        <div class="proof-item">
-          <span class="proof-number">47</span>
-          <span class="proof-label">Enterprise Clients</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Right: Interactive Demo Preview -->
-    <div class="hero-right">
-      
-      <!-- Live Status Dashboard -->
-      <div class="dashboard-preview">
-        <div class="dashboard-header">
-          <span class="status-dot status-active"></span>
-          <span>System Status: <strong>ACTIVE</strong></span>
-        </div>
-        
-        <div class="dashboard-metrics">
-          <div class="metric">
-            <span class="metric-label">Reliability</span>
-            <span class="metric-value">98.7%</span>
-            <div class="metric-bar"><div class="metric-fill" style="width:98.7%"></div></div>
-          </div>
-          <div class="metric">
-            <span class="metric-label">Confidence</span>
-            <span class="metric-value">0.94</span>
-            <div class="metric-bar"><div class="metric-fill" style="width:94%"></div></div>
-          </div>
-          <div class="metric">
-            <span class="metric-label">Risk Level</span>
-            <span class="metric-value risk-low">LOW</span>
-          </div>
-        </div>
-        
-        <div class="dashboard-footer">
-          <small>Real-time monitoring • Auto-failover enabled</small>
-        </div>
-      </div>
-      
-      <!-- Floating Action Buttons -->
-      <div class="floating-actions">
-        <a href="roi-calculator.html" class="btn btn-primary" onclick="trackConversion('hero_floating_roi', 1)">
-          Run Free ROI Audit
-        </a>
-        <button class="btn btn-outline" onclick="openDemoModal()">
-          Watch 90-Second Demo ▶
-        </button>
-      </div>
-      
-    </div>
-  </section>
+<div class="hero-ctas">
+<a href="#roi" class="btn btn-primary btn-lg">Start Analysis →</a>
+<a href="#contact" class="btn btn-secondary btn-lg">Book Call</a>
+</div>
+</div>
 
-  <!-- =====================================
-       💰 URGENCY BANNER (Conversion Booster)
-       ===================================== -->
-  <div class="urgency-banner" role="alert">
-    <div class="urgency-content">
-      <span class="urgency-icon">⏰</span>
-      <strong>Limited Offer:</strong> First 10 strategy sessions this month include 
-      <u>free architecture audit</u> ($2,500 value). 
-      <a href="#contact" class="urgency-link">Claim yours →</a>
-    </div>
-    <button class="urgency-close" id="urgencyClose" aria-label="Close banner">×</button>
-  </div>
+<div class="hero-right">
+<div class="dashboard-preview">
+<div class="dashboard-header">
+<span class="status-dot status-active"></span> ACTIVE
+</div>
+<div class="metric">Reliability <strong>98.7%</strong></div>
+</div>
+</div>
 
-  <!-- =====================================
-       📡 DAILY INTELLIGENCE PANEL (Lead Magnet)
-       ===================================== -->
-  <section class="panel ai-growth-panel fade-in" id="insights">
-    <div class="glass-card strong">
-      
-      <div class="panel-header">
-        <h2>🧠 Daily Intelligence Signal</h2>
-        <span class="panel-badge">Free Resource</span>
-      </div>
-      
-      <p class="section-sub">
-        One precise insight per day to improve how you think, decide, and execute.
-        <strong>Join 2,347+ leaders</strong> who start their day with GRT Intelligence.
-      </p>
-      
-      <!-- Email Capture Form (Lead Generation) -->
-      <form class="email-capture" id="intelligenceSignup" onsubmit="handleSignup(event)">
-        <input type="email" id="signupEmail" placeholder="Enter your work email" required 
-               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" aria-label="Work email">
-        <button type="submit" class="btn btn-primary btn-sm">
-          Get Daily Insights →
-        </button>
-        <small class="form-note">🔒 No spam. Unsubscribe anytime. We respect your inbox.</small>
-      </form>
-      
-      <!-- Dynamic Insight Box -->
-      <div class="daily-insight-box">
-        <h3 id="insight-title">⚡ Decision Quality = Outcome Quality</h3>
-        <p id="insight-text">
-          Most people try to improve results. High performers improve decisions.
-          <br><br>
-          <strong>Ask before your next big decision:</strong><br>
-          "What critical information am I missing?"<br>
-          "What would make this decision wrong?"<br>
-          "How will I know if I'm right—before it's too late?"
-        </p>
-        <small id="insight-date"></small>
-      </div>
-      
-      <!-- Action Prompt -->
-      <div class="daily-action">
-        <h3>🎯 Today's Micro-Action</h3>
-        <p>Pause before your next decision. Write one reason why it's correct—and one reason why it might fail.</p>
-      </div>
-      
-      <!-- Growth Grid -->
-      <div class="growth-grid">
-        <div class="growth-box">
-          <h3>🧠 Thinking</h3>
-          <p>Improve decision clarity with structured frameworks</p>
-        </div>
-        <div class="growth-box">
-          <h3>⚡ Execution</h3>
-          <p>Act with precision using real-time reliability metrics</p>
-        </div>
-        <div class="growth-box">
-          <h3>📊 Systems</h3>
-          <p>Build repeatable success with architecture-first design</p>
-        </div>
-      </div>
-      
-      <!-- Secondary CTAs -->
-      <div class="insight-actions">
-        <a href="insights.html" class="btn btn-outline">View Full Archive →</a>
-        <a href="philosophy.html" class="btn btn-text">Learn Our Methodology →</a>
-      </div>
-      
-    </div>
-  </section>
+</section>
 
-  <!-- =====================================
-       ⚠️ PROBLEM → SOLUTION (Pain Amplification)
-       ===================================== -->
-  <section class="panel fade-in" id="problems">
-    <div class="panel-center">
-      <h2>Why 92% of Enterprise AI Projects Fail</h2>
-      <p class="section-sub">
-        It's not the models. It's the architecture.
-      </p>
-    </div>
-    
-    <div class="grid">
-      <div class="card problem-card">
-        <div class="problem-icon">🔗</div>
-        <h3>Fragmented Systems</h3>
-        <p>Disconnected AI components create hidden failure points. When one piece breaks, the entire revenue stream stops.</p>
-        <div class="problem-cost">
-          <strong>Typical Cost:</strong> $15K-$200K/hour downtime
-        </div>
-      </div>
-      
-      <div class="card problem-card">
-        <div class="problem-icon">👁️</div>
-        <h3>No Observability</h3>
-        <p>Failures are discovered after user impact. By the time you see the error, customers have already churned.</p>
-        <div class="problem-cost">
-          <strong>Typical Cost:</strong> 3-7 days to diagnose + $50K+ recovery
-        </div>
-      </div>
-      
-      <div class="card problem-card">
-        <div class="problem-icon">🧱</div>
-        <h3>No Fallback Logic</h3>
-        <p>Systems collapse instead of degrading gracefully. One edge case can halt your entire operation.</p>
-        <div class="problem-cost">
-          <strong>Typical Cost:</strong> Complete service outage + reputation damage
-        </div>
-      </div>
-    </div>
-    
-    <div class="panel-cta">
-      <p><strong>Good news:</strong> These failures are 100% preventable with architecture-first design.</p>
-      <a href="#solution" class="btn btn-primary">See How GRT Prevents These →</a>
-    </div>
-  </section>
+<!-- ================= AI DEAL ENGINE ================= -->
+<section class="panel glass-card">
+<div class="panel-center">
+<h2>AI Deal Intelligence</h2>
+</div>
 
-  <!-- =====================================
-       ✅ YOUR SOLUTION: GRT ARCHITECTURE (Value Prop)
-       ===================================== -->
-  <section class="panel architecture" id="solution">
-    <div class="panel-center">
-      <h2>Global Reliability Technology</h2>
-      <p class="section-sub">
-        Architecture-first AI systems engineered for enterprises that demand 
-        <strong>reliability, clarity, and production-grade revenue protection</strong>.
-      </p>
-    </div>
-    
-    <div class="grid">
-      <div class="card solution-card highlight">
-        <div class="solution-icon">🏗️</div>
-        <h3>Architecture First</h3>
-        <p>Design the system before deploying models. Prevent failures at the blueprint stage—when fixes cost 100x less.</p>
-        <ul class="benefit-list">
-          <li>✅ Failure mode analysis before code</li>
-          <li>✅ Clear ownership & escalation paths</li>
-          <li>✅ Built-in observability from day one</li>
-        </ul>
-      </div>
-      
-      <div class="card solution-card">
-        <div class="solution-icon">📈</div>
-        <h3>Reliability Metrics</h3>
-        <p>Measure confidence, risk, and system behavior in real-time—not just model accuracy.</p>
-        <ul class="benefit-list">
-          <li>✅ Live confidence scoring</li>
-          <li>✅ Risk surface visualization</li>
-          <li>✅ Automated alerting thresholds</li>
-        </ul>
-      </div>
-      
-      <div class="card solution-card">
-        <div class="solution-icon">🌍</div>
-        <h3>Production Thinking</h3>
-        <p>Build for real-world conditions: latency spikes, edge cases, human oversight, and regulatory compliance.</p>
-        <ul class="benefit-list">
-          <li>✅ Graceful degradation protocols</li>
-          <li>✅ Audit trails for compliance</li>
-          <li>✅ Human-in-the-loop safeguards</li>
-        </ul>
-      </div>
-    </div>
-    
-    <!-- Trust Badges -->
-    <div class="trust-section">
-      <div class="trust-item">
-        <span class="trust-number">3.2x</span>
-        <span class="trust-label">Average ROI in 90 Days</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-number">98.7%</span>
-        <span class="trust-label">System Uptime Guaranteed</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-number">$10M+</span>
-        <span class="trust-label">Revenue Protected for Clients</span>
-      </div>
-    </div>
-  </section>
+<input id="dealInput" placeholder="Enter niche">
+<button onclick="runDealAI()" class="btn btn-primary">Analyze</button>
+<div id="dealOutput"></div>
+</section>
 
-  <!-- =====================================
-       🏢 INDUSTRY APPLICATIONS (Targeted Offers)
-       ===================================== -->
-  <section class="panel fade-in" id="industries">
-    <div class="panel-center">
-      <h2>Built for High-Stakes Industries</h2>
-      <p class="section-sub">
-        Real-world reliability for sectors where AI failures cost millions.
-      </p>
-    </div>
-    
-    <div class="industry-tabs">
-      <button class="industry-tab active" data-industry="realestate">🏘️ Real Estate</button>
-      <button class="industry-tab" data-industry="pharma">💊 Pharma & Life Sciences</button>
-      <button class="industry-tab" data-industry="industrial">🏭 Industrial & Manufacturing</button>
-      <button class="industry-tab" data-industry="finance">💰 Finance & Fintech</button>
-    </div>
-    
-    <div class="industry-content">
-      <!-- Real Estate -->
-      <div class="industry-panel active" id="realestate">
-        <h3>AI for Real Estate Tycoons</h3>
-        <p>Predict off-market deals, automate valuation models, and qualify leads with 94% accuracy—before your competitors see the listing.</p>
-        <ul>
-          <li>🎯 Predictive lead scoring (who will sell in 90 days)</li>
-          <li>📊 Automated valuation models (AVM) with confidence intervals</li>
-          <li>🤖 AI-powered property description generator (SEO-optimized)</li>
-        </ul>
-        <div class="industry-cta">
-          <a href="roi-calculator.html?industry=realestate" class="btn btn-primary" onclick="trackConversion('industry_roi_realestate', 1)">
-            Calculate Real Estate ROI →
-          </a>
-          <span class="industry-note">Used by 12 top brokerages in Mumbai, Delhi & Bangalore</span>
-        </div>
-      </div>
-      
-      <!-- Pharma -->
-      <div class="industry-panel" id="pharma">
-        <h3>AI Compliance for Pharma Leaders</h3>
-        <p>Automate regulatory documentation, match patients to trials, and ensure FDA/CDSCO compliance—without hiring a 10-person team.</p>
-        <ul>
-          <li>📋 Auto-generate compliance reports (FDA, EMA, CDSCO)</li>
-          <li>👥 Clinical trial patient matching with privacy preservation</li>
-          <li>🔍 Adverse event detection & reporting automation</li>
-        </ul>
-        <div class="industry-cta">
-          <a href="roi-calculator.html?industry=pharma" class="btn btn-primary" onclick="trackConversion('industry_roi_pharma', 1)">
-            Calculate Pharma ROI →
-          </a>
-          <span class="industry-note">Trusted by 8 generic manufacturers exporting to US/EU</span>
-        </div>
-      </div>
-      
-      <!-- Industrial -->
-      <div class="industry-panel" id="industrial">
-        <h3>Predictive Maintenance for Factories</h3>
-        <p>Prevent $50K/hour downtime with AI that predicts equipment failures 72 hours in advance—using your existing sensor data.</p>
-        <ul>
-          <li>⚠️ Anomaly detection on vibration, temperature, power logs</li>
-          <li>📱 WhatsApp/SMS alerts to maintenance teams</li>
-          <li>📉 Failure probability forecasting with confidence intervals</li>
-        </ul>
-        <div class="industry-cta">
-          <a href="roi-calculator.html?industry=industrial" class="btn btn-primary" onclick="trackConversion('industry_roi_industrial', 1)">
-            Calculate Industrial ROI →
-          </a>
-          <span class="industry-note">Deployed in 15+ manufacturing units across India</span>
-        </div>
-      </div>
-      
-      <!-- Finance -->
-      <div class="industry-panel" id="finance">
-        <h3>Fraud Detection for Financial Systems</h3>
-        <p>Stop fraud before it happens with real-time anomaly detection that learns your transaction patterns—and flags deviations instantly.</p>
-        <ul>
-          <li>🔍 Real-time transaction scoring with explainable AI</li>
-          <li>🛡️ Adaptive fraud rules that evolve with new threats</li>
-          <li>📊 Audit-ready reports for regulators & stakeholders</li>
-        </ul>
-        <div class="industry-cta">
-          <a href="roi-calculator.html?industry=finance" class="btn btn-primary" onclick="trackConversion('industry_roi_finance', 1)">
-            Calculate Finance ROI →
-          </a>
-          <span class="industry-note">Protecting $2B+ in annual transaction volume</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ================= ROI ================= -->
+<section class="panel" id="roi">
 
-  <!-- =====================================
-       💰 MINI ROI CALCULATOR (Lead Capture Engine)
-       ===================================== -->
-  <section class="panel roi-preview" id="roi-calculator">
-    <div class="panel-center">
-      <h2>📊 See Your Preventable Loss in 60 Seconds</h2>
-      <p class="roi-sub">
-        Enter your numbers. Get an instant estimate of downtime costs—and how GRT architecture prevents them.
-        <br><strong>No email required. No sales call. Just clarity.</strong>
-      </p>
-    </div>
-    
-    <form class="roi-form" id="miniROIForm" onsubmit="runMiniROI(event)">
-      <div class="roi-grid">
-        <div class="roi-input-group">
-          <label for="miniCost">Downtime Cost / Hour ($)</label>
-          <input type="number" id="miniCost" name="cost" value="50000" min="0" step="1000" required>
-          <small class="input-help">Typical range: $10K-$500K/hr for enterprise systems</small>
-        </div>
-        
-        <div class="roi-input-group">
-          <label for="miniHours">Avg. Failure Duration (Hours)</label>
-          <input type="number" id="miniHours" name="hours" value="3" min="0.5" step="0.5" required>
-          <small class="input-help">How long does a typical outage last?</small>
-        </div>
-        
-        <div class="roi-input-group">
-          <label for="miniEvents">Failures / Year</label>
-          <input type="number" id="miniEvents" name="events" value="6" min="1" required>
-          <small class="input-help">Estimated unplanned outages annually</small>
-        </div>
-      </div>
-      
-      <button type="submit" class="btn btn-primary btn-lg btn-block">
-        🔍 Calculate My Preventable Loss →
-      </button>
-      
-      <div id="miniROIOutput" class="mini-roi-output" aria-live="polite" hidden>
-        <!-- Results injected by JS -->
-      </div>
-    </form>
-    
-    <div class="roi-full-link">
-      <p>Want deeper insights? Run the full simulation:</p>
-      <a href="roi-calculator.html" class="btn btn-outline" onclick="trackConversion('full_roi_click', 1)">
-        Open Full ROI Simulator →
-      </a>
-    </div>
-    
-    <!-- Social Proof Below Calculator -->
-    <div class="roi-proof">
-      <div class="proof-avatar">👤</div>
-      <blockquote>
-        "The ROI calculator showed us we were losing $1.2M/year to preventable AI failures. 
-        GRT's architecture fixed it in 6 weeks. Best investment we made all year."
-      </blockquote>
-      <cite>— CTO, Top 10 Indian Pharma Exporter</cite>
-    </div>
-  </section>
+<div class="panel-center">
+<h2>ROI Calculator</h2>
+</div>
 
-  <!-- =====================================
-       💳 PRICING (High-Ticket Positioning)
-       ===================================== -->
-  <section class="panel pricing" id="pricing">
-    <div class="panel-center">
-      <h2>Reliability Intelligence Platform</h2>
-      <p class="section-sub">
-        Deploy architecture-grade intelligence. Scale reliability. 
-        <span class="pricing-note">All plans include 24/7 monitoring & architecture support.</span>
-      </p>
-    </div>
-    
-    <div class="pricing-toggle">
-      <span>Monthly</span>
-      <label class="switch">
-        <input type="checkbox" id="billingToggle">
-        <span class="slider"></span>
-      </label>
-      <span>Annual <span class="discount-badge">Save 20%</span></span>
-    </div>
-    
-    <div class="grid pricing-grid">
-      <!-- Starter -->
-      <div class="card pricing-card">
-        <h3>🚀 Starter</h3>
-        <p class="price" data-monthly="$29" data-annual="$23">
-          $29<span>/mo</span>
-        </p>
-        <p class="price-annual" hidden>Billed as $276/year</p>
-        <ul class="feature-list">
-          <li>✅ ROI Calculator (Unlimited)</li>
-          <li>✅ Basic Reliability Lab Access</li>
-          <li>✅ Daily Intelligence Feed</li>
-          <li>✅ Community Support</li>
-          <li>✅ Email Alerts</li>
-        </ul>
-        <a href="#" class="btn btn-outline btn-block" onclick="trackConversion('pricing_starter', 29)">
-          Start Free Trial
-        </a>
-        <small class="plan-note">Perfect for consultants & small teams</small>
-      </div>
-      
-      <!-- Pro (Highlighted) -->
-      <div class="card pricing-card featured">
-        <span class="badge">MOST POPULAR</span>
-        <h3>⚡ Pro</h3>
-        <p class="price" data-monthly="$99" data-annual="$79">
-          $99<span>/mo</span>
-        </p>
-        <p class="price-annual" hidden>Billed as $948/year</p>
-        <ul class="feature-list">
-          <li>✅ Everything in Starter</li>
-          <li>✅ Full Reliability Lab</li>
-          <li>✅ Risk Simulation Engine</li>
-          <li>✅ Advanced Metrics Dashboard</li>
-          <li>✅ Priority Email Support</li>
-          <li>✅ API Access (10K calls/mo)</li>
-          <li>✅ Custom Alert Rules</li>
-        </ul>
-        <a href="#" class="btn btn-primary btn-block" onclick="trackConversion('pricing_pro', 99)">
-          Upgrade Now →
-        </a>
-        <small class="plan-note">Ideal for growing enterprises</small>
-      </div>
-      
-      <!-- Enterprise -->
-      <div class="card pricing-card enterprise">
-        <h3>🏢 Enterprise</h3>
-        <p class="price">Custom</p>
-        <ul class="feature-list">
-          <li>✅ Everything in Pro</li>
-          <li>✅ Custom Architecture Design</li>
-          <li>✅ Dedicated Solutions Engineer</li>
-          <li>✅ On-Premise / VPC Deployment</li>
-          <li>✅ SLA Guarantees (99.99%)</li>
-          <li>✅ White-Glove Onboarding</li>
-          <li>✅ Unlimited API Calls</li>
-          <li>✅ Compliance Documentation</li>
-        </ul>
-        <a href="mailto:enterprise@grt.ai?subject=Enterprise%20Inquiry%20-%20GRT" class="btn btn-outline btn-block" onclick="trackConversion('pricing_enterprise', 0)">
-          Contact Sales →
-        </a>
-        <small class="plan-note">For organizations with complex needs</small>
-      </div>
-    </div>
-    
-    <!-- Money-Back Guarantee -->
-    <div class="guarantee">
-      <span class="guarantee-icon">🛡️</span>
-      <strong>30-Day Money-Back Guarantee</strong>
-      <p>If GRT doesn't prevent at least one critical failure in your first month, we'll refund 100%. No questions.</p>
-    </div>
-  </section>
+<form id="miniROIForm" onsubmit="runMiniROI(event)">
+<input name="cost" value="50000">
+<input name="hours" value="3">
+<input name="events" value="6">
 
-  <!-- =====================================
-       📚 CASE STUDIES (Social Proof Engine)
-       ===================================== -->
-  <section class="panel fade-in" id="case-studies">
-    <div class="panel-center">
-      <h2>Real Results from Real Enterprises</h2>
-      <p class="section-sub">
-        See how architecture-first AI prevented millions in losses.
-      </p>
-    </div>
-    
-    <div class="grid">
-      <div class="card case-card">
-        <div class="case-badge">Real Estate</div>
-        <h3>🏘️ Predicting Off-Market Deals</h3>
-        <p class="case-problem"><strong>Problem:</strong> Missing 80% of off-market opportunities due to manual lead screening.</p>
-        <p class="case-solution"><strong>Solution:</strong> GRT architecture with predictive lead scoring + automated valuation.</p>
-        <div class="case-results">
-          <div class="result-item">
-            <span class="result-number">+340%</span>
-            <span class="result-label">Deal Pipeline</span>
-          </div>
-          <div class="result-item">
-            <span class="result-number">$2.1M</span>
-            <span class="result-label">Additional Revenue</span>
-          </div>
-        </div>
-        <a href="case-intelligence.html#realestate" class="btn btn-text">Read Full Case Study →</a>
-      </div>
-      
-      <div class="card case-card">
-        <div class="case-badge">Pharma</div>
-        <h3>💊 Automated FDA Compliance</h3>
-        <p class="case-problem"><strong>Problem:</strong> 3-week delay in regulatory submissions costing $150K/week.</p>
-        <p class="case-solution"><strong>Solution:</strong> RAG system trained on FDA guidelines + auto-document generation.</p>
-        <div class="case-results">
-          <div class="result-item">
-            <span class="result-number">-92%</span>
-            <span class="result-label">Submission Time</span>
-          </div>
-          <div class="result-item">
-            <span class="result-number">$1.8M</span>
-            <span class="result-label">Saved Annually</span>
-          </div>
-        </div>
-        <a href="case-intelligence.html#pharma" class="btn btn-text">Read Full Case Study →</a>
-      </div>
-      
-      <div class="card case-card">
-        <div class="case-badge">Industrial</div>
-        <h3>🏭 Predicting Equipment Failure</h3>
-        <p class="case-problem"><strong>Problem:</strong> Unplanned downtime costing $45K/hour in automotive manufacturing.</p>
-        <p class="case-solution"><strong>Solution:</strong> IoT anomaly detection with 72-hour failure forecasting.</p>
-        <div class="case-results">
-          <div class="result-item">
-            <span class="result-number">-89%</span>
-            <span class="result-label">Unplanned Downtime</span>
-          </div>
-          <div class="result-item">
-            <span class="result-number">$3.4M</span>
-            <span class="result-label">Revenue Protected</span>
-          </div>
-        </div>
-        <a href="case-intelligence.html#industrial" class="btn btn-text">Read Full Case Study →</a>
-      </div>
-    </div>
-    
-    <div class="panel-cta">
-      <a href="case-intelligence.html" class="btn btn-outline">View All Case Studies →</a>
-    </div>
-  </section>
+<button class="btn btn-primary">Calculate</button>
+<div id="miniROIOutput"></div>
+</form>
 
-  <!-- =====================================
-       💬 FINAL CTA + CONTACT (Conversion Close)
-       ===================================== -->
-  <section class="panel fade-in" id="contact">
-    <div class="panel-center">
-      <h2>Ready to Architect Intelligence That Prints Money?</h2>
-      <p class="section-sub">
-        Move beyond experiments. Build systems that survive production—and scale revenue without adding headcount.
-      </p>
-    </div>
-    
-    <div class="cta-grid">
-      <div class="cta-card">
-        <h3>🎯 Free Strategy Session</h3>
-        <p>30-minute consultation with our AI architecture lead. We'll analyze your biggest reliability risk—and show you exactly how to fix it.</p>
-        <ul class="session-benefits">
-          <li>✅ No sales pitch—just actionable insights</li>
-          <li>✅ Custom ROI estimate for your business</li>
-          <li>✅ Architecture gap analysis</li>
-        </ul>
-        <a href="https://calendly.com/grt-ai/strategy-session" target="_blank" rel="noopener" class="btn btn-primary btn-lg btn-block" onclick="trackConversion('strategy_session_click', 1)">
-          Book Your Free Session →
-        </a>
-        <small class="cta-note">Only 3 slots available this week</small>
-      </div>
-      
-      <div class="cta-card">
-        <h3>💰 Run Full ROI Simulator</h3>
-        <p>Our most powerful tool: Input your real metrics and get a detailed report of preventable losses—and how GRT prevents them.</p>
-        <ul class="session-benefits">
-          <li>✅ Industry-specific calculations</li>
-          <li>✅ Custom architecture recommendations</li>
-          <li>✅ PDF report you can share with leadership</li>
-        </ul>
-        <a href="roi-calculator.html" class="btn btn-outline btn-lg btn-block" onclick="trackConversion('full_roi_final_click', 1)">
-          Calculate My ROI →
-        </a>
-        <small class="cta-note">Takes 2 minutes. Zero commitment.</small>
-      </div>
-    </div>
-    
-    <!-- Direct Contact Option -->
-    <div class="contact-direct">
-      <p>Prefer to talk now?</p>
-      <div class="contact-options">
-        <a href="mailto:hello@grt.ai" class="contact-link">📧 hello@grt.ai</a>
-        <span class="contact-divider">•</span>
-        <a href="tel:+919876543210" class="contact-link">📞 +91 98765 43210</a>
-        <span class="contact-divider">•</span>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-link">💼 LinkedIn</a>
-      </div>
-    </div>
-  </section>
+</section>
 
-  <!-- =====================================
-       🦶 FOOTER (Trust + Navigation)
-       ===================================== -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-brand">
-        <img src="grt-logo-05.png" alt="GRT" class="footer-logo" width="140" height="36" loading="lazy">
-        <p class="footer-tagline">Architecture decides production.</p>
-        <div class="footer-social">
-          <a href="https://linkedin.com/company/grt-ai" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-          <a href="https://youtube.com/@grt-ai" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
-          <a href="https://github.com/ganesh22takwale" target="_blank" rel="noopener" aria-label="GitHub">⌨</a>
-        </div>
-      </div>
-      
-      <div class="footer-links">
-        <div class="footer-column">
-          <h4>Platform</h4>
-          <a href="lab.html">🔬 Reliability Lab</a>
-          <a href="roi-calculator.html">📊 ROI Calculator</a>
-          <a href="ai-lab/dashboard.html">🤖 AI Lab</a>
-          <a href="risk-assessment.html">⚠️ Risk Assessment</a>
-        </div>
-        <div class="footer-column">
-          <h4>Resources</h4>
-          <a href="insights.html">💡 Insights</a>
-          <a href="case-intelligence.html">📚 Case Studies</a>
-          <a href="#">📖 Documentation</a>
-          <a href="#">🎓 Learning Center</a>
-        </div>
-        <div class="footer-column">
-          <h4>Company</h4>
-          <a href="philosophy.html">🧭 Philosophy</a>
-          <a href="#">👥 About Us</a>
-          <a href="mailto:hello@grt.ai">📧 Contact</a>
-          <a href="#">📰 Press</a>
-        </div>
-        <div class="footer-column">
-          <h4>Legal</h4>
-          <a href="#">🔒 Privacy Policy</a>
-          <a href="#">📜 Terms of Service</a>
-          <a href="#">🛡️ Security</a>
-          <a href="#">🍪 Cookie Settings</a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <p>© <span id="year"></span> Global Reliability Technology. All rights reserved.</p>
-      <p class="footer-disclaimer">
-        <small>GRT is an architecture consultancy. We do not sell AI models—we design systems that make your AI investments reliable, compliant, and revenue-generating.</small>
-      </p>
-    </div>
-  </footer>
+<!-- ================= INDUSTRY TABS ================= -->
+<section class="panel" id="industries">
 
-  <!-- =====================================
-       🧠 JAVASCRIPT (Conversion-Optimized)
-       ===================================== -->
-// ===============================
-// 🔥 NEURAL BACKGROUND ENGINE
-// ===============================
-const canvas = document.getElementById("neuralCanvas");
+<div class="industry-tabs">
+<button class="industry-tab active" data-industry="realestate">Real Estate</button>
+<button class="industry-tab" data-industry="pharma">Pharma</button>
+<button class="industry-tab" data-industry="industrial">Industrial</button>
+</div>
 
-if (canvas) {
-  const ctx = canvas.getContext("2d");
+<div id="realestate" class="industry-panel active">
+Predict deals before market
+</div>
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener("resize", resize);
+<div id="pharma" class="industry-panel">
+Automate compliance
+</div>
 
-  let nodes = [];
-  let count = window.innerWidth < 768 ? 40 : 80;
+<div id="industrial" class="industry-panel">
+Prevent downtime
+</div>
 
-  for (let i = 0; i < count; i++) {
-    nodes.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5
-    });
-  }
+</section>
 
-  let pointer = { x: null, y: null };
+<!-- ================= INSIGHTS ================= -->
+<section class="panel">
+<div class="panel-center">
+<h2>Daily Intelligence</h2>
+<p>Improve decision quality daily</p>
+</div>
+</section>
 
-  window.addEventListener("mousemove", e => {
-    pointer.x = e.clientX;
-    pointer.y = e.clientY;
-  });
+<!-- ================= PRICING ================= -->
+<section class="panel" id="pricing">
 
-  window.addEventListener("touchmove", e => {
-    pointer.x = e.touches[0].clientX;
-    pointer.y = e.touches[0].clientY;
-  });
+<div class="grid">
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+<div class="card">
+<h3>Starter</h3>
+<p>$29/mo</p>
+</div>
 
-    nodes.forEach(n => {
-      nodes.forEach(o => {
-        let dx = n.x - o.x;
-        let dy = n.y - o.y;
-        let d = Math.sqrt(dx * dx + dy * dy);
+<div class="card highlight">
+<h3>Pro</h3>
+<p>$99/mo</p>
+</div>
 
-        if (d < 140) {
-          ctx.strokeStyle = `rgba(0,229,255,${1 - d / 140})`;
-          ctx.beginPath();
-          ctx.moveTo(n.x, n.y);
-          ctx.lineTo(o.x, o.y);
-          ctx.stroke();
-        }
-      });
+<div class="card">
+<h3>Enterprise</h3>
+<p>Custom</p>
+</div>
 
-      n.x += n.vx;
-      n.y += n.vy;
+</div>
 
-      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+</section>
 
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
-      ctx.fillStyle = "#00e5ff";
-      ctx.fill();
+<!-- ================= CASE STUDIES ================= -->
+<section class="panel">
 
-      if (pointer.x) {
-        let dx = n.x - pointer.x;
-        let dy = n.y - pointer.y;
-        let d = Math.sqrt(dx * dx + dy * dy);
+<div class="grid">
+<div class="card">+340% Pipeline</div>
+<div class="card">$3.4M Saved</div>
+<div class="card">-89% Downtime</div>
+</div>
 
-        if (d < 120) {
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(124,92,255,0.8)";
-          ctx.fill();
-        }
-      }
-    });
+</section>
 
-    requestAnimationFrame(animate);
-  }
+<!-- ================= CONTACT ================= -->
+<section class="panel" id="contact">
+<h2>Ready to Build?</h2>
+<a class="btn btn-primary">Book Strategy</a>
+</section>
 
-  animate();
+<footer>
+© <span id="year"></span>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- ================= PARTICLE TEXT ================= -->
+<script>
+(function(){
+const el=document.getElementById("particle-text");
+if(!el)return;
+const text=el.innerText;
+el.innerHTML="";
+const spans=[];
+text.split("").forEach(c=>{
+const s=document.createElement("span");
+s.textContent=c;
+s.style.display="inline-block";
+s.style.transition="transform .2s ease";
+el.appendChild(s);
+spans.push(s);
+});
+document.addEventListener("mousemove",e=>{
+spans.forEach(s=>{
+const r=s.getBoundingClientRect();
+const dx=r.left-e.clientX;
+const dy=r.top-e.clientY;
+const d=Math.sqrt(dx*dx+dy*dy);
+if(d<120){
+s.style.transform=`translate(${dx*0.08}px,${dy*0.08}px)`;
+}else{
+s.style.transform="translate(0,0)";
 }
-  <script>
-    // ✅ Safe DOM Loading
-    document.addEventListener('DOMContentLoaded', function() {
-      
-      // 🎯 1. Auto-Update Year
-      document.getElementById('year').textContent = new Date().getFullYear();
-      
-      // 🎯 2. Dynamic Insight Date
-      function updateInsightDate() {
-        const dateEl = document.getElementById('insight-date');
-        if(dateEl) {
-          const today = new Date();
-          const formatted = today.toLocaleDateString('en-IN', {
-            day: 'numeric', month: 'long', year: 'numeric'
-          });
-          dateEl.textContent = 'Updated: ' + formatted;
-        }
-      }
-      updateInsightDate();
-      
-      // 🎯 3. Mobile Menu Toggle (Accessible)
-      const mobileToggle = document.getElementById('mobileToggle');
-      const mobileNav = document.getElementById('mobileNav');
-      
-      if(mobileToggle && mobileNav) {
-        mobileToggle.addEventListener('click', function() {
-          const isExpanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', !isExpanded);
-          mobileNav.classList.toggle('active');
-          this.classList.toggle('open');
-        });
-        
-        // Close menu when clicking link
-        mobileNav.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            mobileToggle.classList.remove('open');
-          });
-        });
-        
-        // Close on outside click
-        document.addEventListener('click', function(e) {
-          if(!mobileNav.contains(e.target) && !mobileToggle.contains(e.target)) {
-            mobileNav.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            mobileToggle.classList.remove('open');
-          }
-        });
-      }
-      
-      // 🎯 4. Industry Tabs (No External Dependencies)
-      const industryTabs = document.querySelectorAll('.industry-tab');
-      const industryPanels = document.querySelectorAll('.industry-panel');
-      
-      industryTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          // Remove active from all
-          industryTabs.forEach(t => t.classList.remove('active'));
-          industryPanels.forEach(p => p.classList.remove('active'));
-          
-          // Add active to clicked
-          this.classList.add('active');
-          const target = this.getAttribute('data-industry');
-          document.getElementById(target).classList.add('active');
-          
-          // Track interaction
-          trackConversion('industry_tab_click', 0, target);
-        });
-      });
-      
-      // 🎯 5. Pricing Toggle (Monthly/Annual)
-      const billingToggle = document.getElementById('billingToggle');
-      const prices = document.querySelectorAll('.price');
-      const annualNotes = document.querySelectorAll('.price-annual');
-      
-      if(billingToggle) {
-        billingToggle.addEventListener('change', function() {
-          const isAnnual = this.checked;
-          
-          prices.forEach(price => {
-            if(isAnnual) {
-              price.textContent = price.getAttribute('data-annual') + '/mo';
-            } else {
-              price.textContent = price.getAttribute('data-monthly') + '/mo';
-            }
-          });
-          
-          annualNotes.forEach(note => {
-            note.hidden = !isAnnual;
-          });
-          
-          // Track preference
-          trackConversion('billing_toggle', 0, isAnnual ? 'annual' : 'monthly');
-        });
-      }
-      
-      // 🎯 6. Mini ROI Calculator (Error-Protected + Conversion Tracking)
-      window.runMiniROI = function(e) {
-        if(e) e.preventDefault();
-        
-        try {
-          const form = document.getElementById('miniROIForm');
-          const formData = new FormData(form);
-          
-          const cost = parseFloat(formData.get('cost')) || 0;
-          const hours = parseFloat(formData.get('hours')) || 0;
-          const events = parseFloat(formData.get('events')) || 0;
-          
-          if(cost <= 0 || hours <= 0 || events <= 0) {
-            throw new Error('Please enter valid positive numbers');
-          }
-          
-          const annualLoss = cost * hours * events;
-          const prevented = annualLoss * 0.87; // 87% reliability improvement
-          const monthlySavings = prevented / 12;
-          
-          const output = document.getElementById('miniROIOutput');
-          output.hidden = false;
-          output.innerHTML = `
-            <div class="roi-result success">
-              <div class="roi-header">
-                <span class="roi-icon">✅</span>
-                <strong>Your Preventable Loss Analysis</strong>
-              </div>
-              <div class="roi-metrics">
-                <div class="roi-metric">
-                  <span class="roi-label">Annual Downtime Cost</span>
-                  <span class="roi-value">$${annualLoss.toLocaleString()}</span>
-                </div>
-                <div class="roi-metric highlight">
-                  <span class="roi-label">With GRT Architecture</span>
-                  <span class="roi-value">$${prevented.toLocaleString()} Saved/Year</span>
-                </div>
-                <div class="roi-metric">
-                  <span class="roi-label">Monthly Savings</span>
-                  <span class="roi-value">$${monthlySavings.toLocaleString()}</span>
-                </div>
-              </div>
-              <div class="roi-cta">
-                <p><strong>Next Step:</strong> Get a custom architecture plan to capture these savings.</p>
-                <a href="#contact" class="btn btn-primary btn-sm" onclick="trackConversion('mini_roi_cta_click', 1)">
-                  Book Free Strategy Session →
-                </a>
-              </div>
-              
+});
+});
+})();
+</script>
+
+</body>
+</html>
