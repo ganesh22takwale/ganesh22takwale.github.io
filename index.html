@@ -1,18 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Global Reliability Technology | AI Architecture</title>
 
-<meta name="description" content="Enterprise AI architecture that prevents downtime and scales revenue.">
+<!-- SEO -->
+<meta name="description" content="Enterprise AI systems that prevent $50K/hr downtime.">
+<meta name="keywords" content="AI architecture, enterprise AI, predictive maintenance">
 
+<!-- GOOGLE SEARCH CONSOLE -->
+<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
+
+<!-- OPEN GRAPH -->
+<meta property="og:title" content="Stop AI Failures. Start Architecting Revenue.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="grt-og-image.png">
+
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8HQ1C1X28F');
+</script>
+
+<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="styles.css">
 
+<!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+<!-- STRUCTURED DATA -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "name": "Global Reliability Technology",
+ "url": "https://yourdomain.com",
+ "areaServed": ["IN","US","EU"],
+ "serviceType": ["AI Architecture","Predictive Maintenance"]
+}
+</script>
+
 </head>
 
 <body>
@@ -23,20 +62,21 @@
 
 <!-- ================= HEADER ================= -->
 <header class="header">
-  <img src="grt-logo-05.png" class="logo">
+<img src="grt-logo-05.png" class="logo">
 
-  <nav class="desktop-nav">
-    <a href="#" class="nav-link active">Home</a>
-    <a href="#industries" class="nav-link">Industries</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="#roi" class="nav-link highlight">ROI</a>
-  </nav>
+<nav class="desktop-nav">
+<a href="#" class="nav-link active">Home</a>
+<a href="#industries" class="nav-link">Industries</a>
+<a href="#pricing" class="nav-link">Pricing</a>
+<a href="#roi" class="nav-link highlight">ROI</a>
+</nav>
 </header>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
 
 <div class="hero-left">
+
 <div class="trust-badge">
 <span class="trust-dot"></span> Trusted by 50+ Teams
 </div>
@@ -54,6 +94,7 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 <a href="#roi" class="btn btn-primary btn-lg">Start Analysis →</a>
 <a href="#contact" class="btn btn-secondary btn-lg">Book Call</a>
 </div>
+
 </div>
 
 <div class="hero-right">
@@ -61,75 +102,27 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 <div class="dashboard-header">
 <span class="status-dot status-active"></span> ACTIVE
 </div>
-<div class="metric">Reliability <strong>98.7%</strong></div>
+<div class="metric">Reliability 98.7%</div>
 </div>
 </div>
 
-</section>
-
-<!-- ================= AI DEAL ENGINE ================= -->
-<section class="panel glass-card">
-<div class="panel-center">
-<h2>AI Deal Intelligence</h2>
-</div>
-
-<input id="dealInput" placeholder="Enter niche">
-<button onclick="runDealAI()" class="btn btn-primary">Analyze</button>
-<div id="dealOutput"></div>
 </section>
 
 <!-- ================= ROI ================= -->
 <section class="panel" id="roi">
-
-<div class="panel-center">
 <h2>ROI Calculator</h2>
-</div>
 
 <form id="miniROIForm" onsubmit="runMiniROI(event)">
 <input name="cost" value="50000">
 <input name="hours" value="3">
 <input name="events" value="6">
-
 <button class="btn btn-primary">Calculate</button>
 <div id="miniROIOutput"></div>
 </form>
-
-</section>
-
-<!-- ================= INDUSTRY TABS ================= -->
-<section class="panel" id="industries">
-
-<div class="industry-tabs">
-<button class="industry-tab active" data-industry="realestate">Real Estate</button>
-<button class="industry-tab" data-industry="pharma">Pharma</button>
-<button class="industry-tab" data-industry="industrial">Industrial</button>
-</div>
-
-<div id="realestate" class="industry-panel active">
-Predict deals before market
-</div>
-
-<div id="pharma" class="industry-panel">
-Automate compliance
-</div>
-
-<div id="industrial" class="industry-panel">
-Prevent downtime
-</div>
-
-</section>
-
-<!-- ================= INSIGHTS ================= -->
-<section class="panel">
-<div class="panel-center">
-<h2>Daily Intelligence</h2>
-<p>Improve decision quality daily</p>
-</div>
 </section>
 
 <!-- ================= PRICING ================= -->
 <section class="panel" id="pricing">
-
 <div class="grid">
 
 <div class="card">
@@ -148,23 +141,11 @@ Prevent downtime
 </div>
 
 </div>
-
-</section>
-
-<!-- ================= CASE STUDIES ================= -->
-<section class="panel">
-
-<div class="grid">
-<div class="card">+340% Pipeline</div>
-<div class="card">$3.4M Saved</div>
-<div class="card">-89% Downtime</div>
-</div>
-
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="panel" id="contact">
-<h2>Ready to Build?</h2>
+<h2>Ready?</h2>
 <a class="btn btn-primary">Book Strategy</a>
 </section>
 
@@ -176,34 +157,32 @@ Prevent downtime
 
 <!-- ================= PARTICLE TEXT ================= -->
 <script>
-(function(){
 const el=document.getElementById("particle-text");
-if(!el)return;
-const text=el.innerText;
+if(el){
+const t=el.innerText;
 el.innerHTML="";
 const spans=[];
-text.split("").forEach(c=>{
-const s=document.createElement("span");
+t.split("").forEach(c=>{
+let s=document.createElement("span");
 s.textContent=c;
 s.style.display="inline-block";
-s.style.transition="transform .2s ease";
 el.appendChild(s);
 spans.push(s);
 });
 document.addEventListener("mousemove",e=>{
 spans.forEach(s=>{
-const r=s.getBoundingClientRect();
-const dx=r.left-e.clientX;
-const dy=r.top-e.clientY;
-const d=Math.sqrt(dx*dx+dy*dy);
+let r=s.getBoundingClientRect();
+let dx=r.left-e.clientX;
+let dy=r.top-e.clientY;
+let d=Math.sqrt(dx*dx+dy*dy);
 if(d<120){
-s.style.transform=`translate(${dx*0.08}px,${dy*0.08}px)`;
+s.style.transform=`translate(${dx*0.1}px,${dy*0.1}px)`;
 }else{
 s.style.transform="translate(0,0)";
 }
 });
 });
-})();
+}
 </script>
 
 </body>
