@@ -8,21 +8,18 @@
 <title>Global Reliability Technology | AI Architecture</title>
 
 <!-- SEO -->
-<meta name="description" content="Enterprise AI systems that prevent $50K/hr downtime.">
-<meta name="keywords" content="AI architecture, enterprise AI, predictive maintenance">
+<meta name="description" content="Enterprise AI systems that prevent downtime and scale revenue.">
+<meta name="keywords" content="AI architecture, predictive maintenance, enterprise AI">
 
-<!-- GOOGLE SEARCH CONSOLE -->
+<!-- Google Verification -->
 <meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
 
-<!-- OPEN GRAPH -->
+<!-- Open Graph -->
 <meta property="og:title" content="Stop AI Failures. Start Architecting Revenue.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="grt-og-image.png">
 
-<!-- TWITTER -->
-<meta name="twitter:card" content="summary_large_image">
-
-<!-- GOOGLE ANALYTICS -->
+<!-- Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -31,7 +28,7 @@ gtag('js', new Date());
 gtag('config', 'G-8HQ1C1X28F');
 </script>
 
-<!-- FONTS -->
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
@@ -39,18 +36,6 @@ gtag('config', 'G-8HQ1C1X28F');
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-
-<!-- STRUCTURED DATA -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "ProfessionalService",
- "name": "Global Reliability Technology",
- "url": "https://yourdomain.com",
- "areaServed": ["IN","US","EU"],
- "serviceType": ["AI Architecture","Predictive Maintenance"]
-}
-</script>
 
 </head>
 
@@ -87,7 +72,7 @@ Intelligence is not automated.<br>
 </h1>
 
 <p class="hero-sub">
-Stop losing <strong>$50,000/hour</strong> to AI failures.
+Every letter reacts to your movement. Your cursor bends the interface.
 </p>
 
 <div class="hero-ctas">
@@ -100,7 +85,7 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 <div class="hero-right">
 <div class="dashboard-preview">
 <div class="dashboard-header">
-<span class="status-dot status-active"></span> ACTIVE
+<span class="status-dot status-active"></span> LIVE
 </div>
 <div class="metric">Reliability 98.7%</div>
 </div>
@@ -110,19 +95,40 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 
 <!-- ================= ROI ================= -->
 <section class="panel" id="roi">
+
+<div class="panel-center">
 <h2>ROI Calculator</h2>
+</div>
 
 <form id="miniROIForm" onsubmit="runMiniROI(event)">
 <input name="cost" value="50000">
 <input name="hours" value="3">
 <input name="events" value="6">
+
 <button class="btn btn-primary">Calculate</button>
 <div id="miniROIOutput"></div>
 </form>
+
+</section>
+
+<!-- ================= INDUSTRIES ================= -->
+<section class="panel" id="industries">
+
+<div class="industry-tabs">
+<button class="industry-tab active" data-industry="realestate">Real Estate</button>
+<button class="industry-tab" data-industry="pharma">Pharma</button>
+<button class="industry-tab" data-industry="industrial">Industrial</button>
+</div>
+
+<div id="realestate" class="industry-panel active">Predict deals early</div>
+<div id="pharma" class="industry-panel">Automate compliance</div>
+<div id="industrial" class="industry-panel">Prevent downtime</div>
+
 </section>
 
 <!-- ================= PRICING ================= -->
 <section class="panel" id="pricing">
+
 <div class="grid">
 
 <div class="card">
@@ -141,11 +147,23 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 </div>
 
 </div>
+
+</section>
+
+<!-- ================= CASE STUDIES ================= -->
+<section class="panel">
+
+<div class="grid">
+<div class="card">+340% Pipeline</div>
+<div class="card">$3.4M Saved</div>
+<div class="card">-89% Downtime</div>
+</div>
+
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="panel" id="contact">
-<h2>Ready?</h2>
+<h2>Ready to build?</h2>
 <a class="btn btn-primary">Book Strategy</a>
 </section>
 
@@ -155,10 +173,13 @@ Stop losing <strong>$50,000/hour</strong> to AI failures.
 
 <script src="script.js"></script>
 
-<!-- ================= PARTICLE TEXT ================= -->
+<!-- ================= INSANE UI ENGINE ================= -->
 <script>
+
+// ===== PARTICLE TEXT =====
+(function(){
 const el=document.getElementById("particle-text");
-if(el){
+if(!el)return;
 const t=el.innerText;
 el.innerHTML="";
 const spans=[];
@@ -166,6 +187,7 @@ t.split("").forEach(c=>{
 let s=document.createElement("span");
 s.textContent=c;
 s.style.display="inline-block";
+s.style.transition="transform .15s ease, color .2s ease";
 el.appendChild(s);
 spans.push(s);
 });
@@ -175,14 +197,33 @@ let r=s.getBoundingClientRect();
 let dx=r.left-e.clientX;
 let dy=r.top-e.clientY;
 let d=Math.sqrt(dx*dx+dy*dy);
-if(d<120){
-s.style.transform=`translate(${dx*0.1}px,${dy*0.1}px)`;
+if(d<140){
+s.style.transform=`translate(${dx*0.12}px,${dy*0.12}px) scale(1.1)`;
+s.style.color="#00e5ff";
 }else{
 s.style.transform="translate(0,0)";
+s.style.color="";
 }
 });
 });
+})();
+
+// ===== CURSOR FORCE FIELD =====
+document.addEventListener("mousemove", e=>{
+const cards=document.querySelectorAll(".card");
+cards.forEach(card=>{
+const rect=card.getBoundingClientRect();
+const dx=e.clientX-(rect.left+rect.width/2);
+const dy=e.clientY-(rect.top+rect.height/2);
+const dist=Math.sqrt(dx*dx+dy*dy);
+if(dist<300){
+card.style.transform=`translate(${dx*-0.02}px,${dy*-0.02}px)`;
+}else{
+card.style.transform="translate(0,0)";
 }
+});
+});
+
 </script>
 
 </body>
