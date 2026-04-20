@@ -1,230 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Global Reliability Technology | AI Architecture</title>
+<title>GRT System</title>
 
-<!-- SEO -->
-<meta name="description" content="Enterprise AI systems that prevent downtime and scale revenue.">
-<meta name="keywords" content="AI architecture, predictive maintenance, enterprise AI">
-
-<!-- Google Verification -->
-<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Stop AI Failures. Start Architecting Revenue.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="grt-og-image.png">
-
-<!-- Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-8HQ1C1X28F');
-</script>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Sora:wght@700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="styles.css">
-
-<!-- GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+<link rel="stylesheet" href="css/main.css">
 
 </head>
-
 <body>
 
-<!-- ================= BACKGROUND ================= -->
-<canvas id="network"></canvas>
-<div id="cursorGlow" class="glow"></div>
+<canvas id="neural"></canvas>
 
-<!-- ================= HEADER ================= -->
 <header class="header">
-<img src="grt-logo-05.png" class="logo">
-
-<nav class="desktop-nav">
-<a href="#" class="nav-link active">Home</a>
-<a href="#industries" class="nav-link">Industries</a>
-<a href="#pricing" class="nav-link">Pricing</a>
-<a href="#roi" class="nav-link highlight">ROI</a>
-</nav>
+  <h2>GRT</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="lab.html">Lab</a>
+  </nav>
 </header>
 
-<!-- ================= HERO ================= -->
+<main>
+
 <section class="hero">
 
-<div class="hero-left">
-
-<div class="trust-badge">
-<span class="trust-dot"></span> Trusted by 50+ Teams
-</div>
-
 <h1 id="particle-text">
-Intelligence is not automated.<br>
-<span class="gradient-text">It is architected.</span>
+Neural Intelligence System
 </h1>
 
-<p class="hero-sub">
-Every letter reacts to your movement. Your cursor bends the interface.
-</p>
-
-<div class="hero-ctas">
-<a href="#roi" class="btn btn-primary btn-lg">Start Analysis →</a>
-<a href="#contact" class="btn btn-secondary btn-lg">Book Call</a>
-</div>
-
-</div>
-
-<div class="hero-right">
-<div class="dashboard-preview">
-<div class="dashboard-header">
-<span class="status-dot status-active"></span> LIVE
-</div>
-<div class="metric">Reliability 98.7%</div>
-</div>
-</div>
+<p>Move your cursor → system reacts</p>
 
 </section>
 
-<!-- ================= ROI ================= -->
-<section class="panel" id="roi">
-
-<div class="panel-center">
-<h2>ROI Calculator</h2>
-</div>
-
-<form id="miniROIForm" onsubmit="runMiniROI(event)">
-<input name="cost" value="50000">
-<input name="hours" value="3">
-<input name="events" value="6">
-
-<button class="btn btn-primary">Calculate</button>
-<div id="miniROIOutput"></div>
-</form>
-
-</section>
-
-<!-- ================= INDUSTRIES ================= -->
-<section class="panel" id="industries">
-
-<div class="industry-tabs">
-<button class="industry-tab active" data-industry="realestate">Real Estate</button>
-<button class="industry-tab" data-industry="pharma">Pharma</button>
-<button class="industry-tab" data-industry="industrial">Industrial</button>
-</div>
-
-<div id="realestate" class="industry-panel active">Predict deals early</div>
-<div id="pharma" class="industry-panel">Automate compliance</div>
-<div id="industrial" class="industry-panel">Prevent downtime</div>
-
-</section>
-
-<!-- ================= PRICING ================= -->
-<section class="panel" id="pricing">
-
-<div class="grid">
-
-<div class="card">
-<h3>Starter</h3>
-<p>$29/mo</p>
-</div>
-
-<div class="card highlight">
-<h3>Pro</h3>
-<p>$99/mo</p>
-</div>
-
-<div class="card">
-<h3>Enterprise</h3>
-<p>Custom</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= CASE STUDIES ================= -->
 <section class="panel">
-
-<div class="grid">
-<div class="card">+340% Pipeline</div>
-<div class="card">$3.4M Saved</div>
-<div class="card">-89% Downtime</div>
-</div>
-
+<h2>AI Insights</h2>
+<div id="insights"></div>
 </section>
 
-<!-- ================= CONTACT ================= -->
-<section class="panel" id="contact">
-<h2>Ready to build?</h2>
-<a class="btn btn-primary">Book Strategy</a>
-</section>
+</main>
 
-<footer>
-© <span id="year"></span>
-</footer>
-
-<script src="script.js"></script>
-
-<!-- ================= INSANE UI ENGINE ================= -->
-<script>
-
-// ===== PARTICLE TEXT =====
-(function(){
-const el=document.getElementById("particle-text");
-if(!el)return;
-const t=el.innerText;
-el.innerHTML="";
-const spans=[];
-t.split("").forEach(c=>{
-let s=document.createElement("span");
-s.textContent=c;
-s.style.display="inline-block";
-s.style.transition="transform .15s ease, color .2s ease";
-el.appendChild(s);
-spans.push(s);
-});
-document.addEventListener("mousemove",e=>{
-spans.forEach(s=>{
-let r=s.getBoundingClientRect();
-let dx=r.left-e.clientX;
-let dy=r.top-e.clientY;
-let d=Math.sqrt(dx*dx+dy*dy);
-if(d<140){
-s.style.transform=`translate(${dx*0.12}px,${dy*0.12}px) scale(1.1)`;
-s.style.color="#00e5ff";
-}else{
-s.style.transform="translate(0,0)";
-s.style.color="";
-}
-});
-});
-})();
-
-// ===== CURSOR FORCE FIELD =====
-document.addEventListener("mousemove", e=>{
-const cards=document.querySelectorAll(".card");
-cards.forEach(card=>{
-const rect=card.getBoundingClientRect();
-const dx=e.clientX-(rect.left+rect.width/2);
-const dy=e.clientY-(rect.top+rect.height/2);
-const dist=Math.sqrt(dx*dx+dy*dy);
-if(dist<300){
-card.style.transform=`translate(${dx*-0.02}px,${dy*-0.02}px)`;
-}else{
-card.style.transform="translate(0,0)";
-}
-});
-});
-
-</script>
+<script src="js/neural.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/insights.js"></script>
 
 </body>
 </html>
