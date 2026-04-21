@@ -5,71 +5,332 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT Neural Node | AI Intelligence Engine</title>
+<title>Vanguard Neural OS | AI Intelligence System</title>
 
-<meta name="description" content="Autonomous AI Services, Robotics Risk Intelligence, AI Audit Systems">
-<meta name="google-site-verification" content="PASTE_YOUR_CODE">
+<!-- ================= SEO CORE ================= -->
+<meta name="description" content="Autonomous AI Services, Robotics Intelligence, Neural Systems">
+<meta name="keywords" content="AI, robotics, neural intelligence, automation">
 
-<!-- Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XXXX');
+<!-- OpenGraph -->
+<meta property="og:title" content="Vanguard Neural OS">
+<meta property="og:description" content="AI Intelligence Engine">
+<meta property="og:type" content="website">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ "name": "Vanguard Neural OS",
+ "url": "https://yourdomain.com"
+}
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<!-- Google -->
+<meta name="google-site-verification" content="PASTE_CODE">
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-XXXX');
+</script>
+
+<style>
+
+/* ================= DESIGN SYSTEM ================= */
+:root{
+  --bg:#05070d;
+  --cyan:#00e5ff;
+  --glass:rgba(255,255,255,0.05);
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--cyan);
+  overflow:hidden;
+}
+
+/* ================= HUD ================= */
+#hud{
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
+  border-bottom:0.5px solid rgba(0,255,255,0.2);
+}
+
+.pulse{
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{opacity:0.3}
+  50%{opacity:1}
+  100%{opacity:0.3}
+}
+
+/* ================= NAV ================= */
+nav{
+  display:flex;
+  gap:12px;
+  padding:10px;
+}
+
+nav div{
+  cursor:pointer;
+}
+
+/* ================= VIEW ================= */
+#view{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+  padding:12px;
+}
+
+/* PANEL */
+.panel{
+  backdrop-filter:blur(20px);
+  background:var(--glass);
+  border:0.5px solid rgba(0,255,255,0.2);
+  padding:12px;
+  border-radius:12px;
+}
+
+/* MODAL */
+#modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box{
+  background:var(--glass);
+  padding:20px;
+  border:0.5px solid var(--cyan);
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  body{font-size:12px;}
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
-<h1>GRT Neural Node</h1>
-<p>Autonomous Intelligence Engine</p>
-</header>
+<!-- ================= HUD ================= -->
+<div id="hud">
+  <div>System Health: <span class="pulse">●</span></div>
+  <div>Global Node: ACTIVE</div>
+</div>
 
-<main>
+<!-- ================= NAV ================= -->
+<nav>
+  <div onclick="Router.go('home')">Home</div>
+  <div onclick="Router.go('philosophy')">Philosophy</div>
+  <div onclick="Router.go('lab')">Lab</div>
+  <div onclick="Router.go('pricing')">Pricing</div>
+</nav>
 
-<section class="panel">
-<h2>System Intelligence</h2>
-<div id="state"></div>
-</section>
+<!-- ================= VIEW ================= -->
+<div id="view"></div>
 
-<section class="panel">
-<h2>Market Intelligence Graph</h2>
-<canvas id="chart"></canvas>
-</section>
+<!-- ================= MODAL ================= -->
+<div id="modal">
+  <div class="modal-box">
+    <h3>Premium Access</h3>
+    <input id="key" placeholder="Enter Key">
+    <button onclick="unlock()">Unlock</button>
+  </div>
+</div>
 
-<section class="panel">
-<h2>AI Insights</h2>
-<div id="insights"></div>
-</section>
+<script>
 
-<section class="panel">
-<h2>Agent Terminal</h2>
-<div id="log"></div>
-</section>
+/* ======================================================
+   CORE KERNEL (STATE MANAGER)
+====================================================== */
 
-<section class="panel">
-<h2>Deep Neural Analysis</h2>
-<input id="key" placeholder="Enter Access Key">
-<button onclick="unlock()">Unlock</button>
-</section>
+const Router = (()=>{
 
-<section class="panel seo">
-<h2>AI Automation Insights</h2>
-<p>
-AI automation is transforming industries by reducing operational costs,
-increasing efficiency, and enabling predictive intelligence systems.
-Robotics combined with AI is reshaping logistics, healthcare, and finance.
-</p>
-</section>
+  let current="home";
 
-</main>
+  function go(page){
+    current=page;
+    render();
+  }
 
-<script src="script.js"></script>
+  function render(){
+
+    const view=document.getElementById("view");
+
+    if(current==="home"){
+      view.innerHTML=Home();
+    }
+    if(current==="philosophy"){
+      view.innerHTML=Philosophy();
+    }
+    if(current==="lab"){
+      view.innerHTML=Lab();
+    }
+    if(current==="pricing"){
+      view.innerHTML=Pricing();
+    }
+
+  }
+
+  return {go,render};
+
+})();
+
+/* ======================================================
+   VIEWS
+====================================================== */
+
+function Home(){
+  return `
+  <div class="panel">
+    <h3>System State</h3>
+    <div id="state"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Neural Ticker</h3>
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="panel">
+    <h3>Terminal</h3>
+    <div id="log"></div>
+  </div>
+  `;
+}
+
+function Philosophy(){
+  return `<div class="panel">
+  AI is not automation. It is structured intelligence.
+  </div>`;
+}
+
+function Lab(){
+  return `<div class="panel">
+  Experimental AI systems and signal processing.
+  </div>`;
+}
+
+function Pricing(){
+  return `<div class="panel">
+  <button onclick="openModal()">Unlock Premium</button>
+  </div>`;
+}
+
+/* ======================================================
+   ENGINE (MATHEMATICS)
+====================================================== */
+
+const Engine = (()=>{
+
+  let state={risk:0.5};
+
+  function evolve(){
+    state.risk += (Math.random()-0.5)*0.1;
+    state.risk=Math.max(0,Math.min(1,state.risk));
+  }
+
+  return {state,evolve};
+
+})();
+
+/* ======================================================
+   TICKER (BEZIER)
+====================================================== */
+
+function startChart(){
+  const c=document.getElementById("chart");
+  if(!c)return;
+
+  const ctx=c.getContext("2d");
+  c.width=300;c.height=120;
+
+  let data=Array.from({length:20},()=>Math.random());
+
+  function draw(){
+    ctx.clearRect(0,0,300,120);
+    ctx.beginPath();
+
+    data.forEach((v,i)=>{
+      let x=i*15;
+      let y=120-v*100;
+      ctx.quadraticCurveTo(x+10,y,x,y);
+    });
+
+    ctx.strokeStyle="#00e5ff";
+    ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ======================================================
+   TERMINAL
+====================================================== */
+
+function startTerminal(){
+  const log=document.getElementById("log");
+  if(!log)return;
+
+  setInterval(()=>{
+    let el=document.createElement("div");
+    el.textContent="> signal "+Math.random().toFixed(3);
+    log.appendChild(el);
+  },2000);
+}
+
+/* ======================================================
+   MODAL
+====================================================== */
+
+function openModal(){
+  document.getElementById("modal").style.display="flex";
+}
+
+function unlock(){
+  alert("Future monetization gateway");
+}
+
+/* ======================================================
+   LOOP
+====================================================== */
+
+setInterval(()=>{
+  Engine.evolve();
+  const s=document.getElementById("state");
+  if(s) s.innerText="Risk: "+Engine.state.risk.toFixed(2);
+},1000);
+
+/* ======================================================
+   INIT
+====================================================== */
+
+Router.render();
+
+setTimeout(()=>{
+  startChart();
+  startTerminal();
+},100);
+
+</script>
 
 </body>
 </html>
