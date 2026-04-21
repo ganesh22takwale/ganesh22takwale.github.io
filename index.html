@@ -1,253 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>GRT Spatial OS | Global Reliability Technology</title>
+    <meta name="description" content="GRT: Intelligence Risk Assessment & Robotic Reliability. Building 0-failure architecture for the AI era.">
+    <meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8HQ1C1X28F');
+    </script>
 
-<!-- =====================================================
-   ⚠️ CRITICAL: KEEP YOUR ORIGINAL SEO TAGS HERE
-   Copy from your OLD index.html and paste below this line
-===================================================== -->
-
-<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-8HQ1C1X28F');
-</script>
-
-<!-- ===================================================== -->
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Global Reliability Technology | Vanguard Neural OS</title>
-
-<style>
-
-/* ================= CORE DESIGN ================= */
-:root{
-  --bg:#04060c;
-  --cyan:#00e5ff;
-  --glass:rgba(255,255,255,0.05);
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:system-ui;
-  background:var(--bg);
-  color:var(--cyan);
-  overflow:hidden;
-}
-
-/* ================= HUD ================= */
-#hud{
-  display:flex;
-  justify-content:space-between;
-  padding:10px;
-  border-bottom:0.5px solid rgba(0,255,255,0.2);
-  backdrop-filter:blur(25px);
-}
-
-.pulse{
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  0%{opacity:0.3}
-  50%{opacity:1}
-  100%{opacity:0.3}
-}
-
-/* ================= NAV ================= */
-nav{
-  display:flex;
-  gap:15px;
-  padding:10px;
-}
-
-nav div{
-  cursor:pointer;
-}
-
-/* ================= MAIN VIEW ================= */
-#view{
-  padding:12px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:12px;
-}
-
-/* ================= PANEL ================= */
-.panel{
-  backdrop-filter:blur(25px);
-  background:var(--glass);
-  border:0.5px solid rgba(0,255,255,0.2);
-  padding:14px;
-  border-radius:14px;
-  transition:transform 0.3s ease;
-}
-
-/* ================= MOBILE ================= */
-@media(max-width:600px){
-  body{font-size:12px;}
-}
-
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="neural-os-root">
 
-<body>
+    <canvas id="neuralLattice"></canvas>
 
-<!-- ================= HUD ================= -->
-<div id="hud">
-  <div>System Health: <span class="pulse">●</span></div>
-  <div>Node Status: ACTIVE</div>
-</div>
+    <header class="signal-hud">
+        <div class="system-status">
+            <span class="pulse-dot"></span>
+            <span class="status-text">NODE_ACTIVE: GRT_GLOBAL</span>
+        </div>
+        <div class="intelligence-ticker">
+            <div class="ticker-wrap" id="tickerStream">
+                ANALYZING_GLOBAL_AI_FLUX... SIGNAL_STRENGTH: 98.4%... RE-ROUTING_NEURAL_PATHWAYS...
+            </div>
+        </div>
+    </header>
 
-<!-- ================= NAV ================= -->
-<nav>
-  <div onclick="Router.load('home')">Home</div>
-  <div onclick="Router.load('philosophy.html')">Philosophy</div>
-  <div onclick="Router.load('lab.html')">Lab</div>
-  <div onclick="Router.load('insights.html')">Insights</div>
-</nav>
+    <main id="kernel-viewport">
+        
+        <section id="view-home" class="view active">
+            <div class="glass-panel hero-panel">
+                <img src="GRT-LOGO-05.jpg" alt="GRT Logo" class="holographic-logo">
+                <h1 class="glitch-text">GRT SPATIAL OS</h1>
+                <p class="subtitle">Next-Gen Intelligence Risk & Robotic Reliability Architecture</p>
+                <div class="cta-matrix">
+                    <button class="btn-primary" onclick="os.navigate('lab')">Access Lab</button>
+                    <button class="btn-secondary" onclick="os.navigate('philosophy')">Core Philosophy</button>
+                </div>
+            </div>
+        </section>
 
-<!-- ================= VIEW ================= -->
-<div id="view">
-  <div class="panel">
-    <h3>System Core</h3>
-    <div id="state"></div>
-  </div>
+        <section id="view-philosophy" class="view">
+            <div class="glass-panel">
+                <h2 class="section-title"><i class="fa-solid fa-brain"></i> The 0-Failure Philosophy</h2>
+                <div class="philosophy-layout">
+                    <div class="p-text">
+                        <h3>Decades Ahead Thinking</h3>
+                        <p>We don't build software; we engineer <strong>Autonomous Reliability</strong>. In the age of robotics, a 1% failure rate is catastrophic. Our philosophy is rooted in <strong>Bayesian Risk Mitigation</strong>—predicting environmental anomalies before they impact the hardware.</p>
+                    </div>
+                    <div class="p-stats">
+                        <div class="stat-card"><h4>99.999%</h4><span>Target Reliability</span></div>
+                        <div class="stat-card"><h4>&lt;10ms</h4><span>Response Latency</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="panel">
-    <h3>Neural Mesh (Digital Twin)</h3>
-    <canvas id="mesh"></canvas>
-  </div>
+        <section id="view-lab" class="view">
+            <div class="glass-panel lab-grid">
+                <div class="lab-header">
+                    <h2 class="section-title">Intelligence Lab</h2>
+                    <p>Live Risk Simulation & Agentic Auditing</p>
+                </div>
+                <div class="terminal-shell">
+                    <div class="terminal-body" id="terminalOutput">
+                        <span class="t-cyan">> GRT_OS v4.0.2 Initialized...</span><br>
+                        <span class="t-white">> Scanning for vulnerabilities in Neural Link...</span><br>
+                        <span class="t-purple">> [SUCCESS] Logic Gates Secure.</span><br>
+                        <span class="t-white">> Ready for Agentic Input_</span>
+                    </div>
+                </div>
+                <div class="twin-visualizer">
+                    <canvas id="digitalTwinSim"></canvas>
+                    <div class="twin-overlay">DIGITAL_TWIN_ACTIVE</div>
+                </div>
+            </div>
+        </section>
 
-  <div class="panel" id="content">
-    Loading...
-  </div>
-</div>
+        <section id="view-pricing" class="view">
+            <div class="glass-panel">
+                <h2 class="section-title">Capital Strategy</h2>
+                <div class="pricing-container">
+                    <div class="tier">
+                        <h4>Community Node</h4>
+                        <div class="price">$0</div>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Public Risk Data</li>
+                            <li><i class="fa-solid fa-check"></i> Basic Lab Access</li>
+                        </ul>
+                        <button class="btn-ghost">Current Tier</button>
+                    </div>
+                    <div class="tier featured">
+                        <h4>Sovereign Node</h4>
+                        <div class="price">Arbitrage-Based</div>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Private Agentic Audit</li>
+                            <li><i class="fa-solid fa-check"></i> 0-Latency Tickers</li>
+                            <li><i class="fa-solid fa-check"></i> Billion-Dollar Scaling</li>
+                        </ul>
+                        <button class="btn-premium">Contact Founders</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<script>
+    </main>
 
-/* ======================================================
-   SPA CONTENT LOADER
-====================================================== */
+    <nav class="spatial-dock">
+        <div class="dock-item" onclick="os.navigate('home')"><i class="fa-solid fa-house"></i></div>
+        <div class="dock-item" onclick="os.navigate('philosophy')"><i class="fa-solid fa-brain"></i></div>
+        <div class="dock-item" onclick="os.navigate('lab')"><i class="fa-solid fa-flask"></i></div>
+        <div class="dock-item" onclick="os.navigate('pricing')"><i class="fa-solid fa-chart-line"></i></div>
+    </nav>
 
-const Router = {
-
-  async load(page){
-
-    if(page==="home"){
-      document.getElementById("content").innerHTML =
-      "Welcome to Vanguard Neural OS";
-      return;
-    }
-
-    try{
-      let res = await fetch(page);
-      let html = await res.text();
-
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(html,"text/html");
-
-      let bodyContent = doc.body.innerHTML;
-
-      document.getElementById("content").innerHTML = bodyContent;
-
-    }catch{
-      document.getElementById("content").innerText="Load error";
-    }
-  }
-};
-
-/* ======================================================
-   PHYSICS ENGINE (Hooke’s Law)
-   F = -kx → smooth inertia UI
-====================================================== */
-
-function spring(current,target){
-  const k=0.08;
-  return current + (-k*(current-target));
-}
-
-/* ======================================================
-   STATE ENGINE
-====================================================== */
-
-let risk=0.5;
-
-setInterval(()=>{
-  risk += (Math.random()-0.5)*0.1;
-  risk=Math.max(0,Math.min(1,risk));
-
-  document.getElementById("state").innerText =
-    "Risk Level: "+risk.toFixed(2);
-
-},1000);
-
-/* ======================================================
-   NEURAL MESH (DIGITAL TWIN)
-====================================================== */
-
-const canvas=document.getElementById("mesh");
-const ctx=canvas.getContext("2d");
-
-canvas.width=300;
-canvas.height=200;
-
-let nodes = Array.from({length:40},()=>({
-  x:Math.random()*300,
-  y:Math.random()*200,
-  vx:(Math.random()-0.5),
-  vy:(Math.random()-0.5)
-}));
-
-function drawMesh(){
-
-  ctx.clearRect(0,0,300,200);
-
-  nodes.forEach(n=>{
-
-    n.x+=n.vx;
-    n.y+=n.vy;
-
-    if(n.x<0||n.x>300)n.vx*=-1;
-    if(n.y<0||n.y>200)n.vy*=-1;
-
-    ctx.fillStyle="#00e5ff";
-    ctx.fillRect(n.x,n.y,2,2);
-
-    nodes.forEach(o=>{
-      let dx=n.x-o.x;
-      let dy=n.y-o.y;
-      let d=Math.sqrt(dx*dx+dy*dy);
-
-      if(d<80){
-        ctx.strokeStyle="rgba(0,255,255,"+(1-d/80)+")";
-        ctx.beginPath();
-        ctx.moveTo(n.x,n.y);
-        ctx.lineTo(o.x,o.y);
-        ctx.stroke();
-      }
-    });
-
-  });
-
-  requestAnimationFrame(drawMesh);
-}
-
-drawMesh();
-
-/* ======================================================
-   INIT
-====================================================== */
-
-Router.load("home");
-
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
