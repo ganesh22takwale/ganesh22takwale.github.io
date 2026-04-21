@@ -2,51 +2,37 @@
 <html lang="en">
 <head>
 
+<!-- =====================================================
+   ⚠️ CRITICAL: KEEP YOUR ORIGINAL SEO TAGS HERE
+   Copy from your OLD index.html and paste below this line
+===================================================== -->
+
+<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8HQ1C1X28F');
+</script>
+
+<!-- ===================================================== -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vanguard Neural OS | AI Intelligence System</title>
-
-<!-- ================= SEO CORE ================= -->
-<meta name="description" content="Autonomous AI Services, Robotics Intelligence, Neural Systems">
-<meta name="keywords" content="AI, robotics, neural intelligence, automation">
-
-<!-- OpenGraph -->
-<meta property="og:title" content="Vanguard Neural OS">
-<meta property="og:description" content="AI Intelligence Engine">
-<meta property="og:type" content="website">
-
-<!-- Schema -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Organization",
- "name": "Vanguard Neural OS",
- "url": "https://yourdomain.com"
-}
-</script>
-
-<!-- Google -->
-<meta name="google-site-verification" content="PASTE_CODE">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-<script>
-window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());
-gtag('config','G-XXXX');
-</script>
+<title>Global Reliability Technology | Vanguard Neural OS</title>
 
 <style>
 
-/* ================= DESIGN SYSTEM ================= */
+/* ================= CORE DESIGN ================= */
 :root{
-  --bg:#05070d;
+  --bg:#04060c;
   --cyan:#00e5ff;
   --glass:rgba(255,255,255,0.05);
 }
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
@@ -62,6 +48,7 @@ body{
   justify-content:space-between;
   padding:10px;
   border-bottom:0.5px solid rgba(0,255,255,0.2);
+  backdrop-filter:blur(25px);
 }
 
 .pulse{
@@ -76,7 +63,7 @@ body{
 /* ================= NAV ================= */
 nav{
   display:flex;
-  gap:12px;
+  gap:15px;
   padding:10px;
 }
 
@@ -84,42 +71,25 @@ nav div{
   cursor:pointer;
 }
 
-/* ================= VIEW ================= */
+/* ================= MAIN VIEW ================= */
 #view{
+  padding:12px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:12px;
-  padding:12px;
 }
 
-/* PANEL */
+/* ================= PANEL ================= */
 .panel{
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(25px);
   background:var(--glass);
   border:0.5px solid rgba(0,255,255,0.2);
-  padding:12px;
-  border-radius:12px;
+  padding:14px;
+  border-radius:14px;
+  transition:transform 0.3s ease;
 }
 
-/* MODAL */
-#modal{
-  position:fixed;
-  top:0;left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  background:var(--glass);
-  padding:20px;
-  border:0.5px solid var(--cyan);
-}
-
-/* MOBILE */
+/* ================= MOBILE ================= */
 @media(max-width:600px){
   body{font-size:12px;}
 }
@@ -132,203 +102,150 @@ nav div{
 <!-- ================= HUD ================= -->
 <div id="hud">
   <div>System Health: <span class="pulse">●</span></div>
-  <div>Global Node: ACTIVE</div>
+  <div>Node Status: ACTIVE</div>
 </div>
 
 <!-- ================= NAV ================= -->
 <nav>
-  <div onclick="Router.go('home')">Home</div>
-  <div onclick="Router.go('philosophy')">Philosophy</div>
-  <div onclick="Router.go('lab')">Lab</div>
-  <div onclick="Router.go('pricing')">Pricing</div>
+  <div onclick="Router.load('home')">Home</div>
+  <div onclick="Router.load('philosophy.html')">Philosophy</div>
+  <div onclick="Router.load('lab.html')">Lab</div>
+  <div onclick="Router.load('insights.html')">Insights</div>
 </nav>
 
 <!-- ================= VIEW ================= -->
-<div id="view"></div>
+<div id="view">
+  <div class="panel">
+    <h3>System Core</h3>
+    <div id="state"></div>
+  </div>
 
-<!-- ================= MODAL ================= -->
-<div id="modal">
-  <div class="modal-box">
-    <h3>Premium Access</h3>
-    <input id="key" placeholder="Enter Key">
-    <button onclick="unlock()">Unlock</button>
+  <div class="panel">
+    <h3>Neural Mesh (Digital Twin)</h3>
+    <canvas id="mesh"></canvas>
+  </div>
+
+  <div class="panel" id="content">
+    Loading...
   </div>
 </div>
 
 <script>
 
 /* ======================================================
-   CORE KERNEL (STATE MANAGER)
+   SPA CONTENT LOADER
 ====================================================== */
 
-const Router = (()=>{
+const Router = {
 
-  let current="home";
+  async load(page){
 
-  function go(page){
-    current=page;
-    render();
-  }
-
-  function render(){
-
-    const view=document.getElementById("view");
-
-    if(current==="home"){
-      view.innerHTML=Home();
-    }
-    if(current==="philosophy"){
-      view.innerHTML=Philosophy();
-    }
-    if(current==="lab"){
-      view.innerHTML=Lab();
-    }
-    if(current==="pricing"){
-      view.innerHTML=Pricing();
+    if(page==="home"){
+      document.getElementById("content").innerHTML =
+      "Welcome to Vanguard Neural OS";
+      return;
     }
 
+    try{
+      let res = await fetch(page);
+      let html = await res.text();
+
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(html,"text/html");
+
+      let bodyContent = doc.body.innerHTML;
+
+      document.getElementById("content").innerHTML = bodyContent;
+
+    }catch{
+      document.getElementById("content").innerText="Load error";
+    }
   }
-
-  return {go,render};
-
-})();
+};
 
 /* ======================================================
-   VIEWS
+   PHYSICS ENGINE (Hooke’s Law)
+   F = -kx → smooth inertia UI
 ====================================================== */
 
-function Home(){
-  return `
-  <div class="panel">
-    <h3>System State</h3>
-    <div id="state"></div>
-  </div>
-
-  <div class="panel">
-    <h3>Neural Ticker</h3>
-    <canvas id="chart"></canvas>
-  </div>
-
-  <div class="panel">
-    <h3>Terminal</h3>
-    <div id="log"></div>
-  </div>
-  `;
-}
-
-function Philosophy(){
-  return `<div class="panel">
-  AI is not automation. It is structured intelligence.
-  </div>`;
-}
-
-function Lab(){
-  return `<div class="panel">
-  Experimental AI systems and signal processing.
-  </div>`;
-}
-
-function Pricing(){
-  return `<div class="panel">
-  <button onclick="openModal()">Unlock Premium</button>
-  </div>`;
+function spring(current,target){
+  const k=0.08;
+  return current + (-k*(current-target));
 }
 
 /* ======================================================
-   ENGINE (MATHEMATICS)
+   STATE ENGINE
 ====================================================== */
 
-const Engine = (()=>{
-
-  let state={risk:0.5};
-
-  function evolve(){
-    state.risk += (Math.random()-0.5)*0.1;
-    state.risk=Math.max(0,Math.min(1,state.risk));
-  }
-
-  return {state,evolve};
-
-})();
-
-/* ======================================================
-   TICKER (BEZIER)
-====================================================== */
-
-function startChart(){
-  const c=document.getElementById("chart");
-  if(!c)return;
-
-  const ctx=c.getContext("2d");
-  c.width=300;c.height=120;
-
-  let data=Array.from({length:20},()=>Math.random());
-
-  function draw(){
-    ctx.clearRect(0,0,300,120);
-    ctx.beginPath();
-
-    data.forEach((v,i)=>{
-      let x=i*15;
-      let y=120-v*100;
-      ctx.quadraticCurveTo(x+10,y,x,y);
-    });
-
-    ctx.strokeStyle="#00e5ff";
-    ctx.stroke();
-
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
-
-/* ======================================================
-   TERMINAL
-====================================================== */
-
-function startTerminal(){
-  const log=document.getElementById("log");
-  if(!log)return;
-
-  setInterval(()=>{
-    let el=document.createElement("div");
-    el.textContent="> signal "+Math.random().toFixed(3);
-    log.appendChild(el);
-  },2000);
-}
-
-/* ======================================================
-   MODAL
-====================================================== */
-
-function openModal(){
-  document.getElementById("modal").style.display="flex";
-}
-
-function unlock(){
-  alert("Future monetization gateway");
-}
-
-/* ======================================================
-   LOOP
-====================================================== */
+let risk=0.5;
 
 setInterval(()=>{
-  Engine.evolve();
-  const s=document.getElementById("state");
-  if(s) s.innerText="Risk: "+Engine.state.risk.toFixed(2);
+  risk += (Math.random()-0.5)*0.1;
+  risk=Math.max(0,Math.min(1,risk));
+
+  document.getElementById("state").innerText =
+    "Risk Level: "+risk.toFixed(2);
+
 },1000);
+
+/* ======================================================
+   NEURAL MESH (DIGITAL TWIN)
+====================================================== */
+
+const canvas=document.getElementById("mesh");
+const ctx=canvas.getContext("2d");
+
+canvas.width=300;
+canvas.height=200;
+
+let nodes = Array.from({length:40},()=>({
+  x:Math.random()*300,
+  y:Math.random()*200,
+  vx:(Math.random()-0.5),
+  vy:(Math.random()-0.5)
+}));
+
+function drawMesh(){
+
+  ctx.clearRect(0,0,300,200);
+
+  nodes.forEach(n=>{
+
+    n.x+=n.vx;
+    n.y+=n.vy;
+
+    if(n.x<0||n.x>300)n.vx*=-1;
+    if(n.y<0||n.y>200)n.vy*=-1;
+
+    ctx.fillStyle="#00e5ff";
+    ctx.fillRect(n.x,n.y,2,2);
+
+    nodes.forEach(o=>{
+      let dx=n.x-o.x;
+      let dy=n.y-o.y;
+      let d=Math.sqrt(dx*dx+dy*dy);
+
+      if(d<80){
+        ctx.strokeStyle="rgba(0,255,255,"+(1-d/80)+")";
+        ctx.beginPath();
+        ctx.moveTo(n.x,n.y);
+        ctx.lineTo(o.x,o.y);
+        ctx.stroke();
+      }
+    });
+
+  });
+
+  requestAnimationFrame(drawMesh);
+}
+
+drawMesh();
 
 /* ======================================================
    INIT
 ====================================================== */
 
-Router.render();
-
-setTimeout(()=>{
-  startChart();
-  startTerminal();
-},100);
+Router.load("home");
 
 </script>
 
