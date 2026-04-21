@@ -4,46 +4,296 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT System</title>
+<title>GRT Neural Node | Autonomous AI Intelligence</title>
 
-<link rel="stylesheet" href="css/main.css">
+<!-- SEO -->
+<meta name="description" content="Autonomous AI Services, Robotic Risk Intelligence, Neural Intelligence Systems">
+<meta name="keywords" content="AI intelligence, robotics, neural systems, autonomous agents">
 
+<style>
+
+/* =========================
+   CORE DESIGN SYSTEM (DRY)
+========================= */
+
+:root{
+  --bg:#04060c;
+  --cyan:#00e5ff;
+  --glass:rgba(255,255,255,0.05);
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--cyan);
+  overflow:hidden;
+}
+
+/* =========================
+   SPATIAL GRID (INTERFACE)
+========================= */
+
+#app{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+  padding:12px;
+}
+
+/* GLASS PANEL */
+.panel{
+  backdrop-filter:blur(20px);
+  background:var(--glass);
+  border:0.5px solid rgba(0,255,255,0.2);
+  padding:12px;
+  min-height:160px;
+  position:relative;
+  transition:transform 0.2s ease;
+}
+
+/* DEPTH STACK */
+.panel:hover{
+  transform:translateZ(20px) scale(1.02);
+}
+
+/* TERMINAL */
+#terminal{
+  font-family:monospace;
+  font-size:12px;
+  overflow:auto;
+}
+
+/* CANVAS */
+canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  body{font-size:12px;}
+}
+
+</style>
 </head>
+
 <body>
 
-<canvas id="neural"></canvas>
+<canvas id="bg"></canvas>
 
-<header class="header">
-  <h2>GRT</h2>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="lab.html">Lab</a>
-  </nav>
-</header>
+<div id="app">
 
-<main>
+<div class="panel">
+<h3>CORE STATE</h3>
+<div id="state"></div>
+</div>
 
-<section class="hero">
+<div class="panel">
+<h3>INTELLIGENCE TICKER</h3>
+<canvas id="chart"></canvas>
+</div>
 
-<h1 id="particle-text">
-Neural Intelligence System
-</h1>
+<div class="panel">
+<h3>ROBOTIC SIM</h3>
+<canvas id="sim"></canvas>
+</div>
 
-<p>Move your cursor → system reacts</p>
+<div class="panel" id="terminal">
+<h3>AGENT TERMINAL</h3>
+<div id="log"></div>
+</div>
 
-</section>
+</div>
 
-<section class="panel">
-<h2>AI Insights</h2>
-<div id="insights"></div>
-</section>
+<script>
 
-</main>
+/* =========================
+   MICRO-KERNEL CORE
+========================= */
 
-<script src="js/neural.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/insights.js"></script>
+const Kernel = (()=>{
+
+  let state = {
+    risk:0.5,
+    velocity:0
+  };
+
+  /* SPRING PHYSICS (F = -kx) */
+  function spring(target,current){
+    const k = 0.1;
+    return current + (-k*(current-target));
+  }
+
+  /* MARKOV TRANSITION */
+  function update(){
+    let noise = Math.random()*0.1 - 0.05;
+    state.risk = Math.min(1,Math.max(0,state.risk + noise));
+  }
+
+  return {state,update,spring};
+
+})();
+
+/* =========================
+   BACKGROUND (VECTOR FIELD)
+========================= */
+
+const bg = document.getElementById("bg");
+const ctx = bg.getContext("2d");
+
+bg.width = innerWidth;
+bg.height = innerHeight;
+
+let pts = Array.from({length:60},()=>({
+  x:Math.random()*bg.width,
+  y:Math.random()*bg.height,
+  vx:(Math.random()-0.5),
+  vy:(Math.random()-0.5)
+}));
+
+function drawBG(){
+  ctx.clearRect(0,0,bg.width,bg.height);
+
+  pts.forEach(p=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    ctx.fillStyle="#00e5ff";
+    ctx.fillRect(p.x,p.y,1,1);
+
+    if(p.x<0||p.x>bg.width)p.vx*=-1;
+    if(p.y<0||p.y>bg.height)p.vy*=-1;
+  });
+
+  requestAnimationFrame(drawBG);
+}
+drawBG();
+
+/* =========================
+   TICKER (BEZIER CURVE)
+========================= */
+
+const chart = document.getElementById("chart");
+const cctx = chart.getContext("2d");
+
+chart.width = 300;
+chart.height = 120;
+
+let data = Array.from({length:20},()=>Math.random());
+
+function drawChart(){
+
+  cctx.clearRect(0,0,chart.width,chart.height);
+
+  cctx.beginPath();
+  cctx.moveTo(0,chart.height/2);
+
+  for(let i=0;i<data.length;i++){
+    let x = i*15;
+    let y = chart.height - data[i]*100;
+
+    let cx = x+10;
+    let cy = y;
+
+    cctx.quadraticCurveTo(cx,cy,x,y);
+  }
+
+  cctx.strokeStyle="#00e5ff";
+  cctx.stroke();
+
+  requestAnimationFrame(drawChart);
+}
+drawChart();
+
+/* =========================
+   ROBOTIC SIMULATION
+========================= */
+
+const sim = document.getElementById("sim");
+const sctx = sim.getContext("2d");
+
+sim.width = 300;
+sim.height = 120;
+
+let bots = Array.from({length:6},()=>({
+  x:Math.random()*300,
+  y:Math.random()*120,
+  vx:(Math.random()-0.5)*2,
+  vy:(Math.random()-0.5)*2
+}));
+
+function drawSim(){
+  sctx.clearRect(0,0,sim.width,sim.height);
+
+  bots.forEach(b=>{
+    b.x+=b.vx;
+    b.y+=b.vy;
+
+    if(b.x<0||b.x>300)b.vx*=-1;
+    if(b.y<0||b.y>120)b.vy*=-1;
+
+    sctx.fillStyle="#00e5ff";
+    sctx.fillRect(b.x,b.y,4,4);
+  });
+
+  requestAnimationFrame(drawSim);
+}
+drawSim();
+
+/* =========================
+   TERMINAL (AGENT BRIDGE)
+========================= */
+
+const log = document.getElementById("log");
+
+function terminal(msg){
+  let el = document.createElement("div");
+  el.textContent = "> "+msg;
+  log.appendChild(el);
+  log.scrollTop = log.scrollHeight;
+}
+
+/* SIMULATED AGENT */
+setInterval(()=>{
+  terminal("Agent signal: "+Math.random().toFixed(3));
+},2000);
+
+/* =========================
+   STATE DISPLAY
+========================= */
+
+const stateEl = document.getElementById("state");
+
+function updateState(){
+  Kernel.update();
+  stateEl.innerText = "Risk: "+Kernel.state.risk.toFixed(2);
+}
+setInterval(updateState,1000);
+
+/* =========================
+   INTERSECTION OBSERVER
+========================= */
+
+const panels = document.querySelectorAll(".panel");
+
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity=1;
+    }else{
+      e.target.style.opacity=0.3;
+    }
+  });
+});
+
+panels.forEach(p=>obs.observe(p));
+
+</script>
 
 </body>
 </html>
