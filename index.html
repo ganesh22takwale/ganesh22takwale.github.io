@@ -5,16 +5,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT Neural Node | Autonomous AI Intelligence</title>
+<title>GRT Neural Node | AI Intelligence Engine</title>
 
-<!-- ================= SEO ================= -->
-<meta name="description" content="Autonomous AI Services, Robotic Risk Intelligence, Neural Intelligence Systems">
-<meta name="keywords" content="AI automation, robotics intelligence, neural systems, AI audit, robotics risk">
-
-<!-- GOOGLE SEARCH CONSOLE -->
+<meta name="description" content="Autonomous AI Services, Robotics Risk Intelligence, AI Audit Systems">
 <meta name="google-site-verification" content="PASTE_YOUR_CODE">
 
-<!-- GOOGLE ANALYTICS -->
+<!-- Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -23,304 +19,57 @@ gtag('js', new Date());
 gtag('config', 'G-XXXX');
 </script>
 
-<style>
+<link rel="stylesheet" href="styles.css">
 
-/* ================= ROOT ================= */
-:root{
-  --bg:#05070d;
-  --cyan:#00e5ff;
-  --glass:rgba(255,255,255,0.05);
-}
-
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:system-ui;
-  background:var(--bg);
-  color:var(--cyan);
-  overflow:hidden;
-}
-
-/* ================= GRID ================= */
-#app{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:10px;
-  padding:10px;
-}
-
-/* ================= PANEL ================= */
-.panel{
-  backdrop-filter:blur(20px);
-  background:var(--glass);
-  border:0.5px solid rgba(0,255,255,0.2);
-  padding:12px;
-  min-height:160px;
-  position:relative;
-  transition:transform 0.2s ease;
-}
-
-.panel:hover{
-  transform:scale(1.02);
-}
-
-/* TERMINAL */
-#terminal{
-  font-family:monospace;
-  font-size:12px;
-  overflow:auto;
-  height:140px;
-}
-
-/* CANVAS */
-canvas{
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:-1;
-}
-
-/* MOBILE */
-@media(max-width:600px){
-  body{font-size:12px;}
-}
-
-</style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+<header>
+<h1>GRT Neural Node</h1>
+<p>Autonomous Intelligence Engine</p>
+</header>
 
-<div id="app">
+<main>
 
-<div class="panel">
-<h3>System State</h3>
+<section class="panel">
+<h2>System Intelligence</h2>
 <div id="state"></div>
-</div>
+</section>
 
-<div class="panel">
-<h3>AI Intelligence Ticker</h3>
+<section class="panel">
+<h2>Market Intelligence Graph</h2>
 <canvas id="chart"></canvas>
-</div>
+</section>
 
-<div class="panel">
-<h3>Robotics Simulation</h3>
-<canvas id="sim"></canvas>
-</div>
-
-<div class="panel" id="terminal">
-<h3>Agent Bridge</h3>
-<div id="log"></div>
-</div>
-
-<div class="panel">
-<h3>Live AI Insights</h3>
+<section class="panel">
+<h2>AI Insights</h2>
 <div id="insights"></div>
-</div>
+</section>
 
-</div>
+<section class="panel">
+<h2>Agent Terminal</h2>
+<div id="log"></div>
+</section>
 
-<script>
+<section class="panel">
+<h2>Deep Neural Analysis</h2>
+<input id="key" placeholder="Enter Access Key">
+<button onclick="unlock()">Unlock</button>
+</section>
 
-/* ======================================================
-   MICRO-KERNEL ARCHITECTURE
-   CORE / INTERFACE / BRIDGE
-====================================================== */
+<section class="panel seo">
+<h2>AI Automation Insights</h2>
+<p>
+AI automation is transforming industries by reducing operational costs,
+increasing efficiency, and enabling predictive intelligence systems.
+Robotics combined with AI is reshaping logistics, healthcare, and finance.
+</p>
+</section>
 
-const Kernel = (()=>{
+</main>
 
-  /* ================= CORE STATE ================= */
-  let state = {
-    risk:0.5,
-    momentum:0
-  };
-
-  /* ================= SPRING PHYSICS ================= */
-  function spring(target,current){
-    const k = 0.08;
-    return current + (-k*(current-target));
-  }
-
-  /* ================= MARKOV UPDATE ================= */
-  function update(){
-    let noise = (Math.random()-0.5)*0.1;
-    state.risk = Math.min(1,Math.max(0,state.risk + noise));
-  }
-
-  return {state,update,spring};
-
-})();
-
-/* ======================================================
-   BACKGROUND VECTOR FIELD
-====================================================== */
-
-const bg = document.getElementById("bg");
-const ctx = bg.getContext("2d");
-
-bg.width = innerWidth;
-bg.height = innerHeight;
-
-let nodes = Array.from({length:60},()=>({
-  x:Math.random()*bg.width,
-  y:Math.random()*bg.height,
-  vx:(Math.random()-0.5),
-  vy:(Math.random()-0.5)
-}));
-
-function drawBG(){
-  ctx.clearRect(0,0,bg.width,bg.height);
-
-  nodes.forEach(n=>{
-    n.x+=n.vx;
-    n.y+=n.vy;
-
-    ctx.fillStyle="#00e5ff";
-    ctx.fillRect(n.x,n.y,1,1);
-
-    if(n.x<0||n.x>bg.width)n.vx*=-1;
-    if(n.y<0||n.y>bg.height)n.vy*=-1;
-  });
-
-  requestAnimationFrame(drawBG);
-}
-drawBG();
-
-/* ======================================================
-   BEZIER INTELLIGENCE TICKER
-====================================================== */
-
-const chart = document.getElementById("chart");
-const cctx = chart.getContext("2d");
-
-chart.width = 300;
-chart.height = 120;
-
-let data = Array.from({length:20},()=>Math.random());
-
-function drawChart(){
-  cctx.clearRect(0,0,chart.width,chart.height);
-
-  cctx.beginPath();
-  cctx.moveTo(0,chart.height/2);
-
-  data.forEach((v,i)=>{
-    let x=i*15;
-    let y=chart.height - v*100;
-    cctx.quadraticCurveTo(x+10,y,x,y);
-  });
-
-  cctx.strokeStyle="#00e5ff";
-  cctx.stroke();
-
-  requestAnimationFrame(drawChart);
-}
-drawChart();
-
-/* ======================================================
-   ROBOTIC SIMULATION
-====================================================== */
-
-const sim = document.getElementById("sim");
-const sctx = sim.getContext("2d");
-
-sim.width = 300;
-sim.height = 120;
-
-let bots = Array.from({length:6},()=>({
-  x:Math.random()*300,
-  y:Math.random()*120,
-  vx:(Math.random()-0.5)*2,
-  vy:(Math.random()-0.5)*2
-}));
-
-function drawSim(){
-  sctx.clearRect(0,0,sim.width,sim.height);
-
-  bots.forEach(b=>{
-    b.x+=b.vx;
-    b.y+=b.vy;
-
-    if(b.x<0||b.x>300)b.vx*=-1;
-    if(b.y<0||b.y>120)b.vy*=-1;
-
-    sctx.fillStyle="#00e5ff";
-    sctx.fillRect(b.x,b.y,4,4);
-  });
-
-  requestAnimationFrame(drawSim);
-}
-drawSim();
-
-/* ======================================================
-   AGENT TERMINAL (BRIDGE)
-====================================================== */
-
-const log = document.getElementById("log");
-
-function terminal(msg){
-  let el = document.createElement("div");
-  el.textContent = "> "+msg;
-  log.appendChild(el);
-  log.scrollTop = log.scrollHeight;
-}
-
-setInterval(()=>{
-  terminal("Agent signal: "+Math.random().toFixed(3));
-},2000);
-
-/* ======================================================
-   STATE DISPLAY
-====================================================== */
-
-const stateEl = document.getElementById("state");
-
-function updateState(){
-  Kernel.update();
-  stateEl.innerText = "Risk Level: "+Kernel.state.risk.toFixed(2);
-}
-setInterval(updateState,1000);
-
-/* ======================================================
-   TRAFFIC-FOCUSED INSIGHTS (SEO ENGAGEMENT)
-====================================================== */
-
-const insights = document.getElementById("insights");
-
-const dataPoints = [
-"AI market expected to grow 37% CAGR",
-"Robotics automation reduces cost by 42%",
-"Neural decision engines outperform static AI",
-"Autonomous systems trending in logistics"
-];
-
-function updateInsights(){
-  insights.innerText = dataPoints[Math.floor(Math.random()*dataPoints.length)];
-}
-setInterval(updateInsights,2500);
-updateInsights();
-
-/* ======================================================
-   INTERSECTION OBSERVER (PERFORMANCE)
-====================================================== */
-
-const panels = document.querySelectorAll(".panel");
-
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity=1;
-    }else{
-      e.target.style.opacity=0.3;
-    }
-  });
-});
-
-panels.forEach(p=>observer.observe(p));
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
