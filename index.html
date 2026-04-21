@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>GRT Neural Node | Autonomous AI Intelligence</title>
 
-<!-- SEO -->
+<!-- ================= SEO ================= -->
 <meta name="description" content="Autonomous AI Services, Robotic Risk Intelligence, Neural Intelligence Systems">
-<meta name="keywords" content="AI intelligence, robotics, neural systems, autonomous agents">
+<meta name="keywords" content="AI automation, robotics intelligence, neural systems, AI audit, robotics risk">
+
+<!-- GOOGLE SEARCH CONSOLE -->
+<meta name="google-site-verification" content="PASTE_YOUR_CODE">
+
+<!-- GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXX');
+</script>
 
 <style>
 
-/* =========================
-   CORE DESIGN SYSTEM (DRY)
-========================= */
-
+/* ================= ROOT ================= */
 :root{
-  --bg:#04060c;
+  --bg:#05070d;
   --cyan:#00e5ff;
   --glass:rgba(255,255,255,0.05);
 }
@@ -32,18 +42,15 @@ body{
   overflow:hidden;
 }
 
-/* =========================
-   SPATIAL GRID (INTERFACE)
-========================= */
-
+/* ================= GRID ================= */
 #app{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:12px;
-  padding:12px;
+  gap:10px;
+  padding:10px;
 }
 
-/* GLASS PANEL */
+/* ================= PANEL ================= */
 .panel{
   backdrop-filter:blur(20px);
   background:var(--glass);
@@ -54,9 +61,8 @@ body{
   transition:transform 0.2s ease;
 }
 
-/* DEPTH STACK */
 .panel:hover{
-  transform:translateZ(20px) scale(1.02);
+  transform:scale(1.02);
 }
 
 /* TERMINAL */
@@ -64,6 +70,7 @@ body{
   font-family:monospace;
   font-size:12px;
   overflow:auto;
+  height:140px;
 }
 
 /* CANVAS */
@@ -89,49 +96,56 @@ canvas{
 <div id="app">
 
 <div class="panel">
-<h3>CORE STATE</h3>
+<h3>System State</h3>
 <div id="state"></div>
 </div>
 
 <div class="panel">
-<h3>INTELLIGENCE TICKER</h3>
+<h3>AI Intelligence Ticker</h3>
 <canvas id="chart"></canvas>
 </div>
 
 <div class="panel">
-<h3>ROBOTIC SIM</h3>
+<h3>Robotics Simulation</h3>
 <canvas id="sim"></canvas>
 </div>
 
 <div class="panel" id="terminal">
-<h3>AGENT TERMINAL</h3>
+<h3>Agent Bridge</h3>
 <div id="log"></div>
+</div>
+
+<div class="panel">
+<h3>Live AI Insights</h3>
+<div id="insights"></div>
 </div>
 
 </div>
 
 <script>
 
-/* =========================
-   MICRO-KERNEL CORE
-========================= */
+/* ======================================================
+   MICRO-KERNEL ARCHITECTURE
+   CORE / INTERFACE / BRIDGE
+====================================================== */
 
 const Kernel = (()=>{
 
+  /* ================= CORE STATE ================= */
   let state = {
     risk:0.5,
-    velocity:0
+    momentum:0
   };
 
-  /* SPRING PHYSICS (F = -kx) */
+  /* ================= SPRING PHYSICS ================= */
   function spring(target,current){
-    const k = 0.1;
+    const k = 0.08;
     return current + (-k*(current-target));
   }
 
-  /* MARKOV TRANSITION */
+  /* ================= MARKOV UPDATE ================= */
   function update(){
-    let noise = Math.random()*0.1 - 0.05;
+    let noise = (Math.random()-0.5)*0.1;
     state.risk = Math.min(1,Math.max(0,state.risk + noise));
   }
 
@@ -139,9 +153,9 @@ const Kernel = (()=>{
 
 })();
 
-/* =========================
-   BACKGROUND (VECTOR FIELD)
-========================= */
+/* ======================================================
+   BACKGROUND VECTOR FIELD
+====================================================== */
 
 const bg = document.getElementById("bg");
 const ctx = bg.getContext("2d");
@@ -149,7 +163,7 @@ const ctx = bg.getContext("2d");
 bg.width = innerWidth;
 bg.height = innerHeight;
 
-let pts = Array.from({length:60},()=>({
+let nodes = Array.from({length:60},()=>({
   x:Math.random()*bg.width,
   y:Math.random()*bg.height,
   vx:(Math.random()-0.5),
@@ -159,24 +173,24 @@ let pts = Array.from({length:60},()=>({
 function drawBG(){
   ctx.clearRect(0,0,bg.width,bg.height);
 
-  pts.forEach(p=>{
-    p.x+=p.vx;
-    p.y+=p.vy;
+  nodes.forEach(n=>{
+    n.x+=n.vx;
+    n.y+=n.vy;
 
     ctx.fillStyle="#00e5ff";
-    ctx.fillRect(p.x,p.y,1,1);
+    ctx.fillRect(n.x,n.y,1,1);
 
-    if(p.x<0||p.x>bg.width)p.vx*=-1;
-    if(p.y<0||p.y>bg.height)p.vy*=-1;
+    if(n.x<0||n.x>bg.width)n.vx*=-1;
+    if(n.y<0||n.y>bg.height)n.vy*=-1;
   });
 
   requestAnimationFrame(drawBG);
 }
 drawBG();
 
-/* =========================
-   TICKER (BEZIER CURVE)
-========================= */
+/* ======================================================
+   BEZIER INTELLIGENCE TICKER
+====================================================== */
 
 const chart = document.getElementById("chart");
 const cctx = chart.getContext("2d");
@@ -187,21 +201,16 @@ chart.height = 120;
 let data = Array.from({length:20},()=>Math.random());
 
 function drawChart(){
-
   cctx.clearRect(0,0,chart.width,chart.height);
 
   cctx.beginPath();
   cctx.moveTo(0,chart.height/2);
 
-  for(let i=0;i<data.length;i++){
-    let x = i*15;
-    let y = chart.height - data[i]*100;
-
-    let cx = x+10;
-    let cy = y;
-
-    cctx.quadraticCurveTo(cx,cy,x,y);
-  }
+  data.forEach((v,i)=>{
+    let x=i*15;
+    let y=chart.height - v*100;
+    cctx.quadraticCurveTo(x+10,y,x,y);
+  });
 
   cctx.strokeStyle="#00e5ff";
   cctx.stroke();
@@ -210,9 +219,9 @@ function drawChart(){
 }
 drawChart();
 
-/* =========================
+/* ======================================================
    ROBOTIC SIMULATION
-========================= */
+====================================================== */
 
 const sim = document.getElementById("sim");
 const sctx = sim.getContext("2d");
@@ -245,9 +254,9 @@ function drawSim(){
 }
 drawSim();
 
-/* =========================
-   TERMINAL (AGENT BRIDGE)
-========================= */
+/* ======================================================
+   AGENT TERMINAL (BRIDGE)
+====================================================== */
 
 const log = document.getElementById("log");
 
@@ -258,30 +267,48 @@ function terminal(msg){
   log.scrollTop = log.scrollHeight;
 }
 
-/* SIMULATED AGENT */
 setInterval(()=>{
   terminal("Agent signal: "+Math.random().toFixed(3));
 },2000);
 
-/* =========================
+/* ======================================================
    STATE DISPLAY
-========================= */
+====================================================== */
 
 const stateEl = document.getElementById("state");
 
 function updateState(){
   Kernel.update();
-  stateEl.innerText = "Risk: "+Kernel.state.risk.toFixed(2);
+  stateEl.innerText = "Risk Level: "+Kernel.state.risk.toFixed(2);
 }
 setInterval(updateState,1000);
 
-/* =========================
-   INTERSECTION OBSERVER
-========================= */
+/* ======================================================
+   TRAFFIC-FOCUSED INSIGHTS (SEO ENGAGEMENT)
+====================================================== */
+
+const insights = document.getElementById("insights");
+
+const dataPoints = [
+"AI market expected to grow 37% CAGR",
+"Robotics automation reduces cost by 42%",
+"Neural decision engines outperform static AI",
+"Autonomous systems trending in logistics"
+];
+
+function updateInsights(){
+  insights.innerText = dataPoints[Math.floor(Math.random()*dataPoints.length)];
+}
+setInterval(updateInsights,2500);
+updateInsights();
+
+/* ======================================================
+   INTERSECTION OBSERVER (PERFORMANCE)
+====================================================== */
 
 const panels = document.querySelectorAll(".panel");
 
-const obs = new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.style.opacity=1;
@@ -291,7 +318,7 @@ const obs = new IntersectionObserver(entries=>{
   });
 });
 
-panels.forEach(p=>obs.observe(p));
+panels.forEach(p=>observer.observe(p));
 
 </script>
 
