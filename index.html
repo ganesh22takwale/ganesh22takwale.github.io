@@ -1,128 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>GRT Spatial OS | Global Reliability Technology</title>
-    <meta name="description" content="GRT: Intelligence Risk Assessment & Robotic Reliability. Building 0-failure architecture for the AI era.">
-    <meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-8HQ1C1X28F');
-    </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRT Neural OS</title>
+
+<meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8HQ1C1X28F"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8HQ1C1X28F');
+</script>
+
+<link rel="stylesheet" href="styles.css">
+
 </head>
-<body class="neural-os-root">
 
-    <canvas id="neuralLattice"></canvas>
+<body>
 
-    <header class="signal-hud">
-        <div class="system-status">
-            <span class="pulse-dot"></span>
-            <span class="status-text">NODE_ACTIVE: GRT_GLOBAL</span>
-        </div>
-        <div class="intelligence-ticker">
-            <div class="ticker-wrap" id="tickerStream">
-                ANALYZING_GLOBAL_AI_FLUX... SIGNAL_STRENGTH: 98.4%... RE-ROUTING_NEURAL_PATHWAYS...
-            </div>
-        </div>
-    </header>
+<div id="particles"></div>
 
-    <main id="kernel-viewport">
-        
-        <section id="view-home" class="view active">
-            <div class="glass-panel hero-panel">
-                <img src="GRT-LOGO-05.jpg" alt="GRT Logo" class="holographic-logo">
-                <h1 class="glitch-text">GRT SPATIAL OS</h1>
-                <p class="subtitle">Next-Gen Intelligence Risk & Robotic Reliability Architecture</p>
-                <div class="cta-matrix">
-                    <button class="btn-primary" onclick="os.navigate('lab')">Access Lab</button>
-                    <button class="btn-secondary" onclick="os.navigate('philosophy')">Core Philosophy</button>
-                </div>
-            </div>
-        </section>
+<header class="glass">
+  <h1 class="glow">GRT Neural OS</h1>
+  <p>Autonomous Intelligence Engine</p>
+</header>
 
-        <section id="view-philosophy" class="view">
-            <div class="glass-panel">
-                <h2 class="section-title"><i class="fa-solid fa-brain"></i> The 0-Failure Philosophy</h2>
-                <div class="philosophy-layout">
-                    <div class="p-text">
-                        <h3>Decades Ahead Thinking</h3>
-                        <p>We don't build software; we engineer <strong>Autonomous Reliability</strong>. In the age of robotics, a 1% failure rate is catastrophic. Our philosophy is rooted in <strong>Bayesian Risk Mitigation</strong>—predicting environmental anomalies before they impact the hardware.</p>
-                    </div>
-                    <div class="p-stats">
-                        <div class="stat-card"><h4>99.999%</h4><span>Target Reliability</span></div>
-                        <div class="stat-card"><h4>&lt;10ms</h4><span>Response Latency</span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<nav>
+  <button class="magnetic" onclick="Router.go('home')">Home</button>
+  <button class="magnetic" onclick="Router.go('lab')">Lab</button>
+  <button class="magnetic" onclick="Router.go('insights')">Insights</button>
+  <button class="magnetic" onclick="Router.go('pricing')">Pricing</button>
+</nav>
 
-        <section id="view-lab" class="view">
-            <div class="glass-panel lab-grid">
-                <div class="lab-header">
-                    <h2 class="section-title">Intelligence Lab</h2>
-                    <p>Live Risk Simulation & Agentic Auditing</p>
-                </div>
-                <div class="terminal-shell">
-                    <div class="terminal-body" id="terminalOutput">
-                        <span class="t-cyan">> GRT_OS v4.0.2 Initialized...</span><br>
-                        <span class="t-white">> Scanning for vulnerabilities in Neural Link...</span><br>
-                        <span class="t-purple">> [SUCCESS] Logic Gates Secure.</span><br>
-                        <span class="t-white">> Ready for Agentic Input_</span>
-                    </div>
-                </div>
-                <div class="twin-visualizer">
-                    <canvas id="digitalTwinSim"></canvas>
-                    <div class="twin-overlay">DIGITAL_TWIN_ACTIVE</div>
-                </div>
-            </div>
-        </section>
+<main id="app"></main>
 
-        <section id="view-pricing" class="view">
-            <div class="glass-panel">
-                <h2 class="section-title">Capital Strategy</h2>
-                <div class="pricing-container">
-                    <div class="tier">
-                        <h4>Community Node</h4>
-                        <div class="price">$0</div>
-                        <ul>
-                            <li><i class="fa-solid fa-check"></i> Public Risk Data</li>
-                            <li><i class="fa-solid fa-check"></i> Basic Lab Access</li>
-                        </ul>
-                        <button class="btn-ghost">Current Tier</button>
-                    </div>
-                    <div class="tier featured">
-                        <h4>Sovereign Node</h4>
-                        <div class="price">Arbitrage-Based</div>
-                        <ul>
-                            <li><i class="fa-solid fa-check"></i> Private Agentic Audit</li>
-                            <li><i class="fa-solid fa-check"></i> 0-Latency Tickers</li>
-                            <li><i class="fa-solid fa-check"></i> Billion-Dollar Scaling</li>
-                        </ul>
-                        <button class="btn-premium">Contact Founders</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div id="modal" class="hidden">
+  <div class="glass modal-box">
+    <h3>Premium Access</h3>
+    <input id="key" placeholder="Enter Key">
+    <button onclick="unlock()">Unlock</button>
+  </div>
+</div>
 
-    </main>
+<script src="script.js"></script>
 
-    <nav class="spatial-dock">
-        <div class="dock-item" onclick="os.navigate('home')"><i class="fa-solid fa-house"></i></div>
-        <div class="dock-item" onclick="os.navigate('philosophy')"><i class="fa-solid fa-brain"></i></div>
-        <div class="dock-item" onclick="os.navigate('lab')"><i class="fa-solid fa-flask"></i></div>
-        <div class="dock-item" onclick="os.navigate('pricing')"><i class="fa-solid fa-chart-line"></i></div>
-    </nav>
-
-    <script src="script.js"></script>
 </body>
 </html>
