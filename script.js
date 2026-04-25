@@ -142,3 +142,32 @@ const os = {
     }
 };
 document.addEventListener('DOMContentLoaded', () => { os.initLattice(); os.nav('home'); });
+// ===== INTELLIGENCE STREAM =====
+const signals = [
+  "AI anomaly detected in logistics system",
+  "Robotic failure risk ↑ 12%",
+  "Neural optimization triggered",
+  "Predictive alert: downtime risk",
+  "System efficiency improved +8.2%",
+  "AI cost leak detected in pipeline"
+];
+
+function startFeed(){
+  const el = document.getElementById("liveFeed");
+  if(!el) return;
+
+  setInterval(()=>{
+    const msg = signals[Math.floor(Math.random()*signals.length)];
+    const div = document.createElement("div");
+    div.className = "feed-item";
+    div.innerText = "● " + msg;
+
+    el.prepend(div);
+
+    if(el.children.length > 6){
+      el.removeChild(el.lastChild);
+    }
+  }, 2000);
+}
+
+startFeed();
