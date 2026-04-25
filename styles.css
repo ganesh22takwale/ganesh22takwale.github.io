@@ -86,3 +86,21 @@ body { background: var(--d); color: #fff; font-family: var(--f); overflow: hidde
 .tiers { display: flex; gap: 20px; width: 100%; }
 .t { flex: 1; padding: 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; }
 .t.f { border-color: var(--p); }
+.feed-box{
+  background: rgba(0,0,0,0.6);
+  padding:20px;
+  border-radius:12px;
+  height:180px;
+  overflow:hidden;
+  font-family:monospace;
+}
+
+.feed-item{
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn{
+  to{opacity:1; transform:translateY(0);}
+}
