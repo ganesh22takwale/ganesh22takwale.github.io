@@ -5,7 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT Neural OS</title>
+<title>Global Reliability Technology | Neural OS</title>
+
+<meta name="description" content="Autonomous AI systems that prevent failure and generate intelligence." />
+<meta name="keywords" content="AI reliability, neural systems, robotics intelligence">
 
 <meta name="google-site-verification" content="T3mTxf2nV7LVbt96d3NpHZgsFW2vHUnkDaByb77KL98">
 
@@ -17,37 +20,213 @@ gtag('js', new Date());
 gtag('config', 'G-8HQ1C1X28F');
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
+<style>
+
+/* ===== CORE ===== */
+body{
+  margin:0;
+  font-family:Inter;
+  background:#02040a;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ===== BACKGROUND ===== */
+canvas#network{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
+
+/* ===== HEADER ===== */
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px;
+  backdrop-filter:blur(20px);
+}
+
+.logo{height:40px}
+
+/* ===== HERO ===== */
+.hero{
+  display:flex;
+  justify-content:space-between;
+  padding:80px;
+}
+
+.gradient-text{
+  background:linear-gradient(90deg,#00e5ff,#7c5cff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* ===== GLASS ===== */
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+  border:0.5px solid rgba(0,255,255,0.2);
+  padding:20px;
+  border-radius:20px;
+  transition:0.3s;
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:40px;
+}
+
+/* ===== BUTTON ===== */
+.btn{
+  padding:10px 20px;
+  border:none;
+  background:#00e5ff;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ===== PANELS ===== */
+.panel{
+  padding:60px 20px;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="particles"></div>
+<canvas id="network"></canvas>
 
-<header class="glass">
-  <h1 class="glow">GRT Neural OS</h1>
-  <p>Autonomous Intelligence Engine</p>
+<header class="header">
+<img src="grt-logo-05.png" class="logo">
 </header>
 
-<nav>
-  <button class="magnetic" onclick="Router.go('home')">Home</button>
-  <button class="magnetic" onclick="Router.go('lab')">Lab</button>
-  <button class="magnetic" onclick="Router.go('insights')">Insights</button>
-  <button class="magnetic" onclick="Router.go('pricing')">Pricing</button>
-</nav>
-
-<main id="app"></main>
-
-<div id="modal" class="hidden">
-  <div class="glass modal-box">
-    <h3>Premium Access</h3>
-    <input id="key" placeholder="Enter Key">
-    <button onclick="unlock()">Unlock</button>
-  </div>
+<section class="hero">
+<div>
+<h1 id="particle-text">
+Intelligence is not automated.<br>
+<span class="gradient-text">It is architected.</span>
+</h1>
+<p>Next-gen reliability system</p>
 </div>
 
-<script src="script.js"></script>
+<div class="card">
+Reliability 98.7%
+</div>
+</section>
+
+<section class="panel">
+<h2>ROI Engine</h2>
+<div class="card">
+<input id="cost" value="50000">
+<input id="hours" value="3">
+<input id="events" value="6">
+<button onclick="calc()">Calculate</button>
+<div id="out"></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Industries</h2>
+<div class="grid">
+<div class="card">Real Estate Intelligence</div>
+<div class="card">Pharma AI</div>
+<div class="card">Industrial Systems</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Pricing</h2>
+<div class="grid">
+<div class="card">$29</div>
+<div class="card">$99</div>
+<div class="card">Enterprise</div>
+</div>
+</section>
+
+<script>
+
+/* ===== ROI ===== */
+function calc(){
+let c=cost.value;
+let h=hours.value;
+let e=events.value;
+out.innerText = "Saved $" + (c*h*e);
+}
+
+/* ===== PARTICLE TEXT ===== */
+const el=document.getElementById("particle-text");
+const t=el.innerText;
+el.innerHTML="";
+const spans=[];
+t.split("").forEach(c=>{
+let s=document.createElement("span");
+s.textContent=c;
+el.appendChild(s);
+spans.push(s);
+});
+
+document.addEventListener("mousemove",e=>{
+spans.forEach(s=>{
+let r=s.getBoundingClientRect();
+let dx=r.left-e.clientX;
+let dy=r.top-e.clientY;
+let d=Math.sqrt(dx*dx+dy*dy);
+
+if(d<120){
+s.style.transform=`translate(${dx*0.1}px,${dy*0.1}px)`;
+s.style.color="#00e5ff";
+}else{
+s.style.transform="";
+s.style.color="";
+}
+});
+});
+
+/* ===== NEURAL BACKGROUND ===== */
+const canvas=document.getElementById("network");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let nodes=Array.from({length:60},()=>({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5),
+vy:(Math.random()-0.5)
+}));
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+nodes.forEach(n=>{
+n.x+=n.vx;
+n.y+=n.vy;
+
+nodes.forEach(o=>{
+let d=Math.hypot(n.x-o.x,n.y-o.y);
+if(d<100){
+ctx.strokeStyle="rgba(0,255,255,"+(1-d/100)+")";
+ctx.beginPath();
+ctx.moveTo(n.x,n.y);
+ctx.lineTo(o.x,o.y);
+ctx.stroke();
+}
+});
+});
+
+requestAnimationFrame(draw);
+}
+draw();
+
+</script>
 
 </body>
 </html>
