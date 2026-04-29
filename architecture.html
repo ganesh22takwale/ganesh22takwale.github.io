@@ -3,132 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRT Intelligence Core</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<title>GRT Intelligence — Core System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#020617;
---glass:rgba(255,255,255,0.05);
+--bg:#030712;
+--glass:rgba(255,255,255,0.06);
 --border:rgba(255,255,255,0.08);
---accent:#6366f1;
---green:#22c55e;
---red:#ef4444;
---yellow:#f59e0b;
+--accent:#7c3aed;
+--text:#e5e7eb;
+--sub:#9ca3af;
 }
 
+*{box-sizing:border-box;margin:0;padding:0;}
+
 body{
-margin:0;
 font-family:'Inter',sans-serif;
-background:radial-gradient(circle at 30% 30%, #1e1b4b, transparent),
-#020617;
-color:#e2e8f0;
+background:radial-gradient(circle at 20% 20%, #1e1b4b, transparent),
+            radial-gradient(circle at 80% 70%, #0f172a, transparent),
+            var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+/* CURSOR LIGHT */
+.cursor-light{
+position:fixed;
+width:300px;
+height:300px;
+background:radial-gradient(circle, rgba(124,58,237,0.25), transparent 60%);
+pointer-events:none;
+z-index:0;
+transform:translate(-50%,-50%);
 }
 
 /* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
-padding:20px 30px;
+padding:20px 40px;
 border-bottom:1px solid var(--border);
+backdrop-filter:blur(20px);
 }
 
 /* LAYOUT */
-.layout{
+.container{
+padding:30px;
 display:grid;
 grid-template-columns:2fr 1fr;
 gap:20px;
+position:relative;
+z-index:1;
+}
+
+/* GLASS CARD */
+.card{
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:18px;
 padding:20px;
+backdrop-filter:blur(25px);
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+/* HOVER LIGHT EFFECT */
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle at var(--x) var(--y),
+rgba(124,58,237,0.15),transparent 40%);
+opacity:0;
+transition:.3s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover{
+transform:translateY(-6px) scale(1.01);
+border-color:rgba(124,58,237,0.4);
 }
 
 /* GRAPH */
 .graph{
-height:300px;
+height:320px;
 position:relative;
-border:1px solid var(--border);
-border-radius:12px;
-overflow:hidden;
 }
 
 .node{
 position:absolute;
-padding:10px;
-background:var(--glass);
+padding:10px 14px;
+border-radius:12px;
+background:rgba(255,255,255,0.05);
 border:1px solid var(--border);
-border-radius:10px;
 font-size:12px;
+transition:.3s;
 }
 
+.node:hover{
+transform:scale(1.08);
+background:rgba(124,58,237,0.2);
+}
+
+/* SIGNAL DOT */
 .signal{
 position:absolute;
-width:8px;
-height:8px;
-background:var(--accent);
+width:10px;
+height:10px;
 border-radius:50%;
-animation:move 2s linear infinite;
+background:#7c3aed;
+animation:flow 2.5s linear infinite;
 }
 
-@keyframes move{
-0%{left:10%; top:50%;}
+@keyframes flow{
+0%{left:10%; top:60%;}
 50%{left:50%; top:20%;}
 100%{left:90%; top:60%;}
 }
 
 /* LOG */
 .log{
-height:200px;
+height:220px;
 overflow:auto;
 font-family:monospace;
 font-size:12px;
-border:1px solid var(--border);
-padding:10px;
-border-radius:10px;
+color:#22c55e;
 }
 
-/* STATUS PANEL */
+/* RIGHT PANEL */
 .panel{
-border:1px solid var(--border);
-padding:15px;
-border-radius:12px;
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
 .metric{
-margin-bottom:10px;
+font-size:14px;
+color:var(--sub);
 }
 
-/* BUTTONS */
+/* BUTTON */
 button{
-margin:5px;
-padding:10px;
+padding:12px;
+border-radius:10px;
 border:none;
-border-radius:8px;
-background:var(--accent);
+background:linear-gradient(135deg,#7c3aed,#06b6d4);
 color:white;
 cursor:pointer;
+transition:.3s;
 }
 
 button:hover{
-opacity:.8;
+transform:scale(1.05);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+.container{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-<h2>GRT Intelligence Core</h2>
-<div>Live System</div>
-</div>
+<div class="cursor-light" id="cursor"></div>
 
-<div class="layout">
+<header class="header">
+<h2>GRT Intelligence</h2>
+<div>System Core</div>
+</header>
 
-<!-- LEFT SIDE -->
+<div class="container">
+
+<!-- LEFT -->
 <div>
 
-<div class="graph" id="graph">
+<div class="card graph" id="graph">
 
-<div class="node" style="left:10%;top:50%">Signal Agent</div>
+<div class="node" style="left:10%;top:60%">Signal Agent</div>
 <div class="node" style="left:50%;top:20%">Reasoning Core</div>
 <div class="node" style="left:85%;top:60%">Execution</div>
 
@@ -136,32 +195,28 @@ opacity:.8;
 
 </div>
 
-<div class="panel" style="margin-top:20px;">
-<h3>Event Stream</h3>
+<div class="card" style="margin-top:20px;">
+<h3 style="margin-bottom:10px;">Live Event Stream</h3>
 <div class="log" id="log"></div>
 </div>
 
 </div>
 
-<!-- RIGHT SIDE -->
-<div>
-
+<!-- RIGHT -->
 <div class="panel">
+
+<div class="card">
 <h3>System State</h3>
-
-<div class="metric">Active Signals: <span id="signals">0</span></div>
+<div class="metric">Signals: <span id="signals">0</span></div>
 <div class="metric">Confidence: <span id="confidence">0%</span></div>
-<div class="metric">Risk Level: <span id="risk">LOW</span></div>
-
+<div class="metric">Risk: <span id="risk">LOW</span></div>
 </div>
 
-<div class="panel" style="margin-top:20px;">
+<div class="card">
 <h3>Control Center</h3>
-
-<button onclick="injectSignal()">Inject Signal</button>
+<button onclick="inject()">Inject Signal</button>
 <button onclick="shock()">Market Shock</button>
 <button onclick="clearLog()">Clear</button>
-
 </div>
 
 </div>
@@ -170,27 +225,44 @@ opacity:.8;
 
 <script>
 
+/* CURSOR LIGHT */
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* CARD HOVER LIGHT TRACK */
+document.querySelectorAll(".card").forEach(card=>{
+card.addEventListener("mousemove",e=>{
+const rect=card.getBoundingClientRect();
+card.style.setProperty("--x", e.clientX - rect.left + "px");
+card.style.setProperty("--y", e.clientY - rect.top + "px");
+});
+});
+
+/* SYSTEM LOGIC */
 let signals=0;
 
-function log(msg,color="white"){
+function log(msg){
 const el=document.getElementById("log");
-el.innerHTML+=`<div style="color:${color}">> ${msg}</div>`;
+el.innerHTML+=`> ${msg}<br>`;
 el.scrollTop=el.scrollHeight;
 }
 
-function injectSignal(){
+function inject(){
 signals++;
 document.getElementById("signals").innerText=signals;
 
-log("New signal detected", "#22c55e");
-log("Running inference...");
-log("Decision generated");
+log("Signal detected");
+setTimeout(()=>log("Running reasoning engine"),300);
+setTimeout(()=>log("Decision executed"),600);
 
 updateMetrics();
 }
 
 function shock(){
-log("⚠ Market volatility spike detected", "#ef4444");
+log("⚠ Volatility spike detected");
 document.getElementById("risk").innerText="HIGH";
 document.getElementById("risk").style.color="#ef4444";
 }
@@ -199,12 +271,12 @@ function updateMetrics(){
 document.getElementById("confidence").innerText=
 (Math.random()*100).toFixed(1)+"%";
 
-let risk=["LOW","MEDIUM","HIGH"];
-let r=risk[Math.floor(Math.random()*3)];
+const risk=["LOW","MEDIUM","HIGH"];
+const r=risk[Math.floor(Math.random()*3)];
 
-document.getElementById("risk").innerText=r;
-document.getElementById("risk").style.color=
-r==="HIGH"?"#ef4444":r==="MEDIUM"?"#f59e0b":"#22c55e";
+const el=document.getElementById("risk");
+el.innerText=r;
+el.style.color=r==="HIGH"?"#ef4444":r==="MEDIUM"?"#f59e0b":"#22c55e";
 }
 
 function clearLog(){
