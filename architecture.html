@@ -3,220 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRT Intelligence OS</title>
 
-<title>GRT Intelligence — Core System</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#030712;
---glass:rgba(255,255,255,0.06);
+--bg:#020617;
+--glass:rgba(255,255,255,0.05);
 --border:rgba(255,255,255,0.08);
---accent:#7c3aed;
---text:#e5e7eb;
---sub:#9ca3af;
+--accent:#6366f1;
+--green:#22c55e;
+--red:#ef4444;
 }
-
-*{box-sizing:border-box;margin:0;padding:0;}
 
 body{
+margin:0;
 font-family:'Inter',sans-serif;
-background:radial-gradient(circle at 20% 20%, #1e1b4b, transparent),
-            radial-gradient(circle at 80% 70%, #0f172a, transparent),
-            var(--bg);
-color:var(--text);
-overflow-x:hidden;
-}
-
-/* CURSOR LIGHT */
-.cursor-light{
-position:fixed;
-width:300px;
-height:300px;
-background:radial-gradient(circle, rgba(124,58,237,0.25), transparent 60%);
-pointer-events:none;
-z-index:0;
-transform:translate(-50%,-50%);
+background:radial-gradient(circle at 30% 30%, #1e1b4b, transparent), var(--bg);
+color:#e2e8f0;
 }
 
 /* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
-padding:20px 40px;
+padding:15px 25px;
 border-bottom:1px solid var(--border);
-backdrop-filter:blur(20px);
 }
 
 /* LAYOUT */
-.container{
-padding:30px;
+.layout{
 display:grid;
 grid-template-columns:2fr 1fr;
-gap:20px;
-position:relative;
-z-index:1;
+gap:15px;
+padding:15px;
 }
 
-/* GLASS CARD */
+/* PANEL */
 .card{
 background:var(--glass);
 border:1px solid var(--border);
-border-radius:18px;
-padding:20px;
-backdrop-filter:blur(25px);
-transition:.4s;
-position:relative;
-overflow:hidden;
-}
-
-/* HOVER LIGHT EFFECT */
-.card::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(circle at var(--x) var(--y),
-rgba(124,58,237,0.15),transparent 40%);
-opacity:0;
-transition:.3s;
-}
-
-.card:hover::before{
-opacity:1;
-}
-
-.card:hover{
-transform:translateY(-6px) scale(1.01);
-border-color:rgba(124,58,237,0.4);
+border-radius:12px;
+padding:15px;
 }
 
 /* GRAPH */
-.graph{
-height:320px;
-position:relative;
+canvas{
+width:100%;
+height:350px;
+background:#020617;
+border-radius:10px;
 }
 
-.node{
-position:absolute;
-padding:10px 14px;
-border-radius:12px;
-background:rgba(255,255,255,0.05);
-border:1px solid var(--border);
-font-size:12px;
-transition:.3s;
-}
-
-.node:hover{
-transform:scale(1.08);
-background:rgba(124,58,237,0.2);
-}
-
-/* SIGNAL DOT */
-.signal{
-position:absolute;
-width:10px;
-height:10px;
-border-radius:50%;
-background:#7c3aed;
-animation:flow 2.5s linear infinite;
-}
-
-@keyframes flow{
-0%{left:10%; top:60%;}
-50%{left:50%; top:20%;}
-100%{left:90%; top:60%;}
-}
-
-/* LOG */
-.log{
-height:220px;
+/* TRACE */
+.trace{
+height:200px;
 overflow:auto;
 font-family:monospace;
 font-size:12px;
-color:#22c55e;
 }
 
-/* RIGHT PANEL */
-.panel{
+/* AGENTS */
+.agent{
+padding:8px;
+margin-bottom:6px;
+border-radius:8px;
+background:#0f172a;
 display:flex;
-flex-direction:column;
-gap:15px;
-}
-
-.metric{
-font-size:14px;
-color:var(--sub);
+justify-content:space-between;
 }
 
 /* BUTTON */
 button{
-padding:12px;
-border-radius:10px;
+padding:8px 12px;
+background:var(--accent);
 border:none;
-background:linear-gradient(135deg,#7c3aed,#06b6d4);
+border-radius:6px;
 color:white;
 cursor:pointer;
-transition:.3s;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-.container{grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="cursor-light" id="cursor"></div>
+<div class="header">
+<h3>GRT Intelligence OS</h3>
+<div>Live System</div>
+</div>
 
-<header class="header">
-<h2>GRT Intelligence</h2>
-<div>System Core</div>
-</header>
-
-<div class="container">
+<div class="layout">
 
 <!-- LEFT -->
 <div>
 
-<div class="card graph" id="graph">
-
-<div class="node" style="left:10%;top:60%">Signal Agent</div>
-<div class="node" style="left:50%;top:20%">Reasoning Core</div>
-<div class="node" style="left:85%;top:60%">Execution</div>
-
-<div class="signal"></div>
-
+<div class="card">
+<h3>System Graph</h3>
+<canvas id="graph"></canvas>
 </div>
 
-<div class="card" style="margin-top:20px;">
-<h3 style="margin-bottom:10px;">Live Event Stream</h3>
-<div class="log" id="log"></div>
+<div class="card">
+<h3>Decision Trace</h3>
+<div class="trace" id="trace"></div>
 </div>
 
 </div>
 
 <!-- RIGHT -->
-<div class="panel">
+<div>
 
 <div class="card">
-<h3>System State</h3>
-<div class="metric">Signals: <span id="signals">0</span></div>
-<div class="metric">Confidence: <span id="confidence">0%</span></div>
-<div class="metric">Risk: <span id="risk">LOW</span></div>
+<h3>Agents</h3>
+
+<div class="agent">Signal Agent <span id="a1">idle</span></div>
+<div class="agent">Reasoning Agent <span id="a2">idle</span></div>
+<div class="agent">Execution Agent <span id="a3">idle</span></div>
+
 </div>
 
 <div class="card">
-<h3>Control Center</h3>
-<button onclick="inject()">Inject Signal</button>
-<button onclick="shock()">Market Shock</button>
-<button onclick="clearLog()">Clear</button>
+<h3>Control</h3>
+<button onclick="run()">Inject Signal</button>
 </div>
 
 </div>
@@ -225,62 +133,76 @@ transform:scale(1.05);
 
 <script>
 
-/* CURSOR LIGHT */
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
+/* GRAPH ENGINE */
+const canvas=document.getElementById("graph");
+const ctx=canvas.getContext("2d");
+
+let nodes=[
+{x:100,y:200,label:"Signal"},
+{x:300,y:80,label:"Reasoning"},
+{x:500,y:220,label:"Execution"}
+];
+
+let edges=[[0,1],[1,2]];
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+// edges
+edges.forEach(e=>{
+ctx.beginPath();
+ctx.moveTo(nodes[e[0]].x,nodes[e[0]].y);
+ctx.lineTo(nodes[e[1]].x,nodes[e[1]].y);
+ctx.strokeStyle="#6366f1";
+ctx.stroke();
 });
 
-/* CARD HOVER LIGHT TRACK */
-document.querySelectorAll(".card").forEach(card=>{
-card.addEventListener("mousemove",e=>{
-const rect=card.getBoundingClientRect();
-card.style.setProperty("--x", e.clientX - rect.left + "px");
-card.style.setProperty("--y", e.clientY - rect.top + "px");
+// nodes
+nodes.forEach(n=>{
+ctx.beginPath();
+ctx.arc(n.x,n.y,8,0,Math.PI*2);
+ctx.fillStyle="#6366f1";
+ctx.fill();
+ctx.fillText(n.label,n.x-20,n.y-15);
 });
-});
+}
 
-/* SYSTEM LOGIC */
-let signals=0;
+setInterval(draw,30);
 
+/* TRACE */
 function log(msg){
-const el=document.getElementById("log");
+const el=document.getElementById("trace");
 el.innerHTML+=`> ${msg}<br>`;
 el.scrollTop=el.scrollHeight;
 }
 
-function inject(){
-signals++;
-document.getElementById("signals").innerText=signals;
+/* AGENT STATE */
+function setAgent(id,state){
+document.getElementById(id).innerText=state;
+}
 
+/* MOCK STREAM (replace with WebSocket later) */
+function run(){
+
+setAgent("a1","active");
 log("Signal detected");
-setTimeout(()=>log("Running reasoning engine"),300);
-setTimeout(()=>log("Decision executed"),600);
 
-updateMetrics();
-}
+setTimeout(()=>{
+setAgent("a1","done");
+setAgent("a2","active");
+log("Reasoning started");
+},500);
 
-function shock(){
-log("⚠ Volatility spike detected");
-document.getElementById("risk").innerText="HIGH";
-document.getElementById("risk").style.color="#ef4444";
-}
+setTimeout(()=>{
+setAgent("a2","done");
+setAgent("a3","active");
+log("Decision executed");
+},1000);
 
-function updateMetrics(){
-document.getElementById("confidence").innerText=
-(Math.random()*100).toFixed(1)+"%";
+setTimeout(()=>{
+setAgent("a3","done");
+},1500);
 
-const risk=["LOW","MEDIUM","HIGH"];
-const r=risk[Math.floor(Math.random()*3)];
-
-const el=document.getElementById("risk");
-el.innerText=r;
-el.style.color=r==="HIGH"?"#ef4444":r==="MEDIUM"?"#f59e0b":"#22c55e";
-}
-
-function clearLog(){
-document.getElementById("log").innerHTML="";
 }
 
 </script>
