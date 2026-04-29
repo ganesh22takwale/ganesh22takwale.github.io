@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRT Intelligence — Architecture</title>
 
-<title>AI Architecture — GRT</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -17,87 +15,51 @@
 --text:#e2e8f0;
 --sub:#94a3b8;
 --accent:#6366f1;
+--green:#22c55e;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:'Inter',sans-serif;
-background:radial-gradient(circle at 20% 30%, #1e1b4b, transparent),
-           radial-gradient(circle at 80% 70%, #0f172a, transparent),
-           var(--bg);
+background:
+radial-gradient(circle at 20% 30%, #1e1b4b, transparent),
+radial-gradient(circle at 80% 70%, #0f172a, transparent),
+var(--bg);
 color:var(--text);
-min-height:100vh;
 }
 
 /* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:20px 40px;
 border-bottom:1px solid var(--border);
 }
 
 .header nav a{
 margin-left:20px;
-text-decoration:none;
 color:var(--sub);
+text-decoration:none;
 }
 .header nav a:hover{color:var(--accent);}
 
-/* HERO */
-.architecture-hero{
+/* LAYOUT */
+.container{
+padding:30px;
 display:grid;
-grid-template-columns:1fr 1fr;
-padding:60px 40px;
-align-items:center;
+gap:30px;
 }
 
-.arch-left h1{
-font-size:3rem;
-margin-bottom:15px;
-}
-
-.arch-left p{
-color:var(--sub);
-max-width:500px;
-}
-
-.arch-tags span{
-display:inline-block;
-padding:6px 12px;
-margin:10px 8px 0 0;
-border-radius:20px;
+/* CARDS */
+.card{
 background:var(--glass);
 border:1px solid var(--border);
-font-size:12px;
+border-radius:16px;
+padding:20px;
+transition:.3s;
 }
-
-/* ORB */
-.orb{
-width:200px;
-height:200px;
-border-radius:50%;
-background:radial-gradient(circle, #6366f1, transparent);
-margin:auto;
-filter:blur(20px);
-animation:float 6s ease-in-out infinite;
-}
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-20px);}
-}
-
-/* PANELS */
-.panel{
-padding:40px;
-}
-
-.panel h2{
-margin-bottom:20px;
-font-size:2rem;
-}
+.card:hover{border-color:var(--accent);}
 
 /* GRID */
 .grid{
@@ -106,155 +68,217 @@ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
 
-.card{
-background:var(--glass);
-border:1px solid var(--border);
-padding:20px;
-border-radius:16px;
-transition:.3s;
+/* CLICKABLE LAYERS */
+.layer{
+cursor:pointer;
 }
-.card:hover{
-transform:translateY(-5px);
+.layer.active{
 border-color:var(--accent);
+box-shadow:0 0 20px rgba(99,102,241,.3);
 }
 
 /* FLOW */
 .flow{
 display:flex;
-flex-direction:column;
+align-items:center;
+justify-content:space-between;
 gap:10px;
 }
 
-.flow-box{
-padding:15px;
-border-radius:12px;
-background:linear-gradient(90deg,#312e81,#1e293b);
-border:1px solid var(--border);
-}
-
-/* CTA */
-.cta{
-display:inline-block;
-margin-top:20px;
-padding:12px 20px;
+.node{
+padding:10px 15px;
 border-radius:10px;
-background:linear-gradient(90deg,#6366f1,#06b6d4);
-color:white;
-text-decoration:none;
+background:linear-gradient(90deg,#312e81,#1e293b);
+font-size:13px;
 }
 
-/* FOOTER */
-footer{
-text-align:center;
-padding:20px;
-color:var(--sub);
+.arrow{
+flex:1;
+height:2px;
+background:linear-gradient(to right,transparent,var(--accent),transparent);
+animation:flow 2s infinite;
+}
+@keyframes flow{
+0%{opacity:0;}
+50%{opacity:1;}
+100%{opacity:0;}
+}
+
+/* DASHBOARD */
+.dashboard{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px;
+}
+
+.log{
+font-family:monospace;
+font-size:12px;
+color:#22c55e;
+height:200px;
+overflow:auto;
+}
+
+.metric{
+font-size:14px;
+margin-bottom:10px;
+}
+
+/* BUTTON */
+button{
+padding:10px;
+background:var(--accent);
+border:none;
+border-radius:8px;
+color:white;
+cursor:pointer;
 }
 
 /* MOBILE */
 @media(max-width:900px){
-.architecture-hero{
-grid-template-columns:1fr;
-text-align:center;
-}
+.dashboard{grid-template-columns:1fr;}
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
-  <h2>GRT Intelligence</h2>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="systems.html">Systems</a>
-    <a href="insights.html">Insights</a>
-  </nav>
+<h2>GRT Intelligence</h2>
+<nav>
+<a href="#">Home</a>
+<a href="#">Systems</a>
+<a href="#">Insights</a>
+</nav>
 </header>
 
-<!-- HERO -->
-<section class="architecture-hero">
+<div class="container">
 
-  <div class="arch-left">
-    <h1>AI Architecture</h1>
-    <p>
-      Intelligence systems fail not because of models —
-      but because architecture was never designed for reality.
-    </p>
+<!-- ARCHITECTURE -->
+<div class="card">
+<h2>Core Intelligence Layers</h2>
 
-    <div class="arch-tags">
-      <span>Memory</span>
-      <span>Reasoning</span>
-      <span>Alignment</span>
-    </div>
-  </div>
+<div class="grid">
 
-  <div class="arch-right">
-    <div class="orb"></div>
-  </div>
+<div class="card layer" onclick="selectLayer('memory')">
+<h3>Memory Layer</h3>
+<p>Stores system state + context.</p>
+</div>
 
-</section>
+<div class="card layer" onclick="selectLayer('reasoning')">
+<h3>Reasoning Layer</h3>
+<p>Decision logic + inference.</p>
+</div>
 
-<!-- LAYERS -->
-<section class="panel">
+<div class="card layer" onclick="selectLayer('alignment')">
+<h3>Alignment Layer</h3>
+<p>Safety + constraints.</p>
+</div>
 
-  <h2>Core Intelligence Layers</h2>
+</div>
 
-  <div class="grid">
+<p id="layerInfo" style="margin-top:15px;color:var(--sub)">
+Click a layer to inspect system behavior.
+</p>
 
-    <div class="card">
-      <h3>Memory Layer</h3>
-      <p>Persistent system state enabling context-aware intelligence.</p>
-    </div>
-
-    <div class="card">
-      <h3>Reasoning Layer</h3>
-      <p>Structured decision-making beyond raw prediction.</p>
-    </div>
-
-    <div class="card">
-      <h3>Alignment Layer</h3>
-      <p>Ensures outputs remain consistent, safe, and goal-driven.</p>
-    </div>
-
-  </div>
-
-</section>
+</div>
 
 <!-- FLOW -->
-<section class="panel">
+<div class="card">
+<h2>System Flow</h2>
 
-  <h2>System Flow</h2>
+<div class="flow">
+<div class="node">Input</div>
+<div class="arrow"></div>
+<div class="node">Processing</div>
+<div class="arrow"></div>
+<div class="node">Decision</div>
+<div class="arrow"></div>
+<div class="node">Execution</div>
+</div>
 
-  <div class="flow">
-    <div class="flow-box">Input Signals</div>
-    <div class="flow-box">Processing</div>
-    <div class="flow-box">Decision Engine</div>
-    <div class="flow-box">Execution</div>
-  </div>
+<button onclick="runSystem()" style="margin-top:15px">
+Run System
+</button>
 
-</section>
+</div>
 
-<!-- CTA -->
-<section class="panel">
+<!-- DATA PIPELINE -->
+<div class="card">
+<h2>Live Data Pipeline</h2>
+<div class="log" id="log"></div>
+</div>
 
-  <h2>Design Architecture That Survives Reality</h2>
+<!-- DASHBOARD -->
+<div class="dashboard">
 
-  <p style="color:var(--sub)">
-    Move from experimental AI to production-grade intelligence systems.
-  </p>
+<div class="card">
+<h2>System Metrics</h2>
 
-  <a href="#" class="cta">Start Architecture →</a>
+<div class="metric">Throughput: <span id="throughput">0</span></div>
+<div class="metric">Latency: <span id="latency">0ms</span></div>
+<div class="metric">Decisions: <span id="decisions">0</span></div>
 
-</section>
+</div>
 
-<footer>
-  © <span id="year"></span> GRT
-</footer>
+<div class="card">
+<h2>Control Panel</h2>
+<button onclick="runSystem()">Simulate Signal</button>
+<button onclick="clearLog()">Clear Logs</button>
+</div>
+
+</div>
+
+</div>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+
+/* LAYER INTERACTION */
+function selectLayer(layer){
+const info=document.getElementById("layerInfo");
+
+if(layer==="memory"){
+info.innerText="Memory stores context, historical signals, embeddings.";
+}
+if(layer==="reasoning"){
+info.innerText="Reasoning transforms inputs into structured decisions.";
+}
+if(layer==="alignment"){
+info.innerText="Alignment enforces constraints and prevents invalid actions.";
+}
+}
+
+/* MOCK BACKEND */
+let decisions=0;
+
+function runSystem(){
+const log=document.getElementById("log");
+
+let steps=[
+"Signal received",
+"Processing data",
+"Running model inference",
+"Evaluating constraints",
+"Executing action"
+];
+
+steps.forEach((step,i)=>{
+setTimeout(()=>{
+log.innerHTML+=`> ${step}<br>`;
+log.scrollTop=log.scrollHeight;
+},i*400);
+});
+
+decisions++;
+document.getElementById("decisions").innerText=decisions;
+document.getElementById("throughput").innerText=(Math.random()*100).toFixed(1);
+document.getElementById("latency").innerText=(Math.random()*200).toFixed(0)+"ms";
+}
+
+function clearLog(){
+document.getElementById("log").innerHTML="";
+}
+
 </script>
 
 </body>
