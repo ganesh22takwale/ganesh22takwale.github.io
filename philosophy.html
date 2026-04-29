@@ -1,264 +1,477 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GRT Intelligence</title>
+<title>Philosophy | Market Intelligence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 
 <style>
+
 :root{
---cyan:#00e5ff;
---glass:rgba(10,15,30,0.55);
---border:rgba(0,229,255,0.25);
---text:#e6edf3;
+
+--bg:#f6f8fc;
+
+--glass:rgba(255,255,255,0.7);
+
+--border:rgba(0,0,0,0.06);
+
+--text:#0f172a;
+
+--sub:#64748b;
+
+--accent:#2563eb;
+
+--up:#16a34a;
+
+--down:#dc2626;
+
 }
+
+
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
+
+
 body{
-background:#02030a;
-font-family:'Inter';
+
+font-family:'Inter',sans-serif;
+
+background:linear-gradient(120deg,#eef2ff,#f8fafc);
+
 color:var(--text);
+
+height:100vh;
+
 overflow:hidden;
+
 }
 
-/* ===== BACKGROUND ===== */
-#bg{position:fixed;inset:0;z-index:-3;}
-.glow{
-position:fixed;inset:0;z-index:-2;
+
+
+/* BACKGROUND */
+
+.bg{
+
+position:fixed;
+
+inset:0;
+
 background:
-radial-gradient(circle at 20% 30%, rgba(0,229,255,0.25), transparent),
-radial-gradient(circle at 80% 70%, rgba(124,58,237,0.25), transparent);
-filter:blur(120px);
+
+radial-gradient(circle at 20% 30%, rgba(37,99,235,.15), transparent),
+
+radial-gradient(circle at 80% 70%, rgba(124,58,237,.15), transparent);
+
+filter:blur(80px);
+
+z-index:-1;
+
 }
 
-/* FLOAT TEXT */
-#text-layer{position:fixed;inset:0;z-index:-1;pointer-events:none;}
-.word{
-position:absolute;
-font-weight:700;
-color:rgba(0,229,255,0.08);
-}
-.layer1{font-size:120px;}
-.layer2{font-size:60px;}
-.layer3{font-size:25px;}
 
-/* ===== PANELS ===== */
-.panel{
-position:absolute;
-background:var(--glass);
-border:1px solid var(--border);
-border-radius:18px;
-backdrop-filter:blur(25px);
-padding:18px;
-width:240px;
-transition:0.3s;
-}
-.panel:hover{
-border-color:#00e5ff;
-box-shadow:0 0 25px rgba(0,229,255,0.2);
+
+/* LAYOUT */
+
+.layout{
+
+display:grid;
+
+grid-template-columns:280px 1fr 280px;
+
+grid-template-rows:50px 1fr 50px;
+
+gap:14px;
+
+padding:14px;
+
+height:100vh;
+
 }
 
-/* POSITIONS */
-.left{top:30px;left:30px;height:70vh;}
-.right{top:30px;right:30px;height:65vh;}
-.float{bottom:30px;right:30px;width:240px;height:240px;}
 
-/* CENTER CORE */
-.center{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-}
 
-/* CORE */
-.core{
-width:220px;
-height:220px;
-border-radius:50%;
-border:1px solid rgba(0,229,255,0.3);
+/* TOPBAR */
+
+.topbar{
+
+grid-column:1/-1;
+
 display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
 
-/* ROTATING RING */
-.core::before{
-content:"";
-position:absolute;
-width:260px;
-height:260px;
-border-radius:50%;
-border:1px dashed rgba(0,229,255,0.3);
-animation:spin 10s linear infinite;
-}
-
-/* INNER GLOW */
-.core::after{
-content:"";
-position:absolute;
-width:140px;
-height:140px;
-background:radial-gradient(circle,#00e5ff55,transparent);
-border-radius:50%;
-animation:pulse 2s infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-@keyframes pulse{
-0%,100%{opacity:0.5;}
-50%{opacity:1;}
-}
-
-/* TEXT */
-h1{
-font-size:1.5rem;
-background:linear-gradient(90deg,#fff,#00e5ff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* ROW */
-.row{
-display:flex;
 justify-content:space-between;
-font-size:12px;
-padding:5px 0;
+
+align-items:center;
+
+padding:0 15px;
+
+background:var(--glass);
+
+border:1px solid var(--border);
+
+border-radius:12px;
+
+backdrop-filter:blur(20px);
+
+font-size:13px;
+
 }
+
+
+
+.nav a{
+
+margin:0 8px;
+
+text-decoration:none;
+
+color:var(--sub);
+
+}
+
+.nav a:hover{color:var(--accent);}
+
+
+
+/* PANEL */
+
+.panel{
+
+background:var(--glass);
+
+border:1px solid var(--border);
+
+border-radius:16px;
+
+padding:15px;
+
+backdrop-filter:blur(20px);
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+overflow:hidden;
+
+}
+
+
+
+/* STOCKS */
+
+.stock{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:8px;
+
+border-radius:8px;
+
+background:rgba(255,255,255,.6);
+
+font-size:13px;
+
+}
+
+
+
+.up{color:var(--up);}
+
+.down{color:var(--down);}
+
+
+
+/* CENTER */
+
+.center{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+gap:15px;
+
+}
+
+
+
+h1{font-size:2.5rem;}
+
+
+
+button{
+
+padding:10px 20px;
+
+border:none;
+
+border-radius:10px;
+
+background:var(--accent);
+
+color:#fff;
+
+cursor:pointer;
+
+}
+
+
+
+/* FOOTER */
+
+.footer{
+
+grid-column:1/-1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:12px;
+
+color:var(--sub);
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.layout{grid-template-columns:1fr;height:auto;overflow:auto;}
+
+}
+
 </style>
+
 </head>
+
+
 
 <body>
 
-<canvas id="bg"></canvas>
-<div class="glow"></div>
-<div id="text-layer"></div>
+
+
+<div class="bg"></div>
+
+
+
+<div class="layout">
+
+
+
+<div class="topbar">
+
+<div><strong>Market Intelligence</strong></div>
+
+<div class="nav">
+
+<a href="#">Home</a>
+
+<a href="#">Philosophy</a>
+
+<a href="#">Systems</a>
+
+</div>
+
+<div id="time"></div>
+
+</div>
+
+
 
 <!-- LEFT -->
-<div class="panel left">
-<h3>Crypto + Stocks</h3>
-<div id="data"></div>
+
+<div class="panel">
+
+<h3>Live Stocks</h3>
+
+<div id="stocks"></div>
+
+
+
+<canvas id="chart1"></canvas>
+
 </div>
+
+
+
+<!-- CENTER -->
+
+<div class="panel center">
+
+<h1>Market Intelligence</h1>
+
+<p>Build systems that earn, not interfaces that impress.</p>
+
+<button>Explore Systems</button>
+
+</div>
+
+
 
 <!-- RIGHT -->
-<div class="panel right">
-<h3>AI Signals</h3>
-<div id="signals"></div>
-<canvas id="signalChart" height="120"></canvas>
+
+<div class="panel">
+
+<h3>AI Opportunities</h3>
+
+<p style="font-size:13px;color:var(--sub)">
+
+• AI SaaS<br>
+
+• Data Platforms<br>
+
+• Automation Tools<br>
+
+• Trading Systems
+
+</p>
+
+
+
+<canvas id="chart2"></canvas>
+
 </div>
 
-<!-- FLOAT -->
-<div class="panel float">
-<h3>AI Industry</h3>
-<div id="industry"></div>
+
+
+<div class="footer">
+
+© 2026 Intelligence Systems
+
 </div>
-  
-<!-- CENTER CORE -->
-<div class="center">
-<div class="core">
-<h1>Philosophy_GRT</h1>
+
+
+
 </div>
-</div>
+
+
 
 <script>
-/* ===== THREE BACKGROUND ===== */
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-const renderer=new THREE.WebGLRenderer({canvas:bg,alpha:true});
-renderer.setSize(innerWidth,innerHeight);
 
-/* PARTICLES */
-const geo=new THREE.BufferGeometry();
-const arr=new Float32Array(3000*3);
-for(let i=0;i<arr.length;i++) arr[i]=(Math.random()-0.5)*120;
-geo.setAttribute('position',new THREE.BufferAttribute(arr,3));
+const stocks=[
 
-const mat=new THREE.PointsMaterial({size:0.03,color:0x00e5ff});
-const particles=new THREE.Points(geo,mat);
-scene.add(particles);
+{sym:"AAPL",p:220},
 
-/* TYPO SPHERE */
-const group=new THREE.Group();
-const words=["AI","DATA","SYSTEM","GRT"];
+{sym:"MSFT",p:415},
 
-for(let i=0;i<250;i++){
-const canvas=document.createElement("canvas");
-const ctx=canvas.getContext("2d");
-canvas.width=256;canvas.height=128;
-ctx.fillStyle="#00e5ff";
-ctx.font="bold 40px Inter";
-ctx.fillText(words[Math.floor(Math.random()*words.length)],20,60);
+{sym:"NVDA",p:870},
 
-const tex=new THREE.CanvasTexture(canvas);
-const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));
+{sym:"TSLA",p:190}
 
-const phi=Math.acos(-1+(2*i)/250);
-const theta=Math.sqrt(250*Math.PI)*phi;
-sprite.position.setFromSphericalCoords(6,phi,theta);
-group.add(sprite);
+];
+
+
+
+function render(){
+
+const el=document.getElementById("stocks");
+
+el.innerHTML=stocks.map(s=>`
+
+<div class="stock">
+
+<span>${s.sym}</span>
+
+<span id="p-${s.sym}">$${s.p.toFixed(2)}</span>
+
+</div>`).join("");
+
 }
 
-scene.add(group);
-camera.position.z=12;
 
-function animate(){
-requestAnimationFrame(animate);
-particles.rotation.y+=0.0008;
-group.rotation.y+=0.002;
-group.rotation.x+=0.001;
-renderer.render(scene,camera);
-}
-animate();
 
-/* FLOAT TEXT */
-const container=document.getElementById("text-layer");
-const words2=["INTELLIGENCE","AI","DATA","Philosophy_GRT"];
+function update(){
 
-for(let i=0;i<60;i++){
-const el=document.createElement("div");
-el.className="word layer"+(1+Math.floor(Math.random()*3));
-el.innerText=words2[Math.floor(Math.random()*words2.length)];
-el.style.left=Math.random()*100+"%";
-el.style.top=Math.random()*100+"%";
-container.appendChild(el);
-}
+stocks.forEach(s=>{
 
-/* PARALLAX */
-window.addEventListener("mousemove",e=>{
-let x=(e.clientX/window.innerWidth-0.5)*30;
-let y=(e.clientY/window.innerHeight-0.5)*30;
-camera.position.x=x*0.1;
-camera.position.y=-y*0.1;
-container.style.transform=`translate(${x}px,${y}px)`;
+let change=(Math.random()-0.5)*2;
+
+s.p+=change;
+
+let el=document.getElementById(`p-${s.sym}`);
+
+el.innerText="$"+s.p.toFixed(2);
+
+el.className=change>=0?"up":"down";
+
 });
 
-/* DATA */
-function updateData(){
-document.getElementById("data").innerHTML=`
-<div class="row">BTC $67K</div>
-<div class="row">ETH $3.5K</div>
-<div class="row">RELIANCE ₹2950</div>
-<div class="row">TCS ₹4100</div>`;
 }
-updateData();
 
-function signals(){
-const s=["AI Growth","Crypto Momentum","Market Stable"];
-document.getElementById("signals").innerText=s[Math.floor(Math.random()*s.length)];
-}
-setInterval(signals,3000);
-signals();
+
+
+setInterval(update,1500);
+
+render();
+
+
+
+/* TIME */
+
+setInterval(()=>{
+
+document.getElementById("time").innerText=new Date().toLocaleTimeString();
+
+},1000);
+
+
+
+/* CHARTS */
+
+new Chart(document.getElementById("chart1"),{
+
+type:"line",
+
+data:{labels:[1,2,3,4,5],datasets:[{data:[10,20,15,30,25]}]},
+
+options:{plugins:{legend:{display:false}}}
+
+});
+
+
+
+new Chart(document.getElementById("chart2"),{
+
+type:"bar",
+
+data:{labels:["AI","Data","Infra"],datasets:[{data:[40,30,20]}]},
+
+options:{plugins:{legend:{display:false}}}
+
+});
+
 </script>
 
+
+
 </body>
+
 </html>
