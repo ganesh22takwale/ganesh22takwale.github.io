@@ -1,477 +1,274 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Philosophy | Market Intelligence</title>
 
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-
 <style>
-
 :root{
-
 --bg:#f6f8fc;
-
 --glass:rgba(255,255,255,0.7);
-
 --border:rgba(0,0,0,0.06);
-
 --text:#0f172a;
-
 --sub:#64748b;
-
 --accent:#2563eb;
-
 --up:#16a34a;
-
 --down:#dc2626;
-
 }
-
-
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-
-
 body{
-
 font-family:'Inter',sans-serif;
-
 background:linear-gradient(120deg,#eef2ff,#f8fafc);
-
 color:var(--text);
-
-height:100vh;
-
-overflow:hidden;
-
+min-height:100vh;
+overflow:auto; /* FIXED */
 }
-
-
-
-/* BACKGROUND */
 
 .bg{
-
 position:fixed;
-
 inset:0;
-
 background:
-
 radial-gradient(circle at 20% 30%, rgba(37,99,235,.15), transparent),
-
 radial-gradient(circle at 80% 70%, rgba(124,58,237,.15), transparent);
-
 filter:blur(80px);
-
 z-index:-1;
-
 }
-
-
-
-/* LAYOUT */
 
 .layout{
-
 display:grid;
-
 grid-template-columns:280px 1fr 280px;
-
-grid-template-rows:50px 1fr 50px;
-
+grid-template-rows:50px auto 50px;
 gap:14px;
-
 padding:14px;
-
-height:100vh;
-
 }
-
-
 
 /* TOPBAR */
-
 .topbar{
-
 grid-column:1/-1;
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 padding:0 15px;
-
 background:var(--glass);
-
 border:1px solid var(--border);
-
 border-radius:12px;
-
 backdrop-filter:blur(20px);
-
 font-size:13px;
-
 }
-
-
 
 .nav a{
-
 margin:0 8px;
-
 text-decoration:none;
-
 color:var(--sub);
-
+transition:.2s;
 }
-
 .nav a:hover{color:var(--accent);}
 
-
-
 /* PANEL */
-
 .panel{
-
 background:var(--glass);
-
 border:1px solid var(--border);
-
 border-radius:16px;
-
 padding:15px;
-
 backdrop-filter:blur(20px);
-
 display:flex;
-
 flex-direction:column;
-
-gap:10px;
-
-overflow:hidden;
-
+gap:12px;
 }
-
-
 
 /* STOCKS */
-
 .stock{
-
 display:flex;
-
 justify-content:space-between;
-
 padding:8px;
-
 border-radius:8px;
-
 background:rgba(255,255,255,.6);
-
 font-size:13px;
-
+transition:.2s;
 }
-
-
-
+.stock:hover{transform:scale(1.03);}
 .up{color:var(--up);}
-
 .down{color:var(--down);}
 
-
-
 /* CENTER */
-
 .center{
-
 display:flex;
-
 flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-text-align:center;
-
-gap:15px;
-
+gap:20px;
 }
 
-
-
-h1{font-size:2.5rem;}
-
-
+h1{font-size:2.3rem;}
+h2{font-size:1.2rem;margin-top:10px;}
 
 button{
-
 padding:10px 20px;
-
 border:none;
-
 border-radius:10px;
-
 background:var(--accent);
-
 color:#fff;
-
 cursor:pointer;
-
 }
 
-
+/* PHILOSOPHY BLOCK */
+.idea{
+padding:12px;
+border-radius:10px;
+background:rgba(255,255,255,0.6);
+font-size:14px;
+}
 
 /* FOOTER */
-
 .footer{
-
 grid-column:1/-1;
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
 font-size:12px;
-
 color:var(--sub);
-
 }
-
-
 
 /* MOBILE */
-
 @media(max-width:900px){
-
-.layout{grid-template-columns:1fr;height:auto;overflow:auto;}
-
+.layout{grid-template-columns:1fr;}
 }
-
 </style>
-
 </head>
 
-
-
 <body>
-
-
-
 <div class="bg"></div>
-
-
 
 <div class="layout">
 
-
-
+<!-- TOP -->
 <div class="topbar">
-
 <div><strong>Market Intelligence</strong></div>
-
 <div class="nav">
-
 <a href="#">Home</a>
-
 <a href="#">Philosophy</a>
-
 <a href="#">Systems</a>
-
 </div>
-
 <div id="time"></div>
-
 </div>
-
-
 
 <!-- LEFT -->
-
 <div class="panel">
-
 <h3>Live Stocks</h3>
-
 <div id="stocks"></div>
-
-
-
 <canvas id="chart1"></canvas>
-
 </div>
 
-
-
 <!-- CENTER -->
-
 <div class="panel center">
 
-<h1>Market Intelligence</h1>
+<h1>Philosophy</h1>
+<p style="color:var(--sub)">
+Real edge comes from systems, not opinions.
+</p>
 
-<p>Build systems that earn, not interfaces that impress.</p>
+<h2>Core Principles</h2>
+
+<div class="idea">⚡ Build systems, not dashboards</div>
+<div class="idea">📊 Data → Insight → Action → Feedback loop</div>
+<div class="idea">🤖 Automate anything repeatable</div>
+<div class="idea">📉 Eliminate emotional decisions</div>
+
+<h2>Execution Model</h2>
+
+<div class="idea">1. Identify inefficiency</div>
+<div class="idea">2. Quantify opportunity</div>
+<div class="idea">3. Build small system</div>
+<div class="idea">4. Scale what works</div>
 
 <button>Explore Systems</button>
 
 </div>
 
-
-
 <!-- RIGHT -->
-
 <div class="panel">
-
 <h3>AI Opportunities</h3>
 
-<p style="font-size:13px;color:var(--sub)">
-
-• AI SaaS<br>
-
-• Data Platforms<br>
-
-• Automation Tools<br>
-
-• Trading Systems
-
-</p>
-
-
+<div class="idea">AI SaaS → Recurring revenue</div>
+<div class="idea">Automation → Cost reduction</div>
+<div class="idea">Trading Systems → Alpha</div>
 
 <canvas id="chart2"></canvas>
-
 </div>
 
-
-
+<!-- FOOTER -->
 <div class="footer">
-
 © 2026 Intelligence Systems
-
 </div>
 
-
-
 </div>
-
-
 
 <script>
-
 const stocks=[
-
 {sym:"AAPL",p:220},
-
 {sym:"MSFT",p:415},
-
 {sym:"NVDA",p:870},
-
 {sym:"TSLA",p:190}
-
 ];
 
-
-
 function render(){
-
 const el=document.getElementById("stocks");
-
 el.innerHTML=stocks.map(s=>`
-
 <div class="stock">
-
 <span>${s.sym}</span>
-
 <span id="p-${s.sym}">$${s.p.toFixed(2)}</span>
-
 </div>`).join("");
-
 }
 
-
-
 function update(){
-
 stocks.forEach(s=>{
-
-let change=(Math.random()-0.5)*2;
-
+let change=(Math.random()-0.5)*4; // improved volatility
 s.p+=change;
 
 let el=document.getElementById(`p-${s.sym}`);
-
 el.innerText="$"+s.p.toFixed(2);
-
 el.className=change>=0?"up":"down";
-
 });
-
 }
 
-
-
-setInterval(update,1500);
-
+setInterval(update,1200);
 render();
 
-
-
 /* TIME */
-
 setInterval(()=>{
-
 document.getElementById("time").innerText=new Date().toLocaleTimeString();
-
 },1000);
 
-
-
 /* CHARTS */
-
 new Chart(document.getElementById("chart1"),{
-
 type:"line",
-
-data:{labels:[1,2,3,4,5],datasets:[{data:[10,20,15,30,25]}]},
-
+data:{
+labels:[1,2,3,4,5],
+datasets:[{
+data:[10,20,15,30,25],
+borderColor:"#2563eb",
+tension:.4
+}]
+},
 options:{plugins:{legend:{display:false}}}
-
 });
-
-
 
 new Chart(document.getElementById("chart2"),{
-
 type:"bar",
-
-data:{labels:["AI","Data","Infra"],datasets:[{data:[40,30,20]}]},
-
+data:{
+labels:["AI","Data","Infra"],
+datasets:[{
+data:[40,30,20],
+backgroundColor:"#2563eb"
+}]
+},
 options:{plugins:{legend:{display:false}}}
-
 });
-
 </script>
 
-
-
 </body>
-
 </html>
