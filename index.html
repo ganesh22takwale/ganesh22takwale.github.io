@@ -637,5 +637,55 @@ function updateDate() {
 
 updateDate();
 </script>
+  <div class="bottom-nav">
+
+  <a href="index.html" class="nav-item active">
+    <span>🏠</span>
+    <p>Home</p>
+  </a>
+
+  <a href="philosophy.html" class="nav-item">
+    <span>🧠</span>
+    <p>Philosophy</p>
+  </a>
+
+  <a href="architecture.html" class="nav-item">
+    <span>⚙️</span>
+    <p>Architecture</p>
+  </a>
+
+  <a href="systems.html" class="nav-item">
+    <span>🔗</span>
+    <p>Systems</p>
+  </a>
+
+  <a href="ai-lab/dashboard.html" class="nav-item">
+    <span>🚀</span>
+    <p>AI Lab</p>
+  </a>
+
+</div>
+<button class="fab">⚡</button>
+<script>
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (startX - endX > 50) {
+    // swipe left
+    window.location.href = "architecture.html";
+  }
+
+  if (endX - startX > 50) {
+    // swipe right
+    window.location.href = "philosophy.html";
+  }
+});
+</script>
 </body>
 </html>
