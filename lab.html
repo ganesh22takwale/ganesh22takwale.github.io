@@ -1,69 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GRT AI Lab | Neural Simulator</title>
+
+<style>
+
+/* ===== GLOBAL ===== */
+body{
+margin:0;
+font-family:Inter, sans-serif;
+background:#02040a;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* ===== BACKGROUND CANVAS ===== */
+#network{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* ===== HEADER ===== */
+.header{
+display:flex;
+align-items:center;
+gap:10px;
+padding:15px 20px;
+backdrop-filter:blur(20px);
+border-bottom:0.5px solid rgba(0,255,255,0.2);
+}
+
+.logo-ignite{
+height:40px;
+}
+
+/* ===== CORE REACTOR ===== */
+.lab-neon-core{
+position:fixed;
+right:40px;
+bottom:40px;
+width:80px;
+height:80px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:radial-gradient(circle,#00e5ff33,#000);
+box-shadow:0 0 30px #00e5ff;
+animation:pulse 2s infinite;
+}
+
+.lab-neon-core img{
+width:60%;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* ===== SIDE PANEL ===== */
+.ai-side-panel{
+position:fixed;
+left:20px;
+top:100px;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.ai-box{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+padding:15px;
+border-radius:15px;
+border:0.5px solid rgba(0,255,255,0.2);
+width:160px;
+}
+
+/* ===== HERO ===== */
+.hero{
+padding:60px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:40px;
+background:linear-gradient(90deg,#00e5ff,#7c5cff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* ===== SYSTEM GRID ===== */
+.system-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.system-card{
+padding:15px;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
+border:0.5px solid rgba(0,255,255,0.2);
+cursor:pointer;
+transition:0.3s;
+}
+
+.system-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #00e5ff;
+}
+
+/* ===== DIAGNOSTIC ===== */
+.diagnostic-panel{
+padding:20px;
+text-align:center;
+}
+
+#scoreValue{
+font-size:40px;
+}
+
+.score-bar{
+width:100%;
+height:10px;
+background:#111;
+border-radius:10px;
+margin-top:10px;
+}
+
+.score-fill{
+height:100%;
+width:50%;
+background:#00e5ff;
+border-radius:10px;
+transition:0.5s;
+}
+
+/* ===== PRICING ===== */
+.pricing{
+padding:40px 20px;
+}
+
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:20px;
+border:0.5px solid rgba(0,255,255,0.2);
+text-align:center;
+}
+
+.card button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#00e5ff;
+cursor:pointer;
+}
+
+/* ===== FOOTER ===== */
+.smart-footer{
+text-align:center;
+padding:20px;
+opacity:0.6;
+}
+
+</style>
+</head>
+
 <body>
 
-<!-- 🧠 AI CORE -->
 <canvas id="network"></canvas>
 
-<!-- ⚡ CORE REACTOR -->
-<div class="lab-neon-core" id="coreReactor">
-  <img src="grt-logo-05.png">
+<!-- CORE -->
+<div class="lab-neon-core">
+<img src="grt-logo-05.png">
 </div>
 
-<!-- 🧠 SIDE INFO PANEL -->
+<!-- SIDE PANEL -->
 <div class="ai-side-panel">
+<div class="ai-box">
+<h4>System State</h4>
+<p id="stateText">Stable</p>
+</div>
 
-  <div class="ai-box">
-    <h4>System State</h4>
-    <p id="stateText">Stable</p>
-  </div>
+<div class="ai-box">
+<h4>Energy</h4>
+<p id="energyText">Medium</p>
+</div>
 
-  <div class="ai-box">
-    <h4>Energy Level</h4>
-    <p id="energyText">Medium</p>
-  </div>
-
-  <div class="ai-box">
-    <h4>Decision Impact</h4>
-    <p id="impactText">Neutral</p>
-  </div>
-
+<div class="ai-box">
+<h4>Impact</h4>
+<p id="impactText">Neutral</p>
+</div>
 </div>
 
 <header class="header">
-  <img src="grt-logo-11.png" class="logo-ignite">
-  <span>Reliability Lab</span>
+<img src="grt-logo-11.png" class="logo-ignite">
+<span>Neural Intelligence Lab</span>
 </header>
 
 <section class="hero">
-  <h1>Architectural Diagnostic</h1>
+<h1>AI System Simulator</h1>
+<p>Interact. Analyze. Optimize.</p>
 </section>
 
-<section class="panel systems">
+<section class="systems">
 
-  <div class="system-grid">
+<div class="system-grid">
+<button class="system-card" data-impact="15">Observability</button>
+<button class="system-card" data-impact="-10">Speed</button>
+<button class="system-card" data-impact="20">Fallbacks</button>
+<button class="system-card" data-impact="10">Monitoring</button>
+</div>
 
-    <button class="system-card decision" data-impact="15">Observability</button>
-    <button class="system-card decision" data-impact="-10">Speed</button>
-    <button class="system-card decision" data-impact="20">Fallbacks</button>
+<div class="diagnostic-panel">
+<span id="scoreValue">70</span>
 
-  </div>
+<div class="score-bar">
+<div class="score-fill" id="scoreFill"></div>
+</div>
 
-  <div class="diagnostic-panel">
-    <span id="scoreValue">72</span>
+<p id="diagnosticText">Awaiting decisions...</p>
+</div>
 
-    <div class="score-bar">
-      <div class="score-fill" id="scoreFill"></div>
-    </div>
+</section>
 
-    <p id="diagnosticText">Awaiting decision...</p>
-  </div>
+<!-- 💰 PRICING -->
+<section class="pricing">
+<h2 style="text-align:center;">Access Intelligence</h2>
 
+<div class="pricing-grid">
+
+<div class="card">
+<h3>AI Audit</h3>
+<p>$150</p>
+<button>Unlock</button>
+</div>
+
+<div class="card">
+<h3>System Design</h3>
+<p>$500</p>
+<button>Unlock</button>
+</div>
+
+<div class="card">
+<h3>Enterprise</h3>
+<p>Custom</p>
+<button>Contact</button>
+</div>
+
+</div>
 </section>
 
 <footer class="smart-footer">
-  Global Reliability Technology
+Global Reliability Technology
 </footer>
 
-<script src="assets/js/three-core.js"></script>
-<script src="lab.js"></script>
+<script>
+
+/* ===== NEURAL BACKGROUND ===== */
+const canvas=document.getElementById("network");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let mouse={x:0,y:0};
+
+document.addEventListener("mousemove",e=>{
+mouse.x=e.clientX;
+mouse.y=e.clientY;
+});
+
+let nodes=Array.from({length:80},()=>({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5),
+vy:(Math.random()-0.5)
+}));
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+nodes.forEach(n=>{
+n.x+=n.vx;
+n.y+=n.vy;
+
+let dx=n.x-mouse.x;
+let dy=n.y-mouse.y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+
+if(dist<120){
+n.x+=dx*0.02;
+n.y+=dy*0.02;
+}
+
+nodes.forEach(o=>{
+let d=Math.hypot(n.x-o.x,n.y-o.y);
+if(d<100){
+ctx.strokeStyle="rgba(0,255,255,"+(1-d/100)+")";
+ctx.beginPath();
+ctx.moveTo(n.x,n.y);
+ctx.lineTo(o.x,o.y);
+ctx.stroke();
+}
+});
+});
+
+requestAnimationFrame(draw);
+}
+draw();
+
+/* ===== DECISION ENGINE ===== */
+let score=70;
+
+document.querySelectorAll(".system-card").forEach(btn=>{
+btn.addEventListener("click",()=>{
+let impact=parseInt(btn.dataset.impact);
+score+=impact;
+
+score=Math.max(0,Math.min(100,score));
+
+document.getElementById("scoreValue").innerText=score;
+document.getElementById("scoreFill").style.width=score+"%";
+
+updateState();
+});
+});
+
+/* ===== SYSTEM STATE ===== */
+function updateState(){
+let state="Stable";
+let energy="Medium";
+let impact="Neutral";
+
+if(score>85){
+state="Optimized";
+energy="High";
+impact="Positive";
+}
+else if(score<50){
+state="Unstable";
+energy="Low";
+impact="Critical";
+}
+
+document.getElementById("stateText").innerText=state;
+document.getElementById("energyText").innerText=energy;
+document.getElementById("impactText").innerText=impact;
+}
+
+/* ===== AUTO FLUCTUATION ===== */
+setInterval(()=>{
+score += (Math.random()-0.5)*2;
+score=Math.max(0,Math.min(100,score));
+
+document.getElementById("scoreValue").innerText=Math.floor(score);
+document.getElementById("scoreFill").style.width=score+"%";
+updateState();
+},2000);
+
+</script>
 
 </body>
+</html>
