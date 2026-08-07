@@ -5,14 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRT Neural Lab</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg: #01030a;
+  --accent: #00e5ff;
+  --purple: #7c5cff;
+  --glass: rgba(255,255,255,0.05);
+  --border: rgba(0,255,255,0.2);
+}
+
 body {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
-  background: radial-gradient(circle at center, #01030a 0%, #000 100%);
+  background: radial-gradient(circle at center, #020617 0%, #000 100%);
   color: #fff;
   overflow: hidden;
 }
@@ -32,7 +39,7 @@ body {
   gap: 10px;
   padding: 15px 25px;
   backdrop-filter: blur(20px);
-  border-bottom: 0.5px solid rgba(0,255,255,0.2);
+  border-bottom: 0.5px solid var(--border);
   background: rgba(0,0,0,0.4);
 }
 .logo-ignite {
@@ -41,7 +48,8 @@ body {
 .header span {
   font-weight: 600;
   letter-spacing: 1px;
-  color: #00e5ff;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }
 
 /* ===== CORE ===== */
@@ -49,32 +57,37 @@ body {
   position: fixed;
   right: 40px;
   bottom: 40px;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle,#00e5ff44,#000);
-  box-shadow: 0 0 50px #00e5ff;
+  box-shadow: 0 0 60px var(--accent);
   animation: rotateCore 6s linear infinite;
 }
 .core img {
   width: 70%;
+  filter: drop-shadow(0 0 15px var(--accent));
 }
 @keyframes rotateCore {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-/* ===== PANELS ===== */
+/* ===== PANEL ===== */
 .panel {
-  background: rgba(255,255,255,0.05);
+  background: var(--glass);
   backdrop-filter: blur(25px);
-  border: 0.5px solid rgba(0,255,255,0.2);
+  border: 0.5px solid var(--border);
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0,255,255,0.1);
+  box-shadow: 0 0 25px rgba(0,255,255,0.15);
+  transition: 0.3s;
+}
+.panel:hover {
+  box-shadow: 0 0 35px rgba(0,255,255,0.3);
 }
 
 /* ===== GRID ===== */
@@ -88,24 +101,26 @@ body {
 .system-card {
   padding: 15px;
   border-radius: 15px;
-  background: rgba(255,255,255,0.05);
-  border: 0.5px solid rgba(0,255,255,0.2);
+  background: var(--glass);
+  border: 0.5px solid var(--border);
   cursor: pointer;
   transition: 0.3s;
   text-align: center;
+  color: #fff;
 }
 .system-card:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 20px #00e5ff;
+  box-shadow: 0 0 25px var(--accent);
 }
 
 /* ===== SCORE ===== */
 .score {
-  font-size: 60px;
+  font-size: 70px;
   text-align: center;
   margin-top: 20px;
-  color: #00e5ff;
-  text-shadow: 0 0 20px #00e5ff;
+  color: var(--accent);
+  text-shadow: 0 0 25px var(--accent);
+  font-weight: 600;
 }
 
 /* ===== STATUS ===== */
@@ -124,20 +139,20 @@ body {
 .card {
   padding: 20px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.05);
-  border: 0.5px solid rgba(0,255,255,0.2);
+  background: var(--glass);
+  border: 0.5px solid var(--border);
   text-align: center;
   transition: 0.3s;
 }
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px #00e5ff;
+  box-shadow: 0 0 25px var(--accent);
 }
 .card button {
   padding: 10px 25px;
   border: none;
   border-radius: 30px;
-  background: linear-gradient(90deg,#00e5ff,#7c5cff);
+  background: linear-gradient(90deg,var(--accent),var(--purple));
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
@@ -222,13 +237,13 @@ camera.position.z = 5;
 
 const geometry = new THREE.BufferGeometry();
 const vertices = [];
-for (let i = 0; i < 500; i++) {
-  vertices.push((Math.random() - 0.5) * 10);
-  vertices.push((Math.random() - 0.5) * 10);
-  vertices.push((Math.random() - 0.5) * 10);
+for (let i = 0; i < 800; i++) {
+  vertices.push((Math.random() - 0.5) * 12);
+  vertices.push((Math.random() - 0.5) * 12);
+  vertices.push((Math.random() - 0.5) * 12);
 }
 geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-const material = new THREE.PointsMaterial({ color: 0x00e5ff, size: 0.03 });
+const material = new THREE.PointsMaterial({ color: 0x00e5ff, size: 0.04 });
 const points = new THREE.Points(geometry, material);
 scene.add(points);
 
@@ -247,8 +262,4 @@ document.querySelectorAll('.decision').forEach(btn => {
     const impact = parseInt(btn.dataset.impact);
     const newScore = Math.max(0, parseInt(score.textContent) + impact);
     gsap.to(score, { textContent: newScore, duration: 0.8, snap: { textContent: 1 }, ease: "power2.out" });
-  });
-});
-</script>
-</body>
-</html>
+    gsap.to(score, { scale: 1.2, yoyo: true, repeat: 1, duration: 0.3 });
